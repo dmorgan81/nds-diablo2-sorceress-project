@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_layout_file>
+	<ActiveTarget name="Release" />
+	<File name="source\Map.c" open="0" top="0" tabpos="1">
+		<Cursor position="683" topLine="0" />
+	</File>
+	<File name="source\Map.h" open="0" top="0" tabpos="6">
+		<Cursor position="146" topLine="0" />
+	</File>
+	<File name="source\actions.c" open="0" top="0" tabpos="8">
+		<Cursor position="4319" topLine="84" />
+	</File>
+	<File name="source\collisions.c" open="0" top="0" tabpos="2">
+		<Cursor position="197" topLine="0" />
+	</File>
+	<File name="source\collisions.h" open="0" top="0" tabpos="9">
+		<Cursor position="486" topLine="0" />
+	</File>
+	<File name="source\defines.h" open="0" top="0" tabpos="4">
+		<Cursor position="517" topLine="15" />
+	</File>
+	<File name="source\interface.c" open="0" top="0" tabpos="8">
+		<Cursor position="5811" topLine="160" />
+	</File>
+	<File name="source\main.c" open="1" top="0" tabpos="1">
+		<Cursor position="5959" topLine="234" />
+	</File>
+	<File name="source\main.h" open="0" top="0" tabpos="2">
+		<Cursor position="34" topLine="0" />
+	</File>
+	<File name="source\objects.c" open="1" top="1" tabpos="2">
+		<Cursor position="30475" topLine="1072" />
+	</File>
+	<File name="source\objects.h" open="0" top="0" tabpos="4">
+		<Cursor position="651" topLine="0" />
+	</File>
+	<File name="source\structures.h" open="0" top="0" tabpos="5">
+		<Cursor position="1883" topLine="78" />
+	</File>
+	<File name="source\tilescollision.map.c" open="0" top="0" tabpos="10">
+		<Cursor position="0" topLine="0" />
+	</File>
+	<File name="source\ulScreenDisplay.c" open="0" top="0" tabpos="4">
+		<Cursor position="454" topLine="18" />
+	</File>
+	<File name="source\ulScreenDisplay.h" open="0" top="0" tabpos="6">
+		<Cursor position="615" topLine="0" />
+	</File>
+	<File name="source\uldata.h" open="0" top="0" tabpos="4">
+		<Cursor position="706" topLine="0" />
+	</File>
+</CodeBlocks_layout_file>

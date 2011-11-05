@@ -1,0 +1,51 @@
+#Fichier de projet GBA Graphics
+
+#Useful informations about the last session
+ .section infos
+  Directory = "M:\devkitPro\GBA Graphics 1.00\English"
+  Script = "script.spt"
+  UserHelp = "lisezmoi.htm"
+
+  convert.maskColor = RGB(255,0,254)
+  convert.lighting   GAMMA=RGB(1.000,1.000,1.000)  ADD=RGB(0.0,0.0,0.0)  ALPHA=RGB(0.0,0.0,0.0)
+  convert.mode = 0
+
+  system.saveMapsParamsAuto = false
+  system.MaxMemory = 32 MB
+  Format = "Standard"
+
+  DefineModel "Default"		{
+  }
+  Model = "Default"
+
+  Platform = "Game Boy Advance, Nintendo"
+  GBA.paletteMask = false
+  GBA.mirrorMask = false
+  GBA.align = 0
+  End
+
+#Project tree elements
+ .section files
+ #--------------
+  Element: essai
+  Type: tileset
+  File: essai.til.c
+  Base: essai.png
+ #--------------
+  Element: essai
+  Type: palette
+  File: essai.pal.c
+  Base: essai.png
+ #--------------
+  Element: essai
+  Type: map
+  File: essai.map.c
+  Base: essai.png
+ End
+
+#Section where you can enter any script command. It permits you to set here different variables.
+ .section data
+  End
+
+
+

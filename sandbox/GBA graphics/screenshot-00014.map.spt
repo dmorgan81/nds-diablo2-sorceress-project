@@ -1,0 +1,9 @@
+    Maps.Add "screenshot-00014", 1
+    Maps[1].EmulGBA = false
+    ModeHexa.ActiveMap = true
+    Editor.Zoom = 1.50
+    Editor.Move 1288, 1002, -4, -4, true
+    End
+
+
+
