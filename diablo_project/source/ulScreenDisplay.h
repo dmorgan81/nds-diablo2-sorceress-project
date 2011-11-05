@@ -26,7 +26,7 @@ inline void myulAnimBegin (int spritenb);
 inline void myulStartAnim (int spritenb, u8 sframe, u8 endframe, u8 framerate);
 inline void myulSetAnim (int spritenb, u8 sframe, u8 endframe, u8 framerate);
 inline void myulDefaultAnim (int spritenb);
-inline void myulSetSpritePrio( int sprite, u8 prio);
+inline void myulSetSpritePrio( int sprite, int prio);
 void myulScreenDraws(void);
 
 inline void SetSpriteAblending (int nb,int value);

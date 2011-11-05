@@ -115,7 +115,7 @@ void initobjects (void)
     data[3].hitbox.right.y=80;
     data[3].fxdata[0]=5;
     data[3].fxdata[1]=6;
-
+/*
 //cow
     data[4].spritedata=0;
     data[4].ai=&meleeAI;
@@ -136,8 +136,29 @@ void initobjects (void)
     data[4].hitbox.right.x=45;
     data[4].hitbox.right.y=30;
     data[4].fxdata[0]=-1;
+    data[4].fxdata[1]=-1;*/
+//cow
+//change test
+    data[4].spritedata=0;
+    data[4].ai=&meleeAI;
+    data[4].tile=0;
+    data[4].vx=0;
+    data[4].vy=0;
+    data[4].life=50;
+    data[4].dommages=0;
+    data[4].scroll=&objectscroll;
+    data[4].collision=&zmCollision;
+    data[4].datanb=4;
+    data[4].hitbox.down.y=47;
+    data[4].hitbox.down.x=16;
+    data[4].hitbox.up.y=40;
+    data[4].hitbox.up.x=16;
+    data[4].hitbox.left.x=11;
+    data[4].hitbox.left.y=43;
+    data[4].hitbox.right.x=20;
+    data[4].hitbox.right.y=43;
+    data[4].fxdata[0]=-1;
     data[4].fxdata[1]=-1;
-
     //wpfire
     data[5].spritedata=-1;
     data[5].ai=&immortal;
@@ -159,6 +180,7 @@ void initobjects (void)
     data[5].hitbox.right.y=18;
     data[5].fxdata[0]=7;
     data[5].fxdata[1]=8;
+
 
     for(i=0; i<MAXDATA; i++)
     {
@@ -812,7 +834,8 @@ void missilescroll(objectinfo* mover)
 {
 
     //check if mover is onscreen
-    if((fix_norm(mover->x-sorc.x)+mover->hitbox.left.x<=256-CAMERA_X && fix_norm(mover->x-sorc.x)+mover->hitbox.right.x >=-CAMERA_X)&&(fix_norm(mover->y-sorc.y)+mover->hitbox.up.y<=192-CAMERA_Y && fix_norm(mover->y-sorc.y)+mover->hitbox.down.y>=-CAMERA_Y))
+    if((fix_norm(mover->x-sorc.x)+mover->hitbox.left.x<=256-CAMERA_X && fix_norm(mover->x-sorc.x)+mover->hitbox.right.x >=-CAMERA_X)
+       &&(fix_norm(mover->y-sorc.y)+mover->hitbox.up.y<=192-CAMERA_Y && fix_norm(mover->y-sorc.y)+mover->hitbox.down.y>=-CAMERA_Y))
     {
         //if it is then move it to the correct position
         if(mover->sprite!=-1)
@@ -948,8 +971,9 @@ void missilescroll(objectinfo* mover)
 void FXscroll(objectinfo* mover, bool nb)
 {
 
-    //check if mover is onscreen
-    if((fix_norm(mover->x-sorc.x) + fxinfo[ mover->fx[nb] ].x + fxinfo[ mover->fx[nb] ].hitbox.left.x<=256-CAMERA_X && fix_norm(mover->x-sorc.x) + fxinfo[ mover->fx[nb] ].x + fxinfo[ mover->fx[nb] ].hitbox.right.x >=-CAMERA_X)&&(fix_norm(mover->y-sorc.y) + fxinfo[ mover->fx[nb] ].y + fxinfo[ mover->fx[nb] ].hitbox.up.y<=192-CAMERA_Y && fix_norm(mover->y-sorc.y) + fxinfo[ mover->fx[nb] ].y + fxinfo[ mover->fx[nb] ].hitbox.down.y>=-CAMERA_Y))
+    //check if fx is onscreen
+    if((fix_norm(mover->x-sorc.x) + fxinfo[ mover->fx[nb] ].x + fxinfo[ mover->fx[nb] ].hitbox.left.x<=256-CAMERA_X && fix_norm(mover->x-sorc.x) + fxinfo[ mover->fx[nb] ].x + fxinfo[ mover->fx[nb] ].hitbox.right.x >=-CAMERA_X)
+       &&(fix_norm(mover->y-sorc.y) + fxinfo[ mover->fx[nb] ].y + fxinfo[ mover->fx[nb] ].hitbox.up.y<=192-CAMERA_Y && fix_norm(mover->y-sorc.y) + fxinfo[ mover->fx[nb] ].y + fxinfo[ mover->fx[nb] ].hitbox.down.y>=-CAMERA_Y))
     {
         //if it is then move it to the correct position
         if(fxinfo[ mover->fx[nb] ].sprite!=-1)
@@ -1094,7 +1118,7 @@ void meleeAI(objectinfo* melee)
         {
             melee->action=2;
         }
-        else if (PA_Distance(fix_norm(melee->x)+melee->hitbox.down.x,fix_norm(melee->y)+melee->hitbox.down.y,fix_norm(sorc.x)+sorc.hitbox.down.x,fix_norm(sorc.y)+sorc.hitbox.down.y)>500)
+        else if (PA_Distance(fix_norm(melee->x)+melee->hitbox.down.x,fix_norm(melee->y)+melee->hitbox.down.y,fix_norm(sorc.x)+sorc.hitbox.down.x,fix_norm(sorc.y)+sorc.hitbox.down.y)>5000)
         {
             melee->action=0;
         }

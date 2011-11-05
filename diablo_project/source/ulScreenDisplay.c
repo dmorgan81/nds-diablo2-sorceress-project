@@ -332,7 +332,7 @@ inline void myulDefaultAnim (int spritenb)
 
 
 
-inline void myulSetSpritePrio( int sprite, u8 prio)
+inline void myulSetSpritePrio( int sprite, int prio)
 {
     sprites[sprite].prio = prio;
 }

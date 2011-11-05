@@ -133,8 +133,7 @@ int main()
             MajStats();
             movechar();
 #ifdef Test
-            PA_OutputText(1,1,7,"GPU load: %d %   ", (GFX_VERTEX_RAM_USAGE * 100) / 6144);
-
+    PA_OutputText(1,1,7,"distance: %d      ",PA_Distance(fix_norm(objects[2].x)+objects[2].hitbox.down.x,fix_norm(objects[2].y)+objects[2].hitbox.down.y,fix_norm(sorc.x)+sorc.hitbox.down.x,fix_norm(sorc.y)+sorc.hitbox.down.y));
 
             objectnb=-1;
             if (Pad.Held.A)
