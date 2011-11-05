@@ -52,6 +52,17 @@ int MAPSIZE_Y;
 #define MAX_SPRITES 		450
 #define MAX_AURAS           1
 
-#define S_COLD              1
+
+
+//status, bitmasks
+
+#define S_ALARMED           1
+#define S_ATTACKED          2
+#define S_DEAD              4
+#define S_COLD              8
+#define S_FROZEN            16
+#define S_INFIRE            32
+#define S_POISONNED         64
+#define S_STUNNED           128
 
 #endif

@@ -107,7 +107,7 @@ void mCollision(objectinfo* missile)
                 else objects[i].life-=missile->dommages;
                 */
                 objects[i].life-=missile->dommages;
-                objects[i].status=missile->status;
+                objects[i].status|=missile->status;
                 deletemissile(missile->arrayID);
                 i=MAX_OBJECT;
             }
@@ -131,7 +131,7 @@ void orbCollision(objectinfo* missile)
             {
 
                 objects[i].life-=missile->dommages;
-                objects[i].status=missile->status;
+                objects[i].status|=missile->status;
                 i=MAX_OBJECT;
             }
 

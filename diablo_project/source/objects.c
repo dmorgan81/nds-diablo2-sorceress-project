@@ -115,28 +115,28 @@ void initobjects (void)
     data[3].hitbox.right.y=80;
     data[3].fxdata[0]=5;
     data[3].fxdata[1]=6;
-/*
-//cow
-    data[4].spritedata=0;
-    data[4].ai=&meleeAI;
-    data[4].tile=0;
-    data[4].vx=0;
-    data[4].vy=0;
-    data[4].life=50;
-    data[4].dommages=0;
-    data[4].scroll=&objectscroll;
-    data[4].collision=&zmCollision;
-    data[4].datanb=4;
-    data[4].hitbox.down.y=64;
-    data[4].hitbox.down.x=36;
-    data[4].hitbox.up.y=15;
-    data[4].hitbox.up.x=36;
-    data[4].hitbox.left.x=30;
-    data[4].hitbox.left.y=30;
-    data[4].hitbox.right.x=45;
-    data[4].hitbox.right.y=30;
-    data[4].fxdata[0]=-1;
-    data[4].fxdata[1]=-1;*/
+    /*
+    //cow
+        data[4].spritedata=0;
+        data[4].ai=&meleeAI;
+        data[4].tile=0;
+        data[4].vx=0;
+        data[4].vy=0;
+        data[4].life=50;
+        data[4].dommages=0;
+        data[4].scroll=&objectscroll;
+        data[4].collision=&zmCollision;
+        data[4].datanb=4;
+        data[4].hitbox.down.y=64;
+        data[4].hitbox.down.x=36;
+        data[4].hitbox.up.y=15;
+        data[4].hitbox.up.x=36;
+        data[4].hitbox.left.x=30;
+        data[4].hitbox.left.y=30;
+        data[4].hitbox.right.x=45;
+        data[4].hitbox.right.y=30;
+        data[4].fxdata[0]=-1;
+        data[4].fxdata[1]=-1;*/
 //cow
 //change test
     data[4].spritedata=0;
@@ -835,7 +835,7 @@ void missilescroll(objectinfo* mover)
 
     //check if mover is onscreen
     if((fix_norm(mover->x-sorc.x)+mover->hitbox.left.x<=256-CAMERA_X && fix_norm(mover->x-sorc.x)+mover->hitbox.right.x >=-CAMERA_X)
-       &&(fix_norm(mover->y-sorc.y)+mover->hitbox.up.y<=192-CAMERA_Y && fix_norm(mover->y-sorc.y)+mover->hitbox.down.y>=-CAMERA_Y))
+            &&(fix_norm(mover->y-sorc.y)+mover->hitbox.up.y<=192-CAMERA_Y && fix_norm(mover->y-sorc.y)+mover->hitbox.down.y>=-CAMERA_Y))
     {
         //if it is then move it to the correct position
         if(mover->sprite!=-1)
@@ -973,7 +973,7 @@ void FXscroll(objectinfo* mover, bool nb)
 
     //check if fx is onscreen
     if((fix_norm(mover->x-sorc.x) + fxinfo[ mover->fx[nb] ].x + fxinfo[ mover->fx[nb] ].hitbox.left.x<=256-CAMERA_X && fix_norm(mover->x-sorc.x) + fxinfo[ mover->fx[nb] ].x + fxinfo[ mover->fx[nb] ].hitbox.right.x >=-CAMERA_X)
-       &&(fix_norm(mover->y-sorc.y) + fxinfo[ mover->fx[nb] ].y + fxinfo[ mover->fx[nb] ].hitbox.up.y<=192-CAMERA_Y && fix_norm(mover->y-sorc.y) + fxinfo[ mover->fx[nb] ].y + fxinfo[ mover->fx[nb] ].hitbox.down.y>=-CAMERA_Y))
+            &&(fix_norm(mover->y-sorc.y) + fxinfo[ mover->fx[nb] ].y + fxinfo[ mover->fx[nb] ].hitbox.up.y<=192-CAMERA_Y && fix_norm(mover->y-sorc.y) + fxinfo[ mover->fx[nb] ].y + fxinfo[ mover->fx[nb] ].hitbox.down.y>=-CAMERA_Y))
     {
         //if it is then move it to the correct position
         if(fxinfo[ mover->fx[nb] ].sprite!=-1)
@@ -1073,7 +1073,7 @@ void zombieAI(objectinfo* zombie)
     int movangle=PA_GetAngle(fix_norm(zombie->x)+zombie->hitbox.down.x,fix_norm(zombie->y)+zombie->hitbox.down.y,fix_norm(sorc.x)+sorc.hitbox.down.x,fix_norm(sorc.y)+sorc.hitbox.down.y);
     zombie->vx=PA_Cos(movangle)>>1;//make total move 0.5px per frame
     zombie->vy=-PA_Sin(movangle)>>1;
-    if (zombie->status==S_COLD)
+    if (zombie->status&S_COLD)
     {
         zombie->color=0x6400;//RGB15(0,0,31);    //set color to blue and make half speed
         zombie->vx>>=1;
@@ -1114,35 +1114,39 @@ void meleeAI(objectinfo* melee)
         if (!(melee->cd%melee->variables))
         {
 
-        if (PA_Distance(fix_norm(melee->x)+melee->hitbox.down.x,fix_norm(melee->y)+melee->hitbox.down.y,fix_norm(sorc.x)+sorc.hitbox.down.x,fix_norm(sorc.y)+sorc.hitbox.down.y)<40)
-        {
-            melee->action=2;
-        }
-        else if (PA_Distance(fix_norm(melee->x)+melee->hitbox.down.x,fix_norm(melee->y)+melee->hitbox.down.y,fix_norm(sorc.x)+sorc.hitbox.down.x,fix_norm(sorc.y)+sorc.hitbox.down.y)>5000)
-        {
-            melee->action=0;
-        }
+            if (PA_Distance(fix_norm(melee->x)+melee->hitbox.down.x,fix_norm(melee->y)+melee->hitbox.down.y,fix_norm(sorc.x)+sorc.hitbox.down.x,fix_norm(sorc.y)+sorc.hitbox.down.y)<40)
+            {
+                melee->action=2;
+            }
+            else if (PA_Distance(fix_norm(melee->x)+melee->hitbox.down.x,fix_norm(melee->y)+melee->hitbox.down.y,fix_norm(sorc.x)+sorc.hitbox.down.x,fix_norm(sorc.y)+sorc.hitbox.down.y)>7000)
+            {
+                melee->action=0;
+            }
 
-        else if (PA_RandMax(2))
-        {
-            melee->action=1;
-        }
-        else
-        {
-            melee->action=0;
-        }
+            else if (PA_RandMax(2))
+            {
+                melee->action=1;
+            }
+            else
+            {
+                melee->action=0;
+            }
         }
         switch (melee->action)
         {
-            case 0:
+        case 0:
             melee->vx=0;
             melee->vy=0;
             break;
-            case 1:
+        case 1:
+            if (PA_Distance(fix_norm(melee->x)+melee->hitbox.down.x,fix_norm(melee->y)+melee->hitbox.down.y,fix_norm(sorc.x)+sorc.hitbox.down.x,fix_norm(sorc.y)+sorc.hitbox.down.y)<40)
+            {
+                melee->action=2;
+            }
             melee->vx=PA_Cos(movangle)>>1;
             melee->vy=-PA_Sin(movangle)>>1;
             break;
-            case 2:
+        case 2:
             melee->vx=0;
             melee->vy=0;
             break;
@@ -1169,7 +1173,7 @@ void meleeAI(objectinfo* melee)
         melee->cd++;
 
         melee->dir=angle_dir(movangle);
-        if (melee->status==S_COLD) melee->color=RGB15(13,13,31);
+        if (melee->status&S_COLD) melee->color=RGB15(13,13,31);
 
     }
 
