@@ -1,9 +1,0 @@
-    Maps.Add "tiles", 1
-    Maps[1].EmulGBA = false
-    Bits.Show
-    ModeHexa.ActiveMap = true
-    Editor.Move 1288, 1002, -4, -4, true
-    End
-
-
-

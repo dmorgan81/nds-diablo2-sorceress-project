@@ -1,8 +1,0 @@
-    Maps.Add "essai", 1
-    Maps[1].EmulGBA = false
-    ModeHexa.ActiveMap = true
-    Editor.Move 882, 703, 71, 58, false
-    End
-
-
-
