@@ -22,13 +22,13 @@
 	<File name="source\interface.c" open="0" top="0" tabpos="8">
 		<Cursor position="5811" topLine="160" />
 	</File>
-	<File name="source\main.c" open="1" top="0" tabpos="1">
-		<Cursor position="5959" topLine="234" />
+	<File name="source\main.c" open="1" top="1" tabpos="0">
+		<Cursor position="6303" topLine="411" />
 	</File>
 	<File name="source\main.h" open="0" top="0" tabpos="2">
 		<Cursor position="34" topLine="0" />
 	</File>
-	<File name="source\objects.c" open="1" top="1" tabpos="2">
+	<File name="source\objects.c" open="0" top="0" tabpos="2">
 		<Cursor position="30475" topLine="1072" />
 	</File>
 	<File name="source\objects.h" open="0" top="0" tabpos="4">
