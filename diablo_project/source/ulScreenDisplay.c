@@ -136,16 +136,17 @@ void myulInitData (bool again)
     spritedatabase[11].sizey=85;
     spritedatabase[11].abcoeff=31;
 
-///MOOOOOOOOOOOOOOOOOOOOOOOOOOOOHHHHHHHHHHHHHHHHHHHHHHHHH
+///Fallen
     ulSetTransparentColor(RGB15(31, 0, 31));
     {
-        spritedatabase[12].image = ulLoadImageFilePNG((void*)cow_png, (int)cow_png_size, UL_IN_RAM, UL_PF_PAL4);
+        spritedatabase[12].image = ulLoadImageFilePNG((void*)fallen_png, (int)fallen_png_size, UL_IN_RAM, UL_PF_PAL4);
     }
     spritedatabase[12].nbframe=5;
     spritedatabase[12].framerate=8;//8;
-    spritedatabase[12].sizex=75;
-    spritedatabase[12].sizey=70;
+    spritedatabase[12].sizex=32;
+    spritedatabase[12].sizey=32;
     spritedatabase[12].abcoeff=31;
+
 ///small fire at wp
     ulSetTransparentColor(RGB15(31, 0, 31));
     {
@@ -414,7 +415,7 @@ void myulScreenDraws(void)
 
     }
     ulEndDrawing();
-		ulEndFrame();
+    ulEndFrame();
 
 }
 

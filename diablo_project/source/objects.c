@@ -31,6 +31,7 @@ void initobjects (void)
         fxinfo[i].used=0;
         fxinfo[i].sprite=-1;
     }
+//tyrael
     data[0].spritedata=1;
     data[0].ai=&immortal;
     data[0].tile=0;
@@ -115,31 +116,9 @@ void initobjects (void)
     data[3].hitbox.right.y=80;
     data[3].fxdata[0]=5;
     data[3].fxdata[1]=6;
-    /*
-    //cow
-        data[4].spritedata=0;
-        data[4].ai=&meleeAI;
-        data[4].tile=0;
-        data[4].vx=0;
-        data[4].vy=0;
-        data[4].life=50;
-        data[4].dommages=0;
-        data[4].scroll=&objectscroll;
-        data[4].collision=&zmCollision;
-        data[4].datanb=4;
-        data[4].hitbox.down.y=64;
-        data[4].hitbox.down.x=36;
-        data[4].hitbox.up.y=15;
-        data[4].hitbox.up.x=36;
-        data[4].hitbox.left.x=30;
-        data[4].hitbox.left.y=30;
-        data[4].hitbox.right.x=45;
-        data[4].hitbox.right.y=30;
-        data[4].fxdata[0]=-1;
-        data[4].fxdata[1]=-1;*/
-//cow
-//change test
-    data[4].spritedata=0;
+
+//fallen
+    data[4].spritedata=12;
     data[4].ai=&meleeAI;
     data[4].tile=0;
     data[4].vx=0;
@@ -149,16 +128,17 @@ void initobjects (void)
     data[4].scroll=&objectscroll;
     data[4].collision=&zmCollision;
     data[4].datanb=4;
-    data[4].hitbox.down.y=47;
-    data[4].hitbox.down.x=16;
-    data[4].hitbox.up.y=40;
-    data[4].hitbox.up.x=16;
-    data[4].hitbox.left.x=11;
-    data[4].hitbox.left.y=43;
-    data[4].hitbox.right.x=20;
-    data[4].hitbox.right.y=43;
+    data[4].hitbox.down.y=27;
+    data[4].hitbox.down.x=14;
+    data[4].hitbox.up.y=5;
+    data[4].hitbox.up.x=14;
+    data[4].hitbox.left.x=6;
+    data[4].hitbox.left.y=16;
+    data[4].hitbox.right.x=22;
+    data[4].hitbox.right.y=16;
     data[4].fxdata[0]=-1;
     data[4].fxdata[1]=-1;
+
     //wpfire
     data[5].spritedata=-1;
     data[5].ai=&immortal;
@@ -443,7 +423,7 @@ void initobjects (void)
 void deleteobject(s16 ID)
 {
     objects[ID].action=-1;
-    objects[ID].life=0;
+    //objects[ID].life=0; //not useful as set when create new object
     objects[ID].status=0;
     if( objects[ID].sprite != -1)
     {
@@ -494,6 +474,8 @@ void newObject(s32 x, s32 y, objectinfo* object,s16 ID, objectdata* data)
         object->vx=data->vx;
         object->vy=data->vy;
         object->color=RGB15(31,31,31);
+        object->action=0;
+        object->lastaction=-1;
         object->dir=0;
         object->life=data->life;
         object->dommages=data->dommages;
@@ -515,6 +497,7 @@ void newObject(s32 x, s32 y, objectinfo* object,s16 ID, objectdata* data)
         }
         object->action=0;
         (object->scroll)(object);
+        object->lastaction=0;
     }
 }
 
@@ -680,8 +663,20 @@ void objectscroll(objectinfo* mover)
 
             mover->sprite=myulCreateSprite(mover->spritedata, fix_norm(mover->x-hero.x)+CAMERA_X, fix_norm(mover->y-hero.y)+CAMERA_Y,fix_norm(mover->y-hero.y)+CAMERA_Y+mover->hitbox.down.y);
         }
-
-        u8 columnaddaction= mover->action*5; //change
+        u8 columnaddaction=0;
+        if(mover->action!=mover->lastaction)
+        {
+        if (!mover->action)
+        {
+            myulSetAnim (mover->sprite,0,2,25);    //change
+            columnaddaction= mover->action*5;
+        }
+        else
+        {
+            myulDefaultAnim(mover->sprite);    //change
+            columnaddaction= (mover->action-1)*5;
+        }
+        }
         switch (mover->dir)
         {
         case 0 :
@@ -725,6 +720,8 @@ void objectscroll(objectinfo* mover)
             break;
 
         }
+
+
 
         //s16 y = GetSpriteY(mover->sprite)+mover->hitbox.down.y;
         myulSetSpritePrio(mover->sprite,GetSpriteY(mover->sprite)+mover->hitbox.down.y);

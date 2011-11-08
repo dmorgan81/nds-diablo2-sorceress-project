@@ -1,7 +1,7 @@
 ////////////////////////////////////////////
 ////////////////////////////////////////////
 ///////////////DIABLO II////////////////////
-///////////heroERESS PROJECT////////////////
+///////////SORCERESS PROJECT////////////////
 ////////////////////////////////////////////
 ////////////////////////////////////////////
 
@@ -133,7 +133,7 @@ int main()
             MajStats();
             movechar();
 #ifdef Test
-    PA_OutputText(1,1,7,"distance: %d      ",PA_Distance(fix_norm(objects[2].x)+objects[2].hitbox.down.x,fix_norm(objects[2].y)+objects[2].hitbox.down.y,fix_norm(hero.x)+hero.hitbox.down.x,fix_norm(hero.y)+hero.hitbox.down.y));
+            PA_OutputText(1,1,7,"distance: %d      ",PA_Distance(fix_norm(objects[2].x)+objects[2].hitbox.down.x,fix_norm(objects[2].y)+objects[2].hitbox.down.y,fix_norm(hero.x)+hero.hitbox.down.x,fix_norm(hero.y)+hero.hitbox.down.y));
 
             objectnb=-1;
             if (Pad.Held.A)
@@ -167,26 +167,32 @@ int main()
             myulSetSpritePrio(hero.sprite,CHARFEET_Y);
             ulReadKeys(0);
 
-if (!(PA_VBLCounter[2]&128))//change
-{
-    for (i=0;i<MAX_DATASPRITES;i++){imagesused[i]=0;}
-}
+            if (!(PA_VBLCounter[2]&128))//change
+            {
+                for (i=0; i<MAX_DATASPRITES; i++)
+                {
+                    imagesused[i]=0;
+                }
+            }
             myulScreenDraws();
 
-if (!(PA_VBLCounter[2]&128))
-    {
+            if (!(PA_VBLCounter[2]&128))
+            {
 
-PA_OutputText(1,1,8,"tex: %d    ",ulGetTexVramAvailMemory());
-PA_OutputText(1,1,9,"vertex: %d    ",ulGetVertexAvailMemory());
-PA_OutputText(1,1,10,"state: %d    ",spritedatabase[3].image->imgState);
-for (i=1;i<MAX_DATASPRITES;i++){if(!imagesused[i])ulUnrealizeImage(spritedatabase[i].image);}
+                PA_OutputText(1,1,8,"tex: %d    ",ulGetTexVramAvailMemory());
+                PA_OutputText(1,1,9,"vertex: %d    ",ulGetVertexAvailMemory());
+                PA_OutputText(1,1,10,"state: %d    ",spritedatabase[3].image->imgState);
+                for (i=1; i<MAX_DATASPRITES; i++)
+                {
+                    if(!imagesused[i])ulUnrealizeImage(spritedatabase[i].image);
+                }
 
 
 
 
-PA_OutputText(1,1,11,"state: %d    ",spritedatabase[3].image->imgState);
+                PA_OutputText(1,1,11,"state: %d    ",spritedatabase[3].image->imgState);
 
-    }
+            }
 
 
 #ifndef NOSPAWN
