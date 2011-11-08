@@ -1,7 +1,7 @@
 ////////////////////////////////////////////
 ////////////////////////////////////////////
 ///////////////DIABLO II////////////////////
-///////////SORCERESS PROJECT////////////////
+///////////heroERESS PROJECT////////////////
 ////////////////////////////////////////////
 ////////////////////////////////////////////
 
@@ -31,7 +31,7 @@ void MajStats();
 s8 fps = 0; //Our FPS
 u8 old_time=0;
 bool secondpast=1;
-charstruct sorc;
+charstruct hero;
 
 
 ///////////////////////////////
@@ -48,44 +48,44 @@ int main()
 /////////////////
     sortchoisi[0]=&firebolt;
     sortchoisi[1]=&iceorb;
-    sorc.action=0;
-    sorc.vitesse=256;
-    sorc.vitesse2=181;//multiplie par 181 sois 1.7 en point fixe
-    sorc.x=norm_fix(125);//80
-    sorc.y=norm_fix(30);//40
+    hero.action=0;
+    hero.vitesse=256;
+    hero.vitesse2=181;//multiplie par 181 sois 1.7 en point fixe
+    hero.x=norm_fix(125);//80
+    hero.y=norm_fix(30);//40
 
 ///Hitboxinfos///
-    sorc.hitbox.left.x=11;
-    sorc.hitbox.left.y=43;
-    sorc.hitbox.right.x=20;
-    sorc.hitbox.right.y=43;
-    sorc.hitbox.up.x=16;
-    sorc.hitbox.up.y=40;
-    sorc.hitbox.down.x=16;
-    sorc.hitbox.down.y=47;
-    sorc.hitbox.middle.x=16;
-    sorc.hitbox.middle.y=43;
+    hero.hitbox.left.x=11;
+    hero.hitbox.left.y=43;
+    hero.hitbox.right.x=20;
+    hero.hitbox.right.y=43;
+    hero.hitbox.up.x=16;
+    hero.hitbox.up.y=40;
+    hero.hitbox.down.x=16;
+    hero.hitbox.down.y=47;
+    hero.hitbox.middle.x=16;
+    hero.hitbox.middle.y=43;
 ///stats///
-    sorc.stats.force=1;
-    sorc.stats.dexterite=1;
-    sorc.stats.vitalite=1;
-    sorc.stats.energie=1  ;
-    sorc.stats.vie_max=2000;
-    sorc.stats.vie_restante=(sorc.stats.vie_max);
-    sorc.stats.mana_max=100;
-    sorc.stats.mana_restante=(sorc.stats.mana_max);
-    sorc.stats.experience=1;
-    sorc.stats.nextlvl=10;
-    sorc.stats.lvl=1;
+    hero.stats.force=1;
+    hero.stats.dexterite=1;
+    hero.stats.vitalite=1;
+    hero.stats.energie=1  ;
+    hero.stats.vie_max=2000;
+    hero.stats.vie_restante=(hero.stats.vie_max);
+    hero.stats.mana_max=100;
+    hero.stats.mana_restante=(hero.stats.mana_max);
+    hero.stats.experience=1;
+    hero.stats.nextlvl=10;
+    hero.stats.lvl=1;
 
 /////////////////////////////////////////////
-    sorc.stats.mana_restante=0;
+    hero.stats.mana_restante=0;
 
 
     CallAllInits();
 
 
-    sorc.sprite=myulCreateSprite(0,CAMERA_X, CAMERA_Y, CHARFEET_Y);
+    hero.sprite=myulCreateSprite(0,CAMERA_X, CAMERA_Y, CHARFEET_Y);
 
 
 
@@ -127,13 +127,13 @@ int main()
     PA_VBLCounterStart(2);//change
     while(1)
     {
-        while(sorc.stats.vie_restante>0&&sorc.stats.vie_restante<=sorc.stats.vie_max)
+        while(hero.stats.vie_restante>0&&hero.stats.vie_restante<=hero.stats.vie_max)
         {
-            sorc.cooldown=0;
+            hero.cooldown=0;
             MajStats();
             movechar();
 #ifdef Test
-    PA_OutputText(1,1,7,"distance: %d      ",PA_Distance(fix_norm(objects[2].x)+objects[2].hitbox.down.x,fix_norm(objects[2].y)+objects[2].hitbox.down.y,fix_norm(sorc.x)+sorc.hitbox.down.x,fix_norm(sorc.y)+sorc.hitbox.down.y));
+    PA_OutputText(1,1,7,"distance: %d      ",PA_Distance(fix_norm(objects[2].x)+objects[2].hitbox.down.x,fix_norm(objects[2].y)+objects[2].hitbox.down.y,fix_norm(hero.x)+hero.hitbox.down.x,fix_norm(hero.y)+hero.hitbox.down.y));
 
             objectnb=-1;
             if (Pad.Held.A)
@@ -142,8 +142,8 @@ int main()
                 if (objectnb<MAX_MISSILE && objectnb!=-1)
                 {
 
-                    x=fix_norm(sorc.x)+sorc.hitbox.down.x;//PA_RandMax(400);
-                    y=fix_norm(sorc.y)+sorc.hitbox.right.y;//PA_RandMax(310);
+                    x=fix_norm(hero.x)+hero.hitbox.down.x;//PA_RandMax(400);
+                    y=fix_norm(hero.y)+hero.hitbox.right.y;//PA_RandMax(310);
                     newMissile(x, y, &missiles[objectnb],objectnb,dir_angle(3),256,-256,mdata[0].dommages, &mdata[0] );
                 }
             }
@@ -164,7 +164,7 @@ int main()
 
 
 
-            myulSetSpritePrio(sorc.sprite,CHARFEET_Y);
+            myulSetSpritePrio(hero.sprite,CHARFEET_Y);
             ulReadKeys(0);
 
 if (!(PA_VBLCounter[2]&128))//change
@@ -214,7 +214,7 @@ PA_OutputText(1,1,11,"state: %d    ",spritedatabase[3].image->imgState);
             if(Pad.Newpress.Start) pause(&Pad.Newpress.Start);
             PA_WaitForVBL();
         }
-        sorc.stats.vie_restante=0;
+        hero.stats.vie_restante=0;
         death();
     }
 
@@ -440,8 +440,8 @@ void MySplash()
 void MajStats()
 {
     int i;
-    sorc.lastx=sorc.x;
-    sorc.lasty=sorc.y;
+    hero.lastx=hero.x;
+    hero.lasty=hero.y;
 
 #ifndef NOGBA
     secondpast=(PA_RTC.Seconds!=old_time);
@@ -452,7 +452,7 @@ void MajStats()
 #endif
     fps+=1;
 
-    if (sorc.cooldown) sorc.cooldown--;
+    if (hero.cooldown) hero.cooldown--;
     if (secondpast)
     {
 #ifndef NOGBA
@@ -467,9 +467,9 @@ void MajStats()
 
         for(i=0; i<25; i++)
         {
-            if(sorc.stats.vie_restante<sorc.stats.vie_max)
+            if(hero.stats.vie_restante<hero.stats.vie_max)
             {
-                sorc.stats.vie_restante+=1;
+                hero.stats.vie_restante+=1;
             }
             else i=25;
         }
@@ -477,7 +477,7 @@ void MajStats()
         QuickTopScreenRefresh();
         for(i=0; i<6; i++)
         {
-            if((sorc.stats.mana_restante<sorc.stats.mana_max) && !sorc.skillperiod) sorc.stats.mana_restante++;
+            if((hero.stats.mana_restante<hero.stats.mana_max) && !hero.skillperiod) hero.stats.mana_restante++;
         }
     }
 
@@ -491,121 +491,121 @@ void MajStats()
 void movechar()
 {
 
-    if (sorc.action<=3)
+    if (hero.action<=3)
     {
-        if (sorc.skillperiod==1)
+        if (hero.skillperiod==1)
         {
-            myulDefaultAnim (sorc.sprite);
+            myulDefaultAnim (hero.sprite);
         }
-        if (sorc.skillperiod)		sorc.skillperiod--;
-        else if (sorc.cooldown)
+        if (hero.skillperiod)		hero.skillperiod--;
+        else if (hero.cooldown)
         {
-            sorc.cooldown--;
-            sorc.action=2;
+            hero.cooldown--;
+            hero.action=2;
         }
         else if (Stylus.Newpress)	Sort(Stylus.X, Stylus.Y);
-        else sorc.action=2;
+        else hero.action=2;
 
     }
 
-    if (sorc.action<=2)
+    if (hero.action<=2)
     {
         if 		(Pad.Held.Right&& Pad.Held.Down)
         {
-            sorc.direction=1;
-            sorc.action=2;
+            hero.direction=1;
+            hero.action=2;
         }
         else if 	(Pad.Held.Left	&& Pad.Held.Down)
         {
-            sorc.direction=7;
-            sorc.action=2;
+            hero.direction=7;
+            hero.action=2;
         }
         else if 	(Pad.Held.Right&& Pad.Held.Up)
         {
-            sorc.direction=3;
-            sorc.action=2;
+            hero.direction=3;
+            hero.action=2;
         }
         else if 	(Pad.Held.Left	&& Pad.Held.Up)
         {
-            sorc.direction=5;
-            sorc.action=2;
+            hero.direction=5;
+            hero.action=2;
         }
-        else sorc.action=1;
+        else hero.action=1;
 
     }
 
 
-    if(!sorc.action || sorc.action ==1)
+    if(!hero.action || hero.action ==1)
     {
 
         if			(Pad.Held.Right)
         {
-            sorc.direction=2;
-            sorc.action=1;
+            hero.direction=2;
+            hero.action=1;
         }
         else 	if	(Pad.Held.Left)
         {
-            sorc.direction=6;
-            sorc.action=1;
+            hero.direction=6;
+            hero.action=1;
         }
         else 	if (Pad.Held.Down)
         {
-            sorc.direction=0;
-            sorc.action=1;
+            hero.direction=0;
+            hero.action=1;
         }
         else 	if (Pad.Held.Up)
         {
-            sorc.direction=4;
-            sorc.action=1;
+            hero.direction=4;
+            hero.action=1;
         }
-        else 		sorc.action=0;
+        else 		hero.action=0;
 
     }
 
 
     u8 columnaddaction;
-    if (sorc.action>1) columnaddaction= (sorc.action-1)*5;
-    else columnaddaction= sorc.action*5;
-    switch (sorc.direction)
+    if (hero.action>1) columnaddaction= (hero.action-1)*5;
+    else columnaddaction= hero.action*5;
+    switch (hero.direction)
     {
     case 0 :
-        myulImageColumn (sorc.sprite,columnaddaction);
+        myulImageColumn (hero.sprite,columnaddaction);
 
         break;
 
     case 1 :
-        myulImageColumn (sorc.sprite,1+columnaddaction);
-        myulImageFlip(sorc.sprite,0,0);
+        myulImageColumn (hero.sprite,1+columnaddaction);
+        myulImageFlip(hero.sprite,0,0);
         break;
 
     case 2 :
-        myulImageColumn (sorc.sprite,2+columnaddaction);
-        myulImageFlip(sorc.sprite,0,0);
+        myulImageColumn (hero.sprite,2+columnaddaction);
+        myulImageFlip(hero.sprite,0,0);
         break;
 
     case 3 :
-        myulImageColumn (sorc.sprite,3+columnaddaction);
-        myulImageFlip(sorc.sprite,0,0);
+        myulImageColumn (hero.sprite,3+columnaddaction);
+        myulImageFlip(hero.sprite,0,0);
         break;
 
     case 4 :
-        myulImageColumn (sorc.sprite,4+columnaddaction);
+        myulImageColumn (hero.sprite,4+columnaddaction);
 
         break;
 
     case 5 :
-        myulImageColumn (sorc.sprite,3+columnaddaction);
-        myulImageFlip(sorc.sprite,1,0);
+        myulImageColumn (hero.sprite,3+columnaddaction);
+        myulImageFlip(hero.sprite,1,0);
         break;
 
     case 6 :
-        myulImageColumn (sorc.sprite,2+columnaddaction);
-        myulImageFlip(sorc.sprite,1,0);
+        myulImageColumn (hero.sprite,2+columnaddaction);
+        myulImageFlip(hero.sprite,1,0);
         break;
 
     case 7 :
-        myulImageColumn (sorc.sprite,1+columnaddaction);
-        myulImageFlip(sorc.sprite,1,0);
+        myulImageColumn (hero.sprite,1+columnaddaction);
+        myulImageFlip(hero.sprite,1,0);
         break;
 
     }
@@ -613,29 +613,29 @@ void movechar()
 
 
 
-    if (sorc.action ==1 || sorc.action ==2)
+    if (hero.action ==1 || hero.action ==2)
     {
 
-        switch (sorc.direction%2)
+        switch (hero.direction%2)
         {
         case 0 :
-            sorc.x += ((Pad.Held.Right - Pad.Held.Left)*VITESSE);
-            sorc.y += ((Pad.Held.Down - Pad.Held.Up)*VITESSE);
+            hero.x += ((Pad.Held.Right - Pad.Held.Left)*VITESSE);
+            hero.y += ((Pad.Held.Down - Pad.Held.Up)*VITESSE);
             break;
         case 1 :
-            sorc.x += ((Pad.Held.Right - Pad.Held.Left)*VITESSE2);
-            sorc.y += ((Pad.Held.Down - Pad.Held.Up)*VITESSE2);
+            hero.x += ((Pad.Held.Right - Pad.Held.Left)*VITESSE2);
+            hero.y += ((Pad.Held.Down - Pad.Held.Up)*VITESSE2);
             break;
         }
     }
-    CheckSorcCollisions();
-    Mymap->scrollX=fix_norm(sorc.x)-CAMERA_X;
-    Mymap->scrollY=fix_norm(sorc.y)-CAMERA_Y;
+    CheckheroCollisions();
+    Mymap->scrollX=fix_norm(hero.x)-CAMERA_X;
+    Mymap->scrollY=fix_norm(hero.y)-CAMERA_Y;
 #ifdef Test
-    PA_OutputText(1,17,17,"%d",fix_norm(sorc.x));
+    PA_OutputText(1,17,17,"%d",fix_norm(hero.x));
     PA_OutputText(1,17,19,"    ");
-    PA_OutputText(1,17,19,"%d",GetTile(fix_norm(sorc.x),fix_norm(sorc.y)));
-    PA_OutputText(1,17,18,"%d",fix_norm(sorc.y));
+    PA_OutputText(1,17,19,"%d",GetTile(fix_norm(hero.x),fix_norm(hero.y)));
+    PA_OutputText(1,17,18,"%d",fix_norm(hero.y));
 #endif
 }
 

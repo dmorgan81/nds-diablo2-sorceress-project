@@ -7,7 +7,6 @@
 		<Option execution_dir="D:\devkitPro\diablo_project" />
 		<Option pch_mode="2" />
 		<Option compiler="armelfgcc" />
-		<Option virtualFolders="source\;" />
 		<MakeCommands>
 			<Build command="$make -f $makefile" />
 			<CompileFile command="$make -f $makefile" />

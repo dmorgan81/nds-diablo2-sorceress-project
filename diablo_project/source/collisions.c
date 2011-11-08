@@ -2,7 +2,7 @@
 
 #include "Map.h"
 
-extern charstruct sorc;
+extern charstruct hero;
 
 
 
@@ -64,7 +64,7 @@ bool boxcollision(hitboxinfo* hitbox1,s32 x1,s32 y1,hitboxinfo* hitbox2,s32 x2,s
 
 u8 TeleCollision(pointinfo point, u8 flipped,int x,int y)
 {
-    return (GetTile(fix_norm(sorc.x)+point.x + (flipped*point.flipx)+x, fix_norm(sorc.y)+point.y+y));
+    return (GetTile(fix_norm(hero.x)+point.x + (flipped*point.flipx)+x, fix_norm(hero.y)+point.y+y));
 }
 
 
@@ -81,11 +81,11 @@ u8 anytelecollision(hitboxinfo hitbox,int x, int y)
 
 void zmCollision(objectinfo* zombie)
 {
-    if(boxcollision (&zombie->hitbox,zombie->x,zombie->y,&sorc.hitbox,sorc.x,sorc.y))
+    if(boxcollision (&zombie->hitbox,zombie->x,zombie->y,&hero.hitbox,hero.x,hero.y))
     {
 
-        sorc.stats.vie_restante-=zombie->dommages;
-//        PA_OutputText(1,0,0,"TOUCHEEEEEEEEEE %d",sorc.stats.vie_restante,zombie->dommages);
+        hero.stats.vie_restante-=zombie->dommages;
+//        PA_OutputText(1,0,0,"TOUCHEEEEEEEEEE %d",hero.stats.vie_restante,zombie->dommages);
     }
 
 }
@@ -139,28 +139,28 @@ void orbCollision(objectinfo* missile)
     }
 }
 
-void CheckSorcCollisions(void)
+void CheckheroCollisions(void)
 {
 
-    while(TileCollision(&sorc.hitbox.left	, sorc.hitbox.flipped, sorc.x-sorc.hitbox.down.x, sorc.y-sorc.hitbox.down.y)>=NWALKABLETILE)
+    while(TileCollision(&hero.hitbox.left	, hero.hitbox.flipped, hero.x-hero.hitbox.down.x, hero.y-hero.hitbox.down.y)>=NWALKABLETILE)
     {
         // Collision sur le côté gauche du sprite...
-        sorc.x+= norm_fix(1); // Move by 1 pixel...
+        hero.x+= norm_fix(1); // Move by 1 pixel...
     }
-    while(TileCollision(&sorc.hitbox.right, sorc.hitbox.flipped, sorc.x-sorc.hitbox.down.x, sorc.y-sorc.hitbox.down.y)>=NWALKABLETILE)
+    while(TileCollision(&hero.hitbox.right, hero.hitbox.flipped, hero.x-hero.hitbox.down.x, hero.y-hero.hitbox.down.y)>=NWALKABLETILE)
     {
         // Collision sur le côté droit du sprite...
-        sorc.x-= norm_fix(1); // Move by 1 pixel...
+        hero.x-= norm_fix(1); // Move by 1 pixel...
     }
-    while(TileCollision(&sorc.hitbox.up , sorc.hitbox.flipped, sorc.x-sorc.hitbox.down.x, sorc.y-sorc.hitbox.down.y)>=NWALKABLETILE)
+    while(TileCollision(&hero.hitbox.up , hero.hitbox.flipped, hero.x-hero.hitbox.down.x, hero.y-hero.hitbox.down.y)>=NWALKABLETILE)
     {
         // Collision au-dessus du sprite...
-        sorc.y+=norm_fix(1);
+        hero.y+=norm_fix(1);
     }
-    while(TileCollision(&sorc.hitbox.down, sorc.hitbox.flipped, sorc.x-sorc.hitbox.down.x, sorc.y-sorc.hitbox.down.y)>=NWALKABLETILE)
+    while(TileCollision(&hero.hitbox.down, hero.hitbox.flipped, hero.x-hero.hitbox.down.x, hero.y-hero.hitbox.down.y)>=NWALKABLETILE)
     {
         // Collision sous le sprite...
-        sorc.y -= norm_fix(1); // Move by 1 pixel...
+        hero.y -= norm_fix(1); // Move by 1 pixel...
     }
 
 }

@@ -8,7 +8,7 @@
 #include "ulScreenDisplay.h"
 #include "objects.h"
 
-extern charstruct sorc;
+extern charstruct hero;
 extern spritestruct sprites[MAX_SPRITES];
 extern inline void myulStartAnim (int spritenb, u8 sframe, u8 endframe, u8 framerate);
 

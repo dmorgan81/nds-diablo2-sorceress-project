@@ -8,7 +8,7 @@
 
 extern void MajStats();
 
-extern charstruct sorc;
+extern charstruct hero;
 extern bool secondpast;
 
 

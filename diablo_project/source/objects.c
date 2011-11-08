@@ -206,7 +206,7 @@ void initobjects (void)
     mdata[0].vy=0;
     mdata[0].life=256;
     mdata[0].dommages=25;
-    mdata[0].status=0;
+    mdata[0].status=S_ALARMED;
     mdata[0].scroll=&missilescroll;
     mdata[0].collision=&mCollision;
     mdata[0].datanb=0;
@@ -227,7 +227,7 @@ void initobjects (void)
     mdata[1].vy=0;
     mdata[1].dommages=5;
     mdata[1].life=256;
-    mdata[1].status=S_COLD;
+    mdata[1].status=S_ALARMED|S_COLD;
     mdata[1].scroll=&missilescroll;
     mdata[1].collision=&mCollision;
     mdata[1].datanb=1;
@@ -249,7 +249,7 @@ void initobjects (void)
     mdata[2].vy=0;
     mdata[2].life=175;
     mdata[2].dommages=20;
-    mdata[2].status=S_COLD;
+    mdata[2].status=S_ALARMED|S_COLD;
     mdata[2].scroll=&orbscroll;
     mdata[2].collision=&orbCollision;
     mdata[2].datanb=2;
@@ -271,7 +271,7 @@ void initobjects (void)
     mdata[3].vx=0;
     mdata[3].vy=0;
     mdata[3].life=500;
-    mdata[3].status=0;
+    mdata[3].status=S_ALARMED;
     mdata[3].dommages=1;
     mdata[3].scroll=&missilescroll;
     mdata[3].collision=&orbCollision;
@@ -294,7 +294,7 @@ void initobjects (void)
     mdata[4].vx=0;
     mdata[4].vy=0;
     mdata[4].life=500;
-    mdata[4].status=0;
+    mdata[4].status=S_ALARMED;
     mdata[4].dommages=1;
     mdata[4].scroll=&objectscroll;
     mdata[4].collision=&orbCollision;
@@ -317,7 +317,7 @@ void initobjects (void)
     mdata[5].vx=0;
     mdata[5].vy=0;
     mdata[5].life=256;
-    mdata[5].status=0;
+    mdata[5].status=S_ALARMED;
     mdata[5].dommages=26;
     mdata[5].scroll=&orbscroll;
     mdata[5].collision=&mCollision;
@@ -667,22 +667,21 @@ void objectscroll(objectinfo* mover)
 {
 
     //check if mover is onscreen
-    if((fix_norm(mover->x-sorc.x)+mover->hitbox.left.x<=256-CAMERA_X && fix_norm(mover->x-sorc.x)+mover->hitbox.right.x >=-CAMERA_X)&&(fix_norm(mover->y-sorc.y)+mover->hitbox.up.y<=192-CAMERA_Y && fix_norm(mover->y-sorc.y)+mover->hitbox.down.y>=-CAMERA_Y))
+    if((fix_norm(mover->x-hero.x)+mover->hitbox.left.x<=256-CAMERA_X && fix_norm(mover->x-hero.x)+mover->hitbox.right.x >=-CAMERA_X)&&(fix_norm(mover->y-hero.y)+mover->hitbox.up.y<=192-CAMERA_Y && fix_norm(mover->y-hero.y)+mover->hitbox.down.y>=-CAMERA_Y))
     {
         //if it is then move it to the correct position
         if(mover->sprite!=-1)
         {
-            SetSpriteXY(mover->sprite,fix_norm(mover->x-sorc.x)+CAMERA_X,fix_norm(mover->y-sorc.y)+CAMERA_Y);
+            SetSpriteXY(mover->sprite,fix_norm(mover->x-hero.x)+CAMERA_X,fix_norm(mover->y-hero.y)+CAMERA_Y);
         }
         //if it's not then create a sprite for it
         else
         {
 
-            mover->sprite=myulCreateSprite(mover->spritedata, fix_norm(mover->x-sorc.x)+CAMERA_X, fix_norm(mover->y-sorc.y)+CAMERA_Y,fix_norm(mover->y-sorc.y)+CAMERA_Y+mover->hitbox.down.y);
+            mover->sprite=myulCreateSprite(mover->spritedata, fix_norm(mover->x-hero.x)+CAMERA_X, fix_norm(mover->y-hero.y)+CAMERA_Y,fix_norm(mover->y-hero.y)+CAMERA_Y+mover->hitbox.down.y);
         }
 
-        u8 columnaddaction;
-        columnaddaction= mover->action*5; //change
+        u8 columnaddaction= mover->action*5; //change
         switch (mover->dir)
         {
         case 0 :
@@ -779,19 +778,19 @@ void orbscroll(objectinfo* mover)
 {
 
     //check if mover is onscreen
-    if((fix_norm(mover->x-sorc.x)+mover->hitbox.left.x<=256-CAMERA_X && fix_norm(mover->x-sorc.x)+mover->hitbox.right.x >=-CAMERA_X)&&(fix_norm(mover->y-sorc.y)+mover->hitbox.up.y<=192-CAMERA_Y && fix_norm(mover->y-sorc.y)+mover->hitbox.down.y>=-CAMERA_Y))
+    if((fix_norm(mover->x-hero.x)+mover->hitbox.left.x<=256-CAMERA_X && fix_norm(mover->x-hero.x)+mover->hitbox.right.x >=-CAMERA_X)&&(fix_norm(mover->y-hero.y)+mover->hitbox.up.y<=192-CAMERA_Y && fix_norm(mover->y-hero.y)+mover->hitbox.down.y>=-CAMERA_Y))
     {
         //if it is then move it to the correct position
         if(mover->sprite!=-1)
         {
-            SetSpriteXY(mover->sprite,fix_norm(mover->x-sorc.x)+CAMERA_X,fix_norm(mover->y-sorc.y)+CAMERA_Y);
+            SetSpriteXY(mover->sprite,fix_norm(mover->x-hero.x)+CAMERA_X,fix_norm(mover->y-hero.y)+CAMERA_Y);
 
         }
         //if it's not then create a sprite for it
         else
         {
 
-            mover->sprite=myulCreateSprite(mover->spritedata, fix_norm(mover->x-sorc.x)+CAMERA_X, fix_norm(mover->y-sorc.y)+CAMERA_Y,fix_norm(mover->y-sorc.y)+CAMERA_Y+mover->hitbox.down.y);
+            mover->sprite=myulCreateSprite(mover->spritedata, fix_norm(mover->x-hero.x)+CAMERA_X, fix_norm(mover->y-hero.y)+CAMERA_Y,fix_norm(mover->y-hero.y)+CAMERA_Y+mover->hitbox.down.y);
             if(mover->sprite!=-1)
             {
 
@@ -834,20 +833,20 @@ void missilescroll(objectinfo* mover)
 {
 
     //check if mover is onscreen
-    if((fix_norm(mover->x-sorc.x)+mover->hitbox.left.x<=256-CAMERA_X && fix_norm(mover->x-sorc.x)+mover->hitbox.right.x >=-CAMERA_X)
-            &&(fix_norm(mover->y-sorc.y)+mover->hitbox.up.y<=192-CAMERA_Y && fix_norm(mover->y-sorc.y)+mover->hitbox.down.y>=-CAMERA_Y))
+    if((fix_norm(mover->x-hero.x)+mover->hitbox.left.x<=256-CAMERA_X && fix_norm(mover->x-hero.x)+mover->hitbox.right.x >=-CAMERA_X)
+            &&(fix_norm(mover->y-hero.y)+mover->hitbox.up.y<=192-CAMERA_Y && fix_norm(mover->y-hero.y)+mover->hitbox.down.y>=-CAMERA_Y))
     {
         //if it is then move it to the correct position
         if(mover->sprite!=-1)
         {
-            SetSpriteXY(mover->sprite,fix_norm(mover->x-sorc.x)+CAMERA_X,fix_norm(mover->y-sorc.y)+CAMERA_Y);
+            SetSpriteXY(mover->sprite,fix_norm(mover->x-hero.x)+CAMERA_X,fix_norm(mover->y-hero.y)+CAMERA_Y);
 
         }
         //if it's not then create a sprite for it
         else
         {
 
-            mover->sprite=myulCreateSprite(mover->spritedata, fix_norm(mover->x-sorc.x)+CAMERA_X, fix_norm(mover->y-sorc.y)+CAMERA_Y,fix_norm(mover->y-sorc.y)+CAMERA_Y+mover->hitbox.down.y);
+            mover->sprite=myulCreateSprite(mover->spritedata, fix_norm(mover->x-hero.x)+CAMERA_X, fix_norm(mover->y-hero.y)+CAMERA_Y,fix_norm(mover->y-hero.y)+CAMERA_Y+mover->hitbox.down.y);
         }
 
         u8 columnaddaction;
@@ -972,19 +971,19 @@ void FXscroll(objectinfo* mover, bool nb)
 {
 
     //check if fx is onscreen
-    if((fix_norm(mover->x-sorc.x) + fxinfo[ mover->fx[nb] ].x + fxinfo[ mover->fx[nb] ].hitbox.left.x<=256-CAMERA_X && fix_norm(mover->x-sorc.x) + fxinfo[ mover->fx[nb] ].x + fxinfo[ mover->fx[nb] ].hitbox.right.x >=-CAMERA_X)
-            &&(fix_norm(mover->y-sorc.y) + fxinfo[ mover->fx[nb] ].y + fxinfo[ mover->fx[nb] ].hitbox.up.y<=192-CAMERA_Y && fix_norm(mover->y-sorc.y) + fxinfo[ mover->fx[nb] ].y + fxinfo[ mover->fx[nb] ].hitbox.down.y>=-CAMERA_Y))
+    if((fix_norm(mover->x-hero.x) + fxinfo[ mover->fx[nb] ].x + fxinfo[ mover->fx[nb] ].hitbox.left.x<=256-CAMERA_X && fix_norm(mover->x-hero.x) + fxinfo[ mover->fx[nb] ].x + fxinfo[ mover->fx[nb] ].hitbox.right.x >=-CAMERA_X)
+            &&(fix_norm(mover->y-hero.y) + fxinfo[ mover->fx[nb] ].y + fxinfo[ mover->fx[nb] ].hitbox.up.y<=192-CAMERA_Y && fix_norm(mover->y-hero.y) + fxinfo[ mover->fx[nb] ].y + fxinfo[ mover->fx[nb] ].hitbox.down.y>=-CAMERA_Y))
     {
         //if it is then move it to the correct position
         if(fxinfo[ mover->fx[nb] ].sprite!=-1)
         {
-            SetSpriteXY(fxinfo[ mover->fx[nb] ].sprite,fix_norm(mover->x-sorc.x) + fxinfo[ mover->fx[nb] ].x + CAMERA_X,fix_norm(mover->y-sorc.y) + fxinfo[ mover->fx[nb] ].y + CAMERA_Y);
+            SetSpriteXY(fxinfo[ mover->fx[nb] ].sprite,fix_norm(mover->x-hero.x) + fxinfo[ mover->fx[nb] ].x + CAMERA_X,fix_norm(mover->y-hero.y) + fxinfo[ mover->fx[nb] ].y + CAMERA_Y);
             myulImageFlip (fxinfo[ mover->fx[nb] ].sprite, fxinfo[mover->fx[nb]].flippedh,fxinfo[mover->fx[nb]].flippedv);
         }
         //if it's not then create a sprite for it
         else
         {
-            fxinfo[ mover->fx[nb] ].sprite=myulCreateSprite(fxinfo[ mover->fx[nb] ].spritedata, fix_norm(mover->x-sorc.x) + fxinfo[ mover->fx[nb] ].x + CAMERA_X, fix_norm(mover->y-sorc.y)+ fxinfo[ mover->fx[nb] ].y + CAMERA_Y,fix_norm(mover->y-sorc.y)+ fxinfo[ mover->fx[nb] ].y + CAMERA_Y + fxinfo[ mover->fx[nb] ].hitbox.down.y);
+            fxinfo[ mover->fx[nb] ].sprite=myulCreateSprite(fxinfo[ mover->fx[nb] ].spritedata, fix_norm(mover->x-hero.x) + fxinfo[ mover->fx[nb] ].x + CAMERA_X, fix_norm(mover->y-hero.y)+ fxinfo[ mover->fx[nb] ].y + CAMERA_Y,fix_norm(mover->y-hero.y)+ fxinfo[ mover->fx[nb] ].y + CAMERA_Y + fxinfo[ mover->fx[nb] ].hitbox.down.y);
             myulImageFlip (fxinfo[ mover->fx[nb] ].sprite, fxinfo[mover->fx[nb]].flippedh,fxinfo[mover->fx[nb]].flippedv);
         }
 
@@ -1053,7 +1052,7 @@ void bgObjectAi(objectinfo* object)
 {
     immortal(object);
 
-    if (fix_norm(object->y)+object->hitbox.down.y > fix_norm(sorc.y)+sorc.hitbox.down.y && fix_norm(object->y) < fix_norm(sorc.y)+sorc.hitbox.down.y)
+    if (fix_norm(object->y)+object->hitbox.down.y > fix_norm(hero.y)+hero.hitbox.down.y && fix_norm(object->y) < fix_norm(hero.y)+hero.hitbox.down.y)
     {
         SetSpriteAblending (fxinfo[object->fx[0]].sprite,BGOBJ_AB);
         SetSpriteAblending (fxinfo[object->fx[1]].sprite,BGOBJ_AB);
@@ -1070,7 +1069,7 @@ void bgObjectAi(objectinfo* object)
 void zombieAI(objectinfo* zombie)
 {
     (zombie->collision)(zombie);
-    int movangle=PA_GetAngle(fix_norm(zombie->x)+zombie->hitbox.down.x,fix_norm(zombie->y)+zombie->hitbox.down.y,fix_norm(sorc.x)+sorc.hitbox.down.x,fix_norm(sorc.y)+sorc.hitbox.down.y);
+    int movangle=PA_GetAngle(fix_norm(zombie->x)+zombie->hitbox.down.x,fix_norm(zombie->y)+zombie->hitbox.down.y,fix_norm(hero.x)+hero.hitbox.down.x,fix_norm(hero.y)+hero.hitbox.down.y);
     zombie->vx=PA_Cos(movangle)>>1;//make total move 0.5px per frame
     zombie->vy=-PA_Sin(movangle)>>1;
     if (zombie->status&S_COLD)
@@ -1108,17 +1107,17 @@ void meleeAI(objectinfo* melee)
     {
         melee->lastdir=melee->dir;
         melee->lastaction=melee->action;
-        int movangle=PA_GetAngle(fix_norm(melee->x)+melee->hitbox.down.x,fix_norm(melee->y)+melee->hitbox.down.y,fix_norm(sorc.x)+sorc.hitbox.down.x,fix_norm(sorc.y)+sorc.hitbox.down.y);
+        int movangle=PA_GetAngle(fix_norm(melee->x)+melee->hitbox.down.x,fix_norm(melee->y)+melee->hitbox.down.y,fix_norm(hero.x)+hero.hitbox.down.x,fix_norm(hero.y)+hero.hitbox.down.y);
 
 
         if (!(melee->cd%melee->variables))
         {
 
-            if (PA_Distance(fix_norm(melee->x)+melee->hitbox.down.x,fix_norm(melee->y)+melee->hitbox.down.y,fix_norm(sorc.x)+sorc.hitbox.down.x,fix_norm(sorc.y)+sorc.hitbox.down.y)<40)
+            if (PA_Distance(fix_norm(melee->x)+melee->hitbox.down.x,fix_norm(melee->y)+melee->hitbox.down.y,fix_norm(hero.x)+hero.hitbox.down.x,fix_norm(hero.y)+hero.hitbox.down.y)<40)
             {
                 melee->action=2;
             }
-            else if (PA_Distance(fix_norm(melee->x)+melee->hitbox.down.x,fix_norm(melee->y)+melee->hitbox.down.y,fix_norm(sorc.x)+sorc.hitbox.down.x,fix_norm(sorc.y)+sorc.hitbox.down.y)>7000)
+            else if (PA_Distance(fix_norm(melee->x)+melee->hitbox.down.x,fix_norm(melee->y)+melee->hitbox.down.y,fix_norm(hero.x)+hero.hitbox.down.x,fix_norm(hero.y)+hero.hitbox.down.y)>6500 && !melee->status&S_ALARMED)
             {
                 melee->action=0;
             }
@@ -1139,7 +1138,7 @@ void meleeAI(objectinfo* melee)
             melee->vy=0;
             break;
         case 1:
-            if (PA_Distance(fix_norm(melee->x)+melee->hitbox.down.x,fix_norm(melee->y)+melee->hitbox.down.y,fix_norm(sorc.x)+sorc.hitbox.down.x,fix_norm(sorc.y)+sorc.hitbox.down.y)<40)
+            if (PA_Distance(fix_norm(melee->x)+melee->hitbox.down.x,fix_norm(melee->y)+melee->hitbox.down.y,fix_norm(hero.x)+hero.hitbox.down.x,fix_norm(hero.y)+hero.hitbox.down.y)<40)
             {
                 melee->action=2;
             }
@@ -1328,7 +1327,7 @@ void blazeAura (aurainfo* aura)
     if (!(aura->life&15))
     {
         int objectnb=getUnusedMissile();
-        newMissile(fix_norm(sorc.x)+sorc.hitbox.down.x, fix_norm(sorc.y)+sorc.hitbox.down.y, &missiles[objectnb],objectnb,384,0,0,mdata[3].dommages, &mdata[3] );
+        newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+hero.hitbox.down.y, &missiles[objectnb],objectnb,384,0,0,mdata[3].dommages, &mdata[3] );
     }
     aura->life-=1;
 //if(aura->life){}

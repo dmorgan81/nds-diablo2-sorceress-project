@@ -19,7 +19,7 @@ typedef struct fx_data fx_data;
 
 typedef struct aurainfo aurainfo;
 
-extern charstruct sorc;
+extern charstruct hero;
 
 struct aurainfo
 {

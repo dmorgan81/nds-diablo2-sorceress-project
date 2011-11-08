@@ -190,7 +190,7 @@ void death()
     while (!(Pad.Newpress.Anykey||Stylus.Newpress))PA_WaitForVBL();
 
     ulDeleteImage(deathscreen);
-    sorc.stats.vie_restante=sorc.stats.vie_max;
+    hero.stats.vie_restante=hero.stats.vie_max;
     for(i=0; i<MAX_OBJECT; i++)
     {
         deleteobject(i);
