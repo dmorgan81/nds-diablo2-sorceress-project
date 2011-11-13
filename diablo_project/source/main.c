@@ -7,7 +7,7 @@
 
 
 
-//Includes PALib, µLibrary et headers
+//Includes PALib, ÂµLibrary et headers
 #include "main.h"
 #define Test
 #define NOSPAWN
@@ -367,7 +367,7 @@ void MySplash()
 {
     s32 i;
     s32 time=180;
-    //On mets l'cran en luminusité -31, ce qui le rend noir
+    //On mets l'cran en luminusitÃ© -31, ce qui le rend noir
     PA_SetBrightness(1, -31);
 
     //On charge le splash de PAlib
@@ -381,7 +381,7 @@ void MySplash()
     }
 
     //On Affiche celui de la ulib avec sa super animation!
-    ulShowSplashScreen(3);//splash modifié pour n'apparaitre que sur l'écran de la ulib
+    ulShowSplashScreen(3);//splash modifiÃ© pour n'apparaitre que sur l'Ã©cran de la ulib
 
     //effet inverse pour le PAsplash, disparait (fade)
     for( i=0 ; i>=(-31) ; i-- )
@@ -392,7 +392,7 @@ void MySplash()
     //On supprime le splash de PAlib
     PA_ResetBg(1);
 
-    //Et on recommence tout ça...
+    //Et on recommence tout Ã§a...
     //PA_EasyBgLoad(1, 1, d_Splash1);//obselete
     PA_LoadBackground(1, 1, &d_Splash1);
 
@@ -430,7 +430,7 @@ void MySplash()
     }
 
 
-    //On efface tout ça
+    //On efface tout Ã§a
     PA_SetBrightness(1, 0);
     PA_ResetBg(1);
     ulDeleteImage (d_splash2);
