@@ -322,7 +322,7 @@ inline void myulSetAnim (int spritenb, u8 sframe, u8 endframe, u8 framerate)
     sprites[spritenb].framerate=framerate;
 }
 
-inline void myulDefaultAnim (int spritenb)
+inline void myulDefaultAnimRestart (int spritenb)
 {
     sprites[spritenb].startframe=0;
     sprites[spritenb].endframe=spritedatabase[sprites[spritenb].sprite].nbframe;
@@ -331,7 +331,12 @@ inline void myulDefaultAnim (int spritenb)
     sprites[spritenb].animStage=0;
 }
 
-
+inline void myulDefaultAnim (int spritenb)
+{
+    sprites[spritenb].startframe=0;
+    sprites[spritenb].endframe=spritedatabase[sprites[spritenb].sprite].nbframe;
+    sprites[spritenb].framerate=spritedatabase[sprites[spritenb].sprite].framerate;
+}
 
 inline void myulSetSpritePrio( int sprite, int prio)
 {

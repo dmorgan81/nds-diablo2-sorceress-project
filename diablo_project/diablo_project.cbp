@@ -49,6 +49,9 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="source\actions.h" />
+		<Unit filename="source\ai.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="source\collisions.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -66,6 +69,14 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="source\objects.h" />
+		<Unit filename="source\objects\ai.c">
+			<Option compilerVar="CC" />
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="source\scrolling.c">
+			<Option compilerVar="CC" />
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="source\structures.h" />
 		<Unit filename="source\tilescollision.map.c">
 			<Option compilerVar="CC" />
