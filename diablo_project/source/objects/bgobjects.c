@@ -17,7 +17,21 @@ s16 getUnusedBgObject(void)
     }
     return -1;
 }
-
+void deleteBgObject(s16 ID)
+{
+    bgobjects[ID].action=-1;
+    bgobjects[ID].status=0;
+    if( bgobjects[ID].sprite != -1)
+    {
+        myulDeleteSprite(bgobjects[ID].sprite);
+        bgobjects[ID].sprite=-1;
+    }
+    if (bgobjects[ID].fx[0]!=-1) deleteFX(bgobjects[ID].fx[0]);
+    bgobjects[ID].fx[0]=-1;
+    if (bgobjects[ID].fx[1]!=-1) deleteFX(bgobjects[ID].fx[1]);
+    bgobjects[ID].fx[1]=-1;
+    bgobjectused[ID]=0;
+}
 
 void loadBgData()
 {
@@ -116,7 +130,7 @@ void loadBgData()
     bgdata[3].scroll=&ScrollFXonly;
     bgdata[3].collision=&noai;
     bgdata[3].datanb=3;
-    bgdata[3].hitbox.down.y=32;
+    bgdata[3].hitbox.down.y=46;
     bgdata[3].hitbox.down.x=8;
     bgdata[3].hitbox.up.y=0;
     bgdata[3].hitbox.up.x=8;
@@ -140,14 +154,14 @@ void loadBgData()
     bgdata[4].scroll=&ScrollFXonly;
     bgdata[4].collision=&noai;
     bgdata[4].datanb=4;
-    bgdata[4].hitbox.down.y=8;
-    bgdata[4].hitbox.down.x=8;
-    bgdata[4].hitbox.up.y=8;
-    bgdata[4].hitbox.up.x=8;
-    bgdata[4].hitbox.left.x=8;
-    bgdata[4].hitbox.left.y=8;
-    bgdata[4].hitbox.right.x=8;
-    bgdata[4].hitbox.right.y=8;
+    bgdata[4].hitbox.down.y=16;
+    bgdata[4].hitbox.down.x=16;
+    bgdata[4].hitbox.up.y=16;
+    bgdata[4].hitbox.up.x=16;
+    bgdata[4].hitbox.left.x=16;
+    bgdata[4].hitbox.left.y=16;
+    bgdata[4].hitbox.right.x=16;
+    bgdata[4].hitbox.right.y=16;
     bgdata[4].fxdata[0]=10;
     bgdata[4].fxdata[1]=-1;
 

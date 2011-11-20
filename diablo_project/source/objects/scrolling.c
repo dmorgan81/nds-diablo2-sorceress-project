@@ -111,10 +111,10 @@ void objectscroll(objectinfo* mover)
     if (mover->fx[0] != -1)
     {
 
-        FXscroll(mover,0);
+        (fxinfo[mover->fx[0]].scroll)(mover,0);
         if (mover->fx[1] != -1)
         {
-            FXscroll(mover,1);
+            (fxinfo[mover->fx[1]].scroll)(mover,1);
         }
 
     }
@@ -125,10 +125,10 @@ void ScrollFXonly(objectinfo* mover)
     if (mover->fx[0] != -1)
     {
 
-        FXscroll(mover,0);
+        (fxinfo[mover->fx[0]].scroll)(mover,0);
         if (mover->fx[1] != -1)
         {
-            FXscroll(mover,1);
+            (fxinfo[mover->fx[1]].scroll)(mover,1);
         }
 
     }
@@ -183,10 +183,10 @@ void oneDirScroll(objectinfo* mover)
     if (mover->fx[0] != -1)
     {
 
-        FXscroll(mover,0);
+        (fxinfo[mover->fx[0]].scroll)(mover,0);
         if (mover->fx[1] != -1)
         {
-            FXscroll(mover,1);
+            (fxinfo[mover->fx[1]].scroll)(mover,1);
         }
 
     }
@@ -321,10 +321,10 @@ void missilescroll(objectinfo* mover)
     if (mover->fx[0] != -1)
     {
 
-        FXscroll(mover,0);
+        (fxinfo[mover->fx[0]].scroll)(mover,0);
         if (mover->fx[1] != -1)
         {
-            FXscroll(mover,1);
+            (fxinfo[mover->fx[1]].scroll)(mover,1);
         }
 
     }
@@ -349,50 +349,10 @@ void FXscroll(objectinfo* mover, bool nb)
             fxinfo[ mover->fx[nb] ].sprite=myulCreateSprite(fxinfo[ mover->fx[nb] ].spritedata, fix_norm(mover->x-hero.x) + fxinfo[ mover->fx[nb] ].x + CAMERA_X, fix_norm(mover->y-hero.y)+ fxinfo[ mover->fx[nb] ].y + CAMERA_Y,fix_norm(mover->y-hero.y)+ fxinfo[ mover->fx[nb] ].y + CAMERA_Y + fxinfo[ mover->fx[nb] ].hitbox.down.y);
             myulImageFlip (fxinfo[ mover->fx[nb] ].sprite, fxinfo[mover->fx[nb]].flippedh,fxinfo[mover->fx[nb]].flippedv);
         }
-
-        //s16 y = GetSpriteY(fxinfo[ mover->fx[nb] ].sprite)+mover->hitbox.down.y;
+/*
+        s16 y = GetSpriteY(fxinfo[ mover->fx[nb] ].sprite)-fxinfo[mover->fx[nb]].y+mover->hitbox.down.y;
+        if (y<1) y=1;*/   /// to use if the point.down.y of object isnt the same as the fx
         myulSetSpritePrio(fxinfo[ mover->fx[nb] ].sprite,GetSpriteY(fxinfo[ mover->fx[nb] ].sprite)-fxinfo[mover->fx[nb]].y+mover->hitbox.down.y);
-
-
-
-    }
-
-    //if the object is offscreen delete it
-    else
-    {
-        //don't delete already gone stuff
-        if(fxinfo[ mover->fx[nb] ].sprite!=-1)
-        {
-            myulDeleteSprite(fxinfo[ mover->fx[nb] ].sprite);
-            fxinfo[ mover->fx[nb] ].sprite=-1;
-        }
-    }
-}
-
-
-
-void BgLowObjscroll(objectinfo* mover, bool nb)
-{
-
-    //check if fx is onscreen
-    if((fix_norm(mover->x-hero.x) + fxinfo[ mover->fx[nb] ].x + fxinfo[ mover->fx[nb] ].hitbox.left.x<=256-CAMERA_X && fix_norm(mover->x-hero.x) + fxinfo[ mover->fx[nb] ].x + fxinfo[ mover->fx[nb] ].hitbox.right.x >=-CAMERA_X)
-            &&(fix_norm(mover->y-hero.y) + fxinfo[ mover->fx[nb] ].y + fxinfo[ mover->fx[nb] ].hitbox.up.y<=192-CAMERA_Y && fix_norm(mover->y-hero.y) + fxinfo[ mover->fx[nb] ].y + fxinfo[ mover->fx[nb] ].hitbox.down.y>=-CAMERA_Y))
-    {
-        //if it is then move it to the correct position
-        if(fxinfo[ mover->fx[nb] ].sprite!=-1)
-        {
-            SetSpriteXY(fxinfo[ mover->fx[nb] ].sprite,fix_norm(mover->x-hero.x) + fxinfo[ mover->fx[nb] ].x + CAMERA_X,fix_norm(mover->y-hero.y) + fxinfo[ mover->fx[nb] ].y + CAMERA_Y);
-            myulImageFlip (fxinfo[ mover->fx[nb] ].sprite, fxinfo[mover->fx[nb]].flippedh,fxinfo[mover->fx[nb]].flippedv);
-        }
-        //if it's not then create a sprite for it
-        else
-        {
-            fxinfo[ mover->fx[nb] ].sprite=myulCreateSprite(fxinfo[ mover->fx[nb] ].spritedata, fix_norm(mover->x-hero.x) + fxinfo[ mover->fx[nb] ].x + CAMERA_X, fix_norm(mover->y-hero.y)+ fxinfo[ mover->fx[nb] ].y + CAMERA_Y,fix_norm(mover->y-hero.y)+ fxinfo[ mover->fx[nb] ].y + CAMERA_Y + fxinfo[ mover->fx[nb] ].hitbox.down.y);
-            myulImageFlip (fxinfo[ mover->fx[nb] ].sprite, fxinfo[mover->fx[nb]].flippedh,fxinfo[mover->fx[nb]].flippedv);
-        }
-
-        //s16 y = GetSpriteY(fxinfo[ mover->fx[nb] ].sprite)+mover->hitbox.down.y;
-        myulSetSpritePrio(fxinfo[ mover->fx[nb] ].sprite,1);//GetSpriteY(fxinfo[ mover->fx[nb] ].sprite)-fxinfo[mover->fx[nb]].y+mover->hitbox.down.y-8);
 
 
 

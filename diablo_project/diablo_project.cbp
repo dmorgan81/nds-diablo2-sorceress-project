@@ -41,21 +41,20 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="source\Map.c">
+		<Unit filename="source\Maps\Map.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="source\Map.h" />
+		<Unit filename="source\Maps\Map.h" />
+		<Unit filename="source\Maps\dudu.map.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source\Maps\tilescollision.map.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="source\actions.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="source\actions.h" />
-		<Unit filename="source\ai.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="source\collisions.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="source\collisions.h" />
 		<Unit filename="source\defines.h" />
 		<Unit filename="source\interface.c">
 			<Option compilerVar="CC" />
@@ -69,14 +68,29 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="source\objects.h" />
-		<Unit filename="source\scrolling.c">
+		<Unit filename="source\objects\ai.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source\objects\bgobjects.c">
 			<Option compilerVar="CC" />
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="source\structures.h" />
-		<Unit filename="source\tilescollision.map.c">
+		<Unit filename="source\objects\bgobjects.h" />
+		<Unit filename="source\objects\collisions.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="source\objects\collisions.h" />
+		<Unit filename="source\objects\fxdata.txt" />
+		<Unit filename="source\objects\missilesdata.txt" />
+		<Unit filename="source\objects\objectsdata.txt" />
+		<Unit filename="source\objects\scrolling.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source\skillmenu.map.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source\spritesdata.txt" />
+		<Unit filename="source\structures.h" />
 		<Unit filename="source\top_screen.c">
 			<Option compilerVar="CC" />
 		</Unit>

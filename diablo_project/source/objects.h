@@ -37,7 +37,6 @@ void objectscroll(objectinfo* mover);
 void ScrollFXonly(objectinfo* mover);
 void missilescroll(objectinfo* mover);
 void FXscroll(objectinfo* mover, bool nb);
-void BgLowObjscroll(objectinfo* mover, bool nb);
 //ais
 inline void immortal(objectinfo* object);
 void bgObjectAi(objectinfo* object);

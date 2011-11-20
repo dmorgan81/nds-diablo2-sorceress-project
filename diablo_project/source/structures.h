@@ -106,7 +106,7 @@ struct objectdata
     void (*scroll)(objectinfo*);
     void (*collision)(objectinfo*);
     frame frames_dir[25];
-    s32 life;
+    int life,exp;
     s16 dommages;
     s16 vx, vy;
     u8 tile,status;//dont need negative, 0 is enough because its basic tile so wont be called in spawn function

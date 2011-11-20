@@ -129,6 +129,7 @@ void newObject(s32 x, s32 y, objectinfo* object,s16 ID, objectdata* data)
         object->lastaction=-1;
         object->dir=0;
         object->life=data->life;
+        object->exp=data->exp;
         object->dommages=data->dommages;
         object->sprite=-1;
         object->scroll=data->scroll;

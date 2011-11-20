@@ -28,6 +28,7 @@
     data[1].vy=0;
     data[1].life=50;
     data[1].dommages=1;
+    data[1].exp=33;
     data[1].scroll=&objectscroll;
     data[1].collision=&zmCollision;
     data[1].datanb=1;
@@ -50,8 +51,9 @@
     data[2].tile=0;
     data[2].vx=0;
     data[2].vy=0;
-    data[2].life=50;
+    data[2].life=30;
     data[2].dommages=0;
+    data[2].exp=18;
     data[2].scroll=&objectscroll;
     data[2].collision=&zmCollision;
     data[2].datanb=2;
