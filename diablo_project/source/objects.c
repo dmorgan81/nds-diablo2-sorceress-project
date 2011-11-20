@@ -1,9 +1,11 @@
 #include "objects.h"
 
 void noai (objectinfo* info) {}
-objectdata data[MAXDATA];
-objectdata mdata[MAXM_DATA];
+objectdata data[MAX_DATA];
+objectdata bgdata[MAX_BGDATA];
+objectdata mdata[MAX_MDATA];
 objectinfo objects[MAX_OBJECT];
+objectinfo bgobjects[MAX_BGOBJECT];
 objectinfo missiles[MAX_MISSILE];
 fx_data fxdata[MAX_FXDATA];
 fx_info fxinfo[MAX_FX];
@@ -13,7 +15,7 @@ bool objectused[MAX_OBJECT];
 bool missileused[MAX_MISSILE];
 void initobjects (void)
 {
-
+    loadBgData();
 //Objects
     int i;
     for(i=0; i<MAX_OBJECT; i++)
@@ -33,6 +35,7 @@ void initobjects (void)
     }
 //tyrael
     data[0].spritedata=1;
+    data[0].deathspritedata=-1;
     data[0].ai=&immortal;
     data[0].tile=0;
     data[0].vx=0;
@@ -53,6 +56,7 @@ void initobjects (void)
     data[0].fxdata[1]=1;
 //zombie
     data[1].spritedata=6;
+    data[1].deathspritedata=-1;
     data[1].ai=&zombieAI;
     data[1].tile=0;
     data[1].vx=0;
@@ -73,96 +77,32 @@ void initobjects (void)
     data[1].fxdata[0]=-1;
     data[1].fxdata[1]=-1;
 
-//tree
-    data[2].spritedata=-1;
-    data[2].ai=&bgObjectAi;
-    data[2].tile=3;
-    data[2].vx=0;
-    data[2].vy=0;
-    data[2].life=500000;
-    data[2].dommages=0;
-    data[2].scroll=&ScrollFXonly;
-    data[2].collision=&noai;
-    data[2].datanb=2;
-    data[2].hitbox.down.y=107;
-    data[2].hitbox.down.x=50;
-    data[2].hitbox.up.y=63;
-    data[2].hitbox.up.x=50;
-    data[2].hitbox.left.x=45;
-    data[2].hitbox.left.y=85;
-    data[2].hitbox.right.x=55;
-    data[2].hitbox.right.y=85;
-    data[2].fxdata[0]=3;
-    data[2].fxdata[1]=4;
-
-    //fence
-    data[3].spritedata=-1;
-    data[3].ai=&bgObjectAi;
-    data[3].tile=4;
-    data[3].vx=0;
-    data[3].vy=0;
-    data[3].life=500000;
-    data[3].dommages=0;
-    data[3].scroll=&ScrollFXonly;
-    data[3].collision=&noai;
-    data[3].datanb=3;
-    data[3].hitbox.down.y=85;
-    data[3].hitbox.down.x=8;
-    data[3].hitbox.up.y=75;
-    data[3].hitbox.up.x=8;
-    data[3].hitbox.left.x=0;
-    data[3].hitbox.left.y=80;
-    data[3].hitbox.right.x=16;
-    data[3].hitbox.right.y=80;
-    data[3].fxdata[0]=5;
-    data[3].fxdata[1]=6;
 
 //fallen
-    data[4].spritedata=12;
-    data[4].ai=&meleeAI;
-    data[4].tile=0;
-    data[4].vx=0;
-    data[4].vy=0;
-    data[4].life=50;
-    data[4].dommages=0;
-    data[4].scroll=&objectscroll;
-    data[4].collision=&zmCollision;
-    data[4].datanb=4;
-    data[4].hitbox.down.y=27;
-    data[4].hitbox.down.x=14;
-    data[4].hitbox.up.y=5;
-    data[4].hitbox.up.x=14;
-    data[4].hitbox.left.x=6;
-    data[4].hitbox.left.y=16;
-    data[4].hitbox.right.x=22;
-    data[4].hitbox.right.y=16;
-    data[4].fxdata[0]=-1;
-    data[4].fxdata[1]=-1;
-
-    //wpfire
-    data[5].spritedata=-1;
-    data[5].ai=&immortal;
-    data[5].tile=2;
-    data[5].vx=0;
-    data[5].vy=0;
-    data[5].life=500000;
-    data[5].dommages=0;
-    data[5].scroll=&ScrollFXonly;
-    data[5].collision=&noai;
-    data[5].datanb=5;
-    data[5].hitbox.down.y=18;
-    data[5].hitbox.down.x=10;
-    data[5].hitbox.up.y=18;
-    data[5].hitbox.up.x=10;
-    data[5].hitbox.left.x=10;
-    data[5].hitbox.left.y=18;
-    data[5].hitbox.right.x=10;
-    data[5].hitbox.right.y=18;
-    data[5].fxdata[0]=7;
-    data[5].fxdata[1]=8;
+    data[2].spritedata=12;
+    data[2].deathspritedata=-1;
+    data[2].ai=&meleeAI;
+    data[2].tile=0;
+    data[2].vx=0;
+    data[2].vy=0;
+    data[2].life=50;
+    data[2].dommages=0;
+    data[2].scroll=&objectscroll;
+    data[2].collision=&zmCollision;
+    data[2].datanb=2;
+    data[2].hitbox.down.y=27;
+    data[2].hitbox.down.x=14;
+    data[2].hitbox.up.y=5;
+    data[2].hitbox.up.x=14;
+    data[2].hitbox.left.x=6;
+    data[2].hitbox.left.y=16;
+    data[2].hitbox.right.x=22;
+    data[2].hitbox.right.y=16;
+    data[2].fxdata[0]=-1;
+    data[2].fxdata[1]=-1;
 
 
-    for(i=0; i<MAXDATA; i++)
+    for(i=0; i<MAX_DATA; i++)
     {
         data[i].hitbox.middle.x=data[i].hitbox.down.x;
         data[i].hitbox.middle.y=data[i].hitbox.left.y;
@@ -230,7 +170,7 @@ void initobjects (void)
     mdata[2].life=175;
     mdata[2].dommages=20;
     mdata[2].status=S_ALARMED|S_COLD;
-    mdata[2].scroll=&orbscroll;
+    mdata[2].scroll=&oneDirScroll;
     mdata[2].collision=&orbCollision;
     mdata[2].datanb=2;
     mdata[2].hitbox.down.y=8;
@@ -299,7 +239,7 @@ void initobjects (void)
     mdata[5].life=256;
     mdata[5].status=S_ALARMED;
     mdata[5].dommages=26;
-    mdata[5].scroll=&orbscroll;
+    mdata[5].scroll=&oneDirScroll;
     mdata[5].collision=&mCollision;
     mdata[5].datanb=5;
     mdata[5].hitbox.down.y=15;
@@ -313,7 +253,7 @@ void initobjects (void)
     mdata[5].fxdata[0]=-1;
     mdata[5].fxdata[1]=-1;
 
-    for(i=0; i<MAXM_DATA; i++)
+    for(i=0; i<MAX_MDATA; i++)
     {
         mdata[i].hitbox.middle.x=mdata[i].hitbox.down.x;
         mdata[i].hitbox.middle.y=mdata[i].hitbox.left.y;
@@ -423,7 +363,6 @@ void initobjects (void)
 void deleteobject(s16 ID)
 {
     objects[ID].action=-1;
-    //objects[ID].life=0; //not useful as set when create new object
     objects[ID].status=0;
     if( objects[ID].sprite != -1)
     {
@@ -458,9 +397,6 @@ void newObject(s32 x, s32 y, objectinfo* object,s16 ID, objectdata* data)
     if ( ID > -1)
     {
         object->spritedata=data->spritedata;
-//	object->pallete=data->pallete;
-//	object->sizex=data->sizex;
-//	object->sizey=data->sizey;
         if( object->sprite != -1)
         {
             myulDeleteSprite(object->sprite);
@@ -519,7 +455,7 @@ void SpawnObjects()
 {
     int i,j,k,objectnb;
     //spawns objects with tile
-    for (i=0; i < MAXDATA; i++)
+    for (i=0; i < MAX_DATA; i++)
     {
         for (j=0; j<MAPSIZE_X; j++)
         {
@@ -531,6 +467,24 @@ void SpawnObjects()
                     {
                         objectnb=getUnusedObject();
                         newObject((j<<3)+4, (k<<3)+8, &objects[objectnb],objectnb, &data[i] );
+                    }
+                }
+            }
+        }
+    }
+
+    for (i=0; i < MAX_BGDATA; i++)
+    {
+        for (j=0; j<MAPSIZE_X; j++)
+        {
+            for (k=0; k<MAPSIZE_Y; k++)
+            {
+                if (bgdata[i].tile)
+                {
+                    if(bgdata[i].tile==GetTile(j<<3,k<<3))
+                    {
+                        objectnb=getUnusedBgObject();
+                        newObject((j<<3)+4, (k<<3)+8, &bgobjects[objectnb],objectnb, &bgdata[i] );
                     }
                 }
             }
@@ -551,6 +505,21 @@ void UpdateObjects()
             if(objects[i].sprite!=-1  ||  fxinfo[objects[i].fx[0]].sprite!=-1  ||  fxinfo[objects[i].fx[1]].sprite!=-1)
             {
                 (objects[i].ai)(&objects[i]);
+            }
+
+        }
+    }
+
+for(i=0; i<MAX_BGOBJECT; i++)
+    {
+        //scroll all the objects
+        if(bgobjects[i].action > -1)
+        {
+
+            (bgobjects[i].scroll)(&bgobjects[i]);
+            if(bgobjects[i].sprite!=-1  ||  fxinfo[bgobjects[i].fx[0]].sprite!=-1  ||  fxinfo[bgobjects[i].fx[1]].sprite!=-1)
+            {
+                (bgobjects[i].ai)(&bgobjects[i]);
             }
 
         }
@@ -674,8 +643,40 @@ inline void deleteFX (s8 fx)
 }
 
 
+/////////WIP////////////
+
+void MobDeath(objectinfo* mob,int time)
+{
+    hero.stats.experience+=mob->exp;
+    if (data[mob->datanb].deathspritedata!=255)//-1=255because deathspritedata is u8
+    {
+        mob->action=0;
+        if( mob->sprite != -1)
+        {
+            myulDeleteSprite(mob->sprite);
+            mob->sprite=-1;
+        }
+        if (mob->fx[0]!=-1) deleteFX(mob->fx[0]);
+        mob->fx[0]=-1;
+        if (mob->fx[1]!=-1) deleteFX(mob->fx[1]);
+        mob->fx[1]=-1;
+        mob->ai=&deadMob;
+        mob->spritedata=data[mob->datanb].deathspritedata;
+        mob->scroll=&oneDirScroll;
+        mob->variables=time;
+        //play sound?
+    }
+    else deleteobject(mob->arrayID);
+}
 
 
+
+void deadMob(objectinfo* mob)
+{
+    mob->variables--;
+    if (!mob->variables) deleteobject( mob->arrayID);
+}
+/////////WIP////////////
 
 
 

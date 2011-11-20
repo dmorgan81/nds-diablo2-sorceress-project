@@ -42,10 +42,12 @@
 int MAPSIZE_X; //no more a define, we have more than one map
 int MAPSIZE_Y;
 
-#define MAXDATA				6
+#define MAX_DATA			3
+#define MAX_BGDATA			3
 #define MAX_DATASPRITES     15
-#define MAXM_DATA			6
+#define MAX_MDATA			6
 #define MAX_OBJECT			300
+#define MAX_BGOBJECT        100
 #define MAX_MISSILE			150
 #define MAX_FX 				200
 #define MAX_FXDATA 			9

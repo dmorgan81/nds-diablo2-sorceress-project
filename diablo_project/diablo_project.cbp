@@ -69,10 +69,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="source\objects.h" />
-		<Unit filename="source\objects\ai.c">
-			<Option compilerVar="CC" />
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
 		<Unit filename="source\scrolling.c">
 			<Option compilerVar="CC" />
 			<Option target="&lt;{~None~}&gt;" />

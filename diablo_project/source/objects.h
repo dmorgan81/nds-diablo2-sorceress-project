@@ -3,11 +3,14 @@
 #include <PA9.h>
 #include "defines.h"
 #include "structures.h"
-#include "collisions.h"
+#include "objects/collisions.h"
+#include "objects/bgobjects.h"
 #include "ulScreenDisplay.h"
-extern objectdata data[MAXDATA];
-extern objectdata mdata[MAXM_DATA];
+extern objectdata data[MAX_DATA];
+extern objectdata bgdata[MAX_BGDATA];
+extern objectdata mdata[MAX_MDATA];
 extern objectinfo objects[MAX_OBJECT];
+extern objectinfo bgobjects[MAX_BGOBJECT];
 extern objectinfo missiles[MAX_MISSILE];
 extern aurainfo auras[MAX_AURAS];
 
@@ -21,13 +24,17 @@ void newMissile(s32 x, s32 y, objectinfo* object,s16 ID, s16 angle, s16 vx, s16 
 s16 getUnusedObject(void);
 s16 getUnusedMissile(void);
 s16 getUnusedFX(void);
+s8 createFX (s8 datanb);
+inline void deleteFX (s8 fx);
+
+void MobDeath(objectinfo* mob,int time);
+void deadMob(objectinfo* mob);
+
+//scrolling
 void objectscroll(objectinfo* mover);
 void ScrollFXonly(objectinfo* mover);
 void missilescroll(objectinfo* mover);
 void FXscroll(objectinfo* mover, bool nb);
-s8 createFX (s8 datanb);
-inline void deleteFX (s8 fx);
-
 
 //ais
 inline void immortal(objectinfo* object);
@@ -39,7 +46,7 @@ void missileAI (objectinfo* missile);
 void orbAI (objectinfo* missile);
 void fireAI(objectinfo* missile);
 void hydraAI(objectinfo* missile);
-void orbscroll(objectinfo* mover);
+void oneDirScroll(objectinfo* mover);
 
 void blazeAura (aurainfo* aura);
 #endif

@@ -27,12 +27,12 @@ void Sort(int X,int Y)
 void nospell (int a, int b, u16 c) {}
 
 ///firebolt///
-#include "firelaunch1.h"
+#include "firebolt1.h"
 void firebolt (int x,int y,u16 angle)
 {
     int nb=getUnusedMissile();
     newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+30, &missiles[nb],nb,angle,PA_Cos(angle)<<1,(-PA_Sin(angle))<<1,mdata[0].dommages, &mdata[0] );
-    AS_SoundDefaultPlay((u8*)firelaunch1, (u32)firelaunch1_size, 100, 64, false,0);
+    AS_SoundQuickPlay((u8*)firebolt1);
 }
 
 void icebolt (int x,int y,u16 angle)
@@ -97,7 +97,7 @@ void teleport(int x,int y,u16 angle)
 {
     x-=CHARFEET_X;
     y-=CHARFEET_Y;
-    AS_SoundDefaultPlay((u8*)teleport1, (u32)teleport1_size, 55, 64, false,0);
+    AS_SoundQuickPlay((u8*)teleport1);
     int j,k;
 
     if(anytelecollision(hero.hitbox,x,y))

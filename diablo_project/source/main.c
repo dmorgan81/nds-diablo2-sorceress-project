@@ -114,7 +114,7 @@ int main( int argc, char **argv)
     int objectnb=getUnusedObject();
     newObject(200, 64, &objects[objectnb],objectnb, &data[0] );
     objectnb=getUnusedObject();
-    newObject(100, 64, &objects[objectnb],objectnb, &data[4] );
+    newObject(100, 64, &objects[objectnb],objectnb, &data[2] );
     int i=0;
 //objectnb=getUnusedObject();
 
@@ -147,7 +147,7 @@ int main( int argc, char **argv)
                     newMissile(x, y, &missiles[objectnb],objectnb,dir_angle(3),256,-256,mdata[0].dommages, &mdata[0] );
                 }
             }
-            PA_OutputText(1,0,0,"%d",secondpast );
+            //PA_OutputText(1,0,0,"%d",secondpast );
 
             if (Pad.Held.Y)
             {
@@ -333,7 +333,7 @@ void CallAllInits()
     // Init AS_Lib for mp3
     PA_VBLFunctionInit(AS_SoundVBL);
     AS_Init(AS_MODE_MP3 | AS_MODE_SURROUND | AS_MODE_16CH);
-    AS_SetDefaultSettings(AS_PCM_8BIT, 8000, AS_SURROUND);
+    AS_SetDefaultSettings(AS_PCM_8BIT, 16384, AS_SURROUND);
 
     InitTopScreen ();
 
@@ -464,7 +464,6 @@ void MajStats()
 #ifndef NOGBA
         old_time=PA_RTC.Seconds;
 #endif
-        //PA_OutputText(1,0,0,"Fps %d /60",fps);
 #ifdef Test
         PA_OutputText(1,0,0,"%d",fps );
 #endif

@@ -7,17 +7,17 @@
 	<File name="source\Map.h" open="0" top="0" tabpos="6">
 		<Cursor position="146" topLine="0" />
 	</File>
-	<File name="source\actions.c" open="0" top="0" tabpos="8">
-		<Cursor position="61" topLine="0" />
+	<File name="source\actions.c" open="1" top="0" tabpos="6">
+		<Cursor position="3850" topLine="75" />
 	</File>
 	<File name="source\actions.h" open="0" top="0" tabpos="0">
 		<Cursor position="207" topLine="0" />
 	</File>
-	<File name="source\ai.c" open="1" top="1" tabpos="6">
-		<Cursor position="2835" topLine="101" />
+	<File name="source\ai.c" open="1" top="0" tabpos="1">
+		<Cursor position="8564" topLine="143" />
 	</File>
-	<File name="source\collisions.c" open="0" top="0" tabpos="2">
-		<Cursor position="5204" topLine="120" />
+	<File name="source\collisions.c" open="1" top="1" tabpos="7">
+		<Cursor position="2917" topLine="66" />
 	</File>
 	<File name="source\collisions.h" open="0" top="0" tabpos="9">
 		<Cursor position="486" topLine="0" />
@@ -29,22 +29,22 @@
 		<Cursor position="6023" topLine="160" />
 	</File>
 	<File name="source\main.c" open="1" top="0" tabpos="5">
-		<Cursor position="11646" topLine="482" />
+		<Cursor position="3683" topLine="290" />
 	</File>
 	<File name="source\main.h" open="0" top="0" tabpos="2">
 		<Cursor position="34" topLine="0" />
 	</File>
-	<File name="source\objects.c" open="1" top="0" tabpos="3">
-		<Cursor position="607" topLine="0" />
+	<File name="source\objects.c" open="1" top="0" tabpos="2">
+		<Cursor position="18127" topLine="684" />
 	</File>
-	<File name="source\objects.h" open="0" top="0" tabpos="4">
-		<Cursor position="1215" topLine="0" />
+	<File name="source\objects.h" open="1" top="0" tabpos="4">
+		<Cursor position="699" topLine="7" />
 	</File>
-	<File name="source\scrolling.c" open="1" top="0" tabpos="7">
-		<Cursor position="1423" topLine="20" />
+	<File name="source\scrolling.c" open="0" top="0" tabpos="7">
+		<Cursor position="3628" topLine="120" />
 	</File>
-	<File name="source\structures.h" open="0" top="0" tabpos="4">
-		<Cursor position="589" topLine="21" />
+	<File name="source\structures.h" open="1" top="0" tabpos="3">
+		<Cursor position="2071" topLine="78" />
 	</File>
 	<File name="source\tilescollision.map.c" open="0" top="0" tabpos="10">
 		<Cursor position="0" topLine="0" />
@@ -55,13 +55,13 @@
 	<File name="source\top_screen.h" open="0" top="0" tabpos="0">
 		<Cursor position="214" topLine="0" />
 	</File>
-	<File name="source\ulScreenDisplay.c" open="1" top="0" tabpos="1">
+	<File name="source\ulScreenDisplay.c" open="0" top="0" tabpos="1">
 		<Cursor position="8875" topLine="298" />
 	</File>
-	<File name="source\ulScreenDisplay.h" open="1" top="0" tabpos="4">
+	<File name="source\ulScreenDisplay.h" open="0" top="0" tabpos="4">
 		<Cursor position="971" topLine="0" />
 	</File>
-	<File name="source\uldata.h" open="1" top="0" tabpos="2">
+	<File name="source\uldata.h" open="0" top="0" tabpos="2">
 		<Cursor position="493" topLine="0" />
 	</File>
 </CodeBlocks_layout_file>

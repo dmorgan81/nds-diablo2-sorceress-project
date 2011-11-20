@@ -15,7 +15,7 @@
 #include "top_screen.h"
 #include "actions.h"
 #include "objects.h"
-#include "collisions.h"
+#include "objects/collisions.h"
 #include "interface.h"
 void movechar();
 void noactioncheck();

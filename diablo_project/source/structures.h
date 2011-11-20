@@ -90,7 +90,7 @@ struct objectinfo
     bool update;
     int arrayID;
     int x,y,cd;
-    int life;
+    int life,level,exp;
     s16 sprite; //numero sprite system(info)
     s16 vx, vy;
     s16 angle;
@@ -110,7 +110,7 @@ struct objectdata
     s16 dommages;
     s16 vx, vy;
     u8 tile,status;//dont need negative, 0 is enough because its basic tile so wont be called in spawn function
-    u8 spritedata; //numero data sprite
+    u8 spritedata,deathspritedata; //numero data sprite
     u8 datanb;
     s8 fxdata[2]; //numero data des FX, -1 signifie pas de fx
     s8 variables;
