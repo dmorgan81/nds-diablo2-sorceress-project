@@ -115,13 +115,13 @@ int main( int argc, char **argv)
     newObject(200, 64, &objects[objectnb],objectnb, &data[0] );
     objectnb=getUnusedObject();
     newObject(100, 64, &objects[objectnb],objectnb, &data[2] );
-    int i=0;
-//objectnb=getUnusedObject();
 
-    SpawnObjects();
+    int i=0;
+
 #ifdef Test
     s16 x,y;
 #endif
+    SpawnObjects();
     skillmenu();
     PA_WaitForVBL();
     PA_VBLCounterStart(2);//change

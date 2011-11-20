@@ -1,0 +1,67 @@
+//tyrael
+    data[0].spritedata=1;
+    data[0].deathspritedata=-1;
+    data[0].ai=&immortal;
+    data[0].tile=0;
+    data[0].vx=0;
+    data[0].vy=0;
+    data[0].life=500000;
+    data[0].scroll=&objectscroll;
+    data[0].collision=&noai;
+    data[0].datanb=0;
+    data[0].hitbox.down.y=50;
+    data[0].hitbox.down.x=12;
+    data[0].hitbox.up.y=0;
+    data[0].hitbox.up.x=12;
+    data[0].hitbox.left.x=0;
+    data[0].hitbox.left.y=25;
+    data[0].hitbox.right.x=24;
+    data[0].hitbox.right.y=25;
+    data[0].fxdata[0]=0;
+    data[0].fxdata[1]=1;
+//zombie
+    data[1].spritedata=6;
+    data[1].deathspritedata=-1;
+    data[1].ai=&zombieAI;
+    data[1].tile=0;
+    data[1].vx=0;
+    data[1].vy=0;
+    data[1].life=50;
+    data[1].dommages=1;
+    data[1].scroll=&objectscroll;
+    data[1].collision=&zmCollision;
+    data[1].datanb=1;
+    data[1].hitbox.down.y=33;
+    data[1].hitbox.down.x=7;
+    data[1].hitbox.up.y=0;
+    data[1].hitbox.up.x=7;
+    data[1].hitbox.left.x=0;
+    data[1].hitbox.left.y=16;
+    data[1].hitbox.right.x=14;
+    data[1].hitbox.right.y=16;
+    data[1].fxdata[0]=-1;
+    data[1].fxdata[1]=-1;
+
+
+//fallen
+    data[2].spritedata=12;
+    data[2].deathspritedata=-1;
+    data[2].ai=&meleeAI;
+    data[2].tile=0;
+    data[2].vx=0;
+    data[2].vy=0;
+    data[2].life=50;
+    data[2].dommages=0;
+    data[2].scroll=&objectscroll;
+    data[2].collision=&zmCollision;
+    data[2].datanb=2;
+    data[2].hitbox.down.y=27;
+    data[2].hitbox.down.x=14;
+    data[2].hitbox.up.y=5;
+    data[2].hitbox.up.x=14;
+    data[2].hitbox.left.x=6;
+    data[2].hitbox.left.y=16;
+    data[2].hitbox.right.x=22;
+    data[2].hitbox.right.y=16;
+    data[2].fxdata[0]=-1;
+    data[2].fxdata[1]=-1;

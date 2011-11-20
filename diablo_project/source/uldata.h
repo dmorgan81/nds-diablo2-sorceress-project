@@ -35,6 +35,9 @@
 //bg+bg objects
 #include "tree_png.h"
 #include "fence_png.h"
+#include "torch_png.h"
+#include "rock_png.h"
+
 #include "wpfire_png.h"
 #include "dudu_png.h"
 

@@ -2,9 +2,9 @@
 #define _COLLISIONS_H
 
 #include <PA9.h>
-#include "structures.h"
-#include "defines.h"
-#include "objects.h"
+#include "../structures.h"
+#include "../defines.h"
+#include "../objects.h"
 
 u8 GetTile(s32 x,s32 y);
 u8 TileCollision(pointinfo* point, u8 flipped, s32 x, s32 y);
@@ -17,7 +17,7 @@ void CheckSorcCollisions(void);
 void mCollision(objectinfo* missile);
 void orbCollision(objectinfo* missile);
 void zmCollision(objectinfo* zombie);
-
+void CheckheroCollisions(void);
 
 
 

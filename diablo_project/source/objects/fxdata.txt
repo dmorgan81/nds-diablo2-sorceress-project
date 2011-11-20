@@ -1,0 +1,116 @@
+
+    fxdata[0].spritedata=2;
+    fxdata[0].x=7;
+    fxdata[0].y=-10;
+    fxdata[0].hitbox.right.x=96;
+    fxdata[0].hitbox.left.x=0;
+    fxdata[0].hitbox.up.y=2;
+    fxdata[0].hitbox.down.y=66;
+    fxdata[0].flippedh=0;
+    fxdata[0].scroll=&FXscroll;
+
+    fxdata[1].spritedata=2;
+    fxdata[1].x=-80;
+    fxdata[1].y=-10;
+    fxdata[1].hitbox.right.x=96;
+    fxdata[1].hitbox.left.x=0;
+    fxdata[1].hitbox.up.y=2;
+    fxdata[1].hitbox.down.y=66;
+    fxdata[1].flippedh=1;
+    fxdata[1].scroll=&FXscroll;
+
+    fxdata[2].spritedata=8;
+    fxdata[2].x=8;
+    fxdata[2].y=13;
+    fxdata[2].hitbox.right.x=24;
+    fxdata[2].hitbox.left.x=0;
+    fxdata[2].hitbox.up.y=3;
+    fxdata[2].hitbox.down.y=30;
+    fxdata[2].flippedh=0;
+    fxdata[2].scroll=&FXscroll;
+//tree
+    fxdata[3].spritedata=10;
+    fxdata[3].x=49;
+    fxdata[3].y=0;
+    fxdata[3].hitbox.right.x=50;
+    fxdata[3].hitbox.left.x=0;
+    fxdata[3].hitbox.up.y=0;
+    fxdata[3].hitbox.down.y=107;
+    fxdata[3].flippedh=1;
+    fxdata[3].scroll=&FXscroll;
+
+    fxdata[4].spritedata=10;
+    fxdata[4].x=0;
+    fxdata[4].y=0;
+    fxdata[4].hitbox.right.x=50;
+    fxdata[4].hitbox.left.x=0;
+    fxdata[4].hitbox.up.y=0;
+    fxdata[4].hitbox.down.y=107;
+    fxdata[4].flippedh=0;
+    fxdata[4].scroll=&FXscroll;
+
+//fences
+    fxdata[5].spritedata=11;
+    fxdata[5].x=0;
+    fxdata[5].y=0;
+    fxdata[5].hitbox.right.x=16;
+    fxdata[5].hitbox.left.x=0;
+    fxdata[5].hitbox.up.y=0;
+    fxdata[5].hitbox.down.y=85;
+    fxdata[5].flippedh=0;
+    fxdata[5].scroll=&FXscroll;
+
+    fxdata[6].spritedata=11;
+    fxdata[6].x=16;
+    fxdata[6].y=0;
+    fxdata[6].hitbox.right.x=16;
+    fxdata[6].hitbox.left.x=0;
+    fxdata[6].hitbox.up.y=0;
+    fxdata[6].hitbox.down.y=85;
+    fxdata[6].flippedh=0;
+    fxdata[6].scroll=&FXscroll;
+
+//wpfires
+    fxdata[7].spritedata=13;
+    fxdata[7].x=0;
+    fxdata[7].y=0;
+    fxdata[7].hitbox.right.x=10;
+    fxdata[7].hitbox.left.x=0;
+    fxdata[7].hitbox.up.y=0;
+    fxdata[7].hitbox.down.y=18;
+    fxdata[7].flippedh=0;
+    fxdata[7].scroll=&FXscroll;
+
+    fxdata[8].spritedata=13;
+    fxdata[8].x=64;
+    fxdata[8].y=0;
+    fxdata[8].hitbox.right.x=10;
+    fxdata[8].hitbox.left.x=0;
+    fxdata[8].hitbox.up.y=0;
+    fxdata[8].hitbox.down.y=18;
+    fxdata[8].flippedh=1;
+    fxdata[8].scroll=&FXscroll;
+
+//torch
+
+    fxdata[9].spritedata=15;
+    fxdata[9].x=0;
+    fxdata[9].y=0;
+    fxdata[9].hitbox.right.x=16;
+    fxdata[9].hitbox.left.x=0;
+    fxdata[9].hitbox.up.y=0;
+    fxdata[9].hitbox.down.y=46;
+    fxdata[9].flippedh=0;
+    fxdata[9].scroll=&FXscroll;
+
+//rock
+
+    fxdata[10].spritedata=16;
+    fxdata[10].x=0;
+    fxdata[10].y=0;
+    fxdata[10].hitbox.right.x=16;
+    fxdata[10].hitbox.left.x=0;
+    fxdata[10].hitbox.up.y=0;
+    fxdata[10].hitbox.down.y=16;
+    fxdata[10].flippedh=0;
+    fxdata[10].scroll=&FXscroll;

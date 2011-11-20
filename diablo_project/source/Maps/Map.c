@@ -4,9 +4,9 @@
 //Taille: 8*8 * 60*45
 //Mémoire: 5400 octets
 
-#include "ulScreenDisplay.h"
-#include "uldata.h"
-#include "objects.h"
+#include "../ulScreenDisplay.h"
+#include "../uldata.h"
+#include "../objects.h"
 #include "Map.h"
 
 u16* map_col;

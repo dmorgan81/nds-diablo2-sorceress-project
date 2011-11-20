@@ -85,7 +85,7 @@ struct objectinfo
 
     s8 action,lastaction;
     u16 color;
-    s8 fx[2];
+    s16 fx[2];
 
     bool update;
     int arrayID;

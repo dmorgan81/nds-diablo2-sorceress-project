@@ -85,10 +85,13 @@ void hydra (int x,int y,u16 angle)
 {
     int nb=getUnusedMissile();
     newMissile(fix_norm(hero.x)+hero.hitbox.down.x+x-CAMERA_X-10, fix_norm(hero.y)+15+y-CAMERA_Y, &missiles[nb],nb,384,0,0,mdata[4].dommages, &mdata[4] );
+    missiles[nb].variables=0;
     nb=getUnusedMissile();
     newMissile(fix_norm(hero.x)+hero.hitbox.down.x+x-CAMERA_X-20, fix_norm(hero.y)+y-CAMERA_Y, &missiles[nb],nb,213,0,0,mdata[4].dommages, &mdata[4] );
+    missiles[nb].variables=20;
     nb=getUnusedMissile();
     newMissile(fix_norm(hero.x)+hero.hitbox.down.x+x-CAMERA_X+2, fix_norm(hero.y)+y-CAMERA_Y, &missiles[nb],nb,43,0,0,mdata[4].dommages, &mdata[4] );
+    missiles[nb].variables=40;
 }
 
 ///Teleport///

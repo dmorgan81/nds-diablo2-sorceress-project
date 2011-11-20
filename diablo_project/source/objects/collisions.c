@@ -1,6 +1,6 @@
 #include "collisions.h"
 
-#include "Map.h"
+#include "../Maps/Map.h"
 
 extern charstruct hero;
 
@@ -96,22 +96,30 @@ void mCollision(objectinfo* missile)
     u16 i;
     for (i=0; i<MAX_OBJECT; i++)
     {
-
         if (objects[i].life>0)//vérifie que l'objet est bien en vie
         {
-
             if(boxcollision (&missile->hitbox,missile->x,missile->y,&objects[i].hitbox,objects[i].x,objects[i].y))
             {
-                /*
-                if(objects[i].life-=missile->dommages) objects[i].life=0;
-                else objects[i].life-=missile->dommages;
-                */
+                if(objects[i].life)
+                {
                 objects[i].life-=missile->dommages;
                 objects[i].status|=missile->status;
                 deletemissile(missile->arrayID);
                 i=MAX_OBJECT;
+                }
             }
+        }
+    }
 
+    for (i=0; i<MAX_BGOBJECT; i++)
+    {
+        if (bgobjects[i].life>0)//vérifie que l'objet est bien en vie
+        {
+            if(boxcollision (&missile->hitbox,missile->x,missile->y,&bgobjects[i].hitbox,bgobjects[i].x,bgobjects[i].y))
+            {
+                deletemissile(missile->arrayID);
+                i=MAX_OBJECT;
+            }
         }
     }
 }

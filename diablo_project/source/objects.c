@@ -13,10 +13,12 @@ aurainfo auras[MAX_AURAS];
 
 bool objectused[MAX_OBJECT];
 bool missileused[MAX_MISSILE];
+
 void initobjects (void)
 {
     loadBgData();
-//Objects
+
+    //Objects
     int i;
     for(i=0; i<MAX_OBJECT; i++)
     {
@@ -33,84 +35,15 @@ void initobjects (void)
         fxinfo[i].used=0;
         fxinfo[i].sprite=-1;
     }
-//tyrael
-    data[0].spritedata=1;
-    data[0].deathspritedata=-1;
-    data[0].ai=&immortal;
-    data[0].tile=0;
-    data[0].vx=0;
-    data[0].vy=0;
-    data[0].life=500000;
-    data[0].scroll=&objectscroll;
-    data[0].collision=&noai;
-    data[0].datanb=0;
-    data[0].hitbox.down.y=50;
-    data[0].hitbox.down.x=12;
-    data[0].hitbox.up.y=0;
-    data[0].hitbox.up.x=12;
-    data[0].hitbox.left.x=0;
-    data[0].hitbox.left.y=25;
-    data[0].hitbox.right.x=24;
-    data[0].hitbox.right.y=25;
-    data[0].fxdata[0]=0;
-    data[0].fxdata[1]=1;
-//zombie
-    data[1].spritedata=6;
-    data[1].deathspritedata=-1;
-    data[1].ai=&zombieAI;
-    data[1].tile=0;
-    data[1].vx=0;
-    data[1].vy=0;
-    data[1].life=50;
-    data[1].dommages=1;
-    data[1].scroll=&objectscroll;
-    data[1].collision=&zmCollision;
-    data[1].datanb=1;
-    data[1].hitbox.down.y=33;
-    data[1].hitbox.down.x=7;
-    data[1].hitbox.up.y=0;
-    data[1].hitbox.up.x=7;
-    data[1].hitbox.left.x=0;
-    data[1].hitbox.left.y=16;
-    data[1].hitbox.right.x=14;
-    data[1].hitbox.right.y=16;
-    data[1].fxdata[0]=-1;
-    data[1].fxdata[1]=-1;
 
-
-//fallen
-    data[2].spritedata=12;
-    data[2].deathspritedata=-1;
-    data[2].ai=&meleeAI;
-    data[2].tile=0;
-    data[2].vx=0;
-    data[2].vy=0;
-    data[2].life=50;
-    data[2].dommages=0;
-    data[2].scroll=&objectscroll;
-    data[2].collision=&zmCollision;
-    data[2].datanb=2;
-    data[2].hitbox.down.y=27;
-    data[2].hitbox.down.x=14;
-    data[2].hitbox.up.y=5;
-    data[2].hitbox.up.x=14;
-    data[2].hitbox.left.x=6;
-    data[2].hitbox.left.y=16;
-    data[2].hitbox.right.x=22;
-    data[2].hitbox.right.y=16;
-    data[2].fxdata[0]=-1;
-    data[2].fxdata[1]=-1;
-
-
+#include "objects/objectsdata.txt"  //Really, hm, shouldnt do this beacuse its risked but it make the file less fat.
+                                    //all data in txt file to avoid overload of the c file
     for(i=0; i<MAX_DATA; i++)
     {
         data[i].hitbox.middle.x=data[i].hitbox.down.x;
         data[i].hitbox.middle.y=data[i].hitbox.left.y;
     }
-
-
 //missiles data
-
     for(i=0; i<MAX_MISSILE; i++)
     {
         missiles[i].action=-1;
@@ -119,140 +52,8 @@ void initobjects (void)
         missiles[i].fx[1]=-1;
         missiles[i].color=RGB15(31,31,31);
     }
-//firebolt
-    mdata[0].spritedata=3;
-    mdata[0].ai=&missileAI;
-    mdata[0].vx=0;
-    mdata[0].vy=0;
-    mdata[0].life=256;
-    mdata[0].dommages=25;
-    mdata[0].status=S_ALARMED;
-    mdata[0].scroll=&missilescroll;
-    mdata[0].collision=&mCollision;
-    mdata[0].datanb=0;
-    mdata[0].hitbox.down.y=13;
-    mdata[0].hitbox.down.x=15;
-    mdata[0].hitbox.up.y=6;
-    mdata[0].hitbox.up.x=15;
-    mdata[0].hitbox.left.x=13;
-    mdata[0].hitbox.left.y=9;
-    mdata[0].hitbox.right.x=19;
-    mdata[0].hitbox.right.y=9;
-    mdata[0].fxdata[0]=-1;
-    mdata[0].fxdata[1]=-1;
-//icebolt
-    mdata[1].spritedata=4;
-    mdata[1].ai=&missileAI;
-    mdata[1].vx=0;
-    mdata[1].vy=0;
-    mdata[1].dommages=5;
-    mdata[1].life=256;
-    mdata[1].status=S_ALARMED|S_COLD;
-    mdata[1].scroll=&missilescroll;
-    mdata[1].collision=&mCollision;
-    mdata[1].datanb=1;
-    mdata[1].hitbox.down.y=14;
-    mdata[1].hitbox.down.x=13;
-    mdata[1].hitbox.up.y=7;
-    mdata[1].hitbox.up.x=13;
-    mdata[1].hitbox.left.x=8;
-    mdata[1].hitbox.left.y=10;
-    mdata[1].hitbox.right.x=18;
-    mdata[1].hitbox.right.y=10;
-    mdata[1].fxdata[0]=-1;
-    mdata[1].fxdata[1]=-1;
 
-//iceorb
-    mdata[2].spritedata=5;
-    mdata[2].ai=&orbAI;
-    mdata[2].vx=0;
-    mdata[2].vy=0;
-    mdata[2].life=175;
-    mdata[2].dommages=20;
-    mdata[2].status=S_ALARMED|S_COLD;
-    mdata[2].scroll=&oneDirScroll;
-    mdata[2].collision=&orbCollision;
-    mdata[2].datanb=2;
-    mdata[2].hitbox.down.y=8;
-    mdata[2].hitbox.down.x=16;
-    mdata[2].hitbox.up.y=8;
-    mdata[2].hitbox.up.x=0;
-    mdata[2].hitbox.left.x=0;
-    mdata[2].hitbox.left.y=8;
-    mdata[2].hitbox.right.x=16;
-    mdata[2].hitbox.right.y=8;
-    mdata[2].fxdata[0]=-1;
-    mdata[2].fxdata[1]=-1;
-    mdata[2].variables=85;
-
-//fire
-    mdata[3].spritedata=7;
-    mdata[3].ai=&fireAI;
-    mdata[3].vx=0;
-    mdata[3].vy=0;
-    mdata[3].life=500;
-    mdata[3].status=S_ALARMED;
-    mdata[3].dommages=1;
-    mdata[3].scroll=&missilescroll;
-    mdata[3].collision=&orbCollision;
-    mdata[3].datanb=3;
-    mdata[3].hitbox.down.y=67;
-    mdata[3].hitbox.down.x=16;
-    mdata[3].hitbox.up.y=60;
-    mdata[3].hitbox.up.x=16;
-    mdata[3].hitbox.left.x=0;
-    mdata[3].hitbox.left.y=64;
-    mdata[3].hitbox.right.x=32;
-    mdata[3].hitbox.right.y=64;
-    mdata[3].fxdata[0]=-1;
-    mdata[3].fxdata[1]=-1;
-    mdata[3].variables=85;
-
-//hydra
-    mdata[4].spritedata=9;
-    mdata[4].ai=&hydraAI;
-    mdata[4].vx=0;
-    mdata[4].vy=0;
-    mdata[4].life=500;
-    mdata[4].status=S_ALARMED;
-    mdata[4].dommages=1;
-    mdata[4].scroll=&objectscroll;
-    mdata[4].collision=&orbCollision;
-    mdata[4].datanb=4;
-    mdata[4].hitbox.down.y=36;
-    mdata[4].hitbox.down.x=23;
-    mdata[4].hitbox.up.y=15;
-    mdata[4].hitbox.up.x=23;
-    mdata[4].hitbox.left.x=19;
-    mdata[4].hitbox.left.y=20;
-    mdata[4].hitbox.right.x=27;
-    mdata[4].hitbox.right.y=20;
-    mdata[4].fxdata[0]=2;
-    mdata[4].fxdata[1]=-1;
-    mdata[4].variables=85;
-
-    //chargedbolt
-    mdata[5].spritedata=14;
-    mdata[5].ai=&chargedboltAI;
-    mdata[5].vx=0;
-    mdata[5].vy=0;
-    mdata[5].life=256;
-    mdata[5].status=S_ALARMED;
-    mdata[5].dommages=26;
-    mdata[5].scroll=&oneDirScroll;
-    mdata[5].collision=&mCollision;
-    mdata[5].datanb=5;
-    mdata[5].hitbox.down.y=15;
-    mdata[5].hitbox.down.x=9;
-    mdata[5].hitbox.up.y=3;
-    mdata[5].hitbox.up.x=9;
-    mdata[5].hitbox.left.x=3;
-    mdata[5].hitbox.left.y=9;
-    mdata[5].hitbox.right.x=15;
-    mdata[5].hitbox.right.y=9;
-    mdata[5].fxdata[0]=-1;
-    mdata[5].fxdata[1]=-1;
-
+#include "objects/missilesdata.txt" //all data in txt file to avoid overload of the c file
     for(i=0; i<MAX_MDATA; i++)
     {
         mdata[i].hitbox.middle.x=mdata[i].hitbox.down.x;
@@ -260,97 +61,8 @@ void initobjects (void)
     }
 
 //Effects
-    fxdata[0].spritedata=2;
-    fxdata[0].x=7;
-    fxdata[0].y=-10;
-    fxdata[0].hitbox.right.x=96;
-    fxdata[0].hitbox.left.x=0;
-    fxdata[0].hitbox.up.y=2;
-    fxdata[0].hitbox.down.y=66;
-    fxdata[0].flippedh=0;
-    fxdata[0].scroll=&FXscroll;
 
-    fxdata[1].spritedata=2;
-    fxdata[1].x=-80;
-    fxdata[1].y=-10;
-    fxdata[1].hitbox.right.x=96;
-    fxdata[1].hitbox.left.x=0;
-    fxdata[1].hitbox.up.y=2;
-    fxdata[1].hitbox.down.y=66;
-    fxdata[1].flippedh=1;
-    fxdata[1].scroll=&FXscroll;
-
-    fxdata[2].spritedata=8;
-    fxdata[2].x=8;
-    fxdata[2].y=13;
-    fxdata[2].hitbox.right.x=24;
-    fxdata[2].hitbox.left.x=0;
-    fxdata[2].hitbox.up.y=3;
-    fxdata[2].hitbox.down.y=30;
-    fxdata[2].flippedh=0;
-    fxdata[2].scroll=&FXscroll;
-//tree
-    fxdata[3].spritedata=10;
-    fxdata[3].x=49;
-    fxdata[3].y=0;
-    fxdata[3].hitbox.right.x=50;
-    fxdata[3].hitbox.left.x=0;
-    fxdata[3].hitbox.up.y=0;
-    fxdata[3].hitbox.down.y=107;
-    fxdata[3].flippedh=1;
-    fxdata[3].scroll=&FXscroll;
-
-    fxdata[4].spritedata=10;
-    fxdata[4].x=0;
-    fxdata[4].y=0;
-    fxdata[4].hitbox.right.x=50;
-    fxdata[4].hitbox.left.x=0;
-    fxdata[4].hitbox.up.y=0;
-    fxdata[4].hitbox.down.y=107;
-    fxdata[4].flippedh=0;
-    fxdata[4].scroll=&FXscroll;
-
-//fences
-    fxdata[5].spritedata=11;
-    fxdata[5].x=0;
-    fxdata[5].y=0;
-    fxdata[5].hitbox.right.x=16;
-    fxdata[5].hitbox.left.x=0;
-    fxdata[5].hitbox.up.y=0;
-    fxdata[5].hitbox.down.y=85;
-    fxdata[5].flippedh=0;
-    fxdata[5].scroll=&FXscroll;
-
-    fxdata[6].spritedata=11;
-    fxdata[6].x=16;
-    fxdata[6].y=0;
-    fxdata[6].hitbox.right.x=16;
-    fxdata[6].hitbox.left.x=0;
-    fxdata[6].hitbox.up.y=0;
-    fxdata[6].hitbox.down.y=85;
-    fxdata[6].flippedh=0;
-    fxdata[6].scroll=&FXscroll;
-
-//wpfires
-    fxdata[7].spritedata=13;
-    fxdata[7].x=0;
-    fxdata[7].y=0;
-    fxdata[7].hitbox.right.x=10;
-    fxdata[7].hitbox.left.x=0;
-    fxdata[7].hitbox.up.y=0;
-    fxdata[7].hitbox.down.y=18;
-    fxdata[7].flippedh=0;
-    fxdata[7].scroll=&FXscroll;
-
-    fxdata[8].spritedata=13;
-    fxdata[8].x=64;
-    fxdata[8].y=0;
-    fxdata[8].hitbox.right.x=10;
-    fxdata[8].hitbox.left.x=0;
-    fxdata[8].hitbox.up.y=0;
-    fxdata[8].hitbox.down.y=18;
-    fxdata[8].flippedh=1;
-    fxdata[8].scroll=&FXscroll;
+#include "objects/fxdata.txt"       //all data in txt file to avoid overload of the c file
 
     for(i=0; i < MAX_FXDATA; i++)
     {
@@ -360,6 +72,9 @@ void initobjects (void)
 
 
 }
+
+
+
 void deleteobject(s16 ID)
 {
     objects[ID].action=-1;
@@ -394,7 +109,7 @@ void deletemissile(s16 ID)
 
 void newObject(s32 x, s32 y, objectinfo* object,s16 ID, objectdata* data)
 {
-    if ( ID > -1)
+    if ( ID != -1)
     {
         object->spritedata=data->spritedata;
         if( object->sprite != -1)
@@ -616,7 +331,7 @@ s16 getUnusedFX(void)
 
 
 
-s8 createFX (s8 datanb)
+s16 createFX (s16 datanb)
 {
     int nb=getUnusedFX();
     if (nb != -1)
@@ -636,7 +351,7 @@ s8 createFX (s8 datanb)
 }
 
 
-inline void deleteFX (s8 fx)
+inline void deleteFX (s16 fx)
 {
     if (fxinfo[fx].sprite!=-1) myulDeleteSprite(fxinfo[fx].sprite);
     fxinfo[fx].used=0;

@@ -36,22 +36,23 @@
 
 #define BGOBJ_AB            20
 #define NWALKABLETILE       3
-#define TILENB              6
+#define TILENB              16
+#define VOIDTILE            10
 //#define MAPSIZE_X           59 //size in number of tiles
 //#define MAPSIZE_Y           47
 int MAPSIZE_X; //no more a define, we have more than one map
 int MAPSIZE_Y;
 
 #define MAX_DATA			3
-#define MAX_BGDATA			3
-#define MAX_DATASPRITES     15
+#define MAX_BGDATA			5
+#define MAX_DATASPRITES     17
 #define MAX_MDATA			6
-#define MAX_OBJECT			300
+#define MAX_OBJECT			100
 #define MAX_BGOBJECT        100
-#define MAX_MISSILE			150
+#define MAX_MISSILE			100
 #define MAX_FX 				200
-#define MAX_FXDATA 			9
-#define MAX_SPRITES 		450
+#define MAX_FXDATA 			11
+#define MAX_SPRITES 		300
 #define MAX_AURAS           1
 
 
