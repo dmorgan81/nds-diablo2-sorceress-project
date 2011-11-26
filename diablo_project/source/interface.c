@@ -1,6 +1,6 @@
 #include "interface.h"
 #include "uldata.h"
-
+extern int curMaxSprite;
 bool dialbox=0;
 extern const unsigned short skillmenu_map[24][32];
 extern u8 skillsLevels[SKILLNUMBER];
@@ -21,7 +21,7 @@ void pause (u8 *quitcondition)//with booloean parameter checked at each frame
         ulDrawMap(Mymap);
 
 
-        for (i=0; i<MAX_SPRITES ; i++)
+        for (i=0; i<=curMaxSprite ; i++)
         {
             sprite =i;
             while (sprite != -1)

@@ -15,13 +15,14 @@ extern objectinfo missiles[MAX_MISSILE];
 extern aurainfo auras[MAX_AURAS];
 extern fx_data fxdata[MAX_FXDATA];
 extern fx_info fxinfo[MAX_FX];
+extern int curMaxObject,curMaxBgObject,curMaxMissile;
 
 void initobjects (void);
 void SpawnObjects();
 void UpdateObjects();
 void deleteobject(s16 ID);
 void deletemissile(s16 ID);
-void newObject(s32 x, s32 y, objectinfo* object,s16 ID, objectdata* data);
+void newObject(s32 x, s32 y, objectinfo* object,s16 ID, objectdata* data,bool array);
 void newMissile(s32 x, s32 y, objectinfo* object,s16 ID, s16 angle, s16 vx, s16 vy ,int dommages, objectdata* data );
 s16 getUnusedObject(void);
 s16 getUnusedMissile(void);

@@ -112,9 +112,9 @@ int main( int argc, char **argv)
 #endif
 
     int objectnb=getUnusedObject();
-    newObject(200, 64, &objects[objectnb],objectnb, &data[0] );
+    newObject(200, 64, &objects[objectnb],objectnb, &data[0],0);
     objectnb=getUnusedObject();
-    newObject(100, 64, &objects[objectnb],objectnb, &data[2] );
+    newObject(100, 64, &objects[objectnb],objectnb, &data[2],0 );
 
     int i=0;
 
@@ -202,7 +202,7 @@ int main( int argc, char **argv)
                 for(i=0; i<3; i++)
                 {
                     objectnb=getUnusedObject();
-                    newObject(PA_RandMinMax (128, 330),PA_RandMinMax (86, 286), &objects[objectnb],objectnb, &data[1] );
+                    newObject(PA_RandMinMax (128, 330),PA_RandMinMax (86, 286), &objects[objectnb],objectnb, &data[1],0 );
                 }
             }
 #endif

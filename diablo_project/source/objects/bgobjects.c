@@ -31,6 +31,7 @@ void deleteBgObject(s16 ID)
     if (bgobjects[ID].fx[1]!=-1) deleteFX(bgobjects[ID].fx[1]);
     bgobjects[ID].fx[1]=-1;
     bgobjectused[ID]=0;
+    if (ID==curMaxBgObject)curMaxBgObject--;
 }
 
 void loadBgData()

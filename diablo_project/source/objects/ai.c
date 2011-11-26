@@ -270,7 +270,7 @@ void hydraAI(objectinfo* missile)
         int i;
         int bestdistance=norm_fix(75);
         int nearestobject=-1;
-        for(i=0; i<MAX_OBJECT; i++)
+        for(i=0; i<=curMaxObject; i++)
         {
             if(objects[i].life>0)
             {

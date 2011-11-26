@@ -10,7 +10,9 @@ objectinfo missiles[MAX_MISSILE];
 fx_data fxdata[MAX_FXDATA];
 fx_info fxinfo[MAX_FX];
 aurainfo auras[MAX_AURAS];
-
+int curMaxObject,curMaxBgObject,curMaxMissile;    //small trick to avoid long browsing in arrays for nothing,
+                                    //becoming useless when a lot of objects are create and then deleted because the value will not be
+                                    //decreased, would need to browse the arrays again, and then it would be useless
 bool objectused[MAX_OBJECT];
 bool missileused[MAX_MISSILE];
 
@@ -89,6 +91,7 @@ void deleteobject(s16 ID)
     if (objects[ID].fx[1]!=-1) deleteFX(objects[ID].fx[1]);
     objects[ID].fx[1]=-1;
     objectused[ID]=0;
+    if (ID==curMaxObject)curMaxObject--;
 }
 
 void deletemissile(s16 ID)
@@ -105,9 +108,10 @@ void deletemissile(s16 ID)
     if (missiles[ID].fx[1]!=-1) deleteFX(missiles[ID].fx[1]);
     missiles[ID].fx[1]=-1;
     missileused[ID]=0;
+    if (ID==curMaxMissile)curMaxMissile--;
 }
 
-void newObject(s32 x, s32 y, objectinfo* object,s16 ID, objectdata* data)
+void newObject(s32 x, s32 y, objectinfo* object,s16 ID, objectdata* data,bool array)
 {
     if ( ID != -1)
     {
@@ -150,7 +154,13 @@ void newObject(s32 x, s32 y, objectinfo* object,s16 ID, objectdata* data)
         object->action=0;
         (object->scroll)(object);
         object->lastaction=0;
+        if (!array)
+        {
+            if (ID>curMaxObject)curMaxObject=ID;
+        }
+        else if (ID>curMaxBgObject)curMaxBgObject=ID;
     }
+
 }
 
 s16 getUnusedObject(void)
@@ -182,13 +192,14 @@ void SpawnObjects()
                     if(data[i].tile==GetTile(j<<3,k<<3))
                     {
                         objectnb=getUnusedObject();
-                        newObject((j<<3)+4, (k<<3)+8, &objects[objectnb],objectnb, &data[i] );
+                        newObject((j<<3)+4, (k<<3)+8, &objects[objectnb],objectnb, &data[i],0 );
                     }
                 }
             }
         }
     }
 
+    //curMaxObject=objectnb; // we know that the last object created has the highest rank in the array
     for (i=0; i < MAX_BGDATA; i++)
     {
         for (j=0; j<MAPSIZE_X; j++)
@@ -200,18 +211,19 @@ void SpawnObjects()
                     if(bgdata[i].tile==GetTile(j<<3,k<<3))
                     {
                         objectnb=getUnusedBgObject();
-                        newObject((j<<3)+4, (k<<3)+8, &bgobjects[objectnb],objectnb, &bgdata[i] );
+                        newObject((j<<3)+4, (k<<3)+8, &bgobjects[objectnb],objectnb, &bgdata[i] ,1);
                     }
                 }
             }
         }
     }
+    //curMaxBgObject=objectnb; //same here
 }
 
 void UpdateObjects()
 {
     int i;
-    for(i=0; i<MAX_OBJECT; i++)
+    for(i=0; i<=curMaxObject; i++)//MAX_OBJECT; i++)
     {
         //scroll all the objects
         if(objects[i].action > -1)
@@ -226,7 +238,7 @@ void UpdateObjects()
         }
     }
 
-    for(i=0; i<MAX_BGOBJECT; i++)
+    for(i=0; i<=curMaxBgObject; i++)
     {
         //scroll all the objects
         if(bgobjects[i].action > -1)
@@ -242,7 +254,7 @@ void UpdateObjects()
     }
 
 
-    for(i=0; i<MAX_MISSILE; i++)
+    for(i=0; i<=curMaxMissile; i++)
     {
         //scroll all the missiles
         if(missiles[i].action > -1)
@@ -294,7 +306,7 @@ void newMissile(s32 x, s32 y, objectinfo* object,s16 ID, s16 angle, s16 vx, s16 
             }
         }
         object->action=0;
-        //(object->scroll)(object);
+        if (ID>curMaxMissile)curMaxMissile=ID;
     }
 }
 

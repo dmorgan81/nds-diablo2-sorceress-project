@@ -94,7 +94,7 @@ void zmCollision(objectinfo* zombie)
 void mCollision(objectinfo* missile)
 {
     u16 i;
-    for (i=0; i<MAX_OBJECT; i++)
+    for (i=0; i<=curMaxObject; i++)
     {
         if (objects[i].life>0)//vérifie que l'objet est bien en vie
         {
@@ -105,20 +105,20 @@ void mCollision(objectinfo* missile)
                 objects[i].life-=missile->dommages;
                 objects[i].status|=missile->status;
                 deletemissile(missile->arrayID);
-                i=MAX_OBJECT;
+                i=curMaxObject;
                 }
             }
         }
     }
 
-    for (i=0; i<MAX_BGOBJECT; i++)
+    for (i=0; i<=curMaxBgObject; i++)
     {
         if (bgobjects[i].life>0)//vérifie que l'objet est bien en vie
         {
             if(boxcollision (&missile->hitbox,missile->x,missile->y,&bgobjects[i].hitbox,bgobjects[i].x,bgobjects[i].y))
             {
                 deletemissile(missile->arrayID);
-                i=MAX_OBJECT;
+                i=curMaxBgObject;
             }
         }
     }
@@ -129,7 +129,7 @@ void mCollision(objectinfo* missile)
 void orbCollision(objectinfo* missile)
 {
     u16 i;
-    for (i=0; i<MAX_OBJECT; i++)
+    for (i=0; i<=curMaxObject; i++)
     {
 
         if (objects[i].life>0)//vérifie que l'objet est bien en vie
@@ -140,7 +140,7 @@ void orbCollision(objectinfo* missile)
 
                 objects[i].life-=missile->dommages;
                 objects[i].status|=missile->status;
-                i=MAX_OBJECT;
+                i=curMaxObject;
             }
 
         }

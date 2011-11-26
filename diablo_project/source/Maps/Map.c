@@ -31,6 +31,8 @@ void changemap(u8 mapnb,bool reset)
             map_col=tilescollision_map;
             MAPSIZE_X=59;
             MAPSIZE_Y=47;
+            curMaxObject=0;
+            curMaxBgObject=0;
             SpawnObjects();
 
         }
@@ -53,7 +55,8 @@ void changemap(u8 mapnb,bool reset)
             map_col=duducol_map;
             MAPSIZE_X=129;
             MAPSIZE_Y=102;
-
+            curMaxObject=0;
+            curMaxBgObject=0;
             SpawnObjects();
         }
         mapTiles = ulLoadImageFilePNG((void*)dudu_png, (int)dudu_png_size, UL_IN_VRAM, UL_PF_PAL4);

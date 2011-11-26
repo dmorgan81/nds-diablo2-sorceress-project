@@ -1,6 +1,6 @@
 #include "ulScreenDisplay.h"
 #include "uldata.h"
-
+int curMaxSprite;//same trick as in objects.c
 
 
 void myulInitData (bool again)
@@ -61,6 +61,7 @@ int myulCreateSprite (u8 data,int x,int y, s8 prio)
         sprites[nb].color=RGB15(31, 31, 31);
         sprites[nb].cycles=spritedatabase[data].cycles;
         myulSetSpritePrio( nb, prio);
+        if (nb>curMaxSprite)curMaxSprite=nb;
     }
     else
     {
@@ -90,6 +91,7 @@ inline void myulDeleteSprite (int nb)
         sprites[nb].flippedv=0;
         //sprites[nb].angle=0;
         sprites[nb].sprite=-1;
+        if (nb==curMaxSprite)curMaxSprite--;
     }
 }
 inline void myulImageFlip (int /*sprite*/nb,bool fliph,bool flipv)
@@ -216,7 +218,7 @@ void myulScreenDraws(void)
     //myulUpdatePrio();
     int sprite=-1;
     int nb=0;
-    for (i=0; i<MAX_SPRITES ; i++)
+    for (i=0; i<=curMaxSprite ; i++)
     {
 
         sprite =i;// Prio_first[i];
