@@ -144,7 +144,7 @@ struct spritedata
 {
     UL_IMAGE *image;
     u8 sizex, sizey;
-    u8 nbframe, framerate;
+    u8 nbframe, framerate,cycles;
     int abcoeff;
     hitboxinfo hitbox;
 
@@ -153,7 +153,7 @@ struct spritedata
 struct spritestruct
 {
 
-    u8 startframe, endframe, framerate, column;
+    u8 startframe, endframe, framerate, column, cycles;
     u16 color;
     int sprite;//data number
     int x,y,midx,midy,prio,abcoeff;//,angle;

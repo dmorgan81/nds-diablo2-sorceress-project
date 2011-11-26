@@ -2,7 +2,10 @@
 <CodeBlocks_layout_file>
 	<ActiveTarget name="Release" />
 	<File name="source\Maps\Map.c" open="0" top="0" tabpos="0">
-		<Cursor position="151" topLine="0" />
+		<Cursor position="1419" topLine="23" />
+	</File>
+	<File name="source\Maps\Map.h" open="0" top="0" tabpos="0">
+		<Cursor position="247" topLine="0" />
 	</File>
 	<File name="source\Maps\tilescollision.map.c" open="0" top="0" tabpos="0">
 		<Cursor position="1178" topLine="0" />
@@ -11,58 +14,61 @@
 		<Cursor position="3779" topLine="57" />
 	</File>
 	<File name="source\defines.h" open="0" top="0" tabpos="0">
-		<Cursor position="1504" topLine="29" />
+		<Cursor position="1366" topLine="29" />
 	</File>
 	<File name="source\interface.c" open="0" top="0" tabpos="0">
 		<Cursor position="1877" topLine="26" />
 	</File>
 	<File name="source\main.c" open="0" top="0" tabpos="0">
-		<Cursor position="4049" topLine="145" />
+		<Cursor position="9050" topLine="329" />
 	</File>
 	<File name="source\main.h" open="0" top="0" tabpos="0">
 		<Cursor position="413" topLine="0" />
 	</File>
-	<File name="source\objects.c" open="0" top="0" tabpos="0">
-		<Cursor position="5996" topLine="210" />
+	<File name="source\objects.c" open="1" top="1" tabpos="5">
+		<Cursor position="5355" topLine="174" />
 	</File>
 	<File name="source\objects.h" open="0" top="0" tabpos="0">
-		<Cursor position="1359" topLine="12" />
+		<Cursor position="1257" topLine="0" />
 	</File>
 	<File name="source\objects\ai.c" open="0" top="0" tabpos="0">
-		<Cursor position="283" topLine="5" />
+		<Cursor position="936" topLine="203" />
 	</File>
-	<File name="source\objects\bgobjects.c" open="0" top="0" tabpos="0">
-		<Cursor position="2201" topLine="67" />
+	<File name="source\objects\bgobjects.c" open="1" top="0" tabpos="1">
+		<Cursor position="3335" topLine="129" />
 	</File>
 	<File name="source\objects\bgobjects.h" open="0" top="0" tabpos="0">
-		<Cursor position="48" topLine="0" />
+		<Cursor position="138" topLine="0" />
 	</File>
 	<File name="source\objects\collisions.c" open="0" top="0" tabpos="0">
-		<Cursor position="3342" topLine="83" />
+		<Cursor position="225" topLine="0" />
 	</File>
 	<File name="source\objects\collisions.h" open="0" top="0" tabpos="0">
 		<Cursor position="732" topLine="0" />
 	</File>
-	<File name="source\objects\fxdata.txt" open="0" top="0" tabpos="0">
-		<Cursor position="2934" topLine="74" />
+	<File name="source\objects\fxdata.txt" open="1" top="0" tabpos="2">
+		<Cursor position="2901" topLine="74" />
 	</File>
 	<File name="source\objects\missilesdata.txt" open="0" top="0" tabpos="0">
 		<Cursor position="3313" topLine="91" />
 	</File>
 	<File name="source\objects\objectsdata.txt" open="0" top="0" tabpos="0">
-		<Cursor position="1280" topLine="0" />
+		<Cursor position="1339" topLine="0" />
 	</File>
-	<File name="source\objects\scrolling.c" open="0" top="0" tabpos="0">
-		<Cursor position="13089" topLine="366" />
+	<File name="source\objects\scrolling.c" open="1" top="0" tabpos="3">
+		<Cursor position="11307" topLine="328" />
 	</File>
-	<File name="source\spritesdata.txt" open="0" top="0" tabpos="0">
-		<Cursor position="6167" topLine="143" />
+	<File name="source\spritesdata.txt" open="1" top="0" tabpos="4">
+		<Cursor position="5625" topLine="143" />
 	</File>
 	<File name="source\structures.h" open="0" top="0" tabpos="0">
-		<Cursor position="2392" topLine="105" />
+		<Cursor position="2605" topLine="126" />
+	</File>
+	<File name="source\top_screen.c" open="0" top="0" tabpos="0">
+		<Cursor position="545" topLine="0" />
 	</File>
 	<File name="source\ulScreenDisplay.c" open="0" top="0" tabpos="0">
-		<Cursor position="1782" topLine="43" />
+		<Cursor position="4334" topLine="165" />
 	</File>
 	<File name="source\uldata.h" open="0" top="0" tabpos="0">
 		<Cursor position="498" topLine="0" />

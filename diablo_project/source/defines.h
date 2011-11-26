@@ -5,7 +5,7 @@
 /////Defines/////
 /////////////////
 /////////////////
-//#define Test
+
 #define MUSIC_OFF
 
 #define PATEXT_ALL_COL_WHITE	PA_SetTextCol(1,31,31,31);
@@ -25,15 +25,18 @@
 #define fix_mult(x,y)		(((x)*(y))>>8)
 #define ratio_fix(x,y)		((256*(x))/(y))
 #define fixed_fraction(x)	((x)&&0xff)
+
+
 #define VITESSE				256
 #define VITESSE2			181
 #define CAMERA_X        	112
 #define CAMERA_Y	        60
 #define CHARMID_X           128
 #define CHARMID_Y           86
-#define CHARFEET_X           128
-#define CHARFEET_Y           107
+#define CHARFEET_X          128
+#define CHARFEET_Y          107
 
+#define SKILLNUMBER         8
 #define BGOBJ_AB            20
 #define NWALKABLETILE       3
 #define TILENB              16
@@ -45,7 +48,7 @@ int MAPSIZE_Y;
 
 #define MAX_DATA			3
 #define MAX_BGDATA			5
-#define MAX_DATASPRITES     17
+#define MAX_DATASPRITES     18
 #define MAX_MDATA			6
 #define MAX_OBJECT			100
 #define MAX_BGOBJECT        100

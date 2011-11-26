@@ -1,7 +1,7 @@
 #include "actions.h"
 
 
-
+u8 skillsLevels[SKILLNUMBER];
 
 
 
@@ -19,7 +19,7 @@ void Sort(int X,int Y)
         sortchoisi[Pad.Held.L] (X,Y,angle);
         hero.stats.mana_restante -= cout_sort[Pad.Held.L];
 
-        myulStartAnim (hero.sprite, 0, spritedatabase[0].nbframe,hero.skillperiod/spritedatabase[0].nbframe);//framerate according to skill period to match animation time
+        myulStartAnim (hero.sprite, 0, spritedatabase[0].nbframe,hero.skillperiod/spritedatabase[0].nbframe,1);//framerate according to skill period to match animation time
 
     }
 }

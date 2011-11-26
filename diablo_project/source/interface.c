@@ -1,10 +1,9 @@
 #include "interface.h"
 #include "uldata.h"
 
-#define SKILLNUMBER 8
 bool dialbox=0;
 extern const unsigned short skillmenu_map[24][32];
-
+extern u8 skillsLevels[SKILLNUMBER];
 
 
 void pause (u8 *quitcondition)//with booloean parameter checked at each frame
@@ -130,6 +129,7 @@ void skillmenu()
         skillicons->x=skillx[i];
         skillicons->y=skilly[i];
         ulSetImageTileSize (skillicons,0,32*skillframe[i],32,32);
+        if (!skillsLevels[i]){ulSetImageTint(skillicons,0x14d4);} else ulSetImageTint(skillicons,0x7fff);
         ulDrawImage(skillicons);
     }
     UL_IMAGE *exitbtn=ulLoadImageFilePNG((void*)exit_png, (int)exit_png_size, UL_IN_VRAM, UL_PF_PAL4);

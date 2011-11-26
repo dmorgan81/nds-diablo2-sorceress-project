@@ -121,7 +121,6 @@ int main( int argc, char **argv)
 #ifdef Test
     s16 x,y;
 #endif
-    SpawnObjects();
     skillmenu();
     PA_WaitForVBL();
     PA_VBLCounterStart(2);//change
@@ -347,10 +346,13 @@ void CallAllInits()
     ulDeleteImage (loadingimg);
 #endif
     myulInitData (0);
-    MAPSIZE_X=59; //size in number of tiles
-    MAPSIZE_Y=47;
-
-
+    changemap(0,1);
+    int i;
+    #ifndef Test
+    for (i=0;i<SKILLNUMBER;i++){skillsLevels[i]=0;}
+    #else
+    for (i=0;i<SKILLNUMBER;i++){skillsLevels[i]=1;}
+    #endif
 }
 
 

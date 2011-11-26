@@ -34,7 +34,7 @@ void objectscroll(objectinfo* mover)
 
         if (!mover->action)
         {
-            myulSetAnim (mover->sprite,0,2,25);    //change
+            myulSetAnim (mover->sprite,0,2,25,0);    //change
             columnaddaction= mover->action*5;
         }
         else
@@ -163,8 +163,59 @@ void oneDirScroll(objectinfo* mover)
         }
         //s16 y = GetSpriteY(mover->sprite)+mover->hitbox.down.y;
         myulSetSpritePrio(mover->sprite,GetSpriteY(mover->sprite)+mover->hitbox.down.y);
+        SetSpriteColor(mover->sprite,mover->color);
+
+    }
+
+    //if the object is offscreen delete it
+    else
+    {
+        //don't delete already gone stuff
+        if(mover->sprite!=-1)
+        {
+            myulDeleteSprite(mover->sprite);
+            mover->sprite=-1;
+        }
+    }
 
 
+
+    if (mover->fx[0] != -1)
+    {
+
+        (fxinfo[mover->fx[0]].scroll)(mover,0);
+        if (mover->fx[1] != -1)
+        {
+            (fxinfo[mover->fx[1]].scroll)(mover,1);
+        }
+
+    }
+}
+
+void deadScroll(objectinfo* mover)
+{
+    //check if mover is onscreen
+    if((fix_norm(mover->x-hero.x)+mover->hitbox.left.x<=256-CAMERA_X && fix_norm(mover->x-hero.x)+mover->hitbox.right.x >=-CAMERA_X)&&(fix_norm(mover->y-hero.y)+mover->hitbox.up.y<=192-CAMERA_Y && fix_norm(mover->y-hero.y)+mover->hitbox.down.y>=-CAMERA_Y))
+    {
+        //if it is then move it to the correct position
+        if(mover->sprite!=-1)
+        {
+            SetSpriteXY(mover->sprite,fix_norm(mover->x-hero.x)+CAMERA_X,fix_norm(mover->y-hero.y)+CAMERA_Y);
+        }
+        //if it's not then create a sprite for it
+        else
+        {
+            mover->sprite=myulCreateSprite(mover->spritedata, fix_norm(mover->x-hero.x)+CAMERA_X, fix_norm(mover->y-hero.y)+CAMERA_Y,fix_norm(mover->y-hero.y)+CAMERA_Y+mover->hitbox.down.y);
+            if(mover->sprite!=-1)
+            {
+                myulImageColumn (mover->sprite,0);
+                myulImageFlip(mover->sprite,0,0);
+            }
+            myulSetAnim (mover->sprite,spritedatabase[mover->spritedata].nbframe-1,spritedatabase[mover->spritedata].nbframe-1,0,1);
+
+        }
+        SetSpriteColor(mover->sprite,mover->color);
+        myulSetSpritePrio(mover->sprite,GetSpriteY(mover->sprite)+mover->hitbox.down.y);
     }
 
     //if the object is offscreen delete it

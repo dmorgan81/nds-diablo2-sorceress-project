@@ -18,6 +18,7 @@ void myulInitData (bool again)
             sprites[i].sprite=-1;
             sprites[i].prio=-1;
             sprites[i].color=RGB15(31, 31, 31);
+            sprites[i].cycles=0;
         }
     }
     //la map
@@ -58,6 +59,7 @@ int myulCreateSprite (u8 data,int x,int y, s8 prio)
         sprites[nb].animStage=0;
         sprites[nb].frameNumber=0;
         sprites[nb].color=RGB15(31, 31, 31);
+        sprites[nb].cycles=spritedatabase[data].cycles;
         myulSetSpritePrio( nb, prio);
     }
     else
@@ -144,21 +146,23 @@ inline void myulAnimBegin (int spritenb)
     sprites[spritenb].animStage=0;
 }
 
-inline void myulStartAnim (int spritenb, u8 sframe, u8 endframe, u8 framerate)
+inline void myulStartAnim (int spritenb, u8 sframe, u8 endframe, u8 framerate,int cycles)
 {
     sprites[spritenb].startframe=sframe;
     sprites[spritenb].endframe=endframe;
     sprites[spritenb].framerate=framerate;
     sprites[spritenb].frameNumber=0;
     sprites[spritenb].animStage=0;
+    sprites[spritenb].cycles=cycles;
 }
 
 
-inline void myulSetAnim (int spritenb, u8 sframe, u8 endframe, u8 framerate)
+inline void myulSetAnim (int spritenb, u8 sframe, u8 endframe, u8 framerate,int cycles)
 {
     sprites[spritenb].startframe=sframe;
     sprites[spritenb].endframe=endframe;
     sprites[spritenb].framerate=framerate;
+    sprites[spritenb].cycles=0;
 }
 
 inline void myulDefaultAnimRestart (int spritenb)
@@ -168,6 +172,7 @@ inline void myulDefaultAnimRestart (int spritenb)
     sprites[spritenb].framerate=spritedatabase[sprites[spritenb].sprite].framerate;
     sprites[spritenb].frameNumber=0;
     sprites[spritenb].animStage=0;
+    sprites[spritenb].cycles=0;
 }
 
 inline void myulDefaultAnim (int spritenb)
@@ -175,6 +180,7 @@ inline void myulDefaultAnim (int spritenb)
     sprites[spritenb].startframe=0;
     sprites[spritenb].endframe=spritedatabase[sprites[spritenb].sprite].nbframe;
     sprites[spritenb].framerate=spritedatabase[sprites[spritenb].sprite].framerate;
+    sprites[spritenb].cycles=0;
 }
 
 inline void myulSetSpritePrio( int sprite, int prio)
@@ -226,9 +232,28 @@ void myulScreenDraws(void)
                 if(sprites[sprite].framerate!=0)
                 {
                     sprites[sprite].frameNumber++;
-                    if (sprites[sprite].frameNumber % sprites[sprite].framerate  == 0) sprites[sprite].animStage = (sprites[sprite].animStage + 1) % (sprites[sprite].endframe-sprites[sprite].startframe) ;
+                    if (sprites[sprite].frameNumber % sprites[sprite].framerate  == 0)
+                    {
+                        if (!sprites[sprite].cycles) //loop
+                        {
+                            sprites[sprite].animStage = (sprites[sprite].animStage + 1) % (sprites[sprite].endframe-sprites[sprite].startframe) ;
+                        }
+                        else if (sprites[sprite].cycles<1)
+                        {
+                            sprites[sprite].animStage = (sprites[sprite].animStage + 1) % (sprites[sprite].endframe-sprites[sprite].startframe) ;
+                            sprites[sprite].cycles-=1;
+                        }
+                        else if (sprites[sprite].animStage+1==sprites[sprite].endframe)//can only be the last cycle so dont have to check it
+                        {
+                            //sprites[sprite].animStage = 0;// why calculate the modulo if we already know it will be 0?
+                            sprites[sprite].framerate = 0;// no more animation, last frame is reached
+                        }
+                        else
+                        {
+                            sprites[sprite].animStage = (sprites[sprite].animStage + 1) % (sprites[sprite].endframe-sprites[sprite].startframe) ;
+                        }
+                    }
                 }
-
                 spriteimage=spritedatabase[sprites[sprite].sprite].image;
 
                 spriteimage->x=sprites[sprite].x;

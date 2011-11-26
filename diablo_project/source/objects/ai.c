@@ -150,10 +150,13 @@ void meleeAI(objectinfo* melee)
         melee->cd++;
 
         melee->dir=angle_dir(movangle);
-        if (melee->status&S_COLD) melee->color=RGB15(13,13,31);
-
+        if (melee->status&S_COLD)
+        {
+            melee->color=0x7fe0;//set color to blue and make half speed
+            melee->vx>>=1;
+            melee->vy>>=1;
+        }
     }
-
 
 
     else
@@ -224,7 +227,7 @@ void fireAI(objectinfo* missile)
 
     if( missile->life<475)
     {
-        myulSetAnim (missile->sprite, 4, 10, 8);
+        myulSetAnim (missile->sprite, 4, 10, 8, 0);
 
     }
     if (anycollision(VOIDTILE,&missile->hitbox,missile->x-missile->hitbox.down.x,missile->y-missile->hitbox.down.y))

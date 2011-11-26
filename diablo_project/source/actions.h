@@ -10,7 +10,8 @@
 
 extern charstruct hero;
 extern spritestruct sprites[MAX_SPRITES];
-extern inline void myulStartAnim (int spritenb, u8 sframe, u8 endframe, u8 framerate);
+extern u8 skillsLevels[SKILLNUMBER];
+extern inline void myulStartAnim (int spritenb, u8 sframe, u8 endframe, u8 framerate,int cycles);
 
 void Sort(int X,int Y);
 

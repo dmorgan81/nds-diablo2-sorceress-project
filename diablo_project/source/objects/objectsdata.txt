@@ -46,7 +46,7 @@
 
 //fallen
     data[2].spritedata=12;
-    data[2].deathspritedata=-1;
+    data[2].deathspritedata=17;
     data[2].ai=&meleeAI;
     data[2].tile=0;
     data[2].vx=0;

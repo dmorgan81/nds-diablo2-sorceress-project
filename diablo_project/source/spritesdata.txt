@@ -112,7 +112,7 @@
         spritedatabase[10].image = ulLoadImageFilePNG((void*)tree_png, (int)tree_png_size, UL_IN_RAM, UL_PF_PAL4);
     }
     spritedatabase[10].nbframe=0;
-    spritedatabase[10].framerate=8;//8;
+    spritedatabase[10].framerate=0;//8;
     spritedatabase[10].sizex=50;
     spritedatabase[10].sizey=107;
     spritedatabase[10].abcoeff=31;
@@ -123,7 +123,7 @@
         spritedatabase[11].image = ulLoadImageFilePNG((void*)fence_png, (int)fence_png_size, UL_IN_RAM, UL_PF_PAL4);
     }
     spritedatabase[11].nbframe=0;
-    spritedatabase[11].framerate=8;//8;
+    spritedatabase[11].framerate=0;//8;
     spritedatabase[11].sizex=16;
     spritedatabase[11].sizey=85;
     spritedatabase[11].abcoeff=31;
@@ -179,7 +179,19 @@
         spritedatabase[16].image = ulLoadImageFilePNG((void*)rock_png, (int)rock_png_size, UL_IN_RAM, UL_PF_PAL4);
     }
     spritedatabase[16].nbframe=1;
-    spritedatabase[16].framerate=8;//8;
+    spritedatabase[16].framerate=0;//8;
     spritedatabase[16].sizex=16;
     spritedatabase[16].sizey=16;
     spritedatabase[16].abcoeff=31;
+
+///fallen death
+    ulSetTransparentColor(RGB15(31, 0, 31));
+    {
+        spritedatabase[17].image = ulLoadImageFilePNG((void*)fallendeath_png, (int)fallendeath_png_size, UL_IN_RAM, UL_PF_PAL4);
+    }
+    spritedatabase[17].nbframe=5;
+    spritedatabase[17].framerate=8;//8;
+    spritedatabase[17].sizex=32;
+    spritedatabase[17].sizey=32;
+    spritedatabase[17].abcoeff=31;
+    spritedatabase[17].cycles=1;

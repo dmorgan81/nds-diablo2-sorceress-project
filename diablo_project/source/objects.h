@@ -37,6 +37,9 @@ void objectscroll(objectinfo* mover);
 void ScrollFXonly(objectinfo* mover);
 void missilescroll(objectinfo* mover);
 void FXscroll(objectinfo* mover, bool nb);
+void oneDirScroll(objectinfo* mover);
+void deadScroll(objectinfo* mover);
+
 //ais
 inline void immortal(objectinfo* object);
 void bgObjectAi(objectinfo* object);
@@ -47,7 +50,7 @@ void missileAI (objectinfo* missile);
 void orbAI (objectinfo* missile);
 void fireAI(objectinfo* missile);
 void hydraAI(objectinfo* missile);
-void oneDirScroll(objectinfo* mover);
+
 
 void blazeAura (aurainfo* aura);
 #endif

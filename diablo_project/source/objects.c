@@ -37,7 +37,7 @@ void initobjects (void)
     }
 
 #include "objects/objectsdata.txt"  //Really, hm, shouldnt do this beacuse its risked but it make the file less fat.
-                                    //all data in txt file to avoid overload of the c file
+    //all data in txt file to avoid overload of the c file
     for(i=0; i<MAX_DATA; i++)
     {
         data[i].hitbox.middle.x=data[i].hitbox.down.x;
@@ -226,7 +226,7 @@ void UpdateObjects()
         }
     }
 
-for(i=0; i<MAX_BGOBJECT; i++)
+    for(i=0; i<MAX_BGOBJECT; i++)
     {
         //scroll all the objects
         if(bgobjects[i].action > -1)
@@ -378,7 +378,14 @@ void MobDeath(objectinfo* mob,int time)
         mob->fx[1]=-1;
         mob->ai=&deadMob;
         mob->spritedata=data[mob->datanb].deathspritedata;
-        mob->scroll=&oneDirScroll;
+        mob->scroll=&deadScroll;
+        if((fix_norm(mob->x-hero.x)+mob->hitbox.left.x<=256-CAMERA_X && fix_norm(mob->x-hero.x)+mob->hitbox.right.x >=-CAMERA_X)&&(fix_norm(mob->y-hero.y)+mob->hitbox.up.y<=192-CAMERA_Y && fix_norm(mob->y-hero.y)+mob->hitbox.down.y>=-CAMERA_Y))
+        {
+            mob->sprite=myulCreateSprite(mob->spritedata, fix_norm(mob->x-hero.x)+CAMERA_X, fix_norm(mob->y-hero.y)+CAMERA_Y,fix_norm(mob->y-hero.y)+CAMERA_Y+mob->hitbox.down.y);
+            myulImageColumn (mob->sprite,0);
+            myulImageFlip(mob->sprite,0,0);
+            myulSetSpritePrio(mob->sprite,GetSpriteY(mob->sprite)+mob->hitbox.down.y);
+        }
         mob->variables=time;
         //play sound?
     }
