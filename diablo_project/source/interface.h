@@ -9,7 +9,7 @@
 #include "top_screen.h"
 
 void pause (u8 *quitcondition);
-void skillmenu();
+void skillmenu(bool levelup);
 void death();
 
 

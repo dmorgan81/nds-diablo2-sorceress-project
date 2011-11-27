@@ -30,7 +30,7 @@ void initobjects (void)
         objects[i].fx[1]=-1;
         objects[i].life=0;
         objects[i].status=0;
-        objects[i].color=RGB15(31,31,31);
+        objects[i].color=0x7fff;
     }
     for(i=0; i<MAX_FX; i++)
     {
@@ -52,7 +52,7 @@ void initobjects (void)
         missiles[i].sprite=-1;
         missiles[i].fx[0]=-1;
         missiles[i].fx[1]=-1;
-        missiles[i].color=RGB15(31,31,31);
+        missiles[i].color=0x7ffff;
     }
 
 #include "objects/missilesdata.txt" //all data in txt file to avoid overload of the c file
@@ -128,7 +128,7 @@ void newObject(s32 x, s32 y, objectinfo* object,s16 ID, objectdata* data,bool ar
 
         object->vx=data->vx;
         object->vy=data->vy;
-        object->color=RGB15(31,31,31);
+        object->color=0x7fff;
         object->action=0;
         object->lastaction=-1;
         object->dir=0;

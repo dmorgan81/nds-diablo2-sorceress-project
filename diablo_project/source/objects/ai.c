@@ -152,7 +152,7 @@ void meleeAI(objectinfo* melee)
         melee->dir=angle_dir(movangle);
         if (melee->status&S_COLD)
         {
-            melee->color=0x7fe0;//set color to blue and make half speed
+            melee->color=0x7d86;//set color to blue and make half speed
             melee->vx>>=1;
             melee->vy>>=1;
         }

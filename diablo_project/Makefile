@@ -13,7 +13,7 @@ PATH 		:= $(DEVKITARM)/bin:$(PATH)
 #ARM7_SELECTED = ARM7_MP3_DSWIFI
 #ARM7_SELECTED = ARM7_MAXMOD_DSWIFI
 
-#USE_EFS = YES
+USE_EFS = YES
 LAUNCH_ROM_AFTER_BUILD = YES
 
 #arm7 included with this makefile
@@ -22,7 +22,7 @@ include $(DEVKITPRO)/PAlib/lib/PA_Makefile2
 TEXT1 		:= Diablo Project
 TEXT2 		:= using PAlib-µLib
 TEXT3 		:= By Le Rodeur
-ICON 		:= -b $(CURDIR)/../logo.bmp
+ICON 			:= -b $(CURDIR)/../logo.bmp
 
 #---------------------------------------------------------------------------------
 .SUFFIXES:
@@ -38,7 +38,7 @@ endif
 #---------------------------------------------------------------------------------
 TARGET	:=	$(shell basename $(CURDIR))
 BUILD		:=	build
-SOURCES	:=	gfx/bin source source/Maps source/objects data
+SOURCES	:=	gfx/bin source source/objects source/Maps data
 INCLUDES	:=	include build data gfx $(BUILD)
 DATA		:=	data
 
@@ -61,17 +61,15 @@ ARCH	:=	-mthumb-interwork
 
 # note: arm9tdmi isn't the correct CPU arch, but anything newer and LD
 # *insists* it has a FPU or VFP, and it won't take no for an answer!
-CFLAGS	:= -Wall -O2 \
- 			-mcpu=arm9tdmi -mtune=arm9tdmi -fomit-frame-pointer\
+CFLAGS	:=	-g -Wall -O2 \
+ 		-mcpu=arm9tdmi -mtune=arm9tdmi -fomit-frame-pointer\
 		-ffast-math \
 		$(ARCH)
 
-#-mcpu=arm946e-s -mtune=arm946e-s may be faster
-
 CFLAGS	+=	$(INCLUDE) -DARM9 -I$(DEVKITPRO)/PAlib/include/nds
 
-ASFLAGS	:=	 $(ARCH)
-LDFLAGS	:=	 $(ARCH) -mno-fpu -L$(DEVKITPRO)/PAlib/lib -lpa9
+ASFLAGS	:=	-g $(ARCH)
+LDFLAGS	:=	-g $(ARCH) -mno-fpu -L$(DEVKITPRO)/PAlib/lib -lpa9
 
 
 #---------------------------------------------------------------------------------
@@ -91,7 +89,7 @@ PREFIX			:=	arm-eabi-
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
 #---------------------------------------------------------------------------------
-LIBS	:= -lul -lpa9 -lpng -lz -lfat -lnds9
+LIBS	:= -lul -lpa9 -lfilesystem -lpng -lz -lfat -lnds9
  
  
 #---------------------------------------------------------------------------------

@@ -8,7 +8,7 @@
 #include "../uldata.h"
 #include "../objects.h"
 #include "Map.h"
-
+int currentMap;
 u16* map_col;
 void changemap(u8 mapnb,bool reset)
 {
@@ -38,6 +38,9 @@ void changemap(u8 mapnb,bool reset)
         }
         mapTiles = ulLoadImageFilePNG((void*)map_png, (int)map_png_size, UL_IN_VRAM, UL_PF_PAL4);
         Mymap = ulCreateMap(mapTiles,/*Tileset*/map,8,8,/*Tiles size*/60,45,/*Map size*/UL_MF_U16);//Map format
+        hero.x=norm_fix(60);
+        hero.y=norm_fix(0);
+        currentMap=0;
         break;
     case 1:
         if (reset)
@@ -61,7 +64,14 @@ void changemap(u8 mapnb,bool reset)
         }
         mapTiles = ulLoadImageFilePNG((void*)dudu_png, (int)dudu_png_size, UL_IN_VRAM, UL_PF_PAL4);
         Mymap = ulCreateMap(mapTiles,/*Tileset*/dudu_map,8,8,/*Tiles size*/129,102,/*Map size*/UL_MF_U16);//Map format
+        hero.x=norm_fix(240);
+        hero.y=norm_fix(430);
+        currentMap=1;
         break;
+    }
+    for (i=1; i<MAX_DATASPRITES; i++)
+    {
+        ulUnrealizeImage(spritedatabase[i].image);
     }
 }
 

@@ -9,8 +9,8 @@
 
 //Includes PALib, µLibrary et headers
 #include "main.h"
-#define Test
-#define NOSPAWN
+//#define Test
+//#define NOSPAWN
 #ifdef Test
 #define _NOSPLASH_ //quote this line to make splash appear
 #endif
@@ -32,7 +32,7 @@ s8 fps = 0; //Our FPS
 u8 old_time=0;
 bool secondpast=1;
 charstruct hero;
-
+extern void save();
 
 ///////////////////////////////
 
@@ -121,7 +121,7 @@ int main( int argc, char **argv)
 #ifdef Test
     s16 x,y;
 #endif
-    skillmenu();
+    skillmenu(1);
     PA_WaitForVBL();
     PA_VBLCounterStart(2);//change
     while(1)
@@ -181,11 +181,13 @@ int main( int argc, char **argv)
                 PA_OutputText(1,1,8,"tex: %d    ",ulGetTexVramAvailMemory());
                 PA_OutputText(1,1,9,"vertex: %d    ",ulGetVertexAvailMemory());
                 PA_OutputText(1,1,10,"state: %d    ",spritedatabase[3].image->imgState);
+                if (ulGetTexVramAvailMemory()<10000) //security, use it only when necessary because it make some flashes on real ds if the sprite is used right after
+                {
                 for (i=1; i<MAX_DATASPRITES; i++)
                 {
                     if(!imagesused[i])ulUnrealizeImage(spritedatabase[i].image);
                 }
-
+                }
 
 
 
@@ -214,9 +216,9 @@ int main( int argc, char **argv)
 
             UpdateObjects();
 
-
-            if(Pad.Newpress.Select)	skillmenu();
-            if(Pad.Newpress.Start) pause(&Pad.Newpress.Start);
+            if(Pad.Newpress.B)      load();
+            if(Pad.Newpress.Select)	skillmenu(0);
+            if(Pad.Newpress.Start) {pause(&Pad.Newpress.Start); save();}
             PA_WaitForVBL();
         }
         hero.stats.vie_restante=0;
@@ -295,20 +297,12 @@ void CallAllInits()
     ulDrawImage(loadingimg);
     ulEndDrawing();
 #endif
-    /*
-        // Initialize EFS
-        if (!EFS_Init(EFS_AND_FAT | EFS_DEFAULT_DEVICE, NULL))
-        {
-            PA_OutputText(1, 1, 1, "Filesystem init error !!!");
-            for(;;) PA_WaitForVBL();
-        }
-    */
-#ifdef MUSIC_ON
     if (!nitroFSInit())
     {
         PA_OutputText(0, 1, 1, "Filesystem init error !!!");
         for(;;) PA_WaitForVBL();
     }
+#ifdef MUSIC_ON
 
     // Check if tristram.mp3 is there, regardless if libfat or EFS_Lib is used
     MP3FILE* file = FILE_OPEN("tristram.mp3");
@@ -332,7 +326,7 @@ void CallAllInits()
     // Init AS_Lib for mp3
     PA_VBLFunctionInit(AS_SoundVBL);
     AS_Init(AS_MODE_MP3 | AS_MODE_SURROUND | AS_MODE_16CH);
-    AS_SetDefaultSettings(AS_PCM_8BIT, 16384, AS_SURROUND);
+    AS_SetDefaultSettings(AS_PCM_8BIT, 16384, AS_NO_DELAY);//AS_SURROUND delay is creepy
 
     InitTopScreen ();
 

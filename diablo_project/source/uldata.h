@@ -15,6 +15,7 @@
 
 #include "sorts_png.h"
 #include "skilltiles_png.h"
+#include "number_png.h"
 #include "exit_png.h"
 #include "deathscreen_png.h"
 

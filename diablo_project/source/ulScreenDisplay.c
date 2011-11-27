@@ -89,7 +89,7 @@ inline void myulDeleteSprite (int nb)
         sprites[nb].used=0;
         sprites[nb].flippedh=0;
         sprites[nb].flippedv=0;
-        //sprites[nb].angle=0;
+        sprites[nb].color=0x7fff;
         sprites[nb].sprite=-1;
         if (nb==curMaxSprite)curMaxSprite--;
     }

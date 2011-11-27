@@ -1,11 +1,30 @@
 #include "interface.h"
 #include "uldata.h"
+#include "Sor_cantuseyet.h"
+
 extern int curMaxSprite;
 bool dialbox=0;
 extern const unsigned short skillmenu_map[24][32];
 extern u8 skillsLevels[SKILLNUMBER];
+u8 skillpoints=2;
+void save ()
+{
+	FILE *save_file = fopen("fat:/d2save.sav", "wb");
+    if (!save_file)PA_OutputText(1,0,0,"Can't open save, emulator?");
+	fwrite(&hero.stats, 1, sizeof(hero.stats), save_file);
+	fwrite(&skillsLevels, 1, sizeof(skillsLevels), save_file);
 
+	fclose(save_file);
+}
 
+void load()
+{
+    FILE *save_file = fopen("fat:/d2save.sav", "rb");
+    if (!save_file)PA_OutputText(1,0,0,"Can't open save, emulator?");
+    fread(&hero.stats, 1, sizeof(hero.stats), save_file);
+	fread(&skillsLevels, 1, sizeof(skillsLevels), save_file);
+	fclose(save_file);
+}
 void pause (u8 *quitcondition)//with booloean parameter checked at each frame
 {
     int i;
@@ -99,7 +118,7 @@ void dialogbox()
 
 */
 
-void skillmenu()
+void skillmenu(bool levelup)
 {
     bool endloop=0;
     const void (*skillfunction[SKILLNUMBER])(int,int,u16)= {(void*)&firebolt,(void*)&icebolt,(void*)&iceorb,(void*)&blaze,(void*)&firewall,(void*)&hydra,(void*)&chargedbolt,(void*)&teleport};
@@ -109,30 +128,44 @@ void skillmenu()
     u8 i;
 
     UL_IMAGE *skillicons = ulLoadImageFilePNG((void*)sorts_png, (int)sorts_png_size, UL_IN_RAM, UL_PF_PAL4);
+    UL_IMAGE *numberslot = ulLoadImageFilePNG((void*)number_png, (int)number_png_size, UL_IN_RAM, UL_PF_PAL2);
+    UL_IMAGE *exitbtn=ulLoadImageFilePNG((void*)exit_png, (int)exit_png_size, UL_IN_VRAM, UL_PF_PAL4);
 //    UL_IMAGE *skillbg = ulLoadImageFilePNG((void*)skillmenubg_png, (int)skillmenubg_png_size, UL_IN_RAM, UL_PF_PAL4);
 //UL_MAP *skillbg = ulCreateMap(mapTiles,map,8,8,60,45,UL_MF_U16);
     UL_IMAGE *skillTiles = ulLoadImageFilePNG((void*)skilltiles_png, (int)skilltiles_png_size, UL_IN_VRAM, UL_PF_PAL4);
     UL_MAP *skillbg = ulCreateMap(skillTiles,/*Tileset*/skillmenu_map,8,8,/*Tiles size*/32,24,/*Map size*/UL_MF_U16);//Map format
 
-
+    while (!endloop)
+    {
 
     ulStartDrawing2D();
     ulSetDepth(0);
     //Fond sur l'écran du bas
     ulDrawMap(skillbg);
     //ulDrawImage(skillbg);
-    ulSetDepth(255);
+
     glPolyFmt(POLY_ALPHA(31) | POLY_CULL_NONE | POLY_ID(0));
 
     for(i=0; i<SKILLNUMBER; i++)
     {
+        ulSetDepth(1);
+        numberslot->x=skillx[i]+30;
+        numberslot->y=skilly[i]+20;
+        ulDrawImage(numberslot);
+        ulSetDepth(2);
         skillicons->x=skillx[i];
         skillicons->y=skilly[i];
         ulSetImageTileSize (skillicons,0,32*skillframe[i],32,32);
-        if (!skillsLevels[i]){ulSetImageTint(skillicons,0x14d4);} else ulSetImageTint(skillicons,0x7fff);
+        if (!skillsLevels[i])
+        {
+            ulSetImageTint(skillicons,0x14d4);
+        }
+        else ulSetImageTint(skillicons,0x7fff);
         ulDrawImage(skillicons);
+        ulSetDepth(3);
+        ulPrintf_xy(skillx[i]+33,skilly[i]+24,"%i",skillsLevels[i]);
     }
-    UL_IMAGE *exitbtn=ulLoadImageFilePNG((void*)exit_png, (int)exit_png_size, UL_IN_VRAM, UL_PF_PAL4);
+    ulPrintf_xy(130,1,"Points remaining : %i",skillpoints);
     exitbtn->x=212;
     exitbtn->y=156;
     ulDrawImage(exitbtn);
@@ -140,20 +173,28 @@ void skillmenu()
 
 
 
-    while (!endloop)
-    {
         PA_WaitForVBL();
-        if(Stylus.Held)
+        if(Stylus.Newpress)
         {
             for(i=0; i<SKILLNUMBER; i++)
             {
                 if(Stylus.X>skillx[i]&&Stylus.X<(skillx[i]+32)&&Stylus.Y>skilly[i]&&Stylus.Y<(skilly[i]+32))
                 {
-
-                    sortchoisi[Pad.Held.L]=(void*)skillfunction[i];
-                    PA_SetSpriteAnim(1, 3+Pad.Held.L, skillframe[i]);
-                    i=SKILLNUMBER;
-                    endloop=1;
+                    if (levelup&&skillpoints)
+                    {
+                        //should ask for confirmation
+                        skillsLevels[i]++;
+                        skillpoints--;
+                        //ulPrintf_xy(skillx[i]+33,skilly[i]+24,"%i",skillsLevels[i]);
+                    }
+                    else if (skillsLevels[i])
+                    {
+                        sortchoisi[Pad.Held.L]=(void*)skillfunction[i];
+                        PA_SetSpriteAnim(1, 3+Pad.Held.L, skillframe[i]);
+                        i=SKILLNUMBER;
+                        endloop=1;
+                    }
+                    else AS_SoundQuickPlay((u8*)Sor_cantuseyet);
                 }
                 else if (Stylus.X>212&&Stylus.X<244&&Stylus.Y>156&&Stylus.Y<188) endloop=1;
             }
@@ -163,10 +204,11 @@ void skillmenu()
 
 
 
-    ulDeleteImage (skillicons);
-    ulDeleteImage (skillTiles);
-    ulDeleteImage (exitbtn);
-    ulDeleteMap(skillbg);
+    ulDeleteImage   (skillicons);
+    ulDeleteImage   (numberslot);
+    ulDeleteImage   (skillTiles);
+    ulDeleteImage   (exitbtn);
+    ulDeleteMap     (skillbg);
 }
 
 
@@ -174,6 +216,7 @@ void skillmenu()
 void death()
 {
     int i;
+    extern int currentMap;
     for (i=0; i<MAX_DATASPRITES; i++)
     {
         ulDeleteImage(spritedatabase[i].image);
@@ -197,6 +240,6 @@ void death()
     }
     QuickTopScreenRefresh();
     myulInitData(1);
-    SpawnObjects();
+    changemap(currentMap,1);
 }
 
