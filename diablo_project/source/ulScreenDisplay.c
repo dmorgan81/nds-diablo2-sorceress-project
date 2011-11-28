@@ -240,17 +240,16 @@ void myulScreenDraws(void)
                         {
                             sprites[sprite].animStage = (sprites[sprite].animStage + 1) % (sprites[sprite].endframe-sprites[sprite].startframe) ;
                         }
-                        else if (sprites[sprite].cycles<1)
+                        else if (sprites[sprite].cycles>1)
                         {
                             sprites[sprite].animStage = (sprites[sprite].animStage + 1) % (sprites[sprite].endframe-sprites[sprite].startframe) ;
                             sprites[sprite].cycles-=1;
                         }
                         else if (sprites[sprite].animStage+1==sprites[sprite].endframe)//can only be the last cycle so dont have to check it
                         {
-                            //sprites[sprite].animStage = 0;// why calculate the modulo if we already know it will be 0?
                             sprites[sprite].framerate = 0;// no more animation, last frame is reached
                         }
-                        else
+                        else //keep doing animation while it doesnt reach last frame
                         {
                             sprites[sprite].animStage = (sprites[sprite].animStage + 1) % (sprites[sprite].endframe-sprites[sprite].startframe) ;
                         }

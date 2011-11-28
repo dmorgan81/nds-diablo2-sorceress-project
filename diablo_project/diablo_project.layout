@@ -19,7 +19,7 @@
 	<File name="source\defines.h" open="0" top="0" tabpos="0">
 		<Cursor position="824" topLine="0" />
 	</File>
-	<File name="source\interface.c" open="1" top="1" tabpos="2">
+	<File name="source\interface.c" open="1" top="0" tabpos="2">
 		<Cursor position="699" topLine="0" />
 	</File>
 	<File name="source\interface.h" open="0" top="0" tabpos="0">
@@ -73,8 +73,8 @@
 	<File name="source\top_screen.c" open="0" top="0" tabpos="0">
 		<Cursor position="545" topLine="0" />
 	</File>
-	<File name="source\ulScreenDisplay.c" open="0" top="0" tabpos="3">
-		<Cursor position="2210" topLine="78" />
+	<File name="source\ulScreenDisplay.c" open="1" top="1" tabpos="4">
+		<Cursor position="6632" topLine="219" />
 	</File>
 	<File name="source\ulScreenDisplay.h" open="0" top="0" tabpos="0">
 		<Cursor position="895" topLine="2" />
