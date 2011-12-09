@@ -1,4 +1,7 @@
-int FormulaDam(lvl,dam,dam1,dam2,dam3,dam4,dam5)
+
+
+///main one///
+int FormulaDam(int lvl, int dam,int dam1,int dam2,int dam3,int dam4,int dam5)
 {
     if (lvl==1) return dam;
     if (lvl>=2 && lvl<=8) return (dam+(lvl-1)*dam1);
@@ -7,6 +10,13 @@ int FormulaDam(lvl,dam,dam1,dam2,dam3,dam4,dam5)
     if (lvl>=23 && lvl<=28) return (dam+7*dam1+8*dam2+6*dam3+(lvl-22)*dam4);
     if (lvl>=29) return (dam+7*dam1+8*dam2+6*dam3+6*dam4+(lvl-28)*dam5);
 }
+
+
+
+
+
+
+
 int FormulaManaCost(lvl,manashift,mana,lvlmana)
 {
     return (FormulaFloor(((Math.pow(2,manashift)/256)*((lvlmana*(lvl-1))+mana)),100));
