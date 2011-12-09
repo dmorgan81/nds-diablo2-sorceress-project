@@ -25,7 +25,7 @@
 #define fix_mult(x,y)		(((x)*(y))>>8)
 #define ratio_fix(x,y)		((256*(x))/(y))
 #define fixed_fraction(x)	((x)&&0xff)
-
+#define SOUND(x)            (SoundInfo){(u8*)x,(u32)x##_size,0,16384,127,64,false,0,0}
 
 #define VITESSE				256
 #define VITESSE2			181
@@ -48,7 +48,7 @@ int MAPSIZE_Y;
 
 #define MAX_DATA			3
 #define MAX_BGDATA			5
-#define MAX_DATASPRITES     18
+#define MAX_DATASPRITES     19
 #define MAX_MDATA			6
 #define MAX_OBJECT			100
 #define MAX_BGOBJECT        100

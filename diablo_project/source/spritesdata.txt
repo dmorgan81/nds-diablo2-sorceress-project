@@ -195,3 +195,15 @@
     spritedatabase[17].sizey=32;
     spritedatabase[17].abcoeff=31;
     spritedatabase[17].cycles=1;
+
+///lvlup icon
+    ulSetTransparentColor(RGB15(31, 0, 31));
+    {
+        spritedatabase[18].image = ulLoadImageFilePNG((void*)levelup_png, (int)levelup_png_size, UL_IN_RAM, UL_PF_PAL4);
+    }
+    spritedatabase[18].nbframe=2;
+    spritedatabase[18].framerate=0;//8;
+    spritedatabase[18].sizex=24;
+    spritedatabase[18].sizey=24;
+    spritedatabase[18].abcoeff=31;
+

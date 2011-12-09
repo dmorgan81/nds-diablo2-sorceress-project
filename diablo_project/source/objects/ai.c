@@ -69,7 +69,7 @@ void zombieAI(objectinfo* zombie)
     zombie->dir=angle_dir(movangle);
     if (zombie->life < 1)
     {
-        deleteobject( zombie->arrayID);
+        MobDeath(zombie,300);
     }
 }
 //change

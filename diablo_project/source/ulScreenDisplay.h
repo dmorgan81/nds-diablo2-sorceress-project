@@ -17,7 +17,7 @@ UL_MAP *Mymap;
 
 
 void myulInitData (bool again);
-int myulCreateSprite (u8 data,int x,int y, s8 prio);
+int myulCreateSprite (u8 data,int x,int y, int prio);
 inline void myulDeleteSprite (int nb);
 inline void myulImageFlip (int /*sprite*/nb,bool fliph,bool flipv);
 inline void myulImageColumn (int /*sprite*/nb,int column);

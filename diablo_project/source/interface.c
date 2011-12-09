@@ -6,7 +6,10 @@ extern int curMaxSprite;
 bool dialbox=0;
 extern const unsigned short skillmenu_map[24][32];
 extern u8 skillsLevels[SKILLNUMBER];
-u8 skillpoints=2;
+const u8 requiredLevel[SKILLNUMBER]={1/*firebolt*/,1/*icebolt*/,15/*iceorb*/,5/*firewall*/,10/*blaze*/,15/*hydra*/,1/*chargedbolt*/,5/*teleport*/};
+
+
+extern u8 skillpoints;
 void save ()
 {
 	FILE *save_file = fopen("fat:/d2save.sav", "wb");
@@ -180,21 +183,22 @@ void skillmenu(bool levelup)
             {
                 if(Stylus.X>skillx[i]&&Stylus.X<(skillx[i]+32)&&Stylus.Y>skilly[i]&&Stylus.Y<(skilly[i]+32))
                 {
-                    if (levelup&&skillpoints)
+                    if (levelup&&skillpoints&&(hero.stats.lvl>=requiredLevel[i]))
                     {
                         //should ask for confirmation
                         skillsLevels[i]++;
                         skillpoints--;
                         //ulPrintf_xy(skillx[i]+33,skilly[i]+24,"%i",skillsLevels[i]);
                     }
-                    else if (skillsLevels[i])
+                    else if (skillsLevels[i]&&!(levelup&&skillpoints))
                     {
+                        currentSkill[Pad.Held.L]=i;
                         sortchoisi[Pad.Held.L]=(void*)skillfunction[i];
                         PA_SetSpriteAnim(1, 3+Pad.Held.L, skillframe[i]);
                         i=SKILLNUMBER;
                         endloop=1;
                     }
-                    else AS_SoundQuickPlay((u8*)Sor_cantuseyet);
+                    else AS_SoundDirectPlay(0,SOUND(Sor_cantuseyet));//AS_SoundQuickPlay((u8*)Sor_cantuseyet);
                 }
                 else if (Stylus.X>212&&Stylus.X<244&&Stylus.Y>156&&Stylus.Y<188) endloop=1;
             }

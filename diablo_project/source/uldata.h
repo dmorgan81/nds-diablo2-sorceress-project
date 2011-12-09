@@ -18,6 +18,7 @@
 #include "number_png.h"
 #include "exit_png.h"
 #include "deathscreen_png.h"
+#include "levelup_png.h"
 
 //objects/monsters
 #include "sorc_png.h"

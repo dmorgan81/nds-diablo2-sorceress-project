@@ -10,38 +10,38 @@
 	<File name="source\Maps\tilescollision.map.c" open="0" top="0" tabpos="0">
 		<Cursor position="1178" topLine="0" />
 	</File>
-	<File name="source\actions.c" open="0" top="0" tabpos="0">
-		<Cursor position="3976" topLine="87" />
+	<File name="source\actions.c" open="1" top="1" tabpos="2">
+		<Cursor position="1663" topLine="0" />
 	</File>
-	<File name="source\actions.h" open="0" top="0" tabpos="4">
-		<Cursor position="210" topLine="0" />
+	<File name="source\actions.h" open="0" top="0" tabpos="6">
+		<Cursor position="857" topLine="0" />
 	</File>
-	<File name="source\defines.h" open="0" top="0" tabpos="0">
-		<Cursor position="824" topLine="0" />
+	<File name="source\defines.h" open="0" top="0" tabpos="9">
+		<Cursor position="656" topLine="21" />
 	</File>
-	<File name="source\interface.c" open="1" top="0" tabpos="2">
-		<Cursor position="699" topLine="0" />
+	<File name="source\interface.c" open="0" top="0" tabpos="2">
+		<Cursor position="7082" topLine="178" />
 	</File>
 	<File name="source\interface.h" open="0" top="0" tabpos="0">
 		<Cursor position="234" topLine="0" />
 	</File>
-	<File name="source\main.c" open="1" top="0" tabpos="3">
-		<Cursor position="2361" topLine="86" />
+	<File name="source\main.c" open="1" top="0" tabpos="1">
+		<Cursor position="8830" topLine="280" />
 	</File>
 	<File name="source\main.h" open="0" top="0" tabpos="0">
 		<Cursor position="413" topLine="0" />
 	</File>
-	<File name="source\objects.c" open="1" top="0" tabpos="1">
-		<Cursor position="1764" topLine="0" />
+	<File name="source\objects.c" open="0" top="0" tabpos="0">
+		<Cursor position="10174" topLine="386" />
 	</File>
 	<File name="source\objects.h" open="0" top="0" tabpos="0">
 		<Cursor position="592" topLine="3" />
 	</File>
-	<File name="source\objects\ai.c" open="0" top="0" tabpos="0">
-		<Cursor position="4818" topLine="117" />
+	<File name="source\objects\ai.c" open="0" top="0" tabpos="8">
+		<Cursor position="2145" topLine="54" />
 	</File>
-	<File name="source\objects\bgobjects.c" open="0" top="0" tabpos="1">
-		<Cursor position="481" topLine="7" />
+	<File name="source\objects\bgobjects.c" open="0" top="0" tabpos="4">
+		<Cursor position="3545" topLine="114" />
 	</File>
 	<File name="source\objects\bgobjects.h" open="0" top="0" tabpos="0">
 		<Cursor position="138" topLine="0" />
@@ -56,30 +56,30 @@
 		<Cursor position="2901" topLine="74" />
 	</File>
 	<File name="source\objects\missilesdata.txt" open="0" top="0" tabpos="0">
-		<Cursor position="3313" topLine="91" />
+		<Cursor position="3589" topLine="91" />
 	</File>
 	<File name="source\objects\objectsdata.txt" open="0" top="0" tabpos="0">
-		<Cursor position="1320" topLine="24" />
+		<Cursor position="1320" topLine="0" />
 	</File>
 	<File name="source\objects\scrolling.c" open="0" top="0" tabpos="3">
-		<Cursor position="101" topLine="9" />
+		<Cursor position="1201" topLine="9" />
 	</File>
 	<File name="source\spritesdata.txt" open="0" top="0" tabpos="4">
-		<Cursor position="6792" topLine="155" />
+		<Cursor position="6032" topLine="128" />
 	</File>
-	<File name="source\structures.h" open="0" top="0" tabpos="0">
-		<Cursor position="2705" topLine="120" />
+	<File name="source\structures.h" open="0" top="0" tabpos="5">
+		<Cursor position="1197" topLine="57" />
 	</File>
-	<File name="source\top_screen.c" open="0" top="0" tabpos="0">
-		<Cursor position="545" topLine="0" />
+	<File name="source\top_screen.c" open="0" top="0" tabpos="5">
+		<Cursor position="1152" topLine="15" />
 	</File>
-	<File name="source\ulScreenDisplay.c" open="1" top="1" tabpos="4">
-		<Cursor position="6632" topLine="219" />
+	<File name="source\ulScreenDisplay.c" open="0" top="0" tabpos="5">
+		<Cursor position="883" topLine="12" />
 	</File>
 	<File name="source\ulScreenDisplay.h" open="0" top="0" tabpos="0">
-		<Cursor position="895" topLine="2" />
+		<Cursor position="436" topLine="0" />
 	</File>
 	<File name="source\uldata.h" open="0" top="0" tabpos="0">
-		<Cursor position="289" topLine="2" />
+		<Cursor position="365" topLine="4" />
 	</File>
 </CodeBlocks_layout_file>

@@ -74,8 +74,8 @@ int main( int argc, char **argv)
     hero.stats.vie_restante=(hero.stats.vie_max);
     hero.stats.mana_max=100;
     hero.stats.mana_restante=(hero.stats.mana_max);
-    hero.stats.experience=1;
-    hero.stats.nextlvl=10;
+    hero.stats.experience=0;
+    hero.stats.nextlvl=400;
     hero.stats.lvl=1;
 
 /////////////////////////////////////////////
@@ -162,7 +162,6 @@ int main( int argc, char **argv)
 #endif
 
 
-
             myulSetSpritePrio(hero.sprite,CHARFEET_Y);
             ulReadKeys(0);
 
@@ -177,10 +176,10 @@ int main( int argc, char **argv)
 
             if (!(PA_VBLCounter[2]&128))
             {
-
+#ifdef Test
                 PA_OutputText(1,1,8,"tex: %d    ",ulGetTexVramAvailMemory());
                 PA_OutputText(1,1,9,"vertex: %d    ",ulGetVertexAvailMemory());
-                PA_OutputText(1,1,10,"state: %d    ",spritedatabase[3].image->imgState);
+#endif
                 if (ulGetTexVramAvailMemory()<10000) //security, use it only when necessary because it make some flashes on real ds if the sprite is used right after
                 {
                 for (i=1; i<MAX_DATASPRITES; i++)
@@ -188,20 +187,15 @@ int main( int argc, char **argv)
                     if(!imagesused[i])ulUnrealizeImage(spritedatabase[i].image);
                 }
                 }
-
-
-
-                PA_OutputText(1,1,11,"state: %d    ",spritedatabase[3].image->imgState);
-
             }
 
 
 #ifndef NOSPAWN
             //zm spawning
-            if(secondpast)
+            if(!(PA_VBLCounter[2]&511))//secondpast)
             {
-
-                for(i=0; i<3; i++)
+if (hero.stats.lvl<2){objectnb=getUnusedObject();newObject(PA_RandMinMax (128, 330),PA_RandMinMax (86, 286), &objects[objectnb],objectnb, &data[1],0 );}
+                else for(i=0; i<=(hero.stats.lvl>>1)+1; i++)
                 {
                     objectnb=getUnusedObject();
                     newObject(PA_RandMinMax (128, 330),PA_RandMinMax (86, 286), &objects[objectnb],objectnb, &data[1],0 );
@@ -217,8 +211,9 @@ int main( int argc, char **argv)
             UpdateObjects();
 
             if(Pad.Newpress.B)      load();
-            if(Pad.Newpress.Select)	skillmenu(0);
+            if(Pad.Newpress.Select)	skillmenu(0); //will be changed later, we cant firce player to levelup skills if they just want to switch
             if(Pad.Newpress.Start) {pause(&Pad.Newpress.Start); save();}
+            CheckForLevelUp();
             PA_WaitForVBL();
         }
         hero.stats.vie_restante=0;
@@ -327,7 +322,7 @@ void CallAllInits()
     PA_VBLFunctionInit(AS_SoundVBL);
     AS_Init(AS_MODE_MP3 | AS_MODE_SURROUND | AS_MODE_16CH);
     AS_SetDefaultSettings(AS_PCM_8BIT, 16384, AS_NO_DELAY);//AS_SURROUND delay is creepy
-
+    AS_ReserveChannel(0);//hero's channel
     InitTopScreen ();
 
 

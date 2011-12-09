@@ -32,7 +32,7 @@ void myulInitData (bool again)
 
 
 
-int myulCreateSprite (u8 data,int x,int y, s8 prio)
+int myulCreateSprite (u8 data,int x,int y, int prio)
 {
     int i=0, nb=-1;
     for (i=0; i<MAX_SPRITES ; i++)
