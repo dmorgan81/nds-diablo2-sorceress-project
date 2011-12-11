@@ -29,6 +29,7 @@ inline void myulDefaultAnimRestart (int spritenb);
 inline void myulDefaultAnim (int spritenb);
 inline void myulSetSpritePrio( int sprite, int prio);
 void myulScreenDraws(void);
+void drawSpritesNoAnim ();
 
 inline void SetSpriteAblending (int nb,int value);
 inline void SetSpriteColor (int nb,u16 color);

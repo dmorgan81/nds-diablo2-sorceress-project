@@ -11,8 +11,8 @@ fx_data fxdata[MAX_FXDATA];
 fx_info fxinfo[MAX_FX];
 aurainfo auras[MAX_AURAS];
 int curMaxObject,curMaxBgObject,curMaxMissile;    //small trick to avoid long browsing in arrays for nothing,
-                                    //becoming useless when a lot of objects are create and then deleted because the value will not be
-                                    //decreased, would need to browse the arrays again, and then it would be useless
+//becoming useless when a lot of objects are create and then deleted because the value will not be
+//decreased, would need to browse the arrays again, and then it would be useless
 bool objectused[MAX_OBJECT];
 bool missileused[MAX_MISSILE];
 

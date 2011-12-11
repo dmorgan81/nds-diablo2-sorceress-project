@@ -12,6 +12,7 @@
 extern charstruct hero;
 extern spritestruct sprites[MAX_SPRITES];
 extern u8 skillsLevels[SKILLNUMBER];
+extern int skilldmg[SKILLNUMBER][2];
 extern u8 currentSkill[2];
 extern inline void myulStartAnim (int spritenb, u8 sframe, u8 endframe, u8 framerate,int cycles);
 

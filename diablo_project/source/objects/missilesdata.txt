@@ -49,7 +49,7 @@
     mdata[2].life=175;
     mdata[2].dommages=20;
     mdata[2].status=S_ALARMED|S_COLD;
-    mdata[2].scroll=&oneDirScroll;
+    mdata[2].scroll=&onemDirScroll;
     mdata[2].collision=&orbCollision;
     mdata[2].datanb=2;
     mdata[2].hitbox.down.y=8;
@@ -118,7 +118,7 @@
     mdata[5].life=256;
     mdata[5].status=S_ALARMED;
     mdata[5].dommages=2;
-    mdata[5].scroll=&oneDirScroll;
+    mdata[5].scroll=&onemDirScroll;
     mdata[5].collision=&mCollision;
     mdata[5].datanb=5;
     mdata[5].hitbox.down.y=12;

@@ -34,11 +34,11 @@ void InitTopScreen (void)
     PA_CreateSprite(1,2,(void*)mana_Sprite,OBJ_SIZE_64X64,1,2,192,128);
     PA_CreateSprite(1,1,(void*)vie_Sprite,OBJ_SIZE_64X64,1,1,0,128);
     PA_CreateSprite(1,3,(void*)sorts_Sprite,OBJ_SIZE_32X32,1,3,	60, 160);
-    PA_CreateSprite(1,4,(void*)sorts_Sprite,OBJ_SIZE_32X32,1,3,	164, 160);
+    PA_CreateSprite(1,4,(void*)sorts_Sprite,OBJ_SIZE_32X32,1,3,	165, 160);
 
     PA_SetSpriteAnim(1, 0, hero.stats.lvl);
-    PA_SetSpriteAnim(1, 3, 0);
-    PA_SetSpriteAnim(1, 4, 8);
+    PA_SetSpriteAnim(1, 3, -1);
+    PA_SetSpriteAnim(1, 4, -1);
     PA_SetSpriteAnim(1, 2,hero.stats.mana_restante*20/hero.stats.mana_max);//mana=>ramene en x/20 pour les frames
     PA_SetSpriteAnim(1, 1, hero.stats.vie_restante*20/hero.stats.vie_max);//vie
 

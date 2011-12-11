@@ -157,6 +157,7 @@ void meleeAI(objectinfo* melee)
             melee->vy>>=1;
         }
     }
+// TODO (Clement#1#): add damages A FAIRE OBLIGATOIREMENT
 
 
     else

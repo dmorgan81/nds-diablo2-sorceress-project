@@ -9,6 +9,7 @@
 
 //Includes PALib, µLibrary et headers
 #include "main.h"
+
 //#define Test
 //#define NOSPAWN
 #ifdef Test
@@ -46,8 +47,8 @@ int main( int argc, char **argv)
 /////////////////
 /////charvar/////
 /////////////////
-    sortchoisi[0]=&firebolt;
-    sortchoisi[1]=&iceorb;
+    sortchoisi[0]=&nospell;
+    sortchoisi[1]=&nospell;
     hero.action=0;
     hero.vitesse=256;
     hero.vitesse2=181;//multiplie par 181 sois 1.7 en point fixe
@@ -66,20 +67,20 @@ int main( int argc, char **argv)
     hero.hitbox.middle.x=16;
     hero.hitbox.middle.y=43;
 ///stats///
-    hero.stats.force=1;
-    hero.stats.dexterite=1;
-    hero.stats.vitalite=1;
-    hero.stats.energie=1  ;
+    hero.stats.force=10;
+    hero.stats.dexterite=25;
+    hero.stats.vitalite=10;
+    hero.stats.energie=35;
     hero.stats.vie_max=2000;
     hero.stats.vie_restante=(hero.stats.vie_max);
-    hero.stats.mana_max=100;
+    hero.stats.mana_max=35;
     hero.stats.mana_restante=(hero.stats.mana_max);
     hero.stats.experience=0;
     hero.stats.nextlvl=400;
     hero.stats.lvl=1;
 
 /////////////////////////////////////////////
-    hero.stats.mana_restante=0;
+
 
 
     CallAllInits();
@@ -93,8 +94,6 @@ int main( int argc, char **argv)
 
 
     auras[0].fonction=&blazeAura;
-    cout_sort[0]=10;
-    cout_sort[1]=10;
 
 
 
@@ -122,8 +121,12 @@ int main( int argc, char **argv)
     s16 x,y;
 #endif
     skillmenu(1);
+    currentSkill[1] =currentSkill[0];
+    sortchoisi[1]   =sortchoisi[0];
+    cout_sort[1]    =cout_sort[0];
+    PA_SetSpriteAnim(1, 4, PA_GetSpriteAnimFrame(1,3));
     PA_WaitForVBL();
-    PA_VBLCounterStart(2);//change
+    PA_VBLCounterStart(2);
     while(1)
     {
         while(hero.stats.vie_restante>0&&hero.stats.vie_restante<=hero.stats.vie_max)
@@ -182,10 +185,10 @@ int main( int argc, char **argv)
 #endif
                 if (ulGetTexVramAvailMemory()<10000) //security, use it only when necessary because it make some flashes on real ds if the sprite is used right after
                 {
-                for (i=1; i<MAX_DATASPRITES; i++)
-                {
-                    if(!imagesused[i])ulUnrealizeImage(spritedatabase[i].image);
-                }
+                    for (i=1; i<MAX_DATASPRITES; i++)
+                    {
+                        if(!imagesused[i])ulUnrealizeImage(spritedatabase[i].image);
+                    }
                 }
             }
 
@@ -194,12 +197,22 @@ int main( int argc, char **argv)
             //zm spawning
             if(!(PA_VBLCounter[2]&511))//secondpast)
             {
-if (hero.stats.lvl<2){objectnb=getUnusedObject();newObject(PA_RandMinMax (128, 330),PA_RandMinMax (86, 286), &objects[objectnb],objectnb, &data[1],0 );}
-                else for(i=0; i<=(hero.stats.lvl>>1)+1; i++)
+                if (hero.stats.lvl<2)
                 {
                     objectnb=getUnusedObject();
                     newObject(PA_RandMinMax (128, 330),PA_RandMinMax (86, 286), &objects[objectnb],objectnb, &data[1],0 );
                 }
+                else for(i=0; i<=(hero.stats.lvl>>1)+1; i++)
+                    {
+                        objectnb=getUnusedObject();
+                        int x=PA_RandMinMax (128, 330),y=PA_RandMinMax (86, 286);
+                        while (GetTile(x,y)>=NWALKABLETILE)
+                        {
+                            x=PA_RandMinMax (128, 330);
+                            y=PA_RandMinMax (86, 286);
+                        }
+                        newObject(PA_RandMinMax (128, 330),PA_RandMinMax (86, 286), &objects[objectnb],objectnb, &data[1],0 );
+                    }
             }
 #endif
             for(i=0; i<MAX_AURAS; i++)
@@ -212,7 +225,11 @@ if (hero.stats.lvl<2){objectnb=getUnusedObject();newObject(PA_RandMinMax (128, 3
 
             if(Pad.Newpress.B)      load();
             if(Pad.Newpress.Select)	skillmenu(0); //will be changed later, we cant firce player to levelup skills if they just want to switch
-            if(Pad.Newpress.Start) {pause(&Pad.Newpress.Start); save();}
+            if(Pad.Newpress.Start)
+            {
+                pause(&Pad.Newpress.Start);
+                save();
+            }
             CheckForLevelUp();
             PA_WaitForVBL();
         }
@@ -337,11 +354,17 @@ void CallAllInits()
     myulInitData (0);
     changemap(0,1);
     int i;
-    #ifndef Test
-    for (i=0;i<SKILLNUMBER;i++){skillsLevels[i]=0;}
-    #else
-    for (i=0;i<SKILLNUMBER;i++){skillsLevels[i]=1;}
-    #endif
+#ifndef Test
+    for (i=0; i<SKILLNUMBER; i++)
+    {
+        skillsLevels[i]=0;
+    }
+#else
+    for (i=0; i<SKILLNUMBER; i++)
+    {
+        skillsLevels[i]=1;
+    }
+#endif
 }
 
 

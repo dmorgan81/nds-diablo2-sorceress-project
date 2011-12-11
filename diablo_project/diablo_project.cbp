@@ -56,6 +56,12 @@
 		</Unit>
 		<Unit filename="source\actions.h" />
 		<Unit filename="source\defines.h" />
+		<Unit filename="source\formulas\formulas.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source\formulas\skills.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Unit filename="source\interface.c">
 			<Option compilerVar="CC" />
 		</Unit>

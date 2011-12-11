@@ -37,8 +37,8 @@
 #define CHARFEET_Y          107
 
 #define SKILLNUMBER         8
-#define BGOBJ_AB            20
-#define NWALKABLETILE       3
+#define BGOBJ_AB            25
+#define NWALKABLETILE       7
 #define TILENB              16
 #define VOIDTILE            10
 //#define MAPSIZE_X           59 //size in number of tiles

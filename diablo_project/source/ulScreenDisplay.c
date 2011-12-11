@@ -215,80 +215,93 @@ void myulScreenDraws(void)
 #endif
     UL_IMAGE *spriteimage;
     int i;
-    //myulUpdatePrio();
-    int sprite=-1;
     int nb=0;
     for (i=0; i<=curMaxSprite ; i++)
     {
-
-        sprite =i;// Prio_first[i];
-
-        //if(sprites[sprite].used && sprite!=-1)
-
-
-        while (sprite != -1)
+        if(sprites[i].used)
         {
-            if(sprites[sprite].used)
+            nb++;
+            if(sprites[i].framerate!=0)
             {
-                nb++;
-                if(sprites[sprite].framerate!=0)
+                sprites[i].frameNumber++;
+                if (sprites[i].frameNumber % sprites[i].framerate  == 0)
                 {
-                    sprites[sprite].frameNumber++;
-                    if (sprites[sprite].frameNumber % sprites[sprite].framerate  == 0)
+                    if (!sprites[i].cycles) //loop
                     {
-                        if (!sprites[sprite].cycles) //loop
-                        {
-                            sprites[sprite].animStage = (sprites[sprite].animStage + 1) % (sprites[sprite].endframe-sprites[sprite].startframe) ;
-                        }
-                        else if (sprites[sprite].cycles>1)
-                        {
-                            sprites[sprite].animStage = (sprites[sprite].animStage + 1) % (sprites[sprite].endframe-sprites[sprite].startframe) ;
-                            sprites[sprite].cycles-=1;
-                        }
-                        else if (sprites[sprite].animStage+1==sprites[sprite].endframe)//can only be the last cycle so dont have to check it
-                        {
-                            sprites[sprite].framerate = 0;// no more animation, last frame is reached
-                        }
-                        else //keep doing animation while it doesnt reach last frame
-                        {
-                            sprites[sprite].animStage = (sprites[sprite].animStage + 1) % (sprites[sprite].endframe-sprites[sprite].startframe) ;
-                        }
+                        sprites[i].animStage = (sprites[i].animStage + 1) % (sprites[i].endframe-sprites[i].startframe) ;
+                    }
+                    else if (sprites[i].cycles>1)
+                    {
+                        sprites[i].animStage = (sprites[i].animStage + 1) % (sprites[i].endframe-sprites[i].startframe) ;
+                        sprites[i].cycles-=1;
+                    }
+                    else if (sprites[i].animStage+1==sprites[i].endframe)//can only be the last cycle so dont have to check it
+                    {
+                        sprites[i].framerate = 0;// no more animation, last frame is reached
+                    }
+                    else //keep doing animation while it doesnt reach last frame
+                    {
+                        sprites[i].animStage = (sprites[i].animStage + 1) % (sprites[i].endframe-sprites[i].startframe) ;
                     }
                 }
-                spriteimage=spritedatabase[sprites[sprite].sprite].image;
-
-                spriteimage->x=sprites[sprite].x;
-                spriteimage->y=sprites[sprite].y;
-//                if(sprites[sprite].angle)spriteimage->angle=(-sprites[sprite].angle)<<6;//change
-//                	spriteimage->centerX = sprites[sprite].midx;
-//	spriteimage->centerY = sprites[sprite].midy;
-                //Tile to display
-                ulSetImageTileSize (
-                    spriteimage,
-                    spritedatabase[sprites[sprite].sprite].sizex*sprites[sprite].column,																			//image, starting x
-                    spritedatabase[sprites[sprite].sprite].sizey*(sprites[sprite].animStage+sprites[sprite].startframe),	//starting y : size*(frame+startframe)
-                    spritedatabase[sprites[sprite].sprite].sizex,																// size x
-                    spritedatabase[sprites[sprite].sprite].sizey);															// size y
-
-                ulMirrorImageH( spriteimage, sprites[sprite].flippedh);
-                ulMirrorImageV( spriteimage, sprites[sprite].flippedv);
-                ulSetDepth(sprites[sprite].prio);
-                glPolyFmt(POLY_ALPHA(sprites[sprite].abcoeff) | POLY_CULL_NONE | POLY_ID(sprites[sprite].prio));
-                ulSetImageTint(spriteimage,sprites[sprite].color);
-                ulDrawImage(spriteimage);
-                imagesused[sprites[sprite].sprite]=1;
-
             }
-            sprite =-1;// Prio_next[sprite];
+            spriteimage=spritedatabase[sprites[i].sprite].image;
+
+            spriteimage->x=sprites[i].x;
+            spriteimage->y=sprites[i].y;
+//                if(sprites[i].angle)spriteimage->angle=(-sprites[i].angle)<<6;//change
+//                	spriteimage->centerX = sprites[i].midx;
+//	spriteimage->centerY = sprites[i].midy;
+            //Tile to display
+            ulSetImageTileSize (
+                spriteimage,
+                spritedatabase[sprites[i].sprite].sizex*sprites[i].column,																			//image, starting x
+                spritedatabase[sprites[i].sprite].sizey*(sprites[i].animStage+sprites[i].startframe),	//starting y : size*(frame+startframe)
+                spritedatabase[sprites[i].sprite].sizex,																// size x
+                spritedatabase[sprites[i].sprite].sizey);															// size y
+
+            ulMirrorImageH( spriteimage, sprites[i].flippedh);
+            ulMirrorImageV( spriteimage, sprites[i].flippedv);
+            ulSetDepth(sprites[i].prio);
+            glPolyFmt(POLY_ALPHA(sprites[i].abcoeff) | POLY_CULL_NONE | POLY_ID(sprites[i].prio));
+            ulSetImageTint(spriteimage,sprites[i].color);
+            ulDrawImage(spriteimage);
+            imagesused[sprites[i].sprite]=1;
 
         }
-
     }
     ulEndDrawing();
     ulEndFrame();
 
 }
 
+void drawSpritesNoAnim ()
+{
+    int i;
+    ulSetDepth(0);
+    ulDrawMap(Mymap);
+    for (i=0; i<=curMaxSprite ; i++)
+    {
+        if(sprites[i].used)
+        {
+            UL_IMAGE *spriteimage;
+            spriteimage=spritedatabase[sprites[i].sprite].image;
+            spriteimage->x=sprites[i].x;
+            spriteimage->y=sprites[i].y;
+            ulSetImageTileSize (
+                spriteimage,
+                spritedatabase[sprites[i].sprite].sizex*sprites[i].column,																			//image, starting x
+                spritedatabase[sprites[i].sprite].sizey*(sprites[i].animStage+sprites[i].startframe),	//starting y : size*(frame+startframe)
+                spritedatabase[sprites[i].sprite].sizex,																// size x
+                spritedatabase[sprites[i].sprite].sizey);															// size y
+            ulMirrorImageH( spriteimage, sprites[i].flippedh);
+            ulMirrorImageV( spriteimage, sprites[i].flippedv);
+            ulSetDepth(sprites[i].prio);
+            glPolyFmt(POLY_ALPHA(sprites[i].abcoeff) | POLY_CULL_NONE | POLY_ID(sprites[i].prio));
 
+            ulDrawImage(spriteimage);
+        }
+    }
+}
 
 

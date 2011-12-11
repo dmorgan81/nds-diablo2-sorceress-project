@@ -2,10 +2,13 @@
 #include "Sor_Ineedmana.h"
 
 u8 skillsLevels[SKILLNUMBER];
+int skilldmg[SKILLNUMBER][2];
 u8 currentSkill[2];
-u8 skillpoints=2;
+u8 skillpoints=1;
 int lvlupicon=-1;
 int lvlUpIcnPressed=0;
+
+
 void CheckForLevelUp()
 {
     if (hero.stats.nextlvl<=hero.stats.experience)
@@ -39,18 +42,22 @@ void CheckForLevelUp()
                 lvlUpIcnPressed++;
                 myulSetAnim (lvlupicon,1,1,0,0);
             }
-            else{myulSetAnim (lvlupicon,0,0,0,0); lvlUpIcnPressed=0;}
+            else
+            {
+                myulSetAnim (lvlupicon,0,0,0,0);
+                lvlUpIcnPressed=0;
+            }
         }
         else if (Stylus.Released)
         {
             if(Stylus.X>224&&Stylus.X<248&&Stylus.Y>160&&Stylus.Y<188&&lvlUpIcnPressed>3)
             {
-            skillmenu(1);
-            if (!skillpoints)
-            {
-                myulDeleteSprite(lvlupicon);
-                lvlupicon=-1;
-            }
+                skillmenu(1);
+                if (!skillpoints)
+                {
+                    myulDeleteSprite(lvlupicon);
+                    lvlupicon=-1;
+                }
             }
             lvlUpIcnPressed=0;
             myulSetAnim (lvlupicon,0,0,0,0);
@@ -85,42 +92,54 @@ void nospell (int a, int b, u16 c,u8 d) {}
 #include "firebolt1.h"
 void firebolt (int x,int y,u16 angle,u8 level)
 {
-    int nb=getUnusedMissile();
-    newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+30, &missiles[nb],nb,angle,PA_Cos(angle)<<1,(-PA_Sin(angle))<<1,mdata[0].dommages, &mdata[0] );
+    int nb=getUnusedMissile(), dommages=PA_RandMinMax(skilldmg[currentSkill[Pad.Held.L]][0],skilldmg[currentSkill[Pad.Held.L]][1]);
+    newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+30, &missiles[nb],nb,angle,PA_Cos(angle)<<1,(-PA_Sin(angle))<<1,dommages, &mdata[0] );
     AS_SoundQuickPlay((u8*)firebolt1);
 }
 
 void icebolt (int x,int y,u16 angle,u8 level)
 {
-    int nb=getUnusedMissile();
-    newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+30, &missiles[nb],nb,angle,1.5*PA_Cos(angle),1.5*(-PA_Sin(angle)),mdata[1].dommages, &mdata[1] );
+    int nb=getUnusedMissile(), dommages=PA_RandMinMax(skilldmg[currentSkill[Pad.Held.L]][0],skilldmg[currentSkill[Pad.Held.L]][1]);
+    newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+30, &missiles[nb],nb,angle,1.5*PA_Cos(angle),1.5*(-PA_Sin(angle)),dommages, &mdata[1] );
 }
 
 void chargedbolt (int x,int y,u16 angle,u8 level)
 {
-    int dommages=mdata[5].dommages+level>>1 nb=getUnusedMissile();
-
+    int dommages=PA_RandMinMax(skilldmg[currentSkill[Pad.Held.L]][0],skilldmg[currentSkill[Pad.Held.L]][1]);
+    int nb=getUnusedMissile();
     if (level>2)
-{
-    newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+30, &missiles[nb],nb,angle,PA_Cos(angle),-PA_Sin(angle),dommages, &mdata[5] );
-    angle+=30;  nb=getUnusedMissile();  newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+30, &missiles[nb],nb,angle,PA_Cos(angle),-PA_Sin(angle),dommages, &mdata[5] );
-    angle-=60;  nb=getUnusedMissile();  newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+30, &missiles[nb],nb,angle,PA_Cos(angle),-PA_Sin(angle),dommages, &mdata[5] );
-    angle-=20;  nb=getUnusedMissile();  newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+30, &missiles[nb],nb,angle,PA_Cos(angle),-PA_Sin(angle),dommages, &mdata[5] );
-    angle+=100; nb=getUnusedMissile();  newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+30, &missiles[nb],nb,angle,PA_Cos(angle),-PA_Sin(angle),dommages, &mdata[5] );
-}
-else
-{
-    newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+30, &missiles[nb],nb,angle,PA_Cos(angle),-PA_Sin(angle),dommages, &mdata[5] );
-    angle+=40; nb=getUnusedMissile(); newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+30, &missiles[nb],nb,angle,PA_Cos(angle),-PA_Sin(angle),dommages, &mdata[5] );
-    angle-=80; nb=getUnusedMissile(); newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+30, &missiles[nb],nb,angle,PA_Cos(angle),-PA_Sin(angle),dommages, &mdata[5] );
+    {
+        newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+30, &missiles[nb],nb,angle,PA_Cos(angle),-PA_Sin(angle),dommages, &mdata[5] );
+        angle+=30;
+        nb=getUnusedMissile();
+        newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+30, &missiles[nb],nb,angle,PA_Cos(angle),-PA_Sin(angle),dommages, &mdata[5] );
+        angle-=60;
+        nb=getUnusedMissile();
+        newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+30, &missiles[nb],nb,angle,PA_Cos(angle),-PA_Sin(angle),dommages, &mdata[5] );
+        angle-=20;
+        nb=getUnusedMissile();
+        newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+30, &missiles[nb],nb,angle,PA_Cos(angle),-PA_Sin(angle),dommages, &mdata[5] );
+        angle+=100;
+        nb=getUnusedMissile();
+        newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+30, &missiles[nb],nb,angle,PA_Cos(angle),-PA_Sin(angle),dommages, &mdata[5] );
+    }
+    else
+    {
+        newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+30, &missiles[nb],nb,angle,PA_Cos(angle),-PA_Sin(angle),dommages, &mdata[5] );
+        angle+=40;
+        nb=getUnusedMissile();
+        newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+30, &missiles[nb],nb,angle,PA_Cos(angle),-PA_Sin(angle),dommages, &mdata[5] );
+        angle-=80;
+        nb=getUnusedMissile();
+        newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+30, &missiles[nb],nb,angle,PA_Cos(angle),-PA_Sin(angle),dommages, &mdata[5] );
 
-}
+    }
 }
 
 void iceorb (int x,int y,u16 angle,u8 level)
 {
-    int nb=getUnusedMissile();
-    newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+30, &missiles[nb],nb,angle,PA_Cos(angle),-PA_Sin(angle),mdata[2].dommages, &mdata[2] );
+    int nb=getUnusedMissile(), dommages=PA_RandMinMax(skilldmg[currentSkill[Pad.Held.L]][0],skilldmg[currentSkill[Pad.Held.L]][1]);
+    newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+30, &missiles[nb],nb,angle,PA_Cos(angle),-PA_Sin(angle),dommages, &mdata[2] );
 }
 
 void blaze (int x,int y,u16 angle,u8 level)
@@ -132,29 +151,29 @@ void firewall (int x,int y,u16 angle,u8 level)
 {
     x+=fix_norm(hero.x)-CAMERA_X;
     y+=fix_norm(hero.y)-CAMERA_Y;
-    int nb=getUnusedMissile();
-    newMissile(x,y, &missiles[nb],nb,384,0,0,mdata[3].dommages, &mdata[3] );
+    int nb=getUnusedMissile(), dommages=PA_RandMinMax(skilldmg[currentSkill[Pad.Held.L]][0],skilldmg[currentSkill[Pad.Held.L]][1]);
+    newMissile(x,y, &missiles[nb],nb,384,0,0,dommages, &mdata[3] );
     nb=getUnusedMissile();
-    newMissile(x+fix_norm(PA_Sin(angle)*13),y+fix_norm(PA_Cos(angle)*13), &missiles[nb],nb,384,0,0,mdata[3].dommages, &mdata[3] );
+    newMissile(x+fix_norm(PA_Sin(angle)*13),y+fix_norm(PA_Cos(angle)*13), &missiles[nb],nb,384,0,0,dommages, &mdata[3] );
     nb=getUnusedMissile();
-    newMissile(x-fix_norm(PA_Sin(angle)*13),y-fix_norm(PA_Cos(angle)*13), &missiles[nb],nb,384,0,0,mdata[3].dommages, &mdata[3] );
+    newMissile(x-fix_norm(PA_Sin(angle)*13),y-fix_norm(PA_Cos(angle)*13), &missiles[nb],nb,384,0,0,dommages, &mdata[3] );
     nb=getUnusedMissile();
-    newMissile(x+fix_norm(PA_Sin(angle)*26),y+fix_norm(PA_Cos(angle)*26), &missiles[nb],nb,384,0,0,mdata[3].dommages, &mdata[3] );
+    newMissile(x+fix_norm(PA_Sin(angle)*26),y+fix_norm(PA_Cos(angle)*26), &missiles[nb],nb,384,0,0,dommages, &mdata[3] );
     nb=getUnusedMissile();
-    newMissile(x-fix_norm(PA_Sin(angle)*26),y-fix_norm(PA_Cos(angle)*26), &missiles[nb],nb,384,0,0,mdata[3].dommages, &mdata[3] );
+    newMissile(x-fix_norm(PA_Sin(angle)*26),y-fix_norm(PA_Cos(angle)*26), &missiles[nb],nb,384,0,0,dommages, &mdata[3] );
     //newMissile(x,y, &missiles[nb],nb,angle,0,0, &mdata[3] );
 }
 
 void hydra (int x,int y,u16 angle,u8 level)
 {
-    int nb=getUnusedMissile();
-    newMissile(fix_norm(hero.x)+hero.hitbox.down.x+x-CAMERA_X-10, fix_norm(hero.y)+15+y-CAMERA_Y, &missiles[nb],nb,384,0,0,mdata[4].dommages, &mdata[4] );
+    int nb=getUnusedMissile(), dommages=PA_RandMinMax(skilldmg[currentSkill[Pad.Held.L]][0],skilldmg[currentSkill[Pad.Held.L]][1]);
+    newMissile(fix_norm(hero.x)+hero.hitbox.down.x+x-CAMERA_X-10, fix_norm(hero.y)+15+y-CAMERA_Y, &missiles[nb],nb,384,0,0,dommages, &mdata[4] );
     missiles[nb].variables=0;
     nb=getUnusedMissile();
-    newMissile(fix_norm(hero.x)+hero.hitbox.down.x+x-CAMERA_X-20, fix_norm(hero.y)+y-CAMERA_Y, &missiles[nb],nb,213,0,0,mdata[4].dommages, &mdata[4] );
+    newMissile(fix_norm(hero.x)+hero.hitbox.down.x+x-CAMERA_X-20, fix_norm(hero.y)+y-CAMERA_Y, &missiles[nb],nb,213,0,0,dommages, &mdata[4] );
     missiles[nb].variables=20;
     nb=getUnusedMissile();
-    newMissile(fix_norm(hero.x)+hero.hitbox.down.x+x-CAMERA_X+2, fix_norm(hero.y)+y-CAMERA_Y, &missiles[nb],nb,43,0,0,mdata[4].dommages, &mdata[4] );
+    newMissile(fix_norm(hero.x)+hero.hitbox.down.x+x-CAMERA_X+2, fix_norm(hero.y)+y-CAMERA_Y, &missiles[nb],nb,43,0,0,dommages, &mdata[4] );
     missiles[nb].variables=40;
 }
 

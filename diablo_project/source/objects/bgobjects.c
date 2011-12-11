@@ -131,14 +131,14 @@ void loadBgData()
     bgdata[3].scroll=&ScrollFXonly;
     bgdata[3].collision=&noai;
     bgdata[3].datanb=3;
-    bgdata[3].hitbox.down.y=46;
-    bgdata[3].hitbox.down.x=8;
-    bgdata[3].hitbox.up.y=8;
-    bgdata[3].hitbox.up.x=8;
+    bgdata[3].hitbox.down.y=43;
+    bgdata[3].hitbox.down.x=11;
+    bgdata[3].hitbox.up.y=13;
+    bgdata[3].hitbox.up.x=11;
     bgdata[3].hitbox.left.x=9;
-    bgdata[3].hitbox.left.y=16;
+    bgdata[3].hitbox.left.y=28;
     bgdata[3].hitbox.right.x=13;
-    bgdata[3].hitbox.right.y=16;
+    bgdata[3].hitbox.right.y=28;
     bgdata[3].fxdata[0]=9;
     bgdata[3].fxdata[1]=-1;
 

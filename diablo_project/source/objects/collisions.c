@@ -102,10 +102,10 @@ void mCollision(objectinfo* missile)
             {
                 if(objects[i].life)
                 {
-                objects[i].life-=missile->dommages;
-                objects[i].status|=missile->status;
-                deletemissile(missile->arrayID);
-                i=curMaxObject;
+                    objects[i].life-=missile->dommages;
+                    objects[i].status|=missile->status;
+                    deletemissile(missile->arrayID);
+                    i=curMaxObject;
                 }
             }
         }

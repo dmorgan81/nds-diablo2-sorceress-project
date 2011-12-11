@@ -38,7 +38,7 @@ void objectscroll(objectinfo* mover);
 void ScrollFXonly(objectinfo* mover);
 void missilescroll(objectinfo* mover);
 void FXscroll(objectinfo* mover, bool nb);
-void oneDirScroll(objectinfo* mover);
+void onemDirScroll(objectinfo* mover);
 void deadScroll(objectinfo* mover);
 
 //ais

@@ -84,12 +84,13 @@ struct objectinfo
     u8 datanb;
 
     s8 action,lastaction;
-    u16 color;
+
     s16 fx[2];
 
     bool update;
     int arrayID;
     int x,y,cd;
+    int color;
     int life,level,exp;
     s16 sprite; //numero sprite system(info)
     s16 vx, vy;

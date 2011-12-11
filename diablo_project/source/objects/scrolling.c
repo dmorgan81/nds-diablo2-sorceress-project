@@ -135,9 +135,7 @@ void ScrollFXonly(objectinfo* mover)
 }
 
 
-
-
-void oneDirScroll(objectinfo* mover)
+void onemDirScroll(objectinfo* mover)
 {
 
     //check if mover is onscreen
@@ -162,7 +160,7 @@ void oneDirScroll(objectinfo* mover)
             }
         }
         //s16 y = GetSpriteY(mover->sprite)+mover->hitbox.down.y;
-        myulSetSpritePrio(mover->sprite,GetSpriteY(mover->sprite)+mover->hitbox.down.y);
+        myulSetSpritePrio(mover->sprite,GetSpriteY(mover->sprite)+mover->hitbox.down.y+10);
         SetSpriteColor(mover->sprite,mover->color);
 
     }
@@ -191,6 +189,7 @@ void oneDirScroll(objectinfo* mover)
 
     }
 }
+
 
 void deadScroll(objectinfo* mover)
 {
@@ -351,7 +350,7 @@ void missilescroll(objectinfo* mover)
         }
 
         //s16 y = GetSpriteY(mover->sprite)+mover->hitbox.down.y;
-        myulSetSpritePrio(mover->sprite,GetSpriteY(mover->sprite)+mover->hitbox.down.y);
+        myulSetSpritePrio(mover->sprite,GetSpriteY(mover->sprite)+mover->hitbox.down.y+10);
 
 
     }
@@ -400,9 +399,9 @@ void FXscroll(objectinfo* mover, bool nb)
             fxinfo[ mover->fx[nb] ].sprite=myulCreateSprite(fxinfo[ mover->fx[nb] ].spritedata, fix_norm(mover->x-hero.x) + fxinfo[ mover->fx[nb] ].x + CAMERA_X, fix_norm(mover->y-hero.y)+ fxinfo[ mover->fx[nb] ].y + CAMERA_Y,fix_norm(mover->y-hero.y)+ fxinfo[ mover->fx[nb] ].y + CAMERA_Y + fxinfo[ mover->fx[nb] ].hitbox.down.y);
             myulImageFlip (fxinfo[ mover->fx[nb] ].sprite, fxinfo[mover->fx[nb]].flippedh,fxinfo[mover->fx[nb]].flippedv);
         }
-/*
-        s16 y = GetSpriteY(fxinfo[ mover->fx[nb] ].sprite)-fxinfo[mover->fx[nb]].y+mover->hitbox.down.y;
-        if (y<1) y=1;*/   /// to use if the point.down.y of object isnt the same as the fx
+        /*
+                s16 y = GetSpriteY(fxinfo[ mover->fx[nb] ].sprite)-fxinfo[mover->fx[nb]].y+mover->hitbox.down.y;
+                if (y<1) y=1;*/   /// to use if the point.down.y of object isnt the same as the fx
         myulSetSpritePrio(fxinfo[ mover->fx[nb] ].sprite,GetSpriteY(fxinfo[ mover->fx[nb] ].sprite)-fxinfo[mover->fx[nb]].y+mover->hitbox.down.y);
 
 
