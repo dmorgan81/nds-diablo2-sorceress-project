@@ -59,8 +59,8 @@ struct statistiques
     s8 reslight;
     s8 respsn;
 
-    u16 vie_max;
-    u16 vie_restante;
+    u16 lifeMax;
+    u16 curLife;
     u16 mana_max;
     u16 mana_restante;
     u16 dmg;

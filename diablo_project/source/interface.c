@@ -31,7 +31,7 @@ void save ()
     if (!save_file)PA_OutputText(1,0,0,"Can't open save, emulator?");
     fwrite(&hero.stats, 1, sizeof(hero.stats), save_file);
     fwrite(&skillsLevels, 1, sizeof(skillsLevels), save_file);
-
+    fwrite(&skillpoints, 1, sizeof(skillpoints), save_file);
     fclose(save_file);
 }
 
@@ -41,6 +41,7 @@ void load()
     if (!save_file)PA_OutputText(1,0,0,"Can't open save, emulator?");
     fread(&hero.stats, 1, sizeof(hero.stats), save_file);
     fread(&skillsLevels, 1, sizeof(skillsLevels), save_file);
+    fread(&skillpoints, 1, sizeof(skillpoints), save_file);
     fclose(save_file);
 }
 void pause (u8 *quitcondition)//with booloean parameter checked at each frame
@@ -52,7 +53,7 @@ void pause (u8 *quitcondition)//with booloean parameter checked at each frame
     while (!(*quitcondition))
     {
         ulStartDrawing2D();
-        drawSpritesNoAnim ();
+        myulDrawSpritesNoAnim ();
 
         ulSetDepth(255);
         glPolyFmt(POLY_ALPHA(31) | POLY_CULL_NONE | POLY_ID(0));
@@ -240,7 +241,7 @@ void death()
     while (!(Pad.Newpress.Anykey||Stylus.Newpress))PA_WaitForVBL();
 
     ulDeleteImage(deathscreen);
-    hero.stats.vie_restante=hero.stats.vie_max;
+    hero.stats.curLife=hero.stats.lifeMax;
     for(i=0; i<MAX_OBJECT; i++)
     {
         deleteobject(i);

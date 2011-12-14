@@ -21,6 +21,7 @@ void deleteBgObject(s16 ID)
 {
     bgobjects[ID].action=-1;
     bgobjects[ID].status=0;
+    bgobjects[ID].life=0;
     if( bgobjects[ID].sprite != -1)
     {
         myulDeleteSprite(bgobjects[ID].sprite);
@@ -155,14 +156,14 @@ void loadBgData()
     bgdata[4].scroll=&ScrollFXonly;
     bgdata[4].collision=&noai;
     bgdata[4].datanb=4;
-    bgdata[4].hitbox.down.y=16;
-    bgdata[4].hitbox.down.x=16;
-    bgdata[4].hitbox.up.y=16;
-    bgdata[4].hitbox.up.x=16;
-    bgdata[4].hitbox.left.x=16;
-    bgdata[4].hitbox.left.y=16;
-    bgdata[4].hitbox.right.x=16;
-    bgdata[4].hitbox.right.y=16;
+    bgdata[4].hitbox.down.y=14;
+    bgdata[4].hitbox.down.x=8;
+    bgdata[4].hitbox.up.y=2;
+    bgdata[4].hitbox.up.x=8;
+    bgdata[4].hitbox.left.x=2;
+    bgdata[4].hitbox.left.y=8;
+    bgdata[4].hitbox.right.x=14;
+    bgdata[4].hitbox.right.y=8;
     bgdata[4].fxdata[0]=10;
     bgdata[4].fxdata[1]=-1;
 

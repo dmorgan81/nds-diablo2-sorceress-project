@@ -7,10 +7,10 @@
 
 
 
-//Includes PALib, ÂµLibrary et headers
+//Includes PALib, µLibrary et headers
 #include "main.h"
 
-//#define Test
+#define Test
 //#define NOSPAWN
 #ifdef Test
 #define _NOSPLASH_ //quote this line to make splash appear
@@ -71,8 +71,8 @@ int main( int argc, char **argv)
     hero.stats.dexterite=25;
     hero.stats.vitalite=10;
     hero.stats.energie=35;
-    hero.stats.vie_max=2000;
-    hero.stats.vie_restante=(hero.stats.vie_max);
+    hero.stats.lifeMax=2000;
+    hero.stats.curLife=(hero.stats.lifeMax);
     hero.stats.mana_max=35;
     hero.stats.mana_restante=(hero.stats.mana_max);
     hero.stats.experience=0;
@@ -129,7 +129,7 @@ int main( int argc, char **argv)
     PA_VBLCounterStart(2);
     while(1)
     {
-        while(hero.stats.vie_restante>0&&hero.stats.vie_restante<=hero.stats.vie_max)
+        while(hero.stats.curLife>0&&hero.stats.curLife<=hero.stats.lifeMax)
         {
             hero.cooldown=0;
             MajStats();
@@ -146,6 +146,7 @@ int main( int argc, char **argv)
 
                     x=fix_norm(hero.x)+hero.hitbox.down.x;//PA_RandMax(400);
                     y=fix_norm(hero.y)+hero.hitbox.right.y;//PA_RandMax(310);
+
                     newMissile(x, y, &missiles[objectnb],objectnb,dir_angle(3),256,-256,mdata[0].dommages, &mdata[0] );
                 }
             }
@@ -165,7 +166,7 @@ int main( int argc, char **argv)
 #endif
 
 
-            myulSetSpritePrio(hero.sprite,CHARFEET_Y);
+            myulmyulSetSpritePrio(hero.sprite,CHARFEET_Y);
             ulReadKeys(0);
 
             if (!(PA_VBLCounter[2]&128))//change
@@ -200,7 +201,8 @@ int main( int argc, char **argv)
                 if (hero.stats.lvl<2)
                 {
                     objectnb=getUnusedObject();
-                    newObject(PA_RandMinMax (128, 330),PA_RandMinMax (86, 286), &objects[objectnb],objectnb, &data[1],0 );
+                    if (PA_RandMax(1)) newObject(PA_RandMinMax (128, 330),PA_RandMinMax (86, 286), &objects[objectnb],objectnb, &data[1],0 );
+                    else newObject(PA_RandMinMax (128, 330),PA_RandMinMax (86, 286), &objects[objectnb],objectnb, &data[2],0 );
                 }
                 else for(i=0; i<=(hero.stats.lvl>>1)+1; i++)
                     {
@@ -211,7 +213,8 @@ int main( int argc, char **argv)
                             x=PA_RandMinMax (128, 330);
                             y=PA_RandMinMax (86, 286);
                         }
-                        newObject(PA_RandMinMax (128, 330),PA_RandMinMax (86, 286), &objects[objectnb],objectnb, &data[1],0 );
+                        if (PA_RandMax(1)) newObject(PA_RandMinMax (128, 330),PA_RandMinMax (86, 286), &objects[objectnb],objectnb, &data[1],0 );
+                        else newObject(PA_RandMinMax (128, 330),PA_RandMinMax (86, 286), &objects[objectnb],objectnb, &data[2],0 );
                     }
             }
 #endif
@@ -233,7 +236,7 @@ int main( int argc, char **argv)
             CheckForLevelUp();
             PA_WaitForVBL();
         }
-        hero.stats.vie_restante=0;
+        hero.stats.curLife=0;
         death();
     }
 
@@ -381,7 +384,7 @@ void MySplash()
 {
     s32 i;
     s32 time=180;
-    //On mets l'cran en luminusitÃ© -31, ce qui le rend noir
+    //On mets l'cran en luminusité -31, ce qui le rend noir
     PA_SetBrightness(1, -31);
 
     //On charge le splash de PAlib
@@ -395,7 +398,7 @@ void MySplash()
     }
 
     //On Affiche celui de la ulib avec sa super animation!
-    ulShowSplashScreen(3);//splash modifiÃ© pour n'apparaitre que sur l'Ã©cran de la ulib
+    ulShowSplashScreen(3);//splash modifié pour n'apparaitre que sur l'écran de la ulib
 
     //effet inverse pour le PAsplash, disparait (fade)
     for( i=0 ; i>=(-31) ; i-- )
@@ -406,7 +409,7 @@ void MySplash()
     //On supprime le splash de PAlib
     PA_ResetBg(1);
 
-    //Et on recommence tout Ã§a...
+    //Et on recommence tout ça...
     //PA_EasyBgLoad(1, 1, d_Splash1);//obselete
     PA_LoadBackground(1, 1, &d_Splash1);
 
@@ -444,7 +447,7 @@ void MySplash()
     }
 
 
-    //On efface tout Ã§a
+    //On efface tout ça
     PA_SetBrightness(1, 0);
     PA_ResetBg(1);
     ulDeleteImage (d_splash2);
@@ -486,9 +489,9 @@ void MajStats()
 
         for(i=0; i<25; i++)
         {
-            if(hero.stats.vie_restante<hero.stats.vie_max)
+            if(hero.stats.curLife<hero.stats.lifeMax)
             {
-                hero.stats.vie_restante+=1;
+                hero.stats.curLife+=1;
             }
             else i=25;
         }

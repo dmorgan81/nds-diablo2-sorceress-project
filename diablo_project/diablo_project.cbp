@@ -107,8 +107,17 @@
 		<Unit filename="source\ulScreenDisplay.h" />
 		<Unit filename="source\uldata.h" />
 		<Extensions>
-			<code_completion />
+			<code_completion>
+				<search_path add="D:\devkitPro\libnds" />
+				<search_path add="D:\devkitPro\PAlib" />
+				<search_path add="D:\devkitPro\uLibrary" />
+				<search_path add="D:\devkitPro\PAlib\source\arm9\source" />
+				<search_path add="D:\devkitPro\uLibrary\Source" />
+			</code_completion>
 			<debugger />
+			<wxsmith version="1">
+				<gui name="wxWidgets" src="" main="" init_handlers="necessary" language="CPP" />
+			</wxsmith>
 		</Extensions>
 	</Project>
 </CodeBlocks_project_file>

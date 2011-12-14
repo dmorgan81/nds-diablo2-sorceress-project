@@ -60,7 +60,7 @@ int myulCreateSprite (u8 data,int x,int y, int prio)
         sprites[nb].frameNumber=0;
         sprites[nb].color=RGB15(31, 31, 31);
         sprites[nb].cycles=spritedatabase[data].cycles;
-        myulSetSpritePrio( nb, prio);
+        myulmyulSetSpritePrio( nb, prio);
         if (nb>curMaxSprite)curMaxSprite=nb;
     }
     else
@@ -111,32 +111,36 @@ inline void myulImageAngle(int nb,int angle,int x,int y)//change
     sprites[nb].angle=angle; sprites[nb].midx=x; sprites[nb].midy=y;
 }
 */
-inline int GetSpriteY (int nb)
+inline int myulGetSpriteY (int nb)
 {
     return sprites[nb].y;
 }
 
-inline int GetSpriteX (int nb)
+inline int myulGetSpriteX (int nb)
 {
     return sprites[nb].x;
 }
 
-inline void SetSpriteY (int nb,int y)
+inline int myulGetSpriteAnim (int nb)
+{
+    return sprites[nb].animStage;
+}
+inline void myulSetSpriteY (int nb,int y)
 {
     sprites[nb].y=y;
 }
 
-inline void SetSpriteX (int nb,int x)
+inline void myulSetSpriteX (int nb,int x)
 {
     sprites[nb].x=x;
 }
 
-inline void SetSpriteColor (int nb,u16 color)
+inline void myulSetSpriteColor (int nb,u16 color)
 {
     sprites[nb].color=color;
 }
 
-inline void SetSpriteXY (int nb,int x,int y)
+inline void myulSetSpriteXY (int nb,int x,int y)
 {
     sprites[nb].x=x;
     sprites[nb].y=y;
@@ -185,17 +189,20 @@ inline void myulDefaultAnim (int spritenb)
     sprites[spritenb].cycles=0;
 }
 
-inline void myulSetSpritePrio( int sprite, int prio)
+inline void myulmyulSetSpritePrio( int sprite, int prio)
 {
     sprites[sprite].prio = prio;
 }
 
-inline void SetSpriteAblending (int sprite,int value)
+inline void myulSetSpriteAblending (int sprite,int value)
 {
     sprites[sprite].abcoeff = value;
 }
 
-
+inline void myulSetCycles (int sprite,int cycles)
+{
+    sprites[sprite].cycles=cycles;
+}
 
 
 
@@ -221,7 +228,7 @@ void myulScreenDraws(void)
         if(sprites[i].used)
         {
             nb++;
-            if(sprites[i].framerate!=0)
+            if(sprites[i].framerate)
             {
                 sprites[i].frameNumber++;
                 if (sprites[i].frameNumber % sprites[i].framerate  == 0)
@@ -275,7 +282,7 @@ void myulScreenDraws(void)
 
 }
 
-void drawSpritesNoAnim ()
+void myulDrawSpritesNoAnim ()
 {
     int i;
     ulSetDepth(0);

@@ -396,7 +396,7 @@ void MobDeath(objectinfo* mob,int time)
             mob->sprite=myulCreateSprite(mob->spritedata, fix_norm(mob->x-hero.x)+CAMERA_X, fix_norm(mob->y-hero.y)+CAMERA_Y,fix_norm(mob->y-hero.y)+CAMERA_Y+mob->hitbox.down.y);
             myulImageColumn (mob->sprite,0);
             myulImageFlip(mob->sprite,0,0);
-            myulSetSpritePrio(mob->sprite,GetSpriteY(mob->sprite)+mob->hitbox.down.y);
+            myulmyulSetSpritePrio(mob->sprite,myulGetSpriteY(mob->sprite)+mob->hitbox.down.y);
         }
         mob->variables=time;
         //play sound?

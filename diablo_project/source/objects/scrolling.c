@@ -22,7 +22,7 @@ void objectscroll(objectinfo* mover)
         //if it is then move it to the correct position
         if(mover->sprite!=-1)
         {
-            SetSpriteXY(mover->sprite,fix_norm(mover->x-hero.x)+CAMERA_X,fix_norm(mover->y-hero.y)+CAMERA_Y);
+            myulSetSpriteXY(mover->sprite,fix_norm(mover->x-hero.x)+CAMERA_X,fix_norm(mover->y-hero.y)+CAMERA_Y);
         }
         //if it's not then create a sprite for it
         else
@@ -89,9 +89,9 @@ void objectscroll(objectinfo* mover)
 
 
 
-        //s16 y = GetSpriteY(mover->sprite)+mover->hitbox.down.y;
-        myulSetSpritePrio(mover->sprite,GetSpriteY(mover->sprite)+mover->hitbox.down.y);
-        SetSpriteColor(mover->sprite,mover->color);
+        //s16 y = myulGetSpriteY(mover->sprite)+mover->hitbox.down.y;
+        myulmyulSetSpritePrio(mover->sprite,myulGetSpriteY(mover->sprite)+mover->hitbox.down.y);
+        myulSetSpriteColor(mover->sprite,mover->color);
 
     }
 
@@ -144,7 +144,7 @@ void onemDirScroll(objectinfo* mover)
         //if it is then move it to the correct position
         if(mover->sprite!=-1)
         {
-            SetSpriteXY(mover->sprite,fix_norm(mover->x-hero.x)+CAMERA_X,fix_norm(mover->y-hero.y)+CAMERA_Y);
+            myulSetSpriteXY(mover->sprite,fix_norm(mover->x-hero.x)+CAMERA_X,fix_norm(mover->y-hero.y)+CAMERA_Y);
 
         }
         //if it's not then create a sprite for it
@@ -159,9 +159,9 @@ void onemDirScroll(objectinfo* mover)
                 myulImageFlip(mover->sprite,0,0);
             }
         }
-        //s16 y = GetSpriteY(mover->sprite)+mover->hitbox.down.y;
-        myulSetSpritePrio(mover->sprite,GetSpriteY(mover->sprite)+mover->hitbox.down.y+10);
-        SetSpriteColor(mover->sprite,mover->color);
+        //s16 y = myulGetSpriteY(mover->sprite)+mover->hitbox.down.y;
+        myulmyulSetSpritePrio(mover->sprite,myulGetSpriteY(mover->sprite)+mover->hitbox.down.y+10);
+        myulSetSpriteColor(mover->sprite,mover->color);
 
     }
 
@@ -199,7 +199,7 @@ void deadScroll(objectinfo* mover)
         //if it is then move it to the correct position
         if(mover->sprite!=-1)
         {
-            SetSpriteXY(mover->sprite,fix_norm(mover->x-hero.x)+CAMERA_X,fix_norm(mover->y-hero.y)+CAMERA_Y);
+            myulSetSpriteXY(mover->sprite,fix_norm(mover->x-hero.x)+CAMERA_X,fix_norm(mover->y-hero.y)+CAMERA_Y);
         }
         //if it's not then create a sprite for it
         else
@@ -213,8 +213,8 @@ void deadScroll(objectinfo* mover)
             myulSetAnim (mover->sprite,spritedatabase[mover->spritedata].nbframe-1,spritedatabase[mover->spritedata].nbframe-1,0,1);
 
         }
-        SetSpriteColor(mover->sprite,mover->color);
-        myulSetSpritePrio(mover->sprite,GetSpriteY(mover->sprite)+mover->hitbox.down.y);
+        myulSetSpriteColor(mover->sprite,mover->color);
+        myulmyulSetSpritePrio(mover->sprite,myulGetSpriteY(mover->sprite)+mover->hitbox.down.y);
     }
 
     //if the object is offscreen delete it
@@ -252,7 +252,7 @@ void missilescroll(objectinfo* mover)
         //if it is then move it to the correct position
         if(mover->sprite!=-1)
         {
-            SetSpriteXY(mover->sprite,fix_norm(mover->x-hero.x)+CAMERA_X,fix_norm(mover->y-hero.y)+CAMERA_Y);
+            myulSetSpriteXY(mover->sprite,fix_norm(mover->x-hero.x)+CAMERA_X,fix_norm(mover->y-hero.y)+CAMERA_Y);
 
         }
         //if it's not then create a sprite for it
@@ -349,8 +349,8 @@ void missilescroll(objectinfo* mover)
             break;
         }
 
-        //s16 y = GetSpriteY(mover->sprite)+mover->hitbox.down.y;
-        myulSetSpritePrio(mover->sprite,GetSpriteY(mover->sprite)+mover->hitbox.down.y+10);
+        //s16 y = myulGetSpriteY(mover->sprite)+mover->hitbox.down.y;
+        myulmyulSetSpritePrio(mover->sprite,myulGetSpriteY(mover->sprite)+mover->hitbox.down.y+10);
 
 
     }
@@ -390,7 +390,7 @@ void FXscroll(objectinfo* mover, bool nb)
         //if it is then move it to the correct position
         if(fxinfo[ mover->fx[nb] ].sprite!=-1)
         {
-            SetSpriteXY(fxinfo[ mover->fx[nb] ].sprite,fix_norm(mover->x-hero.x) + fxinfo[ mover->fx[nb] ].x + CAMERA_X,fix_norm(mover->y-hero.y) + fxinfo[ mover->fx[nb] ].y + CAMERA_Y);
+            myulSetSpriteXY(fxinfo[ mover->fx[nb] ].sprite,fix_norm(mover->x-hero.x) + fxinfo[ mover->fx[nb] ].x + CAMERA_X,fix_norm(mover->y-hero.y) + fxinfo[ mover->fx[nb] ].y + CAMERA_Y);
             myulImageFlip (fxinfo[ mover->fx[nb] ].sprite, fxinfo[mover->fx[nb]].flippedh,fxinfo[mover->fx[nb]].flippedv);
         }
         //if it's not then create a sprite for it
@@ -400,9 +400,9 @@ void FXscroll(objectinfo* mover, bool nb)
             myulImageFlip (fxinfo[ mover->fx[nb] ].sprite, fxinfo[mover->fx[nb]].flippedh,fxinfo[mover->fx[nb]].flippedv);
         }
         /*
-                s16 y = GetSpriteY(fxinfo[ mover->fx[nb] ].sprite)-fxinfo[mover->fx[nb]].y+mover->hitbox.down.y;
+                s16 y = myulGetSpriteY(fxinfo[ mover->fx[nb] ].sprite)-fxinfo[mover->fx[nb]].y+mover->hitbox.down.y;
                 if (y<1) y=1;*/   /// to use if the point.down.y of object isnt the same as the fx
-        myulSetSpritePrio(fxinfo[ mover->fx[nb] ].sprite,GetSpriteY(fxinfo[ mover->fx[nb] ].sprite)-fxinfo[mover->fx[nb]].y+mover->hitbox.down.y);
+        myulmyulSetSpritePrio(fxinfo[ mover->fx[nb] ].sprite,myulGetSpriteY(fxinfo[ mover->fx[nb] ].sprite)-fxinfo[mover->fx[nb]].y+mover->hitbox.down.y);
 
 
 

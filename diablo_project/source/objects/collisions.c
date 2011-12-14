@@ -43,7 +43,7 @@ u8 feetcollision(hitboxinfo* hitbox,int x, int y) // objectinfo* object
 {
     if(TileCollision(&hitbox->left	, hitbox->flipped, x, y)>=NWALKABLETILE)return 1;
     if(TileCollision(&hitbox->right, hitbox->flipped, x, y)>=NWALKABLETILE)return 2;
-    if(TileCollision(&hitbox->down	, hitbox->flipped, x-8, y)>=NWALKABLETILE)return 3;
+    if(TileCollision(&hitbox->down	, hitbox->flipped, x, y-1782)>=NWALKABLETILE)return 3; //-1792=norm_fix(-7)
     if(TileCollision(&hitbox->down	, hitbox->flipped, x, y)>=NWALKABLETILE)return 4;
     return 0;
 }
@@ -84,8 +84,8 @@ void zmCollision(objectinfo* zombie)
     if(boxcollision (&zombie->hitbox,zombie->x,zombie->y,&hero.hitbox,hero.x,hero.y))
     {
 
-        hero.stats.vie_restante-=zombie->dommages;
-//        PA_OutputText(1,0,0,"TOUCHEEEEEEEEEE %d",hero.stats.vie_restante,zombie->dommages);
+        hero.stats.curLife-=zombie->dommages;
+//        PA_OutputText(1,0,0,"TOUCHEEEEEEEEEE %d",hero.stats.curLife,zombie->dommages);
     }
 
 }

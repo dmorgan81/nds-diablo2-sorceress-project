@@ -17,6 +17,7 @@ void CheckForLevelUp()
         hero.stats.lvl++;
         skillpoints++;
         PA_OutputText(1,20,1,"             ");
+        PA_OutputText(1,20,1,"Next %d",hero.stats.nextlvl);
         if(hero.stats.lvl<10)PA_SetSpriteAnim(1, 0, hero.stats.lvl);
         else if (hero.stats.lvl==10)
         {
@@ -30,7 +31,6 @@ void CheckForLevelUp()
             PA_SetSpriteAnim(1, 0, hero.stats.lvl/10);
             PA_SetSpriteAnim(1, 5, hero.stats.lvl%10);
         }
-        PA_OutputText(1,20,1,"Next %d",hero.stats.nextlvl);
     }
     if (skillpoints)
     {
@@ -93,7 +93,7 @@ void nospell (int a, int b, u16 c,u8 d) {}
 void firebolt (int x,int y,u16 angle,u8 level)
 {
     int nb=getUnusedMissile(), dommages=PA_RandMinMax(skilldmg[currentSkill[Pad.Held.L]][0],skilldmg[currentSkill[Pad.Held.L]][1]);
-    newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+30, &missiles[nb],nb,angle,PA_Cos(angle)<<1,(-PA_Sin(angle))<<1,dommages, &mdata[0] );
+    newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+30, &missiles[nb],nb,angle,PA_Cos(angle)*3,(-PA_Sin(angle))*3,dommages, &mdata[0] );
     AS_SoundQuickPlay((u8*)firebolt1);
 }
 

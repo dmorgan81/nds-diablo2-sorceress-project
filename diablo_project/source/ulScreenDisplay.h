@@ -27,17 +27,20 @@ inline void myulStartAnim (int spritenb, u8 sframe, u8 endframe, u8 framerate,in
 inline void myulSetAnim (int spritenb, u8 sframe, u8 endframe, u8 framerate,int cycles);
 inline void myulDefaultAnimRestart (int spritenb);
 inline void myulDefaultAnim (int spritenb);
-inline void myulSetSpritePrio( int sprite, int prio);
-void myulScreenDraws(void);
-void drawSpritesNoAnim ();
+inline void myulmyulSetSpritePrio( int sprite, int prio);
+inline void myulSetCycles (int sprite,int cycles);
 
-inline void SetSpriteAblending (int nb,int value);
-inline void SetSpriteColor (int nb,u16 color);
-inline void SetSpriteXY (int nb,int x,int y);
-inline void SetSpriteX (int nb,int x);
-inline void SetSpriteY (int nb,int y);
-inline int GetSpriteX (int nb);
-inline int GetSpriteY (int nb);
+void myulScreenDraws(void);
+void myulDrawSpritesNoAnim ();
+
+inline void myulSetSpriteAblending (int nb,int value);
+inline void myulSetSpriteColor (int nb,u16 color);
+inline void myulSetSpriteXY (int nb,int x,int y);
+inline void myulSetSpriteX (int nb,int x);
+inline void myulSetSpriteY (int nb,int y);
+inline int myulGetSpriteX (int nb);
+inline int myulGetSpriteY (int nb);
+inline int myulGetSpriteAnim (int nb);
 
 
 

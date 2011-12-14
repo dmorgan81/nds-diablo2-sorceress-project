@@ -40,7 +40,7 @@ void InitTopScreen (void)
     PA_SetSpriteAnim(1, 3, -1);
     PA_SetSpriteAnim(1, 4, -1);
     PA_SetSpriteAnim(1, 2,hero.stats.mana_restante*20/hero.stats.mana_max);//mana=>ramene en x/20 pour les frames
-    PA_SetSpriteAnim(1, 1, hero.stats.vie_restante*20/hero.stats.vie_max);//vie
+    PA_SetSpriteAnim(1, 1, hero.stats.curLife*20/hero.stats.lifeMax);//vie
 
 }
 
@@ -52,6 +52,6 @@ void QuickTopScreenRefresh (void)
     //PA_OutputText(1,0,0,"%d",PA_RTC.FPS );
     PA_OutputText(1,7,1,"Exp %d",hero.stats.experience);
     PA_SetSpriteAnim(1, 2,hero.stats.mana_restante*20/hero.stats.mana_max);//mana=>ramene en x/20 pour les frames
-    PA_SetSpriteAnim(1, 1, hero.stats.vie_restante*20/hero.stats.vie_max);//vie
+    PA_SetSpriteAnim(1, 1, hero.stats.curLife*20/hero.stats.lifeMax);//vie
 
 }

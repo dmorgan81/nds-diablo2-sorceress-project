@@ -28,14 +28,14 @@ void bgObjectAi(objectinfo* object)
 {
     if (fix_norm(object->y)+object->hitbox.down.y > fix_norm(hero.y)+hero.hitbox.down.y && fix_norm(object->y) < fix_norm(hero.y)+hero.hitbox.down.y)
     {
-        SetSpriteAblending (fxinfo[object->fx[0]].sprite,BGOBJ_AB);
-        SetSpriteAblending (fxinfo[object->fx[1]].sprite,BGOBJ_AB);
+        myulSetSpriteAblending (fxinfo[object->fx[0]].sprite,BGOBJ_AB);
+        myulSetSpriteAblending (fxinfo[object->fx[1]].sprite,BGOBJ_AB);
 
     }
     else
     {
-        SetSpriteAblending (fxinfo[object->fx[0]].sprite,31);
-        SetSpriteAblending (fxinfo[object->fx[1]].sprite,31);
+        myulSetSpriteAblending (fxinfo[object->fx[0]].sprite,31);
+        myulSetSpriteAblending (fxinfo[object->fx[1]].sprite,31);
     }
 }
 
@@ -91,6 +91,11 @@ void meleeAI(objectinfo* melee)
             {
                 //if in front of here, attack him
                 melee->action=2;
+// NOTE (Clement#1#): one hit only
+                myulSetCycles (melee->sprite,1);
+                PA_OutputText(1,20,4,"%d",melee->dommages);
+                hero.stats.curLife-=melee->dommages;
+                PA_OutputText(1,20,5,"%d",hero.stats.curLife);
             }
             else if (PA_Distance(fix_norm(melee->x)+melee->hitbox.down.x,fix_norm(melee->y)+melee->hitbox.down.y,fix_norm(hero.x)+hero.hitbox.down.x,fix_norm(hero.y)+hero.hitbox.down.y)>7000 && !melee->status&S_ALARMED)
             {
@@ -126,6 +131,11 @@ void meleeAI(objectinfo* melee)
         case 2:
             melee->vx=0;
             melee->vy=0;
+            PA_OutputText(1,20,6,"%d",myulGetSpriteAnim(melee->sprite));
+            PA_OutputText(1,20,7,"%d",spritedatabase[melee->spritedata].nbframe-1);
+            PA_OutputText(1,20,7,"%d",sprites[melee->sprite].cycles);
+            if (myulGetSpriteAnim(melee->sprite)==(spritedatabase[melee->spritedata].nbframe-1)) melee->action=0;
+
             break;
         }
         melee->update=(melee->lastdir!=melee->dir)||(melee->lastaction!=melee->action);
@@ -138,12 +148,12 @@ void meleeAI(objectinfo* melee)
         //check ground collision
         if(feetcollision(&melee->hitbox,melee->x+melee->vx,melee->y))
         {
-            melee->vx=0;
+            melee->vx=0;//(melee->vx*-1)>>1;
         }
 
         if(feetcollision(&melee->hitbox,melee->x,melee->y+melee->vy))
         {
-            melee->vy=0;
+            melee->vy=0;//(melee->vx*-1)>>1;
         }
         melee->x+=melee->vx;
         melee->y+=melee->vy;
