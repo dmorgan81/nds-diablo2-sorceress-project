@@ -9,6 +9,7 @@
 #include "top_screen.h"
 
 void pause (u8 *quitcondition);
+void DialogInBox(char* dialog,int speed);
 void skillmenu(bool levelup);
 void death();
 

@@ -30,8 +30,9 @@ inline void myulDefaultAnim (int spritenb);
 inline void myulmyulSetSpritePrio( int sprite, int prio);
 inline void myulSetCycles (int sprite,int cycles);
 
-void myulScreenDraws(void);
-void myulDrawSpritesNoAnim ();
+void myulScreenDraws();
+void myulDrawSpritesNoAnim();
+void myulDrawDialogBox();
 
 inline void myulSetSpriteAblending (int nb,int value);
 inline void myulSetSpriteColor (int nb,u16 color);
@@ -42,7 +43,56 @@ inline int myulGetSpriteX (int nb);
 inline int myulGetSpriteY (int nb);
 inline int myulGetSpriteAnim (int nb);
 
-
+#define myulDrawDialogBox(IMAGE){\
+    ulSetDepth(3000);\
+\
+    ulSetImageTileSize (IMAGE,0,0,8,8);\
+\
+    IMAGE->x=0;\
+    IMAGE->y=DIALOGY0;\
+    ulDrawImage(IMAGE);\
+\
+    IMAGE->x=248;\
+    IMAGE->y=DIALOGY0;\
+    ulMirrorImageH(IMAGE,1);\
+    ulDrawImage(IMAGE);\
+\
+    IMAGE->x=248;\
+    IMAGE->y=184;\
+    ulMirrorImageV(IMAGE,1);\
+    ulDrawImage(IMAGE);\
+\
+    IMAGE->x=0;\
+    IMAGE->y=184;\
+    ulMirrorImageH(IMAGE,0);\
+    ulDrawImage(IMAGE);\
+\
+    ulSetImageTileSize (IMAGE,0,8,8,8);\
+    ulMirrorImageH(IMAGE,0);\
+    for (i=0; i<30; i++)\
+    {\
+        IMAGE->x=8+(i<<3);\
+        IMAGE->y=DIALOGY0;\
+        ulMirrorImageV(IMAGE,0);\
+        ulDrawImage(IMAGE);\
+        IMAGE->y=184;\
+        ulMirrorImageV(IMAGE,1);\
+        ulDrawImage(IMAGE);\
+    }\
+    ulSetImageTileSize (IMAGE,0,16,8,8);\
+    for (i=0; i<6; i++)\
+    {\
+        IMAGE->y=136+(i<<3);\
+        IMAGE->x=0;\
+        ulMirrorImageH(IMAGE,0);\
+        ulDrawImage(IMAGE);\
+        IMAGE->x=248;\
+        ulMirrorImageH(IMAGE,1);\
+        ulDrawImage(IMAGE);\
+    }\
+    glPolyFmt(POLY_ALPHA(20) | POLY_CULL_NONE | POLY_ID(256));\
+    ulDrawFillRect(2,130,254,190,0x0421);\
+    }
 
 
 #endif //_ULDISPLAY_H

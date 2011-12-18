@@ -1,6 +1,7 @@
 #include "interface.h"
 #include "uldata.h"
 #include "Sor_cantuseyet.h"
+//#define ulPrintf_xy(x, y, format...)		({ char __str[1000]; sprintf(__str , ##format); ulDrawString(x, y, __str); })
 
 extern int curMaxSprite;
 bool dialbox=0;
@@ -94,9 +95,92 @@ void dialogbox()
      dialbox=0;
     }
 }
-
 */
+
 // TODO (Clement#1#): Ajouter la gestion du texte ecran du bas semi transparant
+
+int TextBoxGetLineCharNb(int x0, int y0, int x1, int y1, const char *text)
+{
+    int nb=0;
+    if (y1>(y0+ul_curFont->charHeight))
+    {
+        int x,y, x2;
+        unsigned char c;
+        const char *text2;
+        x = x0;
+        y = y0;
+        while(*text && y==y0)
+        {
+            c = *text;
+            nb++;
+            if (c == ' ')
+            {
+                text2 = text;
+                x2 = x;
+                do
+                {
+                    x2 += ul_curFont->charWidths[(int)(*text2++)];
+                    if (x2 > x1)
+                    {
+                        text++;
+                        goto newline;
+                    }
+                }
+                while(*text2 != '\n' && *text2 != ' ' && *text2);
+            }
+            if (x + ul_curFont->charWidths[c] > x1 || *text=='\n')
+            {
+newline:
+                //Prochaine ligne
+                x = x0;
+                y += ul_curFont->charHeight;
+                //Trop bas -> terminé
+                if (y + ul_curFont->charHeight > y1)
+                    return nb;
+                //Retour -> saute
+                if (*text == '\n')
+                    text++;
+                continue;
+            }
+            x += ul_curFont->charWidths[c];
+            text++;
+        }
+    }
+    else while(*text)
+        {
+            text++;
+            nb++;
+        }
+return nb;
+}
+
+
+#define DIALOGY0 128
+void DialogInBox(char* dialog,int speed)
+{
+    int i;
+    int offset=5*speed;
+    UL_IMAGE *box = ulLoadImageFilePNG((void*)textbox_png, (int)textbox_png_size, UL_IN_RAM, UL_PF_PAL4);
+    while(*dialog)//offset<((190-DIALOGY0)<<3))
+    {
+        offset++;
+        if (187<DIALOGY0+(offset/speed))
+        {
+            dialog+=TextBoxGetLineCharNb(3,190-(offset/speed),253,190,dialog);
+            offset-=8*speed;
+        }
+        ulStartDrawing2D();
+        myulDrawSpritesNoAnim();
+        myulDrawDialogBox(box);
+        ulDrawTextBox(3,190-(offset/speed),253,190,dialog,0);
+        ulEndDrawing();
+        PA_WaitForVBL();
+
+    }
+    ulDeleteImage(box);
+}
+
+
 
 void skillmenu(bool levelup)
 {
@@ -168,7 +252,8 @@ void skillmenu(bool levelup)
             ulSetDepth(3);
             ulPrintf_xy(skillx[i]+33,skilly[i]+24,"%i",skillsLevels[i]);
         }
-        ulPrintf_xy(130,1,"Points remaining : %i",skillpoints);
+        if (skillpoints)ulPrintf_xy(130,1,"Points remaining : %i",skillpoints);
+        else if (sortchoisi[0]==&nospell)ulPrintf_xy(1,1,"Please click to select your first skill");
         exitbtn->x=212;
         exitbtn->y=156;
         ulDrawImage(exitbtn);
@@ -190,21 +275,30 @@ void skillmenu(bool levelup)
                         skillpoints--;
                         //ulPrintf_xy(skillx[i]+33,skilly[i]+24,"%i",skillsLevels[i]);
                     }
-                    else if (skillsLevels[i]&&!(levelup&&skillpoints))
+                    else if (skillsLevels[i] && !(levelup&&skillpoints))
                     {
                         currentSkill[Pad.Held.L]=i;
                         cout_sort[Pad.Held.L]=FormulaManaCost(skillsLevels[i],fMana[i][0],fMana[i][1],fMana[i][2]);
-                        PA_OutputText(1,0,0,"%d",cout_sort[Pad.Held.L]);
                         skilldmg[i][0]=(FormulaDam(skillsLevels[i],fDam[i][0][0],fDam[i][0][1],fDam[i][0][2],fDam[i][0][3],fDam[i][0][4],fDam[i][0][5])>>1)*skillRatio[i];
                         skilldmg[i][1]=(FormulaDam(skillsLevels[i],fDam[i][1][0],fDam[i][1][1],fDam[i][1][2],fDam[i][1][3],fDam[i][1][4],fDam[i][1][5])>>1)*skillRatio[i];
                         sortchoisi[Pad.Held.L]=(void*)skillfunction[i];
                         PA_SetSpriteAnim(1, 3+Pad.Held.L, skillframe[i]);
                         i=SKILLNUMBER;
+                        if (sortchoisi[Pad.Held.L ^ 1]==&nospell) //check if other skill has been set (only useful at game start)
+                        {
+                            currentSkill[Pad.Held.L ^ 1] =currentSkill[Pad.Held.L];
+                            sortchoisi[Pad.Held.L ^ 1]   =sortchoisi[Pad.Held.L];
+                            cout_sort[Pad.Held.L ^ 1]    =cout_sort[Pad.Held.L];
+                            PA_SetSpriteAnim(1, 3+(Pad.Held.L^1), PA_GetSpriteAnimFrame(1,3+(Pad.Held.L)));
+                        }
                         endloop=1;
                     }
                     else AS_SoundDirectPlay(0,SOUND(Sor_cantuseyet));//AS_SoundQuickPlay((u8*)Sor_cantuseyet);
                 }
-                else if (Stylus.X>212&&Stylus.X<244&&Stylus.Y>156&&Stylus.Y<188) endloop=1;
+                else if (Stylus.X>212&&Stylus.X<244&&Stylus.Y>156&&Stylus.Y<188)
+                {
+                    if (sortchoisi[0]!=&nospell && sortchoisi[1]!=&nospell) endloop=1;
+                }
             }
         }
 

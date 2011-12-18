@@ -70,7 +70,7 @@ void Sort(int X,int Y)
 {
     if(cout_sort[Pad.Held.L] <=hero.stats.mana_restante )
     {
-        hero.skillperiod=60;
+        hero.skillperiod=50;
         hero.cooldown=200;
         u16 angle = PA_GetAngle(CHARMID_X,CHARMID_Y, X,Y);
         hero.direction=angle_dir(angle);

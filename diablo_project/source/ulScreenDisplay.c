@@ -207,7 +207,7 @@ inline void myulSetCycles (int sprite,int cycles)
 
 
 
-void myulScreenDraws(void)
+void myulScreenDraws()
 {
     ulStartDrawing2D();
 
@@ -282,7 +282,7 @@ void myulScreenDraws(void)
 
 }
 
-void myulDrawSpritesNoAnim ()
+void myulDrawSpritesNoAnim()
 {
     int i;
     ulSetDepth(0);
@@ -310,5 +310,7 @@ void myulDrawSpritesNoAnim ()
         }
     }
 }
+
+
 
 

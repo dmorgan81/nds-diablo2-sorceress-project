@@ -119,12 +119,17 @@ int main( int argc, char **argv)
 
 #ifdef Test
     s16 x,y;
+
+    DialogInBox("Welcome to the world of Sanctuary, sorceress.\nAs you may know, this land is, once again, struck by the Three.\n\n\
+I am the Archangel Tyrael. I came here to prevent Diablo from freeing his brother, Baal. But I have failed. Now, Terror and Destruction roam free throughout your world.\n\n\
+Even now, they head towards the Eastern capital of Kurast - to the very heart of the Zakarum Temple. There they hope to find their eldest brother, Mephisto, the Lord of Hatred who was imprisoned there ages ago.\n\n\
+If the three Prime Evils unite, they will be invincible. Though it is unclear as to what their aims are, it is certain that they must be stopped at all costs.\n\n\
+I am broken and the energies that tie me to this world are diminishing rapidly.\n\n\
+You must take up this quest and prevent the Three Brothers from reuniting. You must cross the sea and search for Diablo and Baal in Kurast.\n\n\
+Now hurry, mortal... Time is running out for all of us!\n",10);
 #endif
     skillmenu(1);
-    currentSkill[1] =currentSkill[0];
-    sortchoisi[1]   =sortchoisi[0];
-    cout_sort[1]    =cout_sort[0];
-    PA_SetSpriteAnim(1, 4, PA_GetSpriteAnimFrame(1,3));
+
     PA_WaitForVBL();
     PA_VBLCounterStart(2);
     while(1)
@@ -149,6 +154,7 @@ int main( int argc, char **argv)
 
                     newMissile(x, y, &missiles[objectnb],objectnb,dir_angle(3),256,-256,mdata[0].dommages, &mdata[0] );
                 }
+                DialogInBox("Voici un texte bidon pour un test dune fonction assez chiante qui commence a me gaver un peu trop",8);
             }
             //PA_OutputText(1,0,0,"%d",secondpast );
 

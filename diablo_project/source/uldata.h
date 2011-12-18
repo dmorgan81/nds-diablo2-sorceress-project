@@ -19,7 +19,7 @@
 #include "exit_png.h"
 #include "deathscreen_png.h"
 #include "levelup_png.h"
-
+#include "textbox_png.h"
 //objects/monsters
 #include "sorc_png.h"
 #include "tyr_body_png.h"
