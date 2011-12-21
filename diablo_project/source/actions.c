@@ -7,7 +7,7 @@ u8 currentSkill[2];
 u8 skillpoints=1;
 int lvlupicon=-1;
 int lvlUpIcnPressed=0;
-
+int MonBaseLife=1600;
 
 void CheckForLevelUp()
 {
@@ -15,9 +15,21 @@ void CheckForLevelUp()
     {
         hero.stats.nextlvl=hero.stats.nextlvl*(2.5/hero.stats.lvl)+hero.stats.nextlvl*.99; //curve is not that bad
         hero.stats.lvl++;
+        hero.stats.vitality++;
+        hero.stats.energy++;
+        hero.stats.lifeMax=2000+(hero.stats.vitality-1)*500;
+        hero.stats.mana_max=37+2*(hero.stats.energy-35);
+        hero.stats.curLife=hero.stats.lifeMax;
+        hero.stats.mana_restante=hero.stats.mana_max;
         skillpoints++;
+        MonBaseLife=40*(hero.stats.lvl+1)*(hero.stats.lvl+1)+1000*(hero.stats.lvl+1)-512; //fixed point *512 not 256
+
         PA_OutputText(1,20,1,"             ");
         PA_OutputText(1,20,1,"Next %d",hero.stats.nextlvl);
+        PA_OutputText(1,1,5,"Strenght   %d",hero.stats.strenght);
+        PA_OutputText(1,1,8,"Dexterity  %d",hero.stats.dexterity);
+        PA_OutputText(1,1,11,"Vitality   %d",hero.stats.vitality);
+        PA_OutputText(1,1,14,"Energy     %d",hero.stats.energy);
         if(hero.stats.lvl<10)PA_SetSpriteAnim(1, 0, hero.stats.lvl);
         else if (hero.stats.lvl==10)
         {
@@ -31,6 +43,7 @@ void CheckForLevelUp()
             PA_SetSpriteAnim(1, 0, hero.stats.lvl/10);
             PA_SetSpriteAnim(1, 5, hero.stats.lvl%10);
         }
+        if (hero.stats.lvl==5)DialogInBox("The waypoint in the southwest is now opened.\nYou can use it by pressing A button.\n\nGo forth, Hero, may the Heaven protect you.",8,0);
     }
     if (skillpoints)
     {
@@ -167,13 +180,13 @@ void firewall (int x,int y,u16 angle,u8 level)
 void hydra (int x,int y,u16 angle,u8 level)
 {
     int nb=getUnusedMissile(), dommages=PA_RandMinMax(skilldmg[currentSkill[Pad.Held.L]][0],skilldmg[currentSkill[Pad.Held.L]][1]);
-    newMissile(fix_norm(hero.x)+hero.hitbox.down.x+x-CAMERA_X-10, fix_norm(hero.y)+15+y-CAMERA_Y, &missiles[nb],nb,384,0,0,dommages, &mdata[4] );
+    newMissile(fix_norm(hero.x)+hero.hitbox.down.x+x-CAMERA_X-10, fix_norm(hero.y)+y-CAMERA_Y+7, &missiles[nb],nb,384,0,0,dommages, &mdata[4] );
     missiles[nb].variables=0;
     nb=getUnusedMissile();
-    newMissile(fix_norm(hero.x)+hero.hitbox.down.x+x-CAMERA_X-20, fix_norm(hero.y)+y-CAMERA_Y, &missiles[nb],nb,213,0,0,dommages, &mdata[4] );
+    newMissile(fix_norm(hero.x)+hero.hitbox.down.x+x-CAMERA_X, fix_norm(hero.y)+y-CAMERA_Y-8, &missiles[nb],nb,213,0,0,dommages, &mdata[4] );
     missiles[nb].variables=20;
     nb=getUnusedMissile();
-    newMissile(fix_norm(hero.x)+hero.hitbox.down.x+x-CAMERA_X+2, fix_norm(hero.y)+y-CAMERA_Y, &missiles[nb],nb,43,0,0,dommages, &mdata[4] );
+    newMissile(fix_norm(hero.x)+hero.hitbox.down.x+x-CAMERA_X-20, fix_norm(hero.y)+y-CAMERA_Y-8, &missiles[nb],nb,43,0,0,dommages, &mdata[4] );
     missiles[nb].variables=40;
 }
 

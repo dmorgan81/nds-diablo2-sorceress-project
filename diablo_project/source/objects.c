@@ -43,6 +43,7 @@ void initobjects (void)
     for(i=0; i<MAX_DATA; i++)
     {
         data[i].hitbox.middle.x=data[i].hitbox.down.x;
+        data[i].hitbox.middle.flipx=data[i].hitbox.down.flipx;
         data[i].hitbox.middle.y=data[i].hitbox.left.y;
     }
 //missiles data

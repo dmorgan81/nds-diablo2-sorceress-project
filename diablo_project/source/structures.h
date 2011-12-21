@@ -10,7 +10,7 @@ typedef struct hitboxinfo hitboxinfo;
 typedef struct frame frame;
 typedef struct statistiques statistiques;
 typedef struct charstruct charstruct;
-typedef struct spriteinfo spriteinfo;
+typedef struct sprite_columns sprite_columns;
 typedef struct spritedata spritedata;
 typedef struct spritestruct spritestruct;
 
@@ -47,10 +47,10 @@ struct frame
 
 struct statistiques
 {
-    u8 force;
-    u8 dexterite;
-    u8 vitalite;
-    u8 energie;
+    u8 strenght;
+    u8 dexterity;
+    u8 vitality;
+    u8 energy;
     u8 lvl ;
 
 
@@ -139,13 +139,18 @@ struct fx_data
     s8 x,y;
     hitboxinfo hitbox;
 };
-
+struct sprite_columns
+{
+    pointinfo offset,size;
+};
 
 struct spritedata
 {
     UL_IMAGE *image;
     u8 sizex, sizey;
+    sprite_columns *colInfo;
     u8 nbframe, framerate,cycles;
+    bool regular;
     int abcoeff;
     hitboxinfo hitbox;
 
@@ -157,9 +162,9 @@ struct spritestruct
     u8 startframe, endframe, framerate, column, cycles;
     u16 color;
     int sprite;//data number
-    int x,y,midx,midy,prio,abcoeff;//,angle;
+    int x,y,prio,abcoeff;//,angle,midx,midy;
     int animStage, frameNumber;
-
+    sprite_columns *colInfo;
     bool /*alphablended,*/ flippedh,flippedv, used;
 
 };

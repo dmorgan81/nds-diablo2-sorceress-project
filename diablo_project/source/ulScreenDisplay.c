@@ -2,16 +2,17 @@
 #include "uldata.h"
 int curMaxSprite;//same trick as in objects.c
 
+sprite_columns columns[50];
 
 void myulInitData (bool again)
 {
-
+    int i;
 #include "spritesdata.txt" //all data in txt file to avoid overload of the c file
 
     if (!again)//if its the first time we load images
     {
         //au cas ou
-        int i;
+
         for (i=0; i<MAX_SPRITES ; i++)
         {
             sprites[i].used=0;
@@ -60,6 +61,7 @@ int myulCreateSprite (u8 data,int x,int y, int prio)
         sprites[nb].frameNumber=0;
         sprites[nb].color=RGB15(31, 31, 31);
         sprites[nb].cycles=spritedatabase[data].cycles;
+        sprites[nb].colInfo=spritedatabase[data].colInfo;
         myulmyulSetSpritePrio( nb, prio);
         if (nb>curMaxSprite)curMaxSprite=nb;
     }
@@ -104,6 +106,7 @@ inline void myulImageFlip (int /*sprite*/nb,bool fliph,bool flipv)
 inline void myulImageColumn (int /*sprite*/nb,int column)
 {
     sprites[nb].column=column;
+    //sprites[nb].colInfo=spritedatabase[sprites[nb].sprite].colInfo+column;
 }
 /*
 inline void myulImageAngle(int nb,int angle,int x,int y)//change
@@ -222,12 +225,10 @@ void myulScreenDraws()
 #endif
     UL_IMAGE *spriteimage;
     int i;
-    int nb=0;
     for (i=0; i<=curMaxSprite ; i++)
     {
         if(sprites[i].used)
         {
-            nb++;
             if(sprites[i].framerate)
             {
                 sprites[i].frameNumber++;
@@ -262,10 +263,10 @@ void myulScreenDraws()
             //Tile to display
             ulSetImageTileSize (
                 spriteimage,
-                spritedatabase[sprites[i].sprite].sizex*sprites[i].column,																			//image, starting x
-                spritedatabase[sprites[i].sprite].sizey*(sprites[i].animStage+sprites[i].startframe),	//starting y : size*(frame+startframe)
-                spritedatabase[sprites[i].sprite].sizex,																// size x
-                spritedatabase[sprites[i].sprite].sizey);															// size y
+                sprites[i].colInfo->offset.x+(spritedatabase[sprites[i].sprite].regular*sprites[i].colInfo->size.x*sprites[i].column),																			//image, starting x
+                sprites[i].colInfo->size.y*(sprites[i].animStage+sprites[i].startframe),	//starting y : size*(frame+startframe)
+                sprites[i].colInfo->size.x,																// size x
+                sprites[i].colInfo->size.y);															// size y
 
             ulMirrorImageH( spriteimage, sprites[i].flippedh);
             ulMirrorImageV( spriteimage, sprites[i].flippedv);
@@ -282,25 +283,49 @@ void myulScreenDraws()
 
 }
 
-void myulDrawSpritesNoAnim()
+void myulDrawSprites(bool anim)
 {
     int i;
     ulSetDepth(0);
     ulDrawMap(Mymap);
+    UL_IMAGE *spriteimage;
     for (i=0; i<=curMaxSprite ; i++)
     {
         if(sprites[i].used)
         {
-            UL_IMAGE *spriteimage;
+            if(sprites[i].framerate&&anim)
+            {
+                sprites[i].frameNumber++;
+                if (sprites[i].frameNumber % sprites[i].framerate  == 0)
+                {
+                    if (!sprites[i].cycles) //loop
+                    {
+                        sprites[i].animStage = (sprites[i].animStage + 1) % (sprites[i].endframe-sprites[i].startframe) ;
+                    }
+                    else if (sprites[i].cycles>1)
+                    {
+                        sprites[i].animStage = (sprites[i].animStage + 1) % (sprites[i].endframe-sprites[i].startframe) ;
+                        sprites[i].cycles-=1;
+                    }
+                    else if (sprites[i].animStage+1==sprites[i].endframe)//can only be the last cycle so dont have to check it
+                    {
+                        sprites[i].framerate = 0;// no more animation, last frame is reached
+                    }
+                    else //keep doing animation while it doesnt reach last frame
+                    {
+                        sprites[i].animStage = (sprites[i].animStage + 1) % (sprites[i].endframe-sprites[i].startframe) ;
+                    }
+                }
+            }
             spriteimage=spritedatabase[sprites[i].sprite].image;
             spriteimage->x=sprites[i].x;
             spriteimage->y=sprites[i].y;
             ulSetImageTileSize (
                 spriteimage,
-                spritedatabase[sprites[i].sprite].sizex*sprites[i].column,																			//image, starting x
-                spritedatabase[sprites[i].sprite].sizey*(sprites[i].animStage+sprites[i].startframe),	//starting y : size*(frame+startframe)
-                spritedatabase[sprites[i].sprite].sizex,																// size x
-                spritedatabase[sprites[i].sprite].sizey);															// size y
+                sprites[i].colInfo->offset.x+(spritedatabase[sprites[i].sprite].regular*sprites[i].colInfo->size.x*sprites[i].column),																			//image, starting x
+                sprites[i].colInfo->size.y*(sprites[i].animStage+sprites[i].startframe),	//starting y : size*(frame+startframe)
+                sprites[i].colInfo->size.x,																// size x
+                sprites[i].colInfo->size.y);														// size y
             ulMirrorImageH( spriteimage, sprites[i].flippedh);
             ulMirrorImageV( spriteimage, sprites[i].flippedv);
             ulSetDepth(sprites[i].prio);

@@ -31,7 +31,7 @@ inline void myulmyulSetSpritePrio( int sprite, int prio);
 inline void myulSetCycles (int sprite,int cycles);
 
 void myulScreenDraws();
-void myulDrawSpritesNoAnim();
+void myulDrawSprites(bool anim);
 void myulDrawDialogBox();
 
 inline void myulSetSpriteAblending (int nb,int value);

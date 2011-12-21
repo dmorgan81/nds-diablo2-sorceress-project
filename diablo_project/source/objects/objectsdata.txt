@@ -1,69 +1,107 @@
-//tyrael
-    data[0].spritedata=1;
-    data[0].deathspritedata=-1;
-    data[0].ai=&immortal;
-    data[0].tile=0;
-    data[0].vx=0;
-    data[0].vy=0;
-    data[0].life=500000;
-    data[0].scroll=&objectscroll;
-    data[0].collision=&noai;
-    data[0].datanb=0;
-    data[0].hitbox.down.y=50;
-    data[0].hitbox.down.x=12;
-    data[0].hitbox.up.y=0;
-    data[0].hitbox.up.x=12;
-    data[0].hitbox.left.x=0;
-    data[0].hitbox.left.y=25;
-    data[0].hitbox.right.x=24;
-    data[0].hitbox.right.y=25;
-    data[0].fxdata[0]=0;
-    data[0].fxdata[1]=1;
-//zombie
-    data[1].spritedata=6;
-    data[1].deathspritedata=-1;
-    data[1].ai=&zombieAI;
-    data[1].tile=0;
-    data[1].vx=0;
-    data[1].vy=0;
-    data[1].life=7;
-    data[1].dommages=1;
-    data[1].exp=33;
-    data[1].scroll=&objectscroll;
-    data[1].collision=&zmCollision;
-    data[1].datanb=1;
-    data[1].hitbox.down.y=33;
-    data[1].hitbox.down.x=7;
-    data[1].hitbox.up.y=0;
-    data[1].hitbox.up.x=7;
-    data[1].hitbox.left.x=0;
-    data[1].hitbox.left.y=16;
-    data[1].hitbox.right.x=14;
-    data[1].hitbox.right.y=16;
-    data[1].fxdata[0]=-1;
-    data[1].fxdata[1]=-1;
+/*
+0 :tyrael
+1 :zombie
+2 :fallen
+3 :serpent
+*/
+//tyrael -- 0
+i=0;
+data[i].spritedata=1;
+data[i].deathspritedata=-1;
+data[i].ai=&immortal;
+data[i].tile=0;
+data[i].vx=0;
+data[i].vy=0;
+data[i].life=500000;
+data[i].scroll=&objectscroll;
+data[i].collision=&noai;
+data[i].datanb=i;
+data[i].hitbox.down.y=50;
+data[i].hitbox.down.x=12;
+data[i].hitbox.up.y=0;
+data[i].hitbox.up.x=12;
+data[i].hitbox.left.x=0;
+data[i].hitbox.left.y=25;
+data[i].hitbox.right.x=24;
+data[i].hitbox.right.y=25;
+data[i].fxdata[0]=0;
+data[i].fxdata[1]=1;
+//zombie -- 1
+i++;
+data[i].spritedata=6;
+data[i].deathspritedata=-1;
+data[i].ai=&zombieAI;
+data[i].tile=0;
+data[i].vx=0;
+data[i].vy=0;
+data[i].life=128;
+data[i].dommages=1;
+data[i].exp=33;
+data[i].scroll=&objectscroll;
+data[i].collision=&zmCollision;
+data[i].datanb=i;
+data[i].hitbox.down.y=33;
+data[i].hitbox.down.x=7;
+data[i].hitbox.up.y=0;
+data[i].hitbox.up.x=7;
+data[i].hitbox.left.x=0;
+data[i].hitbox.left.y=16;
+data[i].hitbox.right.x=14;
+data[i].hitbox.right.y=16;
+data[i].fxdata[0]=-1;
+data[i].fxdata[1]=-1;
 
 
-//fallen
-    data[2].spritedata=12;
-    data[2].deathspritedata=17;
-    data[2].ai=&meleeAI;
-    data[2].tile=0;
-    data[2].vx=0;
-    data[2].vy=0;
-    data[2].life=4;
-    data[2].dommages=100;
-    data[2].exp=18;
-    data[2].scroll=&objectscroll;
-    data[2].collision=&noai;
-    data[2].datanb=2;
-    data[2].hitbox.down.y=28;
-    data[2].hitbox.down.x=14;
-    data[2].hitbox.up.y=5;
-    data[2].hitbox.up.x=14;
-    data[2].hitbox.left.x=11;
-    data[2].hitbox.left.y=22;
-    data[2].hitbox.right.x=22;
-    data[2].hitbox.right.y=22;
-    data[2].fxdata[0]=-1;
-    data[2].fxdata[1]=-1;
+//fallen -- 2
+i++;
+data[i].spritedata=12;
+data[i].deathspritedata=17;
+data[i].ai=&meleeAI;
+data[i].tile=0;
+data[i].vx=0;
+data[i].vy=0;
+data[i].life=32;
+data[i].dommages=100;
+data[i].exp=18;
+data[i].scroll=&objectscroll;
+data[i].collision=&noai;
+data[i].datanb=i;
+data[i].hitbox.down.y=28;
+data[i].hitbox.down.x=14;
+data[i].hitbox.up.y=5;
+data[i].hitbox.up.x=14;
+data[i].hitbox.left.x=11;
+data[i].hitbox.left.y=22;
+data[i].hitbox.right.x=22;
+data[i].hitbox.right.y=22;
+data[i].fxdata[0]=-1;
+data[i].fxdata[1]=-1;
+
+//serpent -- 3
+i++;
+data[i].spritedata=19;
+data[i].deathspritedata=-1;
+data[i].ai=&meleeAI;
+data[i].tile=0;
+data[i].vx=0;
+data[i].vy=0;
+data[i].life=64;
+data[i].dommages=100;
+data[i].exp=18;
+data[i].scroll=&objectscroll;
+data[i].collision=&noai;
+data[i].datanb=i;
+data[i].hitbox.down.y=39;
+data[i].hitbox.down.x=47;
+data[i].hitbox.up.y=5;
+data[i].hitbox.up.x=47;
+data[i].hitbox.left.x=28;
+data[i].hitbox.left.y=22;
+data[i].hitbox.right.x=70;
+data[i].hitbox.right.y=22;
+data[i].hitbox.down.flipx=72-2*data[i].hitbox.down.x;
+data[i].hitbox.up.flipx=72-2*data[i].hitbox.up.x;
+data[i].hitbox.left.flipx=72-data[i].hitbox.right.x-data[i].hitbox.left.x;//origine changement, see collision fonction
+data[i].hitbox.right.flipx=72-data[i].hitbox.left.x-data[i].hitbox.right.x;
+data[i].fxdata[0]=-1;
+data[i].fxdata[1]=-1;

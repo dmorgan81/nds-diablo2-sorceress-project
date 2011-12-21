@@ -10,7 +10,7 @@
 //Includes PALib, µLibrary et headers
 #include "main.h"
 
-#define Test
+//#define Test
 //#define NOSPAWN
 #ifdef Test
 #define _NOSPLASH_ //quote this line to make splash appear
@@ -34,7 +34,8 @@ u8 old_time=0;
 bool secondpast=1;
 charstruct hero;
 extern void save();
-
+extern int currentMap;
+extern int MonBaseLife;
 ///////////////////////////////
 
 int main( int argc, char **argv)
@@ -52,8 +53,8 @@ int main( int argc, char **argv)
     hero.action=0;
     hero.vitesse=256;
     hero.vitesse2=181;//multiplie par 181 sois 1.7 en point fixe
-    hero.x=norm_fix(125);//80
-    hero.y=norm_fix(30);//40
+    hero.x=norm_fix(128);//80
+    hero.y=norm_fix(50);//40
 
 ///Hitboxinfos///
     hero.hitbox.left.x=11;
@@ -67,10 +68,10 @@ int main( int argc, char **argv)
     hero.hitbox.middle.x=16;
     hero.hitbox.middle.y=43;
 ///stats///
-    hero.stats.force=10;
-    hero.stats.dexterite=25;
-    hero.stats.vitalite=10;
-    hero.stats.energie=35;
+    hero.stats.strenght=10;
+    hero.stats.dexterity=25;
+    hero.stats.vitality=10;
+    hero.stats.energy=35;
     hero.stats.lifeMax=2000;
     hero.stats.curLife=(hero.stats.lifeMax);
     hero.stats.mana_max=35;
@@ -111,22 +112,37 @@ int main( int argc, char **argv)
 #endif
 
     int objectnb=getUnusedObject();
-    newObject(200, 64, &objects[objectnb],objectnb, &data[0],0);
-    objectnb=getUnusedObject();
-    newObject(100, 64, &objects[objectnb],objectnb, &data[2],0 );
+    newObject(80, -40, &objects[objectnb],objectnb, &data[0],0);
 
     int i=0;
-
+    Mymap->scrollX=fix_norm(hero.x)-CAMERA_X;
+    Mymap->scrollY=fix_norm(hero.y)-CAMERA_Y;
+    UpdateObjects();
 #ifdef Test
     s16 x,y;
+#endif
+#ifndef Test
+hero.direction=4;
+movechar();
+    for (i=0; i<280; i++)
+    {
+        UpdateObjects();
+        objects[objectnb].y+=64;
+        sprites[objects[objectnb].sprite].prio=100;
+        sprites[objects[objectnb].sprite].prio=100;
+        sprites[fxinfo[objects[objectnb].fx[0]].sprite].prio=100;
+        sprites[fxinfo[objects[objectnb].fx[1]].sprite].prio=100;
+        myulScreenDraws();
+        PA_WaitForVBL();
+    }
 
     DialogInBox("Welcome to the world of Sanctuary, sorceress.\nAs you may know, this land is, once again, struck by the Three.\n\n\
 I am the Archangel Tyrael. I came here to prevent Diablo from freeing his brother, Baal. But I have failed. Now, Terror and Destruction roam free throughout your world.\n\n\
 Even now, they head towards the Eastern capital of Kurast - to the very heart of the Zakarum Temple. There they hope to find their eldest brother, Mephisto, the Lord of Hatred who was imprisoned there ages ago.\n\n\
 If the three Prime Evils unite, they will be invincible. Though it is unclear as to what their aims are, it is certain that they must be stopped at all costs.\n\n\
-I am broken and the energies that tie me to this world are diminishing rapidly.\n\n\
+I am broken and the energys that tie me to this world are diminishing rapidly.\n\n\
 You must take up this quest and prevent the Three Brothers from reuniting. You must cross the sea and search for Diablo and Baal in Kurast.\n\n\
-Now hurry, mortal... Time is running out for all of us!\n",10);
+Now hurry, mortal... Time is running out for all of us!\n",10,1);
 #endif
     skillmenu(1);
 
@@ -136,12 +152,11 @@ Now hurry, mortal... Time is running out for all of us!\n",10);
     {
         while(hero.stats.curLife>0&&hero.stats.curLife<=hero.stats.lifeMax)
         {
+
             hero.cooldown=0;
             MajStats();
             movechar();
 #ifdef Test
-            PA_OutputText(1,1,7,"distance: %d      ",PA_Distance(fix_norm(objects[2].x)+objects[2].hitbox.down.x,fix_norm(objects[2].y)+objects[2].hitbox.down.y,fix_norm(hero.x)+hero.hitbox.down.x,fix_norm(hero.y)+hero.hitbox.down.y));
-
             objectnb=-1;
             if (Pad.Held.A)
             {
@@ -149,14 +164,12 @@ Now hurry, mortal... Time is running out for all of us!\n",10);
                 if (objectnb<MAX_MISSILE && objectnb!=-1)
                 {
 
-                    x=fix_norm(hero.x)+hero.hitbox.down.x;//PA_RandMax(400);
-                    y=fix_norm(hero.y)+hero.hitbox.right.y;//PA_RandMax(310);
+                    x=fix_norm(hero.x)+hero.hitbox.down.x;
+                    y=fix_norm(hero.y)+hero.hitbox.right.y;
 
                     newMissile(x, y, &missiles[objectnb],objectnb,dir_angle(3),256,-256,mdata[0].dommages, &mdata[0] );
                 }
-                DialogInBox("Voici un texte bidon pour un test dune fonction assez chiante qui commence a me gaver un peu trop",8);
             }
-            //PA_OutputText(1,0,0,"%d",secondpast );
 
             if (Pad.Held.Y)
             {
@@ -201,14 +214,22 @@ Now hurry, mortal... Time is running out for all of us!\n",10);
 
 
 #ifndef NOSPAWN
-            //zm spawning
+            //spawning
             if(!(PA_VBLCounter[2]&511))//secondpast)
             {
                 if (hero.stats.lvl<2)
                 {
                     objectnb=getUnusedObject();
-                    if (PA_RandMax(1)) newObject(PA_RandMinMax (128, 330),PA_RandMinMax (86, 286), &objects[objectnb],objectnb, &data[1],0 );
-                    else newObject(PA_RandMinMax (128, 330),PA_RandMinMax (86, 286), &objects[objectnb],objectnb, &data[2],0 );
+                    if (!PA_RandMax(2))
+                    {
+                        newObject(PA_RandMinMax (128, 330),PA_RandMinMax (86, 286), &objects[objectnb],objectnb, &data[1],0 );
+                        objects[objectnb].life=((MonBaseLife*data[1].life)/100+512)>>9;
+                    }
+                    else
+                    {
+                        newObject(PA_RandMinMax (128, 330),PA_RandMinMax (86, 286), &objects[objectnb],objectnb, &data[2+currentMap],0 );
+                        objects[objectnb].life=((MonBaseLife*data[2+currentMap].life)/100+512)>>9;
+                    }
                 }
                 else for(i=0; i<=(hero.stats.lvl>>1)+1; i++)
                     {
@@ -219,8 +240,16 @@ Now hurry, mortal... Time is running out for all of us!\n",10);
                             x=PA_RandMinMax (128, 330);
                             y=PA_RandMinMax (86, 286);
                         }
-                        if (PA_RandMax(1)) newObject(PA_RandMinMax (128, 330),PA_RandMinMax (86, 286), &objects[objectnb],objectnb, &data[1],0 );
-                        else newObject(PA_RandMinMax (128, 330),PA_RandMinMax (86, 286), &objects[objectnb],objectnb, &data[2],0 );
+                        if (!PA_RandMax(2))
+                        {
+                            newObject(PA_RandMinMax (128, 330),PA_RandMinMax (86, 286), &objects[objectnb],objectnb, &data[1],0 );
+                            objects[objectnb].life=((MonBaseLife*data[1].life)/100+512)>>9;
+                        }
+                        else
+                        {
+                            newObject(PA_RandMinMax (128, 330),PA_RandMinMax (86, 286), &objects[objectnb],objectnb, &data[2+currentMap],0 );
+                            objects[objectnb].life=((MonBaseLife*data[2+currentMap].life)/100+512)>>9;
+                        }
                     }
             }
 #endif
@@ -231,13 +260,16 @@ Now hurry, mortal... Time is running out for all of us!\n",10);
             }
 
             UpdateObjects();
-
-            if(Pad.Newpress.B)      load();
+            if(Pad.Newpress.B)
+            {
+                hero.stats.experience+=100;
+            }
+            //if(Pad.Newpress.B)      load();
             if(Pad.Newpress.Select)	skillmenu(0); //will be changed later, we cant firce player to levelup skills if they just want to switch
             if(Pad.Newpress.Start)
             {
                 pause(&Pad.Newpress.Start);
-                save();
+                //save();
             }
             CheckForLevelUp();
             PA_WaitForVBL();

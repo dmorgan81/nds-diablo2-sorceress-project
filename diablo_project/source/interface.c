@@ -54,7 +54,7 @@ void pause (u8 *quitcondition)//with booloean parameter checked at each frame
     while (!(*quitcondition))
     {
         ulStartDrawing2D();
-        myulDrawSpritesNoAnim ();
+        myulDrawSprites (0);
 
         ulSetDepth(255);
         glPolyFmt(POLY_ALPHA(31) | POLY_CULL_NONE | POLY_ID(0));
@@ -156,7 +156,7 @@ return nb;
 
 
 #define DIALOGY0 128
-void DialogInBox(char* dialog,int speed)
+void DialogInBox(char* dialog,int speed,bool anim)
 {
     int i;
     int offset=5*speed;
@@ -170,7 +170,7 @@ void DialogInBox(char* dialog,int speed)
             offset-=8*speed;
         }
         ulStartDrawing2D();
-        myulDrawSpritesNoAnim();
+        myulDrawSprites(anim);
         myulDrawDialogBox(box);
         ulDrawTextBox(3,190-(offset/speed),253,190,dialog,0);
         ulEndDrawing();

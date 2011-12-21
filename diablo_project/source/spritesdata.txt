@@ -1,15 +1,18 @@
 ///sorceress
+
+
     ulSetTransparentColor(RGB15(31, 0, 31));
     {
         spritedatabase[0].image = ulLoadImageFilePNG((void*)sorc_png, (int)sorc_png_size, UL_IN_RAM, UL_PF_PAL4);
     }
     spritedatabase[0].nbframe=5;
     spritedatabase[0].framerate=9;
-    spritedatabase[0].sizex=32;
-    spritedatabase[0].sizey=64;
+    columns[0].size.x=32;
+    columns[0].size.y=45;
     spritedatabase[0].abcoeff=31;
-
-
+    spritedatabase[0].colInfo=&columns[0];
+    spritedatabase[0].regular=1;
+// TODO (Clement#1#): Change sorc hitbox, y-=5
 ///Tyrael - body
     ulSetTransparentColor(RGB15(31, 0, 31));
     {
@@ -17,9 +20,11 @@
     }
     spritedatabase[1].nbframe=1;
     spritedatabase[1].framerate=30;//8;
-    spritedatabase[1].sizex=24;
-    spritedatabase[1].sizey=50;
+    columns[1].size.x=24;
+    columns[1].size.y=50;
     spritedatabase[1].abcoeff=31;
+    spritedatabase[1].colInfo=&columns[1];
+    spritedatabase[1].regular=1;
 ///Tyrael - wings
     ulSetTransparentColor(RGB15(31, 0, 31));
     {
@@ -27,9 +32,11 @@
     }
     spritedatabase[2].nbframe=3;
     spritedatabase[2].framerate=15;//8;
-    spritedatabase[2].sizex=96;
-    spritedatabase[2].sizey=70;
+    columns[2].size.x=96;
+    columns[2].size.y=60;
     spritedatabase[2].abcoeff=22;
+    spritedatabase[2].colInfo=&columns[2];
+    spritedatabase[2].regular=1;
 ///Firebolt
     ulSetTransparentColor(RGB15(31, 0, 31));
     {
@@ -37,9 +44,11 @@
     }
     spritedatabase[3].nbframe=2;
     spritedatabase[3].framerate=8;//8;
-    spritedatabase[3].sizex=32;
-    spritedatabase[3].sizey=16;
+    columns[3].size.x=32;
+    columns[3].size.y=16;
     spritedatabase[3].abcoeff=31;
+    spritedatabase[3].colInfo=&columns[3];
+    spritedatabase[3].regular=1;
 
 ///icebolt
     ulSetTransparentColor(RGB15(31, 0, 31));
@@ -48,10 +57,12 @@
     }
     spritedatabase[4].nbframe=2;
     spritedatabase[4].framerate=8;//8;
-    spritedatabase[4].sizex=32;
-    spritedatabase[4].sizey=16;
+    columns[4].size.x=32;
+    columns[4].size.y=16;
     spritedatabase[4].abcoeff=24;
-    ulSetTransparentColor(RGB15(31, 0, 31));
+    spritedatabase[4].colInfo=&columns[4];
+    spritedatabase[4].regular=1;
+
 ///iceorb
     ulSetTransparentColor(RGB15(31, 0, 31));
     {
@@ -59,9 +70,11 @@
     }
     spritedatabase[5].nbframe=2;
     spritedatabase[5].framerate=8;//8;
-    spritedatabase[5].sizex=16;
-    spritedatabase[5].sizey=16;
+    columns[5].size.x=16;
+    columns[5].size.y=16;
     spritedatabase[5].abcoeff=20;
+    spritedatabase[5].colInfo=&columns[5];
+    spritedatabase[5].regular=1;
 
 ///zombie
     ulSetTransparentColor(RGB15(31, 0, 31));
@@ -70,9 +83,11 @@
     }
     spritedatabase[6].nbframe=2;
     spritedatabase[6].framerate=8;//8;
-    spritedatabase[6].sizex=14;
-    spritedatabase[6].sizey=33;
+    columns[6].size.x=14;
+    columns[6].size.y=33;
     spritedatabase[6].abcoeff=31;
+    spritedatabase[6].colInfo=&columns[6];
+    spritedatabase[6].regular=1;
 
 ///firebig
     ulSetTransparentColor(RGB15(31, 0, 31));
@@ -81,9 +96,11 @@
     }
     spritedatabase[7].nbframe=10;
     spritedatabase[7].framerate=8;//8;
-    spritedatabase[7].sizex=32;
-    spritedatabase[7].sizey=67;
+    columns[7].size.x=32;
+    columns[7].size.y=67;
     spritedatabase[7].abcoeff=20;
+    spritedatabase[7].colInfo=&columns[7];
+    spritedatabase[7].regular=1;
 ///firesmall
     ulSetTransparentColor(RGB15(31, 0, 31));
     {
@@ -91,9 +108,11 @@
     }
     spritedatabase[8].nbframe=5;
     spritedatabase[8].framerate=8;//8;
-    spritedatabase[8].sizex=24;
-    spritedatabase[8].sizey=30;
+    columns[8].size.x=24;
+    columns[8].size.y=24;
     spritedatabase[8].abcoeff=25;
+    spritedatabase[8].colInfo=&columns[8];
+    spritedatabase[8].regular=1;
 ///hydra
     ulSetTransparentColor(RGB15(31, 0, 31));
     {
@@ -101,9 +120,11 @@
     }
     spritedatabase[9].nbframe=4;
     spritedatabase[9].framerate=8;//8;
-    spritedatabase[9].sizex=40;
-    spritedatabase[9].sizey=37;
+    columns[9].size.x=28;
+    columns[9].size.y=37;
     spritedatabase[9].abcoeff=31;
+    spritedatabase[9].colInfo=&columns[9];
+    spritedatabase[9].regular=1;
 
 
 ///tree
@@ -113,9 +134,11 @@
     }
     spritedatabase[10].nbframe=0;
     spritedatabase[10].framerate=0;//8;
-    spritedatabase[10].sizex=50;
-    spritedatabase[10].sizey=107;
+    columns[10].size.x=50;
+    columns[10].size.y=107;
     spritedatabase[10].abcoeff=31;
+    spritedatabase[10].colInfo=&columns[10];
+    spritedatabase[10].regular=1;
 
 ///fence
     ulSetTransparentColor(RGB15(31, 0, 31));
@@ -124,9 +147,11 @@
     }
     spritedatabase[11].nbframe=0;
     spritedatabase[11].framerate=0;//8;
-    spritedatabase[11].sizex=16;
-    spritedatabase[11].sizey=85;
+    columns[11].size.x=16;
+    columns[11].size.y=85;
     spritedatabase[11].abcoeff=31;
+    spritedatabase[11].colInfo=&columns[11];
+    spritedatabase[11].regular=1;
 
 ///Fallen
     ulSetTransparentColor(RGB15(31, 0, 31));
@@ -135,9 +160,11 @@
     }
     spritedatabase[12].nbframe=5;
     spritedatabase[12].framerate=8;//8;
-    spritedatabase[12].sizex=32;
-    spritedatabase[12].sizey=32;
+    columns[12].size.x=32;
+    columns[12].size.y=32;
     spritedatabase[12].abcoeff=31;
+    spritedatabase[12].colInfo=&columns[12];
+    spritedatabase[12].regular=1;
 
 ///small fire at wp
     ulSetTransparentColor(RGB15(31, 0, 31));
@@ -146,9 +173,11 @@
     }
     spritedatabase[13].nbframe=8;
     spritedatabase[13].framerate=8;//8;
-    spritedatabase[13].sizex=10;
-    spritedatabase[13].sizey=18;
+    columns[13].size.x=10;
+    columns[13].size.y=18;
     spritedatabase[13].abcoeff=31;
+    spritedatabase[13].colInfo=&columns[13];
+    spritedatabase[13].regular=1;
 
 ///chargedbolt
     ulSetTransparentColor(RGB15(31, 0, 31));
@@ -157,9 +186,11 @@
     }
     spritedatabase[14].nbframe=10;
     spritedatabase[14].framerate=3;//8;
-    spritedatabase[14].sizex=18;
-    spritedatabase[14].sizey=20;
+    columns[14].size.x=18;
+    columns[14].size.y=20;
     spritedatabase[14].abcoeff=25;
+    spritedatabase[14].colInfo=&columns[14];
+    spritedatabase[14].regular=1;
 
 
 ///torch
@@ -169,9 +200,11 @@
     }
     spritedatabase[15].nbframe=4;
     spritedatabase[15].framerate=8;//8;
-    spritedatabase[15].sizex=16;
-    spritedatabase[15].sizey=46;
+    columns[15].size.x=16;
+    columns[15].size.y=46;
     spritedatabase[15].abcoeff=28;
+    spritedatabase[15].colInfo=&columns[15];
+    spritedatabase[15].regular=1;
 
 ///rock
     ulSetTransparentColor(RGB15(31, 0, 31));
@@ -180,9 +213,11 @@
     }
     spritedatabase[16].nbframe=1;
     spritedatabase[16].framerate=0;//8;
-    spritedatabase[16].sizex=16;
-    spritedatabase[16].sizey=16;
+    columns[16].size.x=16;
+    columns[16].size.y=16;
     spritedatabase[16].abcoeff=31;
+    spritedatabase[16].colInfo=&columns[16];
+    spritedatabase[16].regular=1;
 
 ///fallen death
     ulSetTransparentColor(RGB15(31, 0, 31));
@@ -191,10 +226,12 @@
     }
     spritedatabase[17].nbframe=5;
     spritedatabase[17].framerate=8;//8;
-    spritedatabase[17].sizex=32;
-    spritedatabase[17].sizey=32;
+    columns[17].size.x=32;
+    columns[17].size.y=32;
     spritedatabase[17].abcoeff=31;
     spritedatabase[17].cycles=1;
+    spritedatabase[17].colInfo=&columns[17];
+    spritedatabase[17].regular=1;
 
 ///lvlup icon
     ulSetTransparentColor(RGB15(31, 0, 31));
@@ -203,7 +240,22 @@
     }
     spritedatabase[18].nbframe=2;
     spritedatabase[18].framerate=0;//8;
-    spritedatabase[18].sizex=24;
-    spritedatabase[18].sizey=24;
+    columns[18].size.x=24;
+    columns[18].size.y=24;
     spritedatabase[18].abcoeff=31;
+    spritedatabase[18].colInfo=&columns[18];
+    spritedatabase[18].regular=1;
 
+///serpent
+
+    ulSetTransparentColor(RGB15(31, 0, 31));
+    {
+        spritedatabase[19].image = ulLoadImageFilePNG((void*)serpent_png, (int)serpent_png_size, UL_IN_RAM, UL_PF_PAL4);
+    }
+    spritedatabase[19].nbframe=5;
+    spritedatabase[19].framerate=8;//8;
+    columns[19].size.x=72;
+    columns[19].size.y=44;
+    spritedatabase[19].abcoeff=31;
+    spritedatabase[19].colInfo=&columns[19];
+    spritedatabase[19].regular=1;

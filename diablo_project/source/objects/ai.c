@@ -75,29 +75,29 @@ void zombieAI(objectinfo* zombie)
 //change
 void meleeAI(objectinfo* melee)
 {
+    int distanceToSorc=(PA_Distance(fix_norm(melee->x)+melee->hitbox.down.x+melee->hitbox.flipped*melee->hitbox.down.flipx,fix_norm(melee->y)+melee->hitbox.down.y,fix_norm(hero.x)+hero.hitbox.down.x,fix_norm(hero.y)+hero.hitbox.down.y))>>4,
+                       movangle=PA_GetAngle(fix_norm(melee->x)+melee->hitbox.down.x+melee->hitbox.flipped*melee->hitbox.down.flipx,fix_norm(melee->y)+melee->hitbox.down.y,fix_norm(hero.x)+hero.hitbox.down.x,fix_norm(hero.y)+hero.hitbox.down.y);
     (melee->collision)(melee);
     melee->variables=100;
     if (melee->life > 0)
     {
         melee->lastdir=melee->dir;
         melee->lastaction=melee->action;
-        int movangle=PA_GetAngle(fix_norm(melee->x)+melee->hitbox.down.x,fix_norm(melee->y)+melee->hitbox.down.y,fix_norm(hero.x)+hero.hitbox.down.x,fix_norm(hero.y)+hero.hitbox.down.y);
+
 
 
         if (!(melee->cd%melee->variables))
         {
 
-            if (PA_Distance(fix_norm(melee->x)+melee->hitbox.down.x,fix_norm(melee->y)+melee->hitbox.down.y,fix_norm(hero.x)+hero.hitbox.down.x,fix_norm(hero.y)+hero.hitbox.down.y)<50)
+            if (distanceToSorc<melee->hitbox.right.x-melee->hitbox.left.x)
             {
                 //if in front of here, attack him
                 melee->action=2;
 // NOTE (Clement#1#): one hit only
                 myulSetCycles (melee->sprite,1);
-                PA_OutputText(1,20,4,"%d",melee->dommages);
                 hero.stats.curLife-=melee->dommages;
-                PA_OutputText(1,20,5,"%d",hero.stats.curLife);
             }
-            else if (PA_Distance(fix_norm(melee->x)+melee->hitbox.down.x,fix_norm(melee->y)+melee->hitbox.down.y,fix_norm(hero.x)+hero.hitbox.down.x,fix_norm(hero.y)+hero.hitbox.down.y)>7000 && !melee->status&S_ALARMED)
+            else if (distanceToSorc>7000 && !melee->status&S_ALARMED)
             {
                 //if too far and not alarmed, dont ignore here
                 melee->action=0;
@@ -121,7 +121,7 @@ void meleeAI(objectinfo* melee)
             melee->vy=0;
             break;
         case 1:
-            if (PA_Distance(fix_norm(melee->x)+melee->hitbox.down.x,fix_norm(melee->y)+melee->hitbox.down.y,fix_norm(hero.x)+hero.hitbox.down.x,fix_norm(hero.y)+hero.hitbox.down.y)<50)
+            if (distanceToSorc< melee->hitbox.right.x-melee->hitbox.left.x)
             {
                 melee->action=2;
             }
@@ -131,9 +131,6 @@ void meleeAI(objectinfo* melee)
         case 2:
             melee->vx=0;
             melee->vy=0;
-            PA_OutputText(1,20,6,"%d",myulGetSpriteAnim(melee->sprite));
-            PA_OutputText(1,20,7,"%d",spritedatabase[melee->spritedata].nbframe-1);
-            PA_OutputText(1,20,7,"%d",sprites[melee->sprite].cycles);
             if (myulGetSpriteAnim(melee->sprite)==(spritedatabase[melee->spritedata].nbframe-1)) melee->action=0;
 
             break;
@@ -167,7 +164,6 @@ void meleeAI(objectinfo* melee)
             melee->vy>>=1;
         }
     }
-// TODO (Clement#1#): add damages A FAIRE OBLIGATOIREMENT
 
 
     else

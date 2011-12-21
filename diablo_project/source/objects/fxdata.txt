@@ -1,7 +1,7 @@
 
     fxdata[0].spritedata=2;
     fxdata[0].x=7;
-    fxdata[0].y=-10;
+    fxdata[0].y=-17;
     fxdata[0].hitbox.right.x=96;
     fxdata[0].hitbox.left.x=0;
     fxdata[0].hitbox.up.y=2;
@@ -11,21 +11,21 @@
 
     fxdata[1].spritedata=2;
     fxdata[1].x=-80;
-    fxdata[1].y=-10;
+    fxdata[1].y=-17;
     fxdata[1].hitbox.right.x=96;
     fxdata[1].hitbox.left.x=0;
-    fxdata[1].hitbox.up.y=2;
-    fxdata[1].hitbox.down.y=66;
+    fxdata[1].hitbox.up.y=1;
+    fxdata[1].hitbox.down.y=60;
     fxdata[1].flippedh=1;
     fxdata[1].scroll=&FXscroll;
-
+//small fire hydra
     fxdata[2].spritedata=8;
-    fxdata[2].x=8;
-    fxdata[2].y=13;
+    fxdata[2].x=0;
+    fxdata[2].y=20;
     fxdata[2].hitbox.right.x=24;
     fxdata[2].hitbox.left.x=0;
-    fxdata[2].hitbox.up.y=3;
-    fxdata[2].hitbox.down.y=30;
+    fxdata[2].hitbox.up.y=0;
+    fxdata[2].hitbox.down.y=24;
     fxdata[2].flippedh=0;
     fxdata[2].scroll=&FXscroll;
 //tree

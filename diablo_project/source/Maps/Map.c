@@ -38,8 +38,8 @@ void changemap(u8 mapnb,bool reset)
         }
         mapTiles = ulLoadImageFilePNG((void*)map_png, (int)map_png_size, UL_IN_VRAM, UL_PF_PAL4);
         Mymap = ulCreateMap(mapTiles,/*Tileset*/map,8,8,/*Tiles size*/60,45,/*Map size*/UL_MF_U16);//Map format
-        hero.x=norm_fix(60);
-        hero.y=norm_fix(0);
+        hero.x=norm_fix(63);
+        hero.y=norm_fix(5);
         currentMap=0;
         break;
     case 1:

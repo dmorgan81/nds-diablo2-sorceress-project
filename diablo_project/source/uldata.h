@@ -28,6 +28,7 @@
 #include "hydra_png.h"
 #include "fallen_png.h"
 #include "fallendeath_png.h"
+#include "serpent_png.h"
 //missiles
 #include "firebolt_png.h"
 #include "icebolt_png.h"

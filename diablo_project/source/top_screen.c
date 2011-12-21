@@ -10,10 +10,10 @@ void InitTopScreen (void)
     PA_OutputText(1,7,1,"Exp %d",hero.stats.experience);
     PA_OutputText(1,20,1,"Next    %d",hero.stats.nextlvl);
     PA_OutputText(1,20,2,"Level");
-    PA_OutputText(1,1,5,"Force      %d",hero.stats.force);
-    PA_OutputText(1,1,8,"Dexterite  %d",hero.stats.dexterite);
-    PA_OutputText(1,1,11,"Vitalite   %d",hero.stats.vitalite);
-    PA_OutputText(1,1,14,"Energie    %d",hero.stats.energie);
+    PA_OutputText(1,1,5,"Strenght   %d",hero.stats.strenght);
+    PA_OutputText(1,1,8,"Dexterity  %d",hero.stats.dexterity);
+    PA_OutputText(1,1,11,"Vitality   %d",hero.stats.vitality);
+    PA_OutputText(1,1,14,"Energy     %d",hero.stats.energy);
     PA_SetTextTileCol(1, 1);
     PA_OutputText(1,7,17,"%d",hero.stats.resfire);
     PA_SetTextTileCol(1, 3);
