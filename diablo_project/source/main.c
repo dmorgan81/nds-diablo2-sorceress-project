@@ -122,8 +122,8 @@ int main( int argc, char **argv)
     s16 x,y;
 #endif
 #ifndef Test
-hero.direction=4;
-movechar();
+    hero.direction=4;
+    movechar();
     for (i=0; i<280; i++)
     {
         UpdateObjects();
@@ -170,18 +170,6 @@ Now hurry, mortal... Time is running out for all of us!\n",10,1);
                     newMissile(x, y, &missiles[objectnb],objectnb,dir_angle(3),256,-256,mdata[0].dommages, &mdata[0] );
                 }
             }
-
-            if (Pad.Held.Y)
-            {
-                changemap(0,1);
-            }
-            if (Pad.Held.X)
-            {
-                changemap(1,1);
-            }
-
-
-
 #endif
 
 
@@ -215,39 +203,45 @@ Now hurry, mortal... Time is running out for all of us!\n",10,1);
 
 #ifndef NOSPAWN
             //spawning
-            if(!(PA_VBLCounter[2]&511))//secondpast)
+            if(!(PA_VBLCounter[2]&511))
             {
                 if (hero.stats.lvl<2)
                 {
                     objectnb=getUnusedObject();
+                    int x=PA_RandMinMax (128+currentMap*50, 330+currentMap*500),y=PA_RandMinMax (86+currentMap*150, 286+currentMap*256);
+                    while (GetTile(x,y)>=NWALKABLETILE)
+                    {
+                        x=PA_RandMinMax (128+currentMap*50, 330+currentMap*500);
+                        y=PA_RandMinMax (86+currentMap*150, 286+currentMap*256);
+                    }
                     if (!PA_RandMax(2))
                     {
-                        newObject(PA_RandMinMax (128, 330),PA_RandMinMax (86, 286), &objects[objectnb],objectnb, &data[1],0 );
+                        newObject(x,y, &objects[objectnb],objectnb, &data[1],0 );
                         objects[objectnb].life=((MonBaseLife*data[1].life)/100+512)>>9;
                     }
                     else
                     {
-                        newObject(PA_RandMinMax (128, 330),PA_RandMinMax (86, 286), &objects[objectnb],objectnb, &data[2+currentMap],0 );
+                        newObject(x,y, &objects[objectnb],objectnb, &data[2+currentMap],0 );
                         objects[objectnb].life=((MonBaseLife*data[2+currentMap].life)/100+512)>>9;
                     }
                 }
                 else for(i=0; i<=(hero.stats.lvl>>1)+1; i++)
                     {
                         objectnb=getUnusedObject();
-                        int x=PA_RandMinMax (128, 330),y=PA_RandMinMax (86, 286);
+                        int x=PA_RandMinMax (128+currentMap*50, 330+currentMap*500),y=PA_RandMinMax (86+currentMap*150, 286+currentMap*256);
                         while (GetTile(x,y)>=NWALKABLETILE)
                         {
-                            x=PA_RandMinMax (128, 330);
-                            y=PA_RandMinMax (86, 286);
+                            x=PA_RandMinMax (128+currentMap*50, 330+currentMap*500);
+                            y=PA_RandMinMax (86+currentMap*150, 286+currentMap*256);
                         }
                         if (!PA_RandMax(2))
                         {
-                            newObject(PA_RandMinMax (128, 330),PA_RandMinMax (86, 286), &objects[objectnb],objectnb, &data[1],0 );
+                            newObject(x,y, &objects[objectnb],objectnb, &data[1],0 );
                             objects[objectnb].life=((MonBaseLife*data[1].life)/100+512)>>9;
                         }
                         else
                         {
-                            newObject(PA_RandMinMax (128, 330),PA_RandMinMax (86, 286), &objects[objectnb],objectnb, &data[2+currentMap],0 );
+                            newObject(x,y, &objects[objectnb],objectnb, &data[2+currentMap],0 );
                             objects[objectnb].life=((MonBaseLife*data[2+currentMap].life)/100+512)>>9;
                         }
                     }
@@ -260,17 +254,11 @@ Now hurry, mortal... Time is running out for all of us!\n",10,1);
             }
 
             UpdateObjects();
-            if(Pad.Newpress.B)
-            {
-                hero.stats.experience+=100;
-            }
-            //if(Pad.Newpress.B)      load();
+            if(Pad.Newpress.X) saveloadmenu(0);
+            if(Pad.Newpress.Y) saveloadmenu(1);
+            if(Pad.Newpress.B) hero.stats.experience+=100;
             if(Pad.Newpress.Select)	skillmenu(0); //will be changed later, we cant firce player to levelup skills if they just want to switch
-            if(Pad.Newpress.Start)
-            {
-                pause(&Pad.Newpress.Start);
-                //save();
-            }
+            if(Pad.Newpress.Start) pause(&Pad.Newpress.Start);
             CheckForLevelUp();
             PA_WaitForVBL();
         }

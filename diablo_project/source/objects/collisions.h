@@ -16,7 +16,6 @@ u8 anytelecollision(hitboxinfo hitbox,int x, int y);
 void CheckSorcCollisions(void);
 void mCollision(objectinfo* missile);
 void orbCollision(objectinfo* missile);
-void zmCollision(objectinfo* zombie);
 void CheckheroCollisions(void);
 
 

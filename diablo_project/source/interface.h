@@ -7,11 +7,16 @@
 #include "objects.h"
 #include "actions.h"
 #include "top_screen.h"
-
+#include "Maps/Map.h"
 void pause (u8 *quitcondition);
+void save();
+void load();
+void saveloadmenu(bool saveload);
+void waypointmenu(objectinfo* wp);
 void DialogInBox(char* dialog,int speed,bool anim);
 void skillmenu(bool levelup);
 void death();
+
 
 
 

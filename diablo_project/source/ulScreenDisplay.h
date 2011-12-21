@@ -32,7 +32,6 @@ inline void myulSetCycles (int sprite,int cycles);
 
 void myulScreenDraws();
 void myulDrawSprites(bool anim);
-void myulDrawDialogBox();
 
 inline void myulSetSpriteAblending (int nb,int value);
 inline void myulSetSpriteColor (int nb,u16 color);
@@ -43,8 +42,8 @@ inline int myulGetSpriteX (int nb);
 inline int myulGetSpriteY (int nb);
 inline int myulGetSpriteAnim (int nb);
 
-#define myulDrawDialogBox(IMAGE){\
-    ulSetDepth(3000);\
+#define myulDrawDialogBox(IMAGE,DIALOGY0){\
+    ulSetDepth(350);\
 \
     ulSetImageTileSize (IMAGE,0,0,8,8);\
 \
@@ -80,9 +79,9 @@ inline int myulGetSpriteAnim (int nb);
         ulDrawImage(IMAGE);\
     }\
     ulSetImageTileSize (IMAGE,0,16,8,8);\
-    for (i=0; i<6; i++)\
+    for (i=0; i<((192-DIALOGY0)>>3)-2; i++)\
     {\
-        IMAGE->y=136+(i<<3);\
+        IMAGE->y=DIALOGY0+8+(i<<3);\
         IMAGE->x=0;\
         ulMirrorImageH(IMAGE,0);\
         ulDrawImage(IMAGE);\
@@ -91,7 +90,8 @@ inline int myulGetSpriteAnim (int nb);
         ulDrawImage(IMAGE);\
     }\
     glPolyFmt(POLY_ALPHA(20) | POLY_CULL_NONE | POLY_ID(256));\
-    ulDrawFillRect(2,130,254,190,0x0421);\
+    ulDrawFillRect(2,DIALOGY0+2,254,190,0x0421);\
+    glPolyFmt(POLY_ALPHA(31) | POLY_CULL_NONE | POLY_ID(256));\
     }
 
 

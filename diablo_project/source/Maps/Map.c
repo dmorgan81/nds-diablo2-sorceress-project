@@ -7,7 +7,9 @@
 #include "../ulScreenDisplay.h"
 #include "../uldata.h"
 #include "../objects.h"
+#include "../interface.h"
 #include "Map.h"
+
 int currentMap;
 u16* map_col;
 void changemap(u8 mapnb,bool reset)
@@ -41,6 +43,14 @@ void changemap(u8 mapnb,bool reset)
         hero.x=norm_fix(63);
         hero.y=norm_fix(5);
         currentMap=0;
+
+        if (hero.stats.lvl<=5)
+        {
+            int objectnb;
+            objectnb=getUnusedBgObject();
+            newObject((46<<3)+4, (39<<3)+8, &bgobjects[objectnb],objectnb, &bgdata[2] ,1);
+            for (i=0;i<MAX_BGOBJECT;i++){if(bgobjects[i].datanb==2)bgobjects[i].ai=&waypointmenu;}
+        }
         break;
     case 1:
         if (reset)
@@ -67,6 +77,7 @@ void changemap(u8 mapnb,bool reset)
         hero.x=norm_fix(240);
         hero.y=norm_fix(430);
         currentMap=1;
+        for (i=0;i<MAX_BGOBJECT;i++){if(bgobjects[i].datanb==2)bgobjects[i].ai=&waypointmenu;}
         break;
     }
     for (i=1; i<MAX_DATASPRITES; i++)

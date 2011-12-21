@@ -82,20 +82,6 @@ u8 anytelecollision(hitboxinfo hitbox,int x, int y)
     else return 0;
 }
 
-
-
-void zmCollision(objectinfo* zombie)
-{
-    if(boxcollision (&zombie->hitbox,zombie->x,zombie->y,&hero.hitbox,hero.x,hero.y))
-    {
-
-        hero.stats.curLife-=zombie->dommages;
-//        PA_OutputText(1,0,0,"TOUCHEEEEEEEEEE %d",hero.stats.curLife,zombie->dommages);
-    }
-
-}
-
-
 void mCollision(objectinfo* missile)
 {
     u16 i;

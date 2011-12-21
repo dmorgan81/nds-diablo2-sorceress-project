@@ -1,6 +1,7 @@
 #ifndef _MAP_H
 #define _MAP_H
 
+int currentMap;
 u16* map_col;
 extern const unsigned short map[45][60];
 extern const unsigned short tilescollision_map[47][59];

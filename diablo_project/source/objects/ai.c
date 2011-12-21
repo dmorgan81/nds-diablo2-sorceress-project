@@ -46,6 +46,7 @@ void zombieAI(objectinfo* zombie)
     int movangle=PA_GetAngle(fix_norm(zombie->x)+zombie->hitbox.down.x,fix_norm(zombie->y)+zombie->hitbox.down.y,fix_norm(hero.x)+hero.hitbox.down.x,fix_norm(hero.y)+hero.hitbox.down.y);
     zombie->vx=PA_Cos(movangle)>>1;//make total move 0.5px per frame
     zombie->vy=-PA_Sin(movangle)>>1;
+    zombie->variables++;
     if (zombie->status&S_COLD)
     {
         zombie->color=0x6400;//RGB15(0,0,31);    //set color to blue and make half speed
@@ -67,6 +68,7 @@ void zombieAI(objectinfo* zombie)
     zombie->y+=zombie->vy;
 
     zombie->dir=angle_dir(movangle);
+    if(boxcollision (&zombie->hitbox,zombie->x,zombie->y,&hero.hitbox,hero.x,hero.y)&& !(zombie->variables&64)) hero.stats.curLife-=zombie->dommages;
     if (zombie->life < 1)
     {
         MobDeath(zombie,300);

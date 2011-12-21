@@ -8,7 +8,7 @@ bool dialbox=0;
 extern const unsigned short skillmenu_map[24][32];
 extern u8 skillsLevels[SKILLNUMBER];
 const u8 requiredLevel[SKILLNUMBER]= {1/*firebolt*/,1/*icebolt*/,15/*iceorb*/,5/*firewall*/,10/*blaze*/,15/*hydra*/,1/*chargedbolt*/,5/*teleport*/};
-
+extern int MonBaseLife;
 inline int FormulaDam(int lvl, int dam,int dam1,int dam2,int dam3,int dam4,int dam5)
 {
     if (lvl==1) return dam;
@@ -26,10 +26,11 @@ int FormulaManaCost(int lvl,int manashift,int mana,int lvlmana)
 }
 
 extern u8 skillpoints;
-void save ()
+
+void save()
 {
     FILE *save_file = fopen("fat:/d2save.sav", "wb");
-    if (!save_file)PA_OutputText(1,0,0,"Can't open save, emulator?");
+    if (!save_file)PA_OutputText(1,4,0,"Can't open save, emulator?");
     fwrite(&hero.stats, 1, sizeof(hero.stats), save_file);
     fwrite(&skillsLevels, 1, sizeof(skillsLevels), save_file);
     fwrite(&skillpoints, 1, sizeof(skillpoints), save_file);
@@ -39,12 +40,113 @@ void save ()
 void load()
 {
     FILE *save_file = fopen("fat:/d2save.sav", "rb");
-    if (!save_file)PA_OutputText(1,0,0,"Can't open save, emulator?");
+    if (!save_file)PA_OutputText(1,4,0,"Can't open save, emulator?");
     fread(&hero.stats, 1, sizeof(hero.stats), save_file);
     fread(&skillsLevels, 1, sizeof(skillsLevels), save_file);
     fread(&skillpoints, 1, sizeof(skillpoints), save_file);
     fclose(save_file);
+    PA_OutputText(1,20,1,"             ");
+    PA_OutputText(1,20,1,"Next %d",hero.stats.nextlvl);
+    PA_OutputText(1,1,5,"Strenght   %d",hero.stats.strenght);
+    PA_OutputText(1,1,8,"Dexterity  %d",hero.stats.dexterity);
+    PA_OutputText(1,1,11,"Vitality   %d",hero.stats.vitality);
+    PA_OutputText(1,1,14,"Energy     %d",hero.stats.energy);
+    hero.stats.curLife=hero.stats.lifeMax;
+    hero.stats.mana_restante=hero.stats.mana_max;
+    MonBaseLife=40*(hero.stats.lvl+1)*(hero.stats.lvl+1)+1000*(hero.stats.lvl+1)-512; //fixed point *512 not 256
+    if(hero.stats.lvl<10)PA_SetSpriteAnim(1, 0, hero.stats.lvl);
+    else if (hero.stats.lvl==10)
+    {
+        PA_CreateSprite(1,5,(void*)lvlfont_Sprite,OBJ_SIZE_32X32,1,0,	25, 0);
+        PA_SetSpriteXY(1,0,12,0);
+        PA_SetSpriteAnim(1, 0, 1);
+        PA_SetSpriteAnim(1, 5, 0);
+    }
+    else
+    {
+        PA_SetSpriteAnim(1, 0, hero.stats.lvl/10);
+        PA_SetSpriteAnim(1, 5, hero.stats.lvl%10);
+    }
+    if (currentMap) changemap(currentMap,1);
+    else if (hero.stats.lvl<=5)
+    {
+        int i, objectnb;
+        objectnb=getUnusedBgObject();
+        newObject((46<<3)+4, (39<<3)+8, &bgobjects[objectnb],objectnb, &bgdata[2] ,1);
+        for (i=0;i<MAX_BGOBJECT;i++){if(bgobjects[i].datanb==2)bgobjects[i].ai=&waypointmenu;}
+    }
+
 }
+
+void saveloadmenu(bool saveload)
+{
+    bool loop=1;
+    int i;
+    UL_IMAGE *box = ulLoadImageFilePNG((void*)textbox_png, (int)textbox_png_size, UL_IN_RAM, UL_PF_PAL4);
+    PA_WaitForVBL();
+    while (loop)
+    {
+        ulStartDrawing2D();
+        myulDrawSprites(0);
+        myulDrawDialogBox(box,168);
+        if(saveload)
+        {
+            ulDrawTextBox(3,171,253,190,"Press A button to load your saved progress or B to resume game.",0);
+            if (Pad.Newpress.A)
+            {
+                ulDrawTextBox(3,171,253,190,"Loading please wait...",0);
+                load();
+                loop=0;
+            }
+        }
+        else
+        {
+            ulDrawTextBox(3,171,253,190,"Press A button to save your progress or B to resume game.",0);
+            if (Pad.Newpress.A)
+            {
+                ulDrawTextBox(3,171,253,190,"Saving please wait...",0);
+                save();
+                loop=0;
+            }
+        }
+        ulEndDrawing();
+        if (Pad.Newpress.B) loop=0;
+        PA_WaitForVBL();
+    }
+    ulDeleteImage(box);
+}
+
+
+
+void waypointmenu(objectinfo* wp)
+{
+    if (GetTile(fix_norm(hero.x)+hero.hitbox.down.x,fix_norm(hero.y)+hero.hitbox.down.y)==1 && Pad.Newpress.A)
+    {
+        bool loop=1;
+        int i;
+        UL_IMAGE *box = ulLoadImageFilePNG((void*)textbox_png, (int)textbox_png_size, UL_IN_RAM, UL_PF_PAL4);
+        PA_WaitForVBL();
+        while (loop)
+        {
+            ulStartDrawing2D();
+            myulDrawSprites(0);
+            myulDrawDialogBox(box,168);
+
+            ulDrawTextBox(3,171,253,190,"Press A button to change map or B to resume game.",0);
+            if (Pad.Newpress.A)
+            {
+                ulDrawTextBox(3,171,253,190,"Loading please wait...",0);
+                changemap(!currentMap,1);
+                loop=0;
+            }
+            ulEndDrawing();
+            if (Pad.Newpress.B) loop=0;
+            PA_WaitForVBL();
+        }
+        ulDeleteImage(box);
+    }
+}
+
 void pause (u8 *quitcondition)//with booloean parameter checked at each frame
 {
 
@@ -78,26 +180,6 @@ void pause (u8 *quitcondition)//with booloean parameter checked at each frame
     ulDeleteImage (pentacle);
     ulDeleteImage (pausesprite);
 }
-/*
-
-void dialogbox()
-{
-
-    if (!dialbox)
-    {
-        //PA_ShowBg(0,1);
-        PA_EasyBgLoad(0, 1, dialog);
-        dialbox=1;
-    }
-    else if (dialbox)
-    {
-     PA_HideBg(0, 1);
-     dialbox=0;
-    }
-}
-*/
-
-// TODO (Clement#1#): Ajouter la gestion du texte ecran du bas semi transparant
 
 int TextBoxGetLineCharNb(int x0, int y0, int x1, int y1, const char *text)
 {
@@ -151,31 +233,29 @@ newline:
             text++;
             nb++;
         }
-return nb;
+    return nb;
 }
 
 
-#define DIALOGY0 128
 void DialogInBox(char* dialog,int speed,bool anim)
 {
     int i;
     int offset=5*speed;
     UL_IMAGE *box = ulLoadImageFilePNG((void*)textbox_png, (int)textbox_png_size, UL_IN_RAM, UL_PF_PAL4);
-    while(*dialog)//offset<((190-DIALOGY0)<<3))
+    while(*dialog&& !Pad.Newpress.Start)//offset<((190-DIALOGY0)<<3))
     {
-        offset++;
-        if (187<DIALOGY0+(offset/speed))
+        offset+=1+2*Pad.Held.B;
+        if (187<128+(offset/speed))
         {
             dialog+=TextBoxGetLineCharNb(3,190-(offset/speed),253,190,dialog);
             offset-=8*speed;
         }
         ulStartDrawing2D();
         myulDrawSprites(anim);
-        myulDrawDialogBox(box);
+        myulDrawDialogBox(box,128);
         ulDrawTextBox(3,190-(offset/speed),253,190,dialog,0);
         ulEndDrawing();
         PA_WaitForVBL();
-
     }
     ulDeleteImage(box);
 }
