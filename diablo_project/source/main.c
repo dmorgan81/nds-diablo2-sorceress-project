@@ -256,7 +256,9 @@ Now hurry, mortal... Time is running out for all of us!\n",10,1);
             UpdateObjects();
             if(Pad.Newpress.X) saveloadmenu(0);
             if(Pad.Newpress.Y) saveloadmenu(1);
+#ifdef Test
             if(Pad.Newpress.B) hero.stats.experience+=100;
+#endif
             if(Pad.Newpress.Select)	skillmenu(0); //will be changed later, we cant firce player to levelup skills if they just want to switch
             if(Pad.Newpress.Start) pause(&Pad.Newpress.Start);
             CheckForLevelUp();

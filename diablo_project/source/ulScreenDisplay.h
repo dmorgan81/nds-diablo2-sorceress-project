@@ -44,6 +44,7 @@ inline int myulGetSpriteAnim (int nb);
 
 #define myulDrawDialogBox(IMAGE,DIALOGY0){\
     ulSetDepth(350);\
+    glPolyFmt(POLY_ALPHA(31) | POLY_CULL_NONE | POLY_ID(256));\
 \
     ulSetImageTileSize (IMAGE,0,0,8,8);\
 \

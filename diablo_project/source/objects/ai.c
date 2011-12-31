@@ -68,7 +68,7 @@ void zombieAI(objectinfo* zombie)
     zombie->y+=zombie->vy;
 
     zombie->dir=angle_dir(movangle);
-    if(boxcollision (&zombie->hitbox,zombie->x,zombie->y,&hero.hitbox,hero.x,hero.y)&& !(zombie->variables&64)) hero.stats.curLife-=zombie->dommages;
+    if((boxcollision (&zombie->hitbox,zombie->x,zombie->y,&hero.hitbox,hero.x,hero.y))&& (!(zombie->variables&63))) hero.stats.curLife-=zombie->dommages;
     if (zombie->life < 1)
     {
         MobDeath(zombie,300);

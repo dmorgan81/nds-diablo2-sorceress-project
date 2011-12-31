@@ -44,7 +44,7 @@ void changemap(u8 mapnb,bool reset)
         hero.y=norm_fix(5);
         currentMap=0;
 
-        if (hero.stats.lvl<=5)
+        if (hero.stats.lvl>=5)
         {
             int objectnb;
             objectnb=getUnusedBgObject();

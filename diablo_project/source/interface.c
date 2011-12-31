@@ -39,6 +39,7 @@ void save()
 
 void load()
 {
+    int previouslvl=hero.stats.lvl;
     FILE *save_file = fopen("fat:/d2save.sav", "rb");
     if (!save_file)PA_OutputText(1,4,0,"Can't open save, emulator?");
     fread(&hero.stats, 1, sizeof(hero.stats), save_file);
@@ -55,25 +56,26 @@ void load()
     hero.stats.mana_restante=hero.stats.mana_max;
     MonBaseLife=40*(hero.stats.lvl+1)*(hero.stats.lvl+1)+1000*(hero.stats.lvl+1)-512; //fixed point *512 not 256
     if(hero.stats.lvl<10)PA_SetSpriteAnim(1, 0, hero.stats.lvl);
-    else if (hero.stats.lvl==10)
-    {
-        PA_CreateSprite(1,5,(void*)lvlfont_Sprite,OBJ_SIZE_32X32,1,0,	25, 0);
-        PA_SetSpriteXY(1,0,12,0);
-        PA_SetSpriteAnim(1, 0, 1);
-        PA_SetSpriteAnim(1, 5, 0);
-    }
     else
     {
+        if (previouslvl<10)
+        {
+            PA_CreateSprite(1,5,(void*)lvlfont_Sprite,OBJ_SIZE_32X32,1,0,	25, 0);
+            PA_SetSpriteXY(1,0,12,0);
+        }
         PA_SetSpriteAnim(1, 0, hero.stats.lvl/10);
         PA_SetSpriteAnim(1, 5, hero.stats.lvl%10);
     }
     if (currentMap) changemap(currentMap,1);
-    else if (hero.stats.lvl<=5)
+    else if (hero.stats.lvl>=5)
     {
         int i, objectnb;
         objectnb=getUnusedBgObject();
         newObject((46<<3)+4, (39<<3)+8, &bgobjects[objectnb],objectnb, &bgdata[2] ,1);
-        for (i=0;i<MAX_BGOBJECT;i++){if(bgobjects[i].datanb==2)bgobjects[i].ai=&waypointmenu;}
+        for (i=0; i<MAX_BGOBJECT; i++)
+        {
+            if(bgobjects[i].datanb==2)bgobjects[i].ai=&waypointmenu;
+        }
     }
 
 }
