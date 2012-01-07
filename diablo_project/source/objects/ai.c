@@ -78,7 +78,7 @@ void zombieAI(objectinfo* zombie)
 void meleeAI(objectinfo* melee)
 {
     int distanceToSorc=(PA_Distance(fix_norm(melee->x)+melee->hitbox.down.x+melee->hitbox.flipped*melee->hitbox.down.flipx,fix_norm(melee->y)+melee->hitbox.down.y,fix_norm(hero.x)+hero.hitbox.down.x,fix_norm(hero.y)+hero.hitbox.down.y))>>4,
-                       movangle=PA_GetAngle(fix_norm(melee->x)+melee->hitbox.down.x+melee->hitbox.flipped*melee->hitbox.down.flipx,fix_norm(melee->y)+melee->hitbox.down.y,fix_norm(hero.x)+hero.hitbox.down.x,fix_norm(hero.y)+hero.hitbox.down.y);
+                       movangle=PA_GetAngle(fix_norm(melee->x)+melee->hitbox.down.x+melee->hitbox.down.flipx/2,fix_norm(melee->y)+melee->hitbox.down.y,fix_norm(hero.x)+hero.hitbox.down.x,fix_norm(hero.y)+hero.hitbox.down.y);
     (melee->collision)(melee);
     melee->variables=100;
     if (melee->life > 0)
@@ -158,7 +158,8 @@ void meleeAI(objectinfo* melee)
         melee->y+=melee->vy;
         melee->cd++;
 
-        melee->dir=angle_dir(movangle);
+
+        if (((movangle+3)&63)>=5 || ulAbs(melee->lastdir-angle_dir(movangle))>=2 ) melee->dir=angle_dir(movangle);
         if (melee->status&S_COLD)
         {
             melee->color=0x7d86;//set color to blue and make half speed
