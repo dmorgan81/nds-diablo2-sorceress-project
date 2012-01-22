@@ -89,7 +89,7 @@ void CheckForLevelUp()
 
 void Sort(int X,int Y)
 {
-    if(cout_sort[Pad.Held.L] <=hero.stats.mana_restante )
+    if(cout_sort[Pad.Held.L] <=hero.stats.mana_restante && !lvlUpIcnPressed)
     {
         hero.skillperiod=50;
         hero.cooldown=200;
@@ -104,7 +104,7 @@ void Sort(int X,int Y)
         myulStartAnim (hero.sprite, 0, spritedatabase[0].nbframe,hero.skillperiod/spritedatabase[0].nbframe,1);//framerate according to skill period to match animation time
 
     }
-    else AS_SoundDirectPlay(0,SOUND(Sor_Ineedmana));//AS_SoundQuickPlay((u8*)Sor_Ineedmana);
+    else if(!lvlUpIcnPressed) AS_SoundDirectPlay(0,SOUND(Sor_Ineedmana));//AS_SoundQuickPlay((u8*)Sor_Ineedmana);
 }
 #include "firecast1.h"
 void nospell (int a, int b, u16 c,u8 d) {}

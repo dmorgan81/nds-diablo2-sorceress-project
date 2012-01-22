@@ -11,7 +11,7 @@
 		<Cursor position="19049" topLine="288" />
 	</File>
 	<File name="source\actions.c" open="0" top="0" tabpos="1">
-		<Cursor position="1341" topLine="21" />
+		<Cursor position="3925" topLine="86" />
 	</File>
 	<File name="source\defines.h" open="0" top="0" tabpos="3">
 		<Cursor position="575" topLine="10" />
@@ -20,13 +20,13 @@
 		<Cursor position="2635" topLine="0" />
 	</File>
 	<File name="source\interface.c" open="0" top="0" tabpos="2">
-		<Cursor position="2704" topLine="73" />
+		<Cursor position="3396" topLine="273" />
 	</File>
 	<File name="source\interface.h" open="0" top="0" tabpos="10">
 		<Cursor position="123" topLine="0" />
 	</File>
-	<File name="source\main.c" open="1" top="1" tabpos="6">
-		<Cursor position="817" topLine="24" />
+	<File name="source\main.c" open="1" top="1" tabpos="0">
+		<Cursor position="8759" topLine="242" />
 	</File>
 	<File name="source\main.h" open="0" top="0" tabpos="4">
 		<Cursor position="429" topLine="0" />
@@ -35,7 +35,7 @@
 		<Cursor position="5961" topLine="195" />
 	</File>
 	<File name="source\objects\ai.c" open="0" top="0" tabpos="0">
-		<Cursor position="2858" topLine="66" />
+		<Cursor position="5327" topLine="151" />
 	</File>
 	<File name="source\objects\bgobjects.c" open="0" top="0" tabpos="0">
 		<Cursor position="2665" topLine="95" />
@@ -62,7 +62,7 @@
 		<Cursor position="3867" topLine="90" />
 	</File>
 	<File name="source\structures.h" open="0" top="0" tabpos="6">
-		<Cursor position="1277" topLine="52" />
+		<Cursor position="1219" topLine="73" />
 	</File>
 	<File name="source\top_screen.c" open="0" top="0" tabpos="0">
 		<Cursor position="412" topLine="0" />

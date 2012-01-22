@@ -154,8 +154,6 @@ Now hurry, mortal... Time is running out for all of us!\n",10,1);
         {
 
             hero.cooldown=0;
-            MajStats();
-            movechar();
 #ifdef Test
             objectnb=-1;
             if (Pad.Held.A)
@@ -261,7 +259,9 @@ Now hurry, mortal... Time is running out for all of us!\n",10,1);
 #endif
             if(Pad.Newpress.Select)	skillmenu(0); //will be changed later, we cant firce player to levelup skills if they just want to switch
             if(Pad.Newpress.Start) pause(&Pad.Newpress.Start);
+            MajStats();
             CheckForLevelUp();
+            movechar();
             PA_WaitForVBL();
         }
         hero.stats.curLife=0;
