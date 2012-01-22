@@ -17,8 +17,8 @@ USE_EFS = YES
 LAUNCH_ROM_AFTER_BUILD = YES
 
 #arm7 included with this makefile
-include $(DEVKITPRO)/PAlib/lib/PA_Makefile2
-
+#include $(DEVKITPRO)/PAlib/lib/PA_Makefile2
+#ARM7BIN		:= -7 $(PAPATH)/lib/arm7/arm7.bin
 TEXT1 		:= Diablo Project
 TEXT2 		:= using PAlib-µLib
 TEXT3 		:= By Le Rodeur
@@ -89,7 +89,7 @@ PREFIX			:=	arm-eabi-
 #---------------------------------------------------------------------------------
 # any extra libraries we wish to link with the project
 #---------------------------------------------------------------------------------
-LIBS	:= -lul -lpa9 -lfilesystem -lpng -lz -lfat -lnds9
+LIBS	:= -lul -lfilesystem -lpng -lz -lfat -lnds9
  
  
 #---------------------------------------------------------------------------------

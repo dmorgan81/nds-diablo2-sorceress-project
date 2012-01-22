@@ -1,8 +1,9 @@
 #ifndef _ACTIONS_H
 #define _ACTIONS_H
 
-#include <PA9.h>
 #include <ulib/ulib.h>
+#include "PA_Math.h"
+
 #include "structures.h"
 #include "defines.h"
 #include "ulScreenDisplay.h"

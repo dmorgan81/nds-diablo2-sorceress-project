@@ -1,3 +1,5 @@
+#include "main.h"
+#include "misc.h"
 #include "interface.h"
 #include "uldata.h"
 #include "Sor_cantuseyet.h"
@@ -30,7 +32,7 @@ extern u8 skillpoints;
 void save()
 {
     FILE *save_file = fopen("fat:/d2save.sav", "wb");
-    if (!save_file)PA_OutputText(1,4,0,"Can't open save, emulator?");
+    if (!save_file)topPrintf(24,0,"Can't open save, emulator?");
     fwrite(&hero.stats, 1, sizeof(hero.stats), save_file);
     fwrite(&skillsLevels, 1, sizeof(skillsLevels), save_file);
     fwrite(&skillpoints, 1, sizeof(skillpoints), save_file);
@@ -41,32 +43,27 @@ void load()
 {
     int previouslvl=hero.stats.lvl;
     FILE *save_file = fopen("fat:/d2save.sav", "rb");
-    if (!save_file)PA_OutputText(1,4,0,"Can't open save, emulator?");
+    if (!save_file)topPrintf(0,0,"Can't open save, emulator?");
     fread(&hero.stats, 1, sizeof(hero.stats), save_file);
     fread(&skillsLevels, 1, sizeof(skillsLevels), save_file);
     fread(&skillpoints, 1, sizeof(skillpoints), save_file);
     fclose(save_file);
-    PA_OutputText(1,20,1,"             ");
-    PA_OutputText(1,20,1,"Next %d",hero.stats.nextlvl);
-    PA_OutputText(1,1,5,"Strenght   %d",hero.stats.strenght);
-    PA_OutputText(1,1,8,"Dexterity  %d",hero.stats.dexterity);
-    PA_OutputText(1,1,11,"Vitality   %d",hero.stats.vitality);
-    PA_OutputText(1,1,14,"Energy     %d",hero.stats.energy);
+    topDrawString(20*8,15,"           ");//erase current experience
+    topDrawString(7*8,15,"           ");
+    topPrintf(81,42,"    ");
+    topPrintf(81,66,"    ");
+    topPrintf(81,90,"    ");
+    topPrintf(81,114,"    ");
+    topPrintf(85,42,"%d",hero.stats.strenght);
+    topPrintf(85,66,"%d",hero.stats.dexterity);
+    topPrintf(85,90,"%d",hero.stats.vitality);
+    topPrintf(85,114,"%d",hero.stats.energy);
+    topUpdateLevel();
     hero.stats.curLife=hero.stats.lifeMax;
-    hero.stats.mana_restante=hero.stats.mana_max;
+    hero.stats.curMana=hero.stats.manaMax;
     MonBaseLife=40*(hero.stats.lvl+1)*(hero.stats.lvl+1)+1000*(hero.stats.lvl+1)-512; //fixed point *512 not 256
-    if(hero.stats.lvl<10)PA_SetSpriteAnim(1, 0, hero.stats.lvl);
-    else
-    {
-        if (previouslvl<10)
-        {
-            PA_CreateSprite(1,5,(void*)lvlfont_Sprite,OBJ_SIZE_32X32,1,0,	25, 0);
-            PA_SetSpriteXY(1,0,12,0);
-        }
-        PA_SetSpriteAnim(1, 0, hero.stats.lvl/10);
-        PA_SetSpriteAnim(1, 5, hero.stats.lvl%10);
-    }
-    if (currentMap) changemap(currentMap,1);
+
+    if (currentMap) changemap(currentMap);
     else if (hero.stats.lvl>=5)
     {
         int i, objectnb;
@@ -85,7 +82,7 @@ void saveloadmenu(bool saveload)
     bool loop=1;
     int i;
     UL_IMAGE *box = ulLoadImageFilePNG((void*)textbox_png, (int)textbox_png_size, UL_IN_RAM, UL_PF_PAL4);
-    PA_WaitForVBL();
+    WaitForVBL();
     while (loop)
     {
         ulStartDrawing2D();
@@ -94,7 +91,7 @@ void saveloadmenu(bool saveload)
         if(saveload)
         {
             ulDrawTextBox(3,171,253,190,"Press A button to load your saved progress or B to resume game.",0);
-            if (Pad.Newpress.A)
+            if (ul_keys.pressed.A)
             {
                 ulDrawTextBox(3,171,253,190,"Loading please wait...",0);
                 load();
@@ -104,7 +101,7 @@ void saveloadmenu(bool saveload)
         else
         {
             ulDrawTextBox(3,171,253,190,"Press A button to save your progress or B to resume game.",0);
-            if (Pad.Newpress.A)
+            if (ul_keys.pressed.A)
             {
                 ulDrawTextBox(3,171,253,190,"Saving please wait...",0);
                 save();
@@ -112,8 +109,8 @@ void saveloadmenu(bool saveload)
             }
         }
         ulEndDrawing();
-        if (Pad.Newpress.B) loop=0;
-        PA_WaitForVBL();
+        if (ul_keys.pressed.B) loop=0;
+        WaitForVBL();
     }
     ulDeleteImage(box);
 }
@@ -122,12 +119,12 @@ void saveloadmenu(bool saveload)
 
 void waypointmenu(objectinfo* wp)
 {
-    if (GetTile(fix_norm(hero.x)+hero.hitbox.down.x,fix_norm(hero.y)+hero.hitbox.down.y)==1 && Pad.Newpress.A)
+    if (GetTile(fix_norm(hero.x)+hero.hitbox.down.x,fix_norm(hero.y)+hero.hitbox.down.y)==1 && ul_keys.pressed.A)
     {
         bool loop=1;
         int i;
         UL_IMAGE *box = ulLoadImageFilePNG((void*)textbox_png, (int)textbox_png_size, UL_IN_RAM, UL_PF_PAL4);
-        PA_WaitForVBL();
+        WaitForVBL();
         while (loop)
         {
             ulStartDrawing2D();
@@ -135,27 +132,28 @@ void waypointmenu(objectinfo* wp)
             myulDrawDialogBox(box,168);
 
             ulDrawTextBox(3,171,253,190,"Press A button to change map or B to resume game.",0);
-            if (Pad.Newpress.A)
+            if (ul_keys.pressed.A)
             {
                 ulDrawTextBox(3,171,253,190,"Loading please wait...",0);
-                changemap(!currentMap,1);
+                changemap(!currentMap);
                 loop=0;
             }
             ulEndDrawing();
-            if (Pad.Newpress.B) loop=0;
-            PA_WaitForVBL();
+            if (ul_keys.pressed.B) loop=0;
+            WaitForVBL();
         }
         ulDeleteImage(box);
     }
 }
 
-void pause (u8 *quitcondition)//with booloean parameter checked at each frame
+void pause ()//with booloean parameter checked at each frame
 {
-
+    PA_VBLCounterPause(1);
+    WaitForVBL();
     int frameNumber=0, animStage=0;
     UL_IMAGE *pentacle = ulLoadImageFilePNG((void*)pentacle_png, (int)pentacle_png_size, UL_IN_RAM, UL_PF_PAL4),
                          *pausesprite = ulLoadImageFilePNG((void*)pause_png, (int)pause_png_size, UL_IN_RAM, UL_PF_PAL2);
-    while (!(*quitcondition))
+    while (!(PAUSEKEY))
     {
         ulStartDrawing2D();
         myulDrawSprites (0);
@@ -177,10 +175,11 @@ void pause (u8 *quitcondition)//with booloean parameter checked at each frame
         ulDrawImage(pentacle);
         ulDrawImage(pausesprite);
         ulEndDrawing();
-        PA_WaitForVBL();
+        WaitForVBL();
     }
     ulDeleteImage (pentacle);
     ulDeleteImage (pausesprite);
+    PA_VBLCounterStart(0);
 }
 
 int TextBoxGetLineCharNb(int x0, int y0, int x1, int y1, const char *text)
@@ -244,9 +243,9 @@ void DialogInBox(char* dialog,int speed,bool anim)
     int i;
     int offset=5*speed;
     UL_IMAGE *box = ulLoadImageFilePNG((void*)textbox_png, (int)textbox_png_size, UL_IN_RAM, UL_PF_PAL4);
-    while(*dialog&& !Pad.Newpress.Start)//offset<((190-DIALOGY0)<<3))
+    while(*dialog&& !ul_keys.pressed.start)//offset<((190-DIALOGY0)<<3))
     {
-        offset+=1+2*Pad.Held.B;
+        offset+=1+2*ul_keys.held.B;
         if (187<128+(offset/speed))
         {
             dialog+=TextBoxGetLineCharNb(3,190-(offset/speed),253,190,dialog);
@@ -257,7 +256,7 @@ void DialogInBox(char* dialog,int speed,bool anim)
         myulDrawDialogBox(box,128);
         ulDrawTextBox(3,190-(offset/speed),253,190,dialog,0);
         ulEndDrawing();
-        PA_WaitForVBL();
+        WaitForVBL();
     }
     ulDeleteImage(box);
 }
@@ -343,12 +342,14 @@ void skillmenu(bool levelup)
 
 
 
-        PA_WaitForVBL();
-        if(Stylus.Newpress)
+        WaitForVBL();
+
+        if(ul_keys.touch.click)
         {
+
             for(i=0; i<SKILLNUMBER; i++)
             {
-                if(Stylus.X>skillx[i]&&Stylus.X<(skillx[i]+32)&&Stylus.Y>skilly[i]&&Stylus.Y<(skilly[i]+32))
+                if(ul_keys.touch.x>skillx[i]&&ul_keys.touch.x<(skillx[i]+32)&&ul_keys.touch.y>skilly[i]&&ul_keys.touch.y<(skilly[i]+32))
                 {
                     if (levelup&&skillpoints&&(hero.stats.lvl>=requiredLevel[i]))
                     {
@@ -359,25 +360,25 @@ void skillmenu(bool levelup)
                     }
                     else if (skillsLevels[i] && !(levelup&&skillpoints))
                     {
-                        currentSkill[Pad.Held.L]=i;
-                        cout_sort[Pad.Held.L]=FormulaManaCost(skillsLevels[i],fMana[i][0],fMana[i][1],fMana[i][2]);
+                        currentSkill[ul_keys.held.L]=i;
+                        cout_sort[ul_keys.held.L]=FormulaManaCost(skillsLevels[i],fMana[i][0],fMana[i][1],fMana[i][2]);
                         skilldmg[i][0]=(FormulaDam(skillsLevels[i],fDam[i][0][0],fDam[i][0][1],fDam[i][0][2],fDam[i][0][3],fDam[i][0][4],fDam[i][0][5])>>1)*skillRatio[i];
                         skilldmg[i][1]=(FormulaDam(skillsLevels[i],fDam[i][1][0],fDam[i][1][1],fDam[i][1][2],fDam[i][1][3],fDam[i][1][4],fDam[i][1][5])>>1)*skillRatio[i];
-                        sortchoisi[Pad.Held.L]=(void*)skillfunction[i];
-                        PA_SetSpriteAnim(1, 3+Pad.Held.L, skillframe[i]);
+                        sortchoisi[ul_keys.held.L]=(void*)skillfunction[i];
+//                        PA_SetSpriteAnim(1, 3+ul_keys.held.L, skillframe[i]);
                         i=SKILLNUMBER;
-                        if (sortchoisi[Pad.Held.L ^ 1]==&nospell) //check if other skill has been set (only useful at game start)
+                        if (sortchoisi[ul_keys.held.L ^ 1]==&nospell) //check if other skill has been set (only useful at game start)
                         {
-                            currentSkill[Pad.Held.L ^ 1] =currentSkill[Pad.Held.L];
-                            sortchoisi[Pad.Held.L ^ 1]   =sortchoisi[Pad.Held.L];
-                            cout_sort[Pad.Held.L ^ 1]    =cout_sort[Pad.Held.L];
-                            PA_SetSpriteAnim(1, 3+(Pad.Held.L^1), PA_GetSpriteAnimFrame(1,3+(Pad.Held.L)));
+                            currentSkill[ul_keys.held.L ^ 1] =currentSkill[ul_keys.held.L];
+                            sortchoisi[ul_keys.held.L ^ 1]   =sortchoisi[ul_keys.held.L];
+                            cout_sort[ul_keys.held.L ^ 1]    =cout_sort[ul_keys.held.L];
+//                            PA_SetSpriteAnim(1, 3+(ul_keys.held.L^1), PA_GetSpriteAnimFrame(1,3+(ul_keys.held.L)));
                         }
                         endloop=1;
                     }
-                    else AS_SoundDirectPlay(0,SOUND(Sor_cantuseyet));//AS_SoundQuickPlay((u8*)Sor_cantuseyet);
+//                    else AS_SoundDirectPlay(0,SOUND(Sor_cantuseyet));//AS_SoundQuickPlay((u8*)Sor_cantuseyet);
                 }
-                else if (Stylus.X>212&&Stylus.X<244&&Stylus.Y>156&&Stylus.Y<188)
+                else if (ul_keys.touch.x>212&&ul_keys.touch.x<244&&ul_keys.touch.y>156&&ul_keys.touch.y<188)
                 {
                     if (sortchoisi[0]!=&nospell && sortchoisi[1]!=&nospell) endloop=1;
                 }
@@ -393,6 +394,7 @@ void skillmenu(bool levelup)
     ulDeleteImage   (skillTiles);
     ulDeleteImage   (exitbtn);
     ulDeleteMap     (skillbg);
+    WaitForVBL();
 }
 
 
@@ -413,8 +415,8 @@ void death()
     ulSetDepth(0);
     ulDrawImage(deathscreen);
     ulEndDrawing();
-    PA_WaitForVBL();
-    while (!(Pad.Newpress.Anykey||Stylus.Newpress))PA_WaitForVBL();
+    WaitForVBL();
+    while (!(ul_keys.pressed.value||ul_keys.touch.click))WaitForVBL();
 
     ulDeleteImage(deathscreen);
     hero.stats.curLife=hero.stats.lifeMax;
@@ -424,6 +426,6 @@ void death()
     }
     QuickTopScreenRefresh();
     myulInitData(1);
-    changemap(currentMap,1);
+    changemap(currentMap);
 }
 

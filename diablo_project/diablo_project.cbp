@@ -70,6 +70,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="source\main.h" />
+		<Unit filename="source\misc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source\misc.h" />
 		<Unit filename="source\objects.c">
 			<Option compilerVar="CC" />
 		</Unit>

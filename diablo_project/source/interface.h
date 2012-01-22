@@ -8,7 +8,7 @@
 #include "actions.h"
 #include "top_screen.h"
 #include "Maps/Map.h"
-void pause (u8 *quitcondition);
+void pause ();
 void save();
 void load();
 void saveloadmenu(bool saveload);

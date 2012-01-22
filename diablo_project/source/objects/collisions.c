@@ -51,13 +51,13 @@ u8 feetcollision(hitboxinfo* hitbox,int x, int y) // objectinfo* object
 bool boxcollision(hitboxinfo* hitbox1,s32 x1,s32 y1,hitboxinfo* hitbox2,s32 x2,s32 y2) /*s32 x2, s32 y2, u8 h2, u8 w2*/
 {
     int X1=fix_norm(x1)+hitbox1->middle.x   + hitbox1->middle.flipx*hitbox1->flipped,//avoid calculating 2 times the same thing
-    Y1=fix_norm(y1)+hitbox1->middle.y,
-    X2=fix_norm(x2)+hitbox2->middle.x       + hitbox2->middle.flipx*hitbox2->flipped,
-    Y2=fix_norm(y2)+hitbox2->middle.y,
-    SizeX=hitbox1->right.x-hitbox1->left.x +  hitbox2->right.x-hitbox2->left.x,
-    SizeY=hitbox1->down.y-hitbox1->up.y   +   hitbox2->down.y-hitbox2->up.y;
+           Y1=fix_norm(y1)+hitbox1->middle.y,
+              X2=fix_norm(x2)+hitbox2->middle.x       + hitbox2->middle.flipx*hitbox2->flipped,
+                 Y2=fix_norm(y2)+hitbox2->middle.y,
+                    SizeX=hitbox1->right.x-hitbox1->left.x +  hitbox2->right.x-hitbox2->left.x,
+                          SizeY=hitbox1->down.y-hitbox1->up.y   +   hitbox2->down.y-hitbox2->up.y;
     if(
-            (X1 >= (X2 - (SizeX>>1))    )
+        (X1 >= (X2 - (SizeX>>1))    )
         &&  (X1 <= (X2 + (SizeX>>1))    )
         &&  (Y1 >= (Y2 - (SizeY>>1))  )
         &&  (Y1 <= (Y2 + (SizeY>>1))    )

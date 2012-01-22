@@ -61,8 +61,8 @@ struct statistiques
 
     u16 lifeMax;
     u16 curLife;
-    u16 mana_max;
-    u16 mana_restante;
+    u16 manaMax;
+    u16 curMana;
     u16 dmg;
 
     u32 experience;

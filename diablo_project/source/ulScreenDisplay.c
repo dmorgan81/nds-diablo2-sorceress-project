@@ -23,9 +23,9 @@ void myulInitData (bool again)
         }
     }
     //la map
-    mapTiles = ulLoadImageFilePNG((void*)map_png, (int)map_png_size, UL_IN_VRAM, UL_PF_PAL4);
-    Mymap = ulCreateMap(mapTiles,/*Tileset*/map,8,8,/*Tiles size*/60,45,/*Map size*/UL_MF_U16);//Map format
-    map_col=tilescollision_map;
+    //mapTiles = ulLoadImageFilePNG((void*)map_png, (int)map_png_size, UL_IN_VRAM, UL_PF_PAL4);
+    //Mymap = ulCreateMap(mapTiles,/*Tileset*/map,8,8,/*Tiles size*/60,45,/*Map size*/UL_MF_U16);//Map format
+    //map_col=tilescollision_map;
     ulSetAutoDepth(0);
 
 }
@@ -62,12 +62,12 @@ int myulCreateSprite (u8 data,int x,int y, int prio)
         sprites[nb].color=RGB15(31, 31, 31);
         sprites[nb].cycles=spritedatabase[data].cycles;
         sprites[nb].colInfo=spritedatabase[data].colInfo;
-        myulmyulSetSpritePrio( nb, prio);
+        myulSetSpritePrio( nb, prio);
         if (nb>curMaxSprite)curMaxSprite=nb;
     }
     else
     {
-        PA_OutputText(1,15,17,"SPRITES LIMIT REACHED");
+        //PA_OutputText(1,15,17,"SPRITES LIMIT REACHED");
     }
     return nb;
 }
@@ -192,7 +192,7 @@ inline void myulDefaultAnim (int spritenb)
     sprites[spritenb].cycles=0;
 }
 
-inline void myulmyulSetSpritePrio( int sprite, int prio)
+inline void myulSetSpritePrio( int sprite, int prio)
 {
     sprites[sprite].prio = prio;
 }
@@ -278,9 +278,8 @@ void myulScreenDraws()
 
         }
     }
+    //ulPrintf_xy(0,0,"%d",PA_VBLCounter[0]);
     ulEndDrawing();
-    ulEndFrame();
-
 }
 
 void myulDrawSprites(bool anim)

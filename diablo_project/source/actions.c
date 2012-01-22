@@ -18,31 +18,22 @@ void CheckForLevelUp()
         hero.stats.vitality++;
         hero.stats.energy++;
         hero.stats.lifeMax=2000+(hero.stats.vitality-1)*500;
-        hero.stats.mana_max=37+2*(hero.stats.energy-35);
+        hero.stats.manaMax=37+2*(hero.stats.energy-35);
         hero.stats.curLife=hero.stats.lifeMax;
-        hero.stats.mana_restante=hero.stats.mana_max;
+        hero.stats.curMana=hero.stats.manaMax;
         skillpoints++;
         MonBaseLife=40*(hero.stats.lvl+1)*(hero.stats.lvl+1)+1000*(hero.stats.lvl+1)-512; //fixed point *512 not 256
-
-        PA_OutputText(1,20,1,"             ");
-        PA_OutputText(1,20,1,"Next %d",hero.stats.nextlvl);
-        PA_OutputText(1,1,5,"Strenght   %d",hero.stats.strenght);
-        PA_OutputText(1,1,8,"Dexterity  %d",hero.stats.dexterity);
-        PA_OutputText(1,1,11,"Vitality   %d",hero.stats.vitality);
-        PA_OutputText(1,1,14,"Energy     %d",hero.stats.energy);
-        if(hero.stats.lvl<10)PA_SetSpriteAnim(1, 0, hero.stats.lvl);
-        else if (hero.stats.lvl==10)
-        {
-            PA_CreateSprite(1,5,(void*)lvlfont_Sprite,OBJ_SIZE_32X32,1,0,	25, 0);
-            PA_SetSpriteXY(1,0,12,0);
-            PA_SetSpriteAnim(1, 0, 1);
-            PA_SetSpriteAnim(1, 5, 0);
-        }
-        else
-        {
-            PA_SetSpriteAnim(1, 0, hero.stats.lvl/10);
-            PA_SetSpriteAnim(1, 5, hero.stats.lvl%10);
-        }
+        topUpdateLevel();
+        topDrawString(20*8,15,"           ");//erase current experience
+        topDrawString(7*8,15,"           ");
+        topPrintf(81,42,"    ");
+        topPrintf(81,66,"    ");
+        topPrintf(81,90,"    ");
+        topPrintf(81,114,"    ");
+        topPrintf(85,42,"%d",hero.stats.strenght);
+        topPrintf(85,66,"%d",hero.stats.dexterity);
+        topPrintf(85,90,"%d",hero.stats.vitality);
+        topPrintf(85,114,"%d",hero.stats.energy);
         if (hero.stats.lvl==5)
         {
             int i;
@@ -50,15 +41,18 @@ void CheckForLevelUp()
             int objectnb;
             objectnb=getUnusedBgObject();
             newObject((46<<3)+4, (39<<3)+8, &bgobjects[objectnb],objectnb, &bgdata[2] ,1);
-            for (i=0;i<MAX_BGOBJECT;i++){if(bgobjects[i].datanb==2)bgobjects[i].ai=&waypointmenu;}
+            for (i=0; i<MAX_BGOBJECT; i++)
+            {
+                if(bgobjects[i].datanb==2)bgobjects[i].ai=&waypointmenu;
+            }
         }
     }
     if (skillpoints)
     {
         if (lvlupicon==-1) lvlupicon=myulCreateSprite(18,224,160,500);
-        if (Stylus.Held)
+        if (ul_keys.touch.held)
         {
-            if(Stylus.X>224&&Stylus.X<248&&Stylus.Y>160&&Stylus.Y<188&&(Stylus.Newpress||(lvlUpIcnPressed)))
+            if(ul_keys.touch.x>224&&ul_keys.touch.x<248&&ul_keys.touch.y>160&&ul_keys.touch.y<188&&(ul_keys.touch.click||(lvlUpIcnPressed)))
             {
                 lvlUpIcnPressed++;
                 myulSetAnim (lvlupicon,1,1,0,0);
@@ -69,9 +63,9 @@ void CheckForLevelUp()
                 lvlUpIcnPressed=0;
             }
         }
-        else if (Stylus.Released)
+        else if (ul_keys.touch.released)
         {
-            if(Stylus.X>224&&Stylus.X<248&&Stylus.Y>160&&Stylus.Y<188&&lvlUpIcnPressed>3)
+            if(ul_keys.touch.x>224&&ul_keys.touch.x<248&&ul_keys.touch.y>160&&ul_keys.touch.y<188&&lvlUpIcnPressed>3)
             {
                 skillmenu(1);
                 if (!skillpoints)
@@ -89,7 +83,7 @@ void CheckForLevelUp()
 
 void Sort(int X,int Y)
 {
-    if(cout_sort[Pad.Held.L] <=hero.stats.mana_restante && !lvlUpIcnPressed)
+    if(cout_sort[ul_keys.held.L] <=hero.stats.curMana && !lvlUpIcnPressed)
     {
         hero.skillperiod=50;
         hero.cooldown=200;
@@ -98,13 +92,13 @@ void Sort(int X,int Y)
         hero.action=3;
 
 
-        sortchoisi[Pad.Held.L] (X,Y,angle,skillsLevels[currentSkill[Pad.Held.L]]);
-        hero.stats.mana_restante -= cout_sort[Pad.Held.L];
+        sortchoisi[ul_keys.held.L] (X,Y,angle,skillsLevels[currentSkill[ul_keys.held.L]]);
+        hero.stats.curMana -= cout_sort[ul_keys.held.L];
 
         myulStartAnim (hero.sprite, 0, spritedatabase[0].nbframe,hero.skillperiod/spritedatabase[0].nbframe,1);//framerate according to skill period to match animation time
 
     }
-    else if(!lvlUpIcnPressed) AS_SoundDirectPlay(0,SOUND(Sor_Ineedmana));//AS_SoundQuickPlay((u8*)Sor_Ineedmana);
+//    else if(!lvlUpIcnPressed) AS_SoundDirectPlay(0,SOUND(Sor_Ineedmana));//AS_SoundQuickPlay((u8*)Sor_Ineedmana);
 }
 #include "firecast1.h"
 void nospell (int a, int b, u16 c,u8 d) {}
@@ -114,24 +108,24 @@ void nospell (int a, int b, u16 c,u8 d) {}
 #include "firebolt1.h"
 void firebolt (int x,int y,u16 angle,u8 level)
 {
-    int nb=getUnusedMissile(), dommages=PA_RandMinMax(skilldmg[currentSkill[Pad.Held.L]][0],skilldmg[currentSkill[Pad.Held.L]][1]);
+    int nb=getUnusedMissile(), dommages=PA_RandMinMax(skilldmg[currentSkill[ul_keys.held.L]][0],skilldmg[currentSkill[ul_keys.held.L]][1]);
     newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+30, &missiles[nb],nb,angle,PA_Cos(angle)*3,(-PA_Sin(angle))*3,dommages, &mdata[0] );
-    AS_SoundQuickPlay((u8*)firebolt1);
-    AS_SoundQuickPlay((u8*)firecast1);
+//    AS_SoundQuickPlay((u8*)firebolt1);
+//    AS_SoundQuickPlay((u8*)firecast1);
 }
 #include "firebolt1.h"
 
 void icebolt (int x,int y,u16 angle,u8 level)
 {
-    AS_SoundQuickPlay((u8*)coldcast);
-    int nb=getUnusedMissile(), dommages=PA_RandMinMax(skilldmg[currentSkill[Pad.Held.L]][0],skilldmg[currentSkill[Pad.Held.L]][1]);
+//    AS_SoundQuickPlay((u8*)coldcast);
+    int nb=getUnusedMissile(), dommages=PA_RandMinMax(skilldmg[currentSkill[ul_keys.held.L]][0],skilldmg[currentSkill[ul_keys.held.L]][1]);
     newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+30, &missiles[nb],nb,angle,1.5*PA_Cos(angle),1.5*(-PA_Sin(angle)),dommages, &mdata[1] );
 }
 #include "chargedbolt1.h"
 void chargedbolt (int x,int y,u16 angle,u8 level)
 {
-    AS_SoundQuickPlay((u8*)chargedbolt1);
-    int dommages=PA_RandMinMax(skilldmg[currentSkill[Pad.Held.L]][0],skilldmg[currentSkill[Pad.Held.L]][1]);
+//    AS_SoundQuickPlay((u8*)chargedbolt1);
+    int dommages=PA_RandMinMax(skilldmg[currentSkill[ul_keys.held.L]][0],skilldmg[currentSkill[ul_keys.held.L]][1]);
     int nb=getUnusedMissile();
     if (level>2)
     {
@@ -164,23 +158,23 @@ void chargedbolt (int x,int y,u16 angle,u8 level)
 
 void iceorb (int x,int y,u16 angle,u8 level)
 {
-    int nb=getUnusedMissile(), dommages=PA_RandMinMax(skilldmg[currentSkill[Pad.Held.L]][0],skilldmg[currentSkill[Pad.Held.L]][1]);
-    AS_SoundQuickPlay((u8*)coldcast);
+    int nb=getUnusedMissile(), dommages=PA_RandMinMax(skilldmg[currentSkill[ul_keys.held.L]][0],skilldmg[currentSkill[ul_keys.held.L]][1]);
+//    AS_SoundQuickPlay((u8*)coldcast);
     newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+30, &missiles[nb],nb,angle,PA_Cos(angle),-PA_Sin(angle),dommages, &mdata[2] );
 }
 
 void blaze (int x,int y,u16 angle,u8 level)
 {
     auras[0].life=1000;
-    AS_SoundQuickPlay((u8*)firecast1);
+//    AS_SoundQuickPlay((u8*)firecast1);
 }
 
 void firewall (int x,int y,u16 angle,u8 level)
 {
-    AS_SoundQuickPlay((u8*)firecast1);
+//    AS_SoundQuickPlay((u8*)firecast1);
     x+=fix_norm(hero.x)-CAMERA_X;
     y+=fix_norm(hero.y)-CAMERA_Y;
-    int nb=getUnusedMissile(), dommages=PA_RandMinMax(skilldmg[currentSkill[Pad.Held.L]][0],skilldmg[currentSkill[Pad.Held.L]][1]);
+    int nb=getUnusedMissile(), dommages=PA_RandMinMax(skilldmg[currentSkill[ul_keys.held.L]][0],skilldmg[currentSkill[ul_keys.held.L]][1]);
     newMissile(x,y, &missiles[nb],nb,384,0,0,dommages, &mdata[3] );
     nb=getUnusedMissile();
     newMissile(x+fix_norm(PA_Sin(angle)*13),y+fix_norm(PA_Cos(angle)*13), &missiles[nb],nb,384,0,0,dommages, &mdata[3] );
@@ -195,8 +189,8 @@ void firewall (int x,int y,u16 angle,u8 level)
 
 void hydra (int x,int y,u16 angle,u8 level)
 {
-    AS_SoundQuickPlay((u8*)firecast1);
-    int nb=getUnusedMissile(), dommages=PA_RandMinMax(skilldmg[currentSkill[Pad.Held.L]][0],skilldmg[currentSkill[Pad.Held.L]][1]);
+//    AS_SoundQuickPlay((u8*)firecast1);
+    int nb=getUnusedMissile(), dommages=PA_RandMinMax(skilldmg[currentSkill[ul_keys.held.L]][0],skilldmg[currentSkill[ul_keys.held.L]][1]);
     newMissile(fix_norm(hero.x)+hero.hitbox.down.x+x-CAMERA_X-10, fix_norm(hero.y)+y-CAMERA_Y+7, &missiles[nb],nb,384,0,0,dommages, &mdata[4] );
     missiles[nb].variables=0;
     nb=getUnusedMissile();
@@ -213,7 +207,7 @@ void teleport(int x,int y,u16 angle,u8 level)
 {
     x-=CHARFEET_X;
     y-=CHARFEET_Y;
-    AS_SoundQuickPlay((u8*)teleport1);
+//    AS_SoundQuickPlay((u8*)teleport1);
     int j,k;
 
     if(anytelecollision(hero.hitbox,x,y))

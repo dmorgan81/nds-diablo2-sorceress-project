@@ -47,23 +47,27 @@ void objectscroll(objectinfo* mover)
         {
         case 0 :
             myulImageColumn (mover->sprite,columnaddaction);
-            myulImageFlip(mover->sprite,0,0); mover->hitbox.flipped=0;
+            myulImageFlip(mover->sprite,0,0);
+            mover->hitbox.flipped=0;
 
             break;
 
         case 1 :
             myulImageColumn (mover->sprite,1+columnaddaction);
-            myulImageFlip(mover->sprite,0,0); mover->hitbox.flipped=0;
+            myulImageFlip(mover->sprite,0,0);
+            mover->hitbox.flipped=0;
             break;
 
         case 2 :
             myulImageColumn (mover->sprite,2+columnaddaction);
-            myulImageFlip(mover->sprite,0,0); mover->hitbox.flipped=0;
+            myulImageFlip(mover->sprite,0,0);
+            mover->hitbox.flipped=0;
             break;
 
         case 3 :
             myulImageColumn (mover->sprite,3+columnaddaction);
-            myulImageFlip(mover->sprite,0,0); mover->hitbox.flipped=0;
+            myulImageFlip(mover->sprite,0,0);
+            mover->hitbox.flipped=0;
             break;
 
         case 4 :
@@ -72,17 +76,20 @@ void objectscroll(objectinfo* mover)
 
         case 5 :
             myulImageColumn (mover->sprite,3+columnaddaction);
-            myulImageFlip(mover->sprite,1,0); mover->hitbox.flipped=1;;
+            myulImageFlip(mover->sprite,1,0);
+            mover->hitbox.flipped=1;;
             break;
 
         case 6 :
             myulImageColumn (mover->sprite,2+columnaddaction);
-            myulImageFlip(mover->sprite,1,0); mover->hitbox.flipped=1;;
+            myulImageFlip(mover->sprite,1,0);
+            mover->hitbox.flipped=1;;
             break;
 
         case 7 :
             myulImageColumn (mover->sprite,1+columnaddaction);
-            myulImageFlip(mover->sprite,1,0); mover->hitbox.flipped=1;;
+            myulImageFlip(mover->sprite,1,0);
+            mover->hitbox.flipped=1;;
             break;
 
         }
@@ -90,7 +97,7 @@ void objectscroll(objectinfo* mover)
 
 
         //s16 y = myulGetSpriteY(mover->sprite)+mover->hitbox.down.y;
-        myulmyulSetSpritePrio(mover->sprite,myulGetSpriteY(mover->sprite)+mover->hitbox.down.y);
+        myulSetSpritePrio(mover->sprite,myulGetSpriteY(mover->sprite)+mover->hitbox.down.y);
         myulSetSpriteColor(mover->sprite,mover->color);
 
     }
@@ -156,11 +163,12 @@ void onemDirScroll(objectinfo* mover)
             {
 
                 myulImageColumn (mover->sprite,0);
-                myulImageFlip(mover->sprite,0,0); mover->hitbox.flipped=0;
+                myulImageFlip(mover->sprite,0,0);
+                mover->hitbox.flipped=0;
             }
         }
         //s16 y = myulGetSpriteY(mover->sprite)+mover->hitbox.down.y;
-        myulmyulSetSpritePrio(mover->sprite,myulGetSpriteY(mover->sprite)+mover->hitbox.down.y+10);
+        myulSetSpritePrio(mover->sprite,myulGetSpriteY(mover->sprite)+mover->hitbox.down.y+10);
         myulSetSpriteColor(mover->sprite,mover->color);
 
     }
@@ -208,13 +216,14 @@ void deadScroll(objectinfo* mover)
             if(mover->sprite!=-1)
             {
                 myulImageColumn (mover->sprite,0);
-                myulImageFlip(mover->sprite,0,0); mover->hitbox.flipped=0;
+                myulImageFlip(mover->sprite,0,0);
+                mover->hitbox.flipped=0;
             }
             myulSetAnim (mover->sprite,spritedatabase[mover->spritedata].nbframe-1,spritedatabase[mover->spritedata].nbframe-1,0,1);
 
         }
         myulSetSpriteColor(mover->sprite,mover->color);
-        myulmyulSetSpritePrio(mover->sprite,myulGetSpriteY(mover->sprite)+mover->hitbox.down.y);
+        myulSetSpritePrio(mover->sprite,myulGetSpriteY(mover->sprite)+mover->hitbox.down.y);
     }
 
     //if the object is offscreen delete it
@@ -269,27 +278,32 @@ void missilescroll(objectinfo* mover)
         {
         case 0 :
             myulImageColumn (mover->sprite,columnaddaction);
-            myulImageFlip(mover->sprite,0,0); mover->hitbox.flipped=0;
+            myulImageFlip(mover->sprite,0,0);
+            mover->hitbox.flipped=0;
             break;
 
         case 1 :
             myulImageColumn (mover->sprite,1+columnaddaction);
-            myulImageFlip(mover->sprite,0,0); mover->hitbox.flipped=0;
+            myulImageFlip(mover->sprite,0,0);
+            mover->hitbox.flipped=0;
             break;
 
         case 2 :
             myulImageColumn (mover->sprite,2+columnaddaction);
-            myulImageFlip(mover->sprite,0,0); mover->hitbox.flipped=0;
+            myulImageFlip(mover->sprite,0,0);
+            mover->hitbox.flipped=0;
             break;
 
         case 3 :
             myulImageColumn (mover->sprite,3+columnaddaction);
-            myulImageFlip(mover->sprite,0,0); mover->hitbox.flipped=0;
+            myulImageFlip(mover->sprite,0,0);
+            mover->hitbox.flipped=0;
             break;
 
         case 4 :
             myulImageColumn (mover->sprite,4+columnaddaction);
-            myulImageFlip(mover->sprite,0,0); mover->hitbox.flipped=0;
+            myulImageFlip(mover->sprite,0,0);
+            mover->hitbox.flipped=0;
             break;
 
         case 5 :
@@ -314,43 +328,50 @@ void missilescroll(objectinfo* mover)
 
         case 9 :
             myulImageColumn (mover->sprite,1+columnaddaction);
-            myulImageFlip(mover->sprite,1,1); mover->hitbox.flipped=1;
+            myulImageFlip(mover->sprite,1,1);
+            mover->hitbox.flipped=1;
             break;
 
 
         case 10 :
             myulImageColumn (mover->sprite,2+columnaddaction);
-            myulImageFlip(mover->sprite,1,1); mover->hitbox.flipped=1;
+            myulImageFlip(mover->sprite,1,1);
+            mover->hitbox.flipped=1;
             break;
 
         case 11 :
             myulImageColumn (mover->sprite,3+columnaddaction);
-            myulImageFlip(mover->sprite,1,1); mover->hitbox.flipped=1;
+            myulImageFlip(mover->sprite,1,1);
+            mover->hitbox.flipped=1;
             break;
 
         case 12 :
             myulImageColumn (mover->sprite,4+columnaddaction);
-            myulImageFlip(mover->sprite,1,0); mover->hitbox.flipped=1;;
+            myulImageFlip(mover->sprite,1,0);
+            mover->hitbox.flipped=1;;
             break;
 
         case 13 :
             myulImageColumn (mover->sprite,3+columnaddaction);
-            myulImageFlip(mover->sprite,1,0); mover->hitbox.flipped=1;;
+            myulImageFlip(mover->sprite,1,0);
+            mover->hitbox.flipped=1;;
             break;
 
         case 14 :
             myulImageColumn (mover->sprite,2+columnaddaction);
-            myulImageFlip(mover->sprite,1,0); mover->hitbox.flipped=1;;
+            myulImageFlip(mover->sprite,1,0);
+            mover->hitbox.flipped=1;;
             break;
 
         case 15 :
             myulImageColumn (mover->sprite,1+columnaddaction);
-            myulImageFlip(mover->sprite,1,0); mover->hitbox.flipped=1;;
+            myulImageFlip(mover->sprite,1,0);
+            mover->hitbox.flipped=1;;
             break;
         }
 
         //s16 y = myulGetSpriteY(mover->sprite)+mover->hitbox.down.y;
-        myulmyulSetSpritePrio(mover->sprite,myulGetSpriteY(mover->sprite)+mover->hitbox.down.y+10);
+        myulSetSpritePrio(mover->sprite,myulGetSpriteY(mover->sprite)+mover->hitbox.down.y+10);
 
 
     }
@@ -402,7 +423,7 @@ void FXscroll(objectinfo* mover, bool nb)
         /*
                 s16 y = myulGetSpriteY(fxinfo[ mover->fx[nb] ].sprite)-fxinfo[mover->fx[nb]].y+mover->hitbox.down.y;
                 if (y<1) y=1;*/   /// to use if the point.down.y of object isnt the same as the fx
-        myulmyulSetSpritePrio(fxinfo[ mover->fx[nb] ].sprite,myulGetSpriteY(fxinfo[ mover->fx[nb] ].sprite)-fxinfo[mover->fx[nb]].y+mover->hitbox.down.y);
+        myulSetSpritePrio(fxinfo[ mover->fx[nb] ].sprite,myulGetSpriteY(fxinfo[ mover->fx[nb] ].sprite)-fxinfo[mover->fx[nb]].y+mover->hitbox.down.y);
 
 
 

@@ -8,13 +8,8 @@
 
 #define MUSIC_OFF
 
-#define PATEXT_ALL_COL_WHITE	PA_SetTextCol(1,31,31,31);
-#define PATEXT_ALL_COL_BLACK	PA_SetTextCol(screen, 0, 0, 0);
-#define PATEXT_ALL_COL_GREY		PA_SetTextCol(screen, 22, 22, 22);
-#define PATEXT_ALL_COL_BLUE		PA_SetTextCol(screen, 0, 0, 31);
-#define PATEXT_ALL_COL_RED		PA_SetTextCol(screen, 31, 0, 0);
 
-
+#define _GFX_ALIGN __attribute__((aligned (4)))
 
 #define norm_fix(x)			((x)<<8)
 #define fix_norm(x)			((x)>>8)
@@ -35,6 +30,7 @@
 #define CHARMID_Y           86
 #define CHARFEET_X          128
 #define CHARFEET_Y          107
+#define PAUSEKEY            ul_keys.pressed.start
 
 #define SKILLNUMBER         8
 #define BGOBJ_AB            25

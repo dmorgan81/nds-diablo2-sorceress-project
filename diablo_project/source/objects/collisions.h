@@ -1,7 +1,7 @@
 #ifndef _COLLISIONS_H
 #define _COLLISIONS_H
 
-#include <PA9.h>
+
 #include "../structures.h"
 #include "../defines.h"
 #include "../objects.h"

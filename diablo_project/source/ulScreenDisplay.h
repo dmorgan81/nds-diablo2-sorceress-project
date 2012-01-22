@@ -3,8 +3,8 @@
 
 
 
-#include <PA9.h>					// Include for PA_Lib
 #include <ulib/ulib.h>			// Include for µLib
+#include "PA_Math.h"					// Include for PA_Lib
 #include "structures.h"
 #include "defines.h"
 
@@ -27,7 +27,7 @@ inline void myulStartAnim (int spritenb, u8 sframe, u8 endframe, u8 framerate,in
 inline void myulSetAnim (int spritenb, u8 sframe, u8 endframe, u8 framerate,int cycles);
 inline void myulDefaultAnimRestart (int spritenb);
 inline void myulDefaultAnim (int spritenb);
-inline void myulmyulSetSpritePrio( int sprite, int prio);
+inline void myulSetSpritePrio( int sprite, int prio);
 inline void myulSetCycles (int sprite,int cycles);
 
 void myulScreenDraws();

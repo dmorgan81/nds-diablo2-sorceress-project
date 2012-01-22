@@ -1,6 +1,7 @@
 #ifndef _OBJECTS_H
 #define _OBJECTS_H
-#include <PA9.h>
+#include <nds.h>
+#include "PA_Math.h"
 #include "defines.h"
 #include "structures.h"
 #include "objects/collisions.h"
@@ -19,7 +20,7 @@ extern int curMaxObject,curMaxBgObject,curMaxMissile;
 
 void initobjects (void);
 void SpawnObjects();
-void UpdateObjects();
+void updateObjects();
 void deleteobject(s16 ID);
 void deletemissile(s16 ID);
 void newObject(s32 x, s32 y, objectinfo* object,s16 ID, objectdata* data,bool array);
