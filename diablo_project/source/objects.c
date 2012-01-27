@@ -16,7 +16,7 @@ int curMaxObject,curMaxBgObject,curMaxMissile;    //small trick to avoid long br
 bool objectused[MAX_OBJECT];
 bool missileused[MAX_MISSILE];
 
-void initobjects (void)
+void initObjects (void)
 {
     loadBgData();
 
@@ -78,7 +78,7 @@ void initobjects (void)
 
 
 
-void deleteobject(s16 ID)
+void deleteObject(s16 ID)
 {
     objects[ID].action=-1;
     objects[ID].status=0;
@@ -95,7 +95,7 @@ void deleteobject(s16 ID)
     if (ID==curMaxObject)curMaxObject--;
 }
 
-void deletemissile(s16 ID)
+void deleteMissile(s16 ID)
 {
     missiles[ID].action=-1;
     missiles[ID].status=0;
@@ -178,7 +178,7 @@ s16 getUnusedObject(void)
     return -1;
 }
 
-void SpawnObjects()
+void spawnObjects()
 {
     int i,j,k,objectnb;
     //spawns objects with tile
@@ -374,7 +374,7 @@ inline void deleteFX (s16 fx)
 
 /////////WIP////////////
 
-void MobDeath(objectinfo* mob,int time)
+void mobDeath(objectinfo* mob,int time)
 {
     hero.stats.experience+=mob->exp;
     if (data[mob->datanb].deathspritedata!=255)//-1=255because deathspritedata is u8
@@ -402,7 +402,7 @@ void MobDeath(objectinfo* mob,int time)
         mob->variables=time;
         //play sound?
     }
-    else deleteobject(mob->arrayID);
+    else deleteObject(mob->arrayID);
 }
 
 
@@ -410,7 +410,7 @@ void MobDeath(objectinfo* mob,int time)
 void deadMob(objectinfo* mob)
 {
     mob->variables--;
-    if (!mob->variables) deleteobject( mob->arrayID);
+    if (!mob->variables) deleteObject( mob->arrayID);
 }
 /////////WIP////////////
 

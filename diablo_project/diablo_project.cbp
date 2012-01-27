@@ -45,12 +45,6 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="source\Maps\Map.h" />
-		<Unit filename="source\Maps\dudu.map.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="source\Maps\tilescollision.map.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="source\actions.c">
 			<Option compilerVar="CC" />
 		</Unit>

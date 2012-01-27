@@ -22,8 +22,8 @@
 #define fixed_fraction(x)	((x)&&0xff)
 #define SOUND(x)            (SoundInfo){(u8*)x,(u32)x##_size,0,16384,127,64,false,0,0}
 
-#define VITESSE				256
-#define VITESSE2			181
+#define SPEED				256
+#define SPEED2			181
 #define CAMERA_X        	112
 #define CAMERA_Y	        60
 #define CHARMID_X           128

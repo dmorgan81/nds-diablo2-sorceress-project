@@ -30,8 +30,8 @@ void firewall (int x,int y,u16 angle,u8 level);
 void hydra (int x,int y,u16 angle,u8 level);
 void teleport(int x,int y,u16 angle,u8 level);
 
-void (*sortchoisi[2]) (int,int,u16,u8);
-int cout_sort[2];
+void (*selectedSkill[2]) (int,int,u16,u8);
+int skillCost[2];
 
 
 #endif

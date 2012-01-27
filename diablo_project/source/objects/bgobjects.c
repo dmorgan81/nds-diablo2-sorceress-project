@@ -59,7 +59,7 @@ void loadBgData()
     bgdata[0].vy=0;
     bgdata[0].life=500000;
     bgdata[0].dommages=0;
-    bgdata[0].scroll=&ScrollFXonly;
+    bgdata[0].scroll=&scrollFXonly;
     bgdata[0].collision=&noai;
     bgdata[0].datanb=0;
     bgdata[0].hitbox.down.y=107;
@@ -82,7 +82,7 @@ void loadBgData()
     bgdata[1].vy=0;
     bgdata[1].life=500000;
     bgdata[1].dommages=0;
-    bgdata[1].scroll=&ScrollFXonly;
+    bgdata[1].scroll=&scrollFXonly;
     bgdata[1].collision=&noai;
     bgdata[1].datanb=1;
     bgdata[1].hitbox.down.y=85;
@@ -105,7 +105,7 @@ void loadBgData()
     bgdata[2].vy=0;
     bgdata[2].life=0;               //life=0 ==>missiles dont collide on it
     bgdata[2].dommages=0;
-    bgdata[2].scroll=&ScrollFXonly;
+    bgdata[2].scroll=&scrollFXonly;
     bgdata[2].collision=&noai;
     bgdata[2].datanb=2;
     bgdata[2].hitbox.down.y=18;
@@ -129,7 +129,7 @@ void loadBgData()
     bgdata[3].vy=0;
     bgdata[3].life=500000;
     bgdata[3].dommages=0;
-    bgdata[3].scroll=&ScrollFXonly;
+    bgdata[3].scroll=&scrollFXonly;
     bgdata[3].collision=&noai;
     bgdata[3].datanb=3;
     bgdata[3].hitbox.down.y=43;
@@ -153,7 +153,7 @@ void loadBgData()
     bgdata[4].vy=0;
     bgdata[4].life=0;
     bgdata[4].dommages=0;
-    bgdata[4].scroll=&ScrollFXonly;
+    bgdata[4].scroll=&scrollFXonly;
     bgdata[4].collision=&noai;
     bgdata[4].datanb=4;
     bgdata[4].hitbox.down.y=14;

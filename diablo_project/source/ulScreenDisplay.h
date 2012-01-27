@@ -1,8 +1,6 @@
 #ifndef _ULDISPLAY_H
 #define _ULDISPLAY_H
 
-
-
 #include <ulib/ulib.h>			// Include for µLib
 #include "PA_Math.h"					// Include for PA_Lib
 #include "structures.h"

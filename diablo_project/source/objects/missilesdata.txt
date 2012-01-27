@@ -6,7 +6,7 @@
     mdata[0].life=256;
     mdata[0].dommages=25;
     mdata[0].status=S_ALARMED;
-    mdata[0].scroll=&missilescroll;
+    mdata[0].scroll=&missileScroll;
     mdata[0].collision=&mCollision;
     mdata[0].datanb=0;
     mdata[0].hitbox.down.y=13;
@@ -27,7 +27,7 @@
     mdata[1].dommages=5;
     mdata[1].life=256;
     mdata[1].status=S_ALARMED|S_COLD;
-    mdata[1].scroll=&missilescroll;
+    mdata[1].scroll=&missileScroll;
     mdata[1].collision=&mCollision;
     mdata[1].datanb=1;
     mdata[1].hitbox.down.y=14;
@@ -72,7 +72,7 @@
     mdata[3].life=500;
     mdata[3].status=S_ALARMED;
     mdata[3].dommages=1;
-    mdata[3].scroll=&missilescroll;
+    mdata[3].scroll=&missileScroll;
     mdata[3].collision=&orbCollision;
     mdata[3].datanb=3;
     mdata[3].hitbox.down.y=67;
@@ -95,7 +95,7 @@
     mdata[4].life=500;
     mdata[4].status=S_ALARMED;
     mdata[4].dommages=1;
-    mdata[4].scroll=&objectscroll;
+    mdata[4].scroll=&objectScroll;
     mdata[4].collision=&noai;//&orbCollision;
     mdata[4].datanb=4;
     mdata[4].hitbox.down.y=36;

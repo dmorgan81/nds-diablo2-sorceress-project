@@ -3,8 +3,8 @@
 #include <ulib/ulib.h>
 #include "misc.h"
 
-s32 PA_VBLCounter[16]; // VBL counters
-bool PA_VBLCounterOn[16]; // VBL counters enable/disable flag
+s32 Counter[16]; // VBL counters
+bool CounterOn[16]; // VBL counters enable/disable flag
 
 void WaitForVBL()
 {
@@ -26,27 +26,27 @@ void UpdateRTC()
     MY_RTC.Year = 1900 + RTCV->tm_year;
 }
 
-inline void PA_VBLCounterStart(u8 nCounter)
+inline void CounterStart(u8 nCounter)
 {
-    PA_VBLCounter[nCounter]   = 0;
-    PA_VBLCounterOn[nCounter] = 1;
+    Counter[nCounter]   = 0;
+    CounterOn[nCounter] = 1;
 }
-inline void PA_VBLCounterPause(u8 nCounter)
+inline void CounterPause(u8 nCounter)
 {
-    PA_VBLCounterOn[nCounter] = 0;
+    CounterOn[nCounter] = 0;
 }
-inline void PA_VBLCounterUnpause(u8 nCounter)
+inline void CounterUnpause(u8 nCounter)
 {
-    PA_VBLCounterOn[nCounter] = 1;
+    CounterOn[nCounter] = 1;
 }
 
-void PA_VBLCountersReset()
+void CountersReset()
 {
     register int i;
     for (i = 0; i < 16; i++)
     {
-        PA_VBLCounter[i] = 0; // Ready to start
-        PA_VBLCounterOn[i] = 0;  // Not counting yet
+        Counter[i] = 0; // Ready to start
+        CounterOn[i] = 0;  // Not counting yet
     }
 }
 
@@ -54,5 +54,5 @@ inline void PA_RunCounters()
 {
     register int i;
     for(i = 0; i < 16; i++)
-        PA_VBLCounter[i] += PA_VBLCounterOn[i];
+        Counter[i] += CounterOn[i];
 }

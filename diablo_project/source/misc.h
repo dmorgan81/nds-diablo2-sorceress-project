@@ -13,14 +13,14 @@ struct
 //	u8 FPS, Frames, OldSeconds; // To test the FPS...
 } MY_RTC;
 
-extern s32 PA_VBLCounter[16]; // VBL counters
-extern bool PA_VBLCounterOn[16]; // VBL counters enable/disable flag
+extern s32 Counter[16]; // VBL counters
+extern bool CounterOn[16]; // VBL counters enable/disable flag
 
-inline void PA_VBLCounterStart(u8 nCounter);
-inline void PA_VBLCounterPause(u8 nCounter);
-inline void PA_VBLCounterUnpause(u8 nCounter);
+inline void CounterStart(u8 nCounter);
+inline void CounterPause(u8 nCounter);
+inline void CounterUnpause(u8 nCounter);
 
-void PA_VBLCountersReset();
+void CountersReset();
 
 inline void PA_RunCounters();
 

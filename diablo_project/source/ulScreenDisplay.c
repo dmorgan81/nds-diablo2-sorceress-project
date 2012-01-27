@@ -278,7 +278,7 @@ void myulScreenDraws()
 
         }
     }
-    //ulPrintf_xy(0,0,"%d",PA_VBLCounter[0]);
+    //ulPrintf_xy(0,0,"%d",Counter[0]);
     ulEndDrawing();
 }
 

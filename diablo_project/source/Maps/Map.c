@@ -26,7 +26,7 @@ void changemap(u8 mapnb)
         ulDeleteMap(Mymap);
         for (i=0; i<MAX_OBJECT; i++)
         {
-            deleteobject(i);
+            deleteObject(i);
         }
         for (i=0; i<MAX_BGOBJECT; i++)
         {
@@ -63,7 +63,7 @@ void changemap(u8 mapnb)
                 if(bgobjects[i].datanb==2)bgobjects[i].ai=&waypointmenu;
             }
         }
-        SpawnObjects();
+        spawnObjects();
         break;
 
 
@@ -72,7 +72,7 @@ void changemap(u8 mapnb)
         ulDeleteMap(Mymap);
         for (i=0; i<MAX_OBJECT; i++)
         {
-            deleteobject(i);
+            deleteObject(i);
         }
         for (i=0; i<MAX_BGOBJECT; i++)
         {
@@ -100,7 +100,7 @@ void changemap(u8 mapnb)
         {
             if(bgobjects[i].datanb==2)bgobjects[i].ai=&waypointmenu;
         }
-        SpawnObjects();
+        spawnObjects();
 
         break;
     }

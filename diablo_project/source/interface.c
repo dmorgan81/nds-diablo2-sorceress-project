@@ -41,7 +41,6 @@ void save()
 
 void load()
 {
-    int previouslvl=hero.stats.lvl;
     FILE *save_file = fopen("fat:/d2save.sav", "rb");
     if (!save_file)topPrintf(0,0,"Can't open save, emulator?");
     fread(&hero.stats, 1, sizeof(hero.stats), save_file);
@@ -148,7 +147,7 @@ void waypointmenu(objectinfo* wp)
 
 void pause ()//with booloean parameter checked at each frame
 {
-    PA_VBLCounterPause(1);
+    CounterPause(1);
     WaitForVBL();
     int frameNumber=0, animStage=0;
     UL_IMAGE *pentacle = ulLoadImageFilePNG((void*)pentacle_png, (int)pentacle_png_size, UL_IN_RAM, UL_PF_PAL4),
@@ -179,7 +178,7 @@ void pause ()//with booloean parameter checked at each frame
     }
     ulDeleteImage (pentacle);
     ulDeleteImage (pausesprite);
-    PA_VBLCounterStart(0);
+    CounterStart(0);
 }
 
 int TextBoxGetLineCharNb(int x0, int y0, int x1, int y1, const char *text)
@@ -334,7 +333,7 @@ void skillmenu(bool levelup)
             ulPrintf_xy(skillx[i]+33,skilly[i]+24,"%i",skillsLevels[i]);
         }
         if (skillpoints)ulPrintf_xy(130,1,"Points remaining : %i",skillpoints);
-        else if (sortchoisi[0]==&nospell)ulPrintf_xy(1,1,"Please click to select your first skill");
+        else if (selectedSkill[0]==&nospell)ulPrintf_xy(1,1,"Please click to select your first skill");
         exitbtn->x=212;
         exitbtn->y=156;
         ulDrawImage(exitbtn);
@@ -361,18 +360,18 @@ void skillmenu(bool levelup)
                     else if (skillsLevels[i] && !(levelup&&skillpoints))
                     {
                         currentSkill[ul_keys.held.L]=i;
-                        cout_sort[ul_keys.held.L]=FormulaManaCost(skillsLevels[i],fMana[i][0],fMana[i][1],fMana[i][2]);
+                        skillCost[ul_keys.held.L]=FormulaManaCost(skillsLevels[i],fMana[i][0],fMana[i][1],fMana[i][2]);
                         skilldmg[i][0]=(FormulaDam(skillsLevels[i],fDam[i][0][0],fDam[i][0][1],fDam[i][0][2],fDam[i][0][3],fDam[i][0][4],fDam[i][0][5])>>1)*skillRatio[i];
                         skilldmg[i][1]=(FormulaDam(skillsLevels[i],fDam[i][1][0],fDam[i][1][1],fDam[i][1][2],fDam[i][1][3],fDam[i][1][4],fDam[i][1][5])>>1)*skillRatio[i];
-                        sortchoisi[ul_keys.held.L]=(void*)skillfunction[i];
-//                        PA_SetSpriteAnim(1, 3+ul_keys.held.L, skillframe[i]);
+                        selectedSkill[ul_keys.held.L]=(void*)skillfunction[i];
+                        topSetSkill(skillframe[currentSkill[ul_keys.held.L]],ul_keys.held.L);
                         i=SKILLNUMBER;
-                        if (sortchoisi[ul_keys.held.L ^ 1]==&nospell) //check if other skill has been set (only useful at game start)
+                        if (selectedSkill[ul_keys.held.L ^ 1]==&nospell) //check if other skill has been set (only useful at game start)
                         {
                             currentSkill[ul_keys.held.L ^ 1] =currentSkill[ul_keys.held.L];
-                            sortchoisi[ul_keys.held.L ^ 1]   =sortchoisi[ul_keys.held.L];
-                            cout_sort[ul_keys.held.L ^ 1]    =cout_sort[ul_keys.held.L];
-//                            PA_SetSpriteAnim(1, 3+(ul_keys.held.L^1), PA_GetSpriteAnimFrame(1,3+(ul_keys.held.L)));
+                            selectedSkill[ul_keys.held.L ^ 1]   =selectedSkill[ul_keys.held.L];
+                            skillCost[ul_keys.held.L ^ 1]    =skillCost[ul_keys.held.L];
+                            topSetSkill(skillframe[currentSkill[ul_keys.held.L^1]],ul_keys.held.L^1);
                         }
                         endloop=1;
                     }
@@ -380,7 +379,7 @@ void skillmenu(bool levelup)
                 }
                 else if (ul_keys.touch.x>212&&ul_keys.touch.x<244&&ul_keys.touch.y>156&&ul_keys.touch.y<188)
                 {
-                    if (sortchoisi[0]!=&nospell && sortchoisi[1]!=&nospell) endloop=1;
+                    if (selectedSkill[0]!=&nospell && selectedSkill[1]!=&nospell) endloop=1;
                 }
             }
         }
@@ -409,7 +408,7 @@ void death()
     }
     ulDeleteImage(mapTiles);
     ulDeleteMap(Mymap);
-    QuickTopScreenRefresh();
+    quickTopScreenRefresh();
     UL_IMAGE *deathscreen = ulLoadImageFilePNG((void*)deathscreen_png, (int)deathscreen_png_size, UL_IN_RAM, UL_PF_PAL8);
     ulStartDrawing2D();
     ulSetDepth(0);
@@ -422,9 +421,9 @@ void death()
     hero.stats.curLife=hero.stats.lifeMax;
     for(i=0; i<MAX_OBJECT; i++)
     {
-        deleteobject(i);
+        deleteObject(i);
     }
-    QuickTopScreenRefresh();
+    quickTopScreenRefresh();
     myulInitData(1);
     changemap(currentMap);
 }

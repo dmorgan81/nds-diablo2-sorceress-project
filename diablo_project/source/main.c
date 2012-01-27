@@ -11,7 +11,7 @@
 #include <nds.h>
 #include "main.h"
 #include "misc.h"
-#define Test
+//#define Test
 //#define NOSPAWN
 #ifdef Test
 #define _NOSPLASH_ //quote this line to make splash appear
@@ -25,7 +25,7 @@
 
 void MySplash();
 void CallAllInits();
-void MajStats();
+void statsUpdate();
 
 ////////////////////////////////
 /////VARIABLES DECLARATIONS/////
@@ -50,11 +50,11 @@ int main( int argc, char **argv)
 /////////////////
 /////charvar/////
 /////////////////
-    sortchoisi[0]=&nospell;
-    sortchoisi[1]=&nospell;
+    selectedSkill[0]=&nospell;
+    selectedSkill[1]=&nospell;
     hero.action=0;
-    hero.vitesse=256;
-    hero.vitesse2=181;//multiplie par 181 sois 1.7 en point fixe
+    hero.speed=256;
+    hero.speed2=181;//multiplie par 181 sois 1.7 en point fixe
     hero.x=norm_fix(128);//80
     hero.y=norm_fix(50);//40
 
@@ -138,6 +138,7 @@ int main( int argc, char **argv)
         myulScreenDraws();
         WaitForVBL();
     }
+topSetBackground("tyrael");
 
     DialogInBox("Welcome to the world of Sanctuary, sorceress.\nAs you may know, this land is, once again, struck by the Three.\n\n\
 I am the Archangel Tyrael. I came here to prevent Diablo from freeing his brother, Baal. But I have failed. Now, Terror and Destruction roam free throughout your world.\n\n\
@@ -147,22 +148,20 @@ I am broken and the energys that tie me to this world are diminishing rapidly.\n
 You must take up this quest and prevent the Three Brothers from reuniting. You must cross the sea and search for Diablo and Baal in Kurast.\n\n\
 Now hurry, mortal... Time is running out for all of us!\n",10,1);
 #endif
+topSetNormalScreen();
     skillmenu(1);
-    objectnb=getUnusedObject();
-    newObject(100, 50, &objects[objectnb],objectnb, &data[3],0);
-
     WaitForVBL();
 
-    PA_VBLCounterStart(0);
+    CounterStart(0);
     while(1)
     {
         while(hero.stats.curLife>0&&hero.stats.curLife<=hero.stats.lifeMax)
         {
 
             hero.cooldown=0;
-            MajStats();
+            statsUpdate();
             movechar();
-            QuickTopScreenRefresh();
+            quickTopScreenRefresh();
 
 #ifdef Test
             objectnb=-1;
@@ -183,7 +182,7 @@ Now hurry, mortal... Time is running out for all of us!\n",10,1);
 
             myulSetSpritePrio(hero.sprite,CHARFEET_Y);
 
-            if (!(PA_VBLCounter[0]&128))//change
+            if (!(Counter[0]&128))//change
             {
                 for (i=0; i<MAX_DATASPRITES; i++)
                 {
@@ -192,7 +191,7 @@ Now hurry, mortal... Time is running out for all of us!\n",10,1);
             }
             myulScreenDraws();
 
-            if (!(PA_VBLCounter[0]&128))
+            if (!(Counter[0]&128))
             {
 #ifdef Test
                 //PA_OutputText(1,1,8,"tex: %d    ",ulGetTexVramAvailMemory());
@@ -210,7 +209,7 @@ Now hurry, mortal... Time is running out for all of us!\n",10,1);
 
 #ifndef NOSPAWN
             //spawning
-            if(!(PA_VBLCounter[0]&511))
+            if(!(Counter[0]&511))
             {
                 if (hero.stats.lvl<2)
                 {
@@ -314,7 +313,7 @@ void CallAllInits()
     vramSetBankI(VRAM_I_SUB_BG_0x06208000);
     bg3_sub = bgInitSub(3, BgType_Bmp8, BgSize_B8_256x256, 0,0);
     ulSetTexVramParameters(UL_BANK_A | UL_BANK_B | UL_BANK_C | UL_BANK_D, VRAM_A, 512 << 10); //256ko de vram
-    PA_VBLCountersReset();
+    CountersReset();
     if (!nitroFSInit())
     {
         ////PA_OutputText(0, 1, 1, "Filesystem init error !!!");
@@ -372,7 +371,7 @@ void CallAllInits()
         FILE_CLOSE(file);
         */
 #endif
-    initobjects ();
+    initObjects ();
 #ifndef _NOSPLASH_
     //loading frame 2
     ulSetImageTileSize (loadingimg, 384, 0, 192, 192);
@@ -383,13 +382,13 @@ void CallAllInits()
 
     /*
         // Init AS_Lib for mp3
-        PA_VBLFunctionInit(AS_SoundVBL);
+        FunctionInit(AS_SoundVBL);
         AS_Init(AS_MODE_MP3 | AS_MODE_SURROUND | AS_MODE_16CH);
         AS_SetDefaultSettings(AS_PCM_8BIT, 16384, AS_NO_DELAY);//AS_SURROUND delay is creepy
         AS_ReserveChannel(0);//hero's channel
 
     */
-    InitTopScreen ();
+    initTopScreen ();
 #ifndef _NOSPLASH_
     //loading frame 3
     ulSetImageTileSize (loadingimg, 576, 0, 192, 192);
@@ -475,7 +474,7 @@ void MySplash()
 
 
 
-void MajStats()
+void statsUpdate()
 {
     register int i;
     hero.lastx=hero.x;
@@ -659,12 +658,12 @@ void movechar()
         switch (hero.direction%2)
         {
         case 0 :
-            hero.x += ((ul_keys.held.right - ul_keys.held.left)*VITESSE);
-            hero.y += ((ul_keys.held.down - ul_keys.held.up)*VITESSE);
+            hero.x += ((ul_keys.held.right - ul_keys.held.left)*SPEED);
+            hero.y += ((ul_keys.held.down - ul_keys.held.up)*SPEED);
             break;
         case 1 :
-            hero.x += ((ul_keys.held.right - ul_keys.held.left)*VITESSE2);
-            hero.y += ((ul_keys.held.down - ul_keys.held.up)*VITESSE2);
+            hero.x += ((ul_keys.held.right - ul_keys.held.left)*SPEED2);
+            hero.y += ((ul_keys.held.down - ul_keys.held.up)*SPEED2);
             break;
         }
     }

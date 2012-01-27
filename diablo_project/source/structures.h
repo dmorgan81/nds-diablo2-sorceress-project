@@ -172,7 +172,7 @@ struct spritestruct
 struct charstruct
 {
     int x,y,lastx,lasty;
-    u16 vitesse, vitesse2;
+    u16 speed, speed2;
     u8 action, stop_action, direction, skillperiod, cooldown, sprite;
     statistiques stats;
     hitboxinfo hitbox;

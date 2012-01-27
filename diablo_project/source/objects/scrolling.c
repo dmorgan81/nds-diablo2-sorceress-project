@@ -13,7 +13,7 @@ extern bool objectused[MAX_OBJECT];
 extern bool missileused[MAX_MISSILE];
 
 
-void objectscroll(objectinfo* mover)
+void objectScroll(objectinfo* mover)
 {
 
     //check if mover is onscreen
@@ -127,7 +127,7 @@ void objectscroll(objectinfo* mover)
     }
 }
 
-void ScrollFXonly(objectinfo* mover)
+void scrollFXonly(objectinfo* mover)
 {
     if (mover->fx[0] != -1)
     {
@@ -251,7 +251,7 @@ void deadScroll(objectinfo* mover)
     }
 }
 
-void missilescroll(objectinfo* mover)
+void missileScroll(objectinfo* mover)
 {
 
     //check if mover is onscreen

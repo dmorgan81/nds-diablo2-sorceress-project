@@ -95,7 +95,7 @@ void mCollision(objectinfo* missile)
                 {
                     objects[i].life-=missile->dommages;
                     objects[i].status|=missile->status;
-                    deletemissile(missile->arrayID);
+                    deleteMissile(missile->arrayID);
                     i=curMaxObject;
                 }
             }
@@ -108,7 +108,7 @@ void mCollision(objectinfo* missile)
         {
             if(boxcollision (&missile->hitbox,missile->x,missile->y,&bgobjects[i].hitbox,bgobjects[i].x,bgobjects[i].y))
             {
-                deletemissile(missile->arrayID);
+                deleteMissile(missile->arrayID);
                 i=curMaxBgObject;
             }
         }

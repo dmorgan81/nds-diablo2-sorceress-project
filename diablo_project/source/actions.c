@@ -83,7 +83,7 @@ void CheckForLevelUp()
 
 void Sort(int X,int Y)
 {
-    if(cout_sort[ul_keys.held.L] <=hero.stats.curMana && !lvlUpIcnPressed)
+    if(skillCost[ul_keys.held.L] <=hero.stats.curMana && !lvlUpIcnPressed)
     {
         hero.skillperiod=50;
         hero.cooldown=200;
@@ -92,8 +92,8 @@ void Sort(int X,int Y)
         hero.action=3;
 
 
-        sortchoisi[ul_keys.held.L] (X,Y,angle,skillsLevels[currentSkill[ul_keys.held.L]]);
-        hero.stats.curMana -= cout_sort[ul_keys.held.L];
+        selectedSkill[ul_keys.held.L] (X,Y,angle,skillsLevels[currentSkill[ul_keys.held.L]]);
+        hero.stats.curMana -= skillCost[ul_keys.held.L];
 
         myulStartAnim (hero.sprite, 0, spritedatabase[0].nbframe,hero.skillperiod/spritedatabase[0].nbframe,1);//framerate according to skill period to match animation time
 

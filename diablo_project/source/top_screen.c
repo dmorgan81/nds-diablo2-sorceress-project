@@ -8,7 +8,7 @@ _GFX_ALIGN char *topscr_levelFont=NULL;
 _GFX_ALIGN short *topscr_palbuffer=NULL;
 u8 lvlfontsizes[10]= {18,9,14,14,15,15,14,14,15,14};
 extern int bg3_sub;
-void InitTopScreen (void)
+void initTopScreen (void)
 {
     topscr_buffer=(char*)malloc(256*192*sizeof(char));
     topscr_orbs=(char*)malloc(256*42*sizeof(char));
@@ -23,60 +23,62 @@ void InitTopScreen (void)
     {
         file=fopen("/fond_haut_Bitmap.bin", "rb");
         //copy main background
-        fread(topscr_buffer, sizeof(char), 256*192, file);
-        //copy images of the orbs and the backup of the background
-        for(i=0; i<42; i++)
+        if (file)
         {
-            fread(topscr_orbs+168*i, sizeof(char), 84, file);
-            dmaCopy(topscr_buffer+(143+i)*256+17,topscr_orbs+84+i*168,42);
-            dmaCopy(topscr_buffer+(143+i)*256+198,topscr_orbs+126+i*168,42);
-            fseek(file,172,SEEK_CUR);
-        }
+            fread(topscr_buffer, sizeof(char), 256*192, file);
+            //copy images of the orbs and the backup of the background
+            for(i=0; i<42; i++)
+            {
+                fread(topscr_orbs+168*i, sizeof(char), 84, file);
+                dmaCopy(topscr_buffer+(143+i)*256+17,topscr_orbs+84+i*168,42);
+                dmaCopy(topscr_buffer+(143+i)*256+198,topscr_orbs+126+i*168,42);
+                fseek(file,172,SEEK_CUR);
+            }
 
-        //copy the level numbers font
-        fseek(file,256*192+84,SEEK_SET);
-        for(i=0; i<21; i++)
-        {
-            fread(topscr_levelFont+210*i, sizeof(char), 168, file);
-            fseek(file,88,SEEK_CUR);
-        }
-        fseek(file,256*192+256*21+84,SEEK_SET);
-        for(i=0; i<21; i++)//copy images of the orbs and the backup of the background
-        {
-            fread(topscr_levelFont+210*i+168, sizeof(char), 42, file);
-            fseek(file,256*(192+21+i)+84,SEEK_SET);
-        }
+            //copy the level numbers font
+            fseek(file,256*192+84,SEEK_SET);
+            for(i=0; i<21; i++)
+            {
+                fread(topscr_levelFont+210*i, sizeof(char), 168, file);
+                fseek(file,88,SEEK_CUR);
+            }
+            fseek(file,256*192+256*21+84,SEEK_SET);
+            for(i=0; i<21; i++)//copy images of the orbs and the backup of the background
+            {
+                fread(topscr_levelFont+210*i+168, sizeof(char), 42, file);
+                fseek(file,256*(192+21+i)+84,SEEK_SET);
+            }
 
-        fclose(file);
+            fclose(file);
+        }
         dmaCopy(topscr_buffer, bgGetGfxPtr(bg3_sub), 256*192);
         file=fopen("/fond_haut_Pal.bin", "rb");
-        fread(topscr_palbuffer, sizeof(short), 256, file);
+        if (file)fread(topscr_palbuffer, sizeof(short), 256, file);
         fclose(file);
 
         file=fopen("/exocet_Bitmap.bin", "rb");
-        fread(topscr_font, sizeof(char), 256*24, file);
+        if (file)fread(topscr_font, sizeof(char), 256*24, file);
         fclose(file);
         dmaCopy(topscr_palbuffer, BG_PALETTE_SUB, 256*2);
     }
-    //topDrawImage(17,143,topscr_orbs,0,0,42,42,168);
-    //topDrawImage(198,143,topscr_orbs,42,0,42,42,168);
+    topUpdateLevel();
     dmaCopy(topscr_buffer, bgGetGfxPtr(bg3_sub), 256*192);
     dmaCopy(topscr_palbuffer, BG_PALETTE_SUB, 256*2);
-    PA_VBLCounterStart(1);
+    CounterStart(1);
 
 }
 
-void QuickTopScreenRefresh (void)
+void quickTopScreenRefresh (void)
 {
-    if(!(PA_VBLCounter[1]&15))
+    if(!(Counter[1]&15))
     {
 
         ///Draw buffer to screen
         dmaCopy(topscr_buffer, bgGetGfxPtr(bg3_sub), 256*192);
-        dmaCopy(topscr_palbuffer, BG_PALETTE_SUB, 256*2);
+        //dmaCopy(topscr_palbuffer, BG_PALETTE_SUB, 256*2);
     }
     //we do actualize top screen every 16 frames, enough to have something smooth, and it doesnt impact the overall fps
-    else if (!(PA_VBLCounter[1]&7))
+    else if (!(Counter[1]&7))
     {
         ///set the correct images of the orbs in the buffer
         orbLifeLevel=((hero.stats.lifeMax-hero.stats.curLife)*42)/hero.stats.lifeMax;
@@ -112,14 +114,7 @@ void QuickTopScreenRefresh (void)
 void topDrawImage(int x,int y,char* source,int offsetx,int offsety,int sizex, int sizey,int dataheight)
 {
     register int i;
-    if(sizey&3) //if the number of lines is even we can copy 2line at the same time
-    {
-        for (i=0; i<sizey; i++)
-        {
-            dmaCopyHalfWords (2,source+offsetx+dataheight*(offsety+i),topscr_buffer+x+SCREEN_WIDTH*(y+i) , sizex);
-        }
-    }
-    if(sizey&1) //if the number of lines is even we can copy 2line at the same time
+    if(sizey&3) //if the number of lines is a multiple of 4 we can copy 4 line at the same time!!!
     {
         for (i=0; i<sizey-3; i+=4)
         {
@@ -129,13 +124,19 @@ void topDrawImage(int x,int y,char* source,int offsetx,int offsety,int sizex, in
             dmaCopyHalfWords (3,source+offsetx+dataheight*(offsety+i+3),topscr_buffer+x+SCREEN_WIDTH*(y+i+3) , sizex);
         }
     }
-
-    else
+    if(sizey&1) //if the number of lines is even we can copy 2line at the same time
     {
         for (i=0; i<sizey-1; i+=2)
         {
             dmaCopyHalfWordsAsynch (2,source+offsetx+dataheight*(offsety+i),topscr_buffer+x+SCREEN_WIDTH*(y+i) , sizex);
             dmaCopyHalfWords (3,source+offsetx+dataheight*(offsety+i+1),topscr_buffer+x+SCREEN_WIDTH*(y+i+1) , sizex);
+        }
+    }
+    else
+    {
+        for (i=0; i<sizey; i++)
+        {
+            dmaCopyHalfWords (2,source+offsetx+dataheight*(offsety+i),topscr_buffer+x+SCREEN_WIDTH*(y+i) , sizex);
         }
     }
 }
@@ -168,4 +169,58 @@ void topUpdateLevel(void)
         topDrawImage(26-(lvlfontsizes[hero.stats.lvl/10]+lvlfontsizes[hero.stats.lvl%10])/2, 7,topscr_levelFont,((hero.stats.lvl/10)*21),0,lvlfontsizes[hero.stats.lvl/10],21,210);
         topDrawImage(26-(-lvlfontsizes[hero.stats.lvl/10]+lvlfontsizes[hero.stats.lvl%10])/2, 7,topscr_levelFont,((hero.stats.lvl%10)*21),0,lvlfontsizes[hero.stats.lvl%10],21,210);
     }
+}
+
+void topSetSkill(int skill,bool secondarySkill)
+{
+    FILE* file;
+    _GFX_ALIGN char *buffer=NULL;
+    buffer=(char*)malloc(32*32*sizeof(char));
+
+    file=fopen("/sorts_Bitmap.bin", "rb");
+    //copy main background
+
+    if(file&&buffer)
+    {
+        fseek(file,32*32*skill,SEEK_SET);
+        fread(buffer, sizeof(char), 32*32, file);
+        topDrawImage(60+(105*secondarySkill),160,buffer,0,0,32,32,32);
+    }
+    fclose(file);
+    free(buffer);
+}
+
+void topSetBackground(char* name)
+{
+    char __str[500];
+    _GFX_ALIGN char *buffer=NULL;
+    _GFX_ALIGN short *palbuffer=NULL;
+
+    buffer=(char*)malloc(256*192*sizeof(char));
+    palbuffer=(short*)malloc(256*sizeof(short));
+    FILE* filebg;
+
+    sprintf(__str ,"/Backgrounds/%s_Pal.bin",name);
+    filebg=fopen(__str, "rb");
+    if(filebg&&palbuffer)
+    {
+        fread(palbuffer, sizeof(short), 256, filebg);
+        dmaCopy(palbuffer, BG_PALETTE_SUB, 256*2);
+    }
+    sprintf(__str ,"/Backgrounds/%s_Bitmap.bin",name);
+    filebg=fopen(__str,"rb");
+    if(filebg&&buffer)
+    {
+        fread(buffer, sizeof(char), 256*192, filebg);
+        dmaCopy(buffer, bgGetGfxPtr(bg3_sub), 256*192);
+    }
+
+    fclose(filebg);
+    free(buffer);
+}
+
+void topSetNormalScreen()
+{
+    dmaCopy(topscr_buffer, bgGetGfxPtr(bg3_sub), 256*192);
+    dmaCopy(topscr_palbuffer, BG_PALETTE_SUB, 256*2);
 }

@@ -18,11 +18,11 @@ extern fx_data fxdata[MAX_FXDATA];
 extern fx_info fxinfo[MAX_FX];
 extern int curMaxObject,curMaxBgObject,curMaxMissile;
 
-void initobjects (void);
-void SpawnObjects();
+void initObjects (void);
+void spawnObjects();
 void updateObjects();
-void deleteobject(s16 ID);
-void deletemissile(s16 ID);
+void deleteObject(s16 ID);
+void deleteMissile(s16 ID);
 void newObject(s32 x, s32 y, objectinfo* object,s16 ID, objectdata* data,bool array);
 void newMissile(s32 x, s32 y, objectinfo* object,s16 ID, s16 angle, s16 vx, s16 vy ,int dommages, objectdata* data );
 s16 getUnusedObject(void);
@@ -31,13 +31,13 @@ s16 getUnusedFX(void);
 s16 createFX (s16 datanb);
 inline void deleteFX (s16 fx);
 
-void MobDeath(objectinfo* mob,int time);
+void mobDeath(objectinfo* mob,int time);
 void deadMob(objectinfo* mob);
 
 //scrolling
-void objectscroll(objectinfo* mover);
-void ScrollFXonly(objectinfo* mover);
-void missilescroll(objectinfo* mover);
+void objectScroll(objectinfo* mover);
+void scrollFXonly(objectinfo* mover);
+void missileScroll(objectinfo* mover);
 void FXscroll(objectinfo* mover, bool nb);
 void onemDirScroll(objectinfo* mover);
 void deadScroll(objectinfo* mover);

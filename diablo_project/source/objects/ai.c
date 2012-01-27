@@ -71,7 +71,7 @@ void zombieAI(objectinfo* zombie)
     if((boxcollision (&zombie->hitbox,zombie->x,zombie->y,&hero.hitbox,hero.x,hero.y))&& (!(zombie->variables&63))) hero.stats.curLife-=zombie->dommages;
     if (zombie->life < 1)
     {
-        MobDeath(zombie,300);
+        mobDeath(zombie,300);
     }
 }
 //change
@@ -170,7 +170,7 @@ void meleeAI(objectinfo* melee)
 
     else
     {
-        MobDeath(melee,300);
+        mobDeath(melee,300);
     }
 
 }
@@ -194,7 +194,7 @@ void missileAI (objectinfo* missile)
 
     if (missile->life < 1)
     {
-        deletemissile( missile->arrayID);
+        deleteMissile( missile->arrayID);
     }
 }
 
@@ -224,7 +224,7 @@ void orbAI(objectinfo* missile)
 
     if (missile->life < 1)
     {
-        deletemissile( missile->arrayID);
+        deleteMissile( missile->arrayID);
     }
 }
 
@@ -248,7 +248,7 @@ void fireAI(objectinfo* missile)
 
     if (missile->life < 1)
     {
-        deletemissile( missile->arrayID);
+        deleteMissile( missile->arrayID);
     }
 }
 
@@ -264,7 +264,7 @@ void chargedboltAI (objectinfo* missile)
     }
     if (missile->life < 1)
     {
-        deletemissile( missile->arrayID);
+        deleteMissile( missile->arrayID);
     }
 }
 void hydraAI(objectinfo* missile)
@@ -297,6 +297,6 @@ void hydraAI(objectinfo* missile)
             int nb=getUnusedMissile();
             newMissile(fix_norm(missile->x+PA_Cos(missile->angle)*10)+missile->hitbox.up.x,fix_norm(missile->y)+missile->hitbox.up.y, &missiles[nb],nb,missile->angle,1.5*PA_Cos(missile->angle),1.5*(-PA_Sin(missile->angle)),mdata[0].dommages, &mdata[0] );
         }
-        if(missile->life<1) deletemissile(missile->arrayID);
+        if(missile->life<1) deleteMissile(missile->arrayID);
     }
 }
