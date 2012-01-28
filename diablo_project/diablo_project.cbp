@@ -93,6 +93,11 @@
 		<Unit filename="source\skillmenu.map.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="source\sound.c">
+			<Option compilerVar="CC" />
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="source\sound.h" />
 		<Unit filename="source\spritesdata.txt" />
 		<Unit filename="source\structures.h" />
 		<Unit filename="source\top_screen.c">

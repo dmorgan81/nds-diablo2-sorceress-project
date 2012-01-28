@@ -1,8 +1,9 @@
 #include "main.h"
+#include "sound.h"
 #include "misc.h"
 #include "interface.h"
 #include "uldata.h"
-#include "Sor_cantuseyet.h"
+//#include "Sor_cantuseyet.h"
 //#define ulPrintf_xy(x, y, format...)		({ char __str[1000]; sprintf(__str , ##format); ulDrawString(x, y, __str); })
 
 extern int curMaxSprite;
@@ -147,7 +148,7 @@ void waypointmenu(objectinfo* wp)
 
 void pause ()//with booloean parameter checked at each frame
 {
-    CounterPause(1);
+    CounterPause(0);
     WaitForVBL();
     int frameNumber=0, animStage=0;
     UL_IMAGE *pentacle = ulLoadImageFilePNG((void*)pentacle_png, (int)pentacle_png_size, UL_IN_RAM, UL_PF_PAL4),
@@ -178,7 +179,7 @@ void pause ()//with booloean parameter checked at each frame
     }
     ulDeleteImage (pentacle);
     ulDeleteImage (pausesprite);
-    CounterStart(0);
+    CounterStart(VBL);
 }
 
 int TextBoxGetLineCharNb(int x0, int y0, int x1, int y1, const char *text)
@@ -237,13 +238,17 @@ newline:
 }
 
 
-void DialogInBox(char* dialog,int speed,bool anim)
+void DialogInBox(char* dialog,int speed,char* topBg,int sound,int soundOffset,bool anim)
 {
     int i;
+    mm_sfxhand sfx=0;
     int offset=5*speed;
     UL_IMAGE *box = ulLoadImageFilePNG((void*)textbox_png, (int)textbox_png_size, UL_IN_RAM, UL_PF_PAL4);
+    if(topBg)topSetBackground(topBg);
+    if(sound!=-1) loadSound(sound);
     while(*dialog&& !ul_keys.pressed.start)//offset<((190-DIALOGY0)<<3))
     {
+        if(offset==soundOffset) if(sound!=-1 && !sfx)    sfx=playSound(sound);
         offset+=1+2*ul_keys.held.B;
         if (187<128+(offset/speed))
         {
@@ -257,7 +262,9 @@ void DialogInBox(char* dialog,int speed,bool anim)
         ulEndDrawing();
         WaitForVBL();
     }
+    topSetNormalScreen();
     ulDeleteImage(box);
+    stopSound(sfx);
 }
 
 
@@ -375,7 +382,7 @@ void skillmenu(bool levelup)
                         }
                         endloop=1;
                     }
-//                    else AS_SoundDirectPlay(0,SOUND(Sor_cantuseyet));//AS_SoundQuickPlay((u8*)Sor_cantuseyet);
+                    else if (Counter[TALKING]>60){CounterStart(TALKING);playSound(SFX_SOR_CANTUSEYET);}
                 }
                 else if (ul_keys.touch.x>212&&ul_keys.touch.x<244&&ul_keys.touch.y>156&&ul_keys.touch.y<188)
                 {
@@ -413,6 +420,8 @@ void death()
     ulStartDrawing2D();
     ulSetDepth(0);
     ulDrawImage(deathscreen);
+    loadSound(SFX_DEATH);
+    playSound(SFX_DEATH);
     ulEndDrawing();
     WaitForVBL();
     while (!(ul_keys.pressed.value||ul_keys.touch.click))WaitForVBL();
@@ -426,5 +435,7 @@ void death()
     quickTopScreenRefresh();
     myulInitData(1);
     changemap(currentMap);
+    WaitForVBL();
+    unloadSound(SFX_DEATH);
 }
 

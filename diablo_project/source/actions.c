@@ -1,5 +1,5 @@
 #include "actions.h"
-#include "Sor_Ineedmana.h"
+#include "sound.h"
 
 u8 skillsLevels[SKILLNUMBER];
 int skilldmg[SKILLNUMBER][2];
@@ -37,7 +37,7 @@ void CheckForLevelUp()
         if (hero.stats.lvl==5)
         {
             int i;
-            DialogInBox("The waypoint in the southwest is now opened.\nYou can use it by pressing A button.\nIf you wish to come back, simply use the waypoint from your new location.\n\nGo forth, Hero, may the Heaven protect you.",8,0);
+            DialogInBox("The waypoint in the southwest is now opened.\nYou can use it by pressing A button.\nIf you wish to come back, simply use the waypoint from your new location.\n\nGo forth, Hero, may the Heaven protect you.",8,0,-1,0,0);
             int objectnb;
             objectnb=getUnusedBgObject();
             newObject((46<<3)+4, (39<<3)+8, &bgobjects[objectnb],objectnb, &bgdata[2] ,1);
@@ -49,7 +49,7 @@ void CheckForLevelUp()
     }
     if (skillpoints)
     {
-        if (lvlupicon==-1) lvlupicon=myulCreateSprite(18,224,160,500);
+        if (lvlupicon==-1) lvlupicon=myulCreateSprite(18,224,160,348);
         if (ul_keys.touch.held)
         {
             if(ul_keys.touch.x>224&&ul_keys.touch.x<248&&ul_keys.touch.y>160&&ul_keys.touch.y<188&&(ul_keys.touch.click||(lvlUpIcnPressed)))
@@ -98,33 +98,29 @@ void Sort(int X,int Y)
         myulStartAnim (hero.sprite, 0, spritedatabase[0].nbframe,hero.skillperiod/spritedatabase[0].nbframe,1);//framerate according to skill period to match animation time
 
     }
-//    else if(!lvlUpIcnPressed) AS_SoundDirectPlay(0,SOUND(Sor_Ineedmana));//AS_SoundQuickPlay((u8*)Sor_Ineedmana);
+    else if(!lvlUpIcnPressed&& Counter[TALKING]>60){CounterStart(TALKING); playSound(SFX_SOR_INEEDMANA);}
 }
-#include "firecast1.h"
 void nospell (int a, int b, u16 c,u8 d) {}
-#include "coldcast.h"
 
 ///firebolt///
-#include "firebolt1.h"
 void firebolt (int x,int y,u16 angle,u8 level)
 {
     int nb=getUnusedMissile(), dommages=PA_RandMinMax(skilldmg[currentSkill[ul_keys.held.L]][0],skilldmg[currentSkill[ul_keys.held.L]][1]);
     newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+30, &missiles[nb],nb,angle,PA_Cos(angle)*3,(-PA_Sin(angle))*3,dommages, &mdata[0] );
-//    AS_SoundQuickPlay((u8*)firebolt1);
-//    AS_SoundQuickPlay((u8*)firecast1);
+    playSound(SFX_FIREBOLT1);
+    playSound(SFX_FIRECAST);
 }
-#include "firebolt1.h"
 
 void icebolt (int x,int y,u16 angle,u8 level)
 {
-//    AS_SoundQuickPlay((u8*)coldcast);
+    playSound(SFX_COLDCAST);
     int nb=getUnusedMissile(), dommages=PA_RandMinMax(skilldmg[currentSkill[ul_keys.held.L]][0],skilldmg[currentSkill[ul_keys.held.L]][1]);
     newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+30, &missiles[nb],nb,angle,1.5*PA_Cos(angle),1.5*(-PA_Sin(angle)),dommages, &mdata[1] );
 }
-#include "chargedbolt1.h"
+
 void chargedbolt (int x,int y,u16 angle,u8 level)
 {
-//    AS_SoundQuickPlay((u8*)chargedbolt1);
+    playSound(SFX_CHARGEDBOLT1);
     int dommages=PA_RandMinMax(skilldmg[currentSkill[ul_keys.held.L]][0],skilldmg[currentSkill[ul_keys.held.L]][1]);
     int nb=getUnusedMissile();
     if (level>2)
@@ -159,19 +155,19 @@ void chargedbolt (int x,int y,u16 angle,u8 level)
 void iceorb (int x,int y,u16 angle,u8 level)
 {
     int nb=getUnusedMissile(), dommages=PA_RandMinMax(skilldmg[currentSkill[ul_keys.held.L]][0],skilldmg[currentSkill[ul_keys.held.L]][1]);
-//    AS_SoundQuickPlay((u8*)coldcast);
+    playSound(SFX_COLDCAST);
     newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+30, &missiles[nb],nb,angle,PA_Cos(angle),-PA_Sin(angle),dommages, &mdata[2] );
 }
 
 void blaze (int x,int y,u16 angle,u8 level)
 {
     auras[0].life=1000;
-//    AS_SoundQuickPlay((u8*)firecast1);
+    playSound(SFX_FIRECAST);
 }
 
 void firewall (int x,int y,u16 angle,u8 level)
 {
-//    AS_SoundQuickPlay((u8*)firecast1);
+    playSound(SFX_FIRECAST);
     x+=fix_norm(hero.x)-CAMERA_X;
     y+=fix_norm(hero.y)-CAMERA_Y;
     int nb=getUnusedMissile(), dommages=PA_RandMinMax(skilldmg[currentSkill[ul_keys.held.L]][0],skilldmg[currentSkill[ul_keys.held.L]][1]);
@@ -189,7 +185,7 @@ void firewall (int x,int y,u16 angle,u8 level)
 
 void hydra (int x,int y,u16 angle,u8 level)
 {
-//    AS_SoundQuickPlay((u8*)firecast1);
+    playSound(SFX_FIRECAST);
     int nb=getUnusedMissile(), dommages=PA_RandMinMax(skilldmg[currentSkill[ul_keys.held.L]][0],skilldmg[currentSkill[ul_keys.held.L]][1]);
     newMissile(fix_norm(hero.x)+hero.hitbox.down.x+x-CAMERA_X-10, fix_norm(hero.y)+y-CAMERA_Y+7, &missiles[nb],nb,384,0,0,dommages, &mdata[4] );
     missiles[nb].variables=0;
@@ -202,12 +198,11 @@ void hydra (int x,int y,u16 angle,u8 level)
 }
 
 ///Teleport///
-#include "teleport1.h"
 void teleport(int x,int y,u16 angle,u8 level)
 {
     x-=CHARFEET_X;
     y-=CHARFEET_Y;
-//    AS_SoundQuickPlay((u8*)teleport1);
+    playSound(SFX_TELEPORT);
     int j,k;
 
     if(anytelecollision(hero.hitbox,x,y))

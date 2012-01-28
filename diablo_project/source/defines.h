@@ -5,6 +5,7 @@
 /////Defines/////
 /////////////////
 /////////////////
+#include "soundbank.h" //include all audio defines
 
 #define MUSIC_OFF
 
@@ -53,8 +54,10 @@ int MAPSIZE_Y;
 #define MAX_FXDATA 			11
 #define MAX_SPRITES 		300
 #define MAX_AURAS           1
-
-
+//counters
+#define VBL                 0
+#define TOPSCREEN           1
+#define TALKING             2
 
 //status, bitmasks
 

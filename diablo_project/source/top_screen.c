@@ -51,7 +51,6 @@ void initTopScreen (void)
 
             fclose(file);
         }
-        dmaCopy(topscr_buffer, bgGetGfxPtr(bg3_sub), 256*192);
         file=fopen("/fond_haut_Pal.bin", "rb");
         if (file)fread(topscr_palbuffer, sizeof(short), 256, file);
         fclose(file);
@@ -59,18 +58,17 @@ void initTopScreen (void)
         file=fopen("/exocet_Bitmap.bin", "rb");
         if (file)fread(topscr_font, sizeof(char), 256*24, file);
         fclose(file);
-        dmaCopy(topscr_palbuffer, BG_PALETTE_SUB, 256*2);
     }
     topUpdateLevel();
     dmaCopy(topscr_buffer, bgGetGfxPtr(bg3_sub), 256*192);
     dmaCopy(topscr_palbuffer, BG_PALETTE_SUB, 256*2);
-    CounterStart(1);
+    CounterStart(TOPSCREEN);
 
 }
 
 void quickTopScreenRefresh (void)
 {
-    if(!(Counter[1]&15))
+    if(!(Counter[TOPSCREEN]&15))
     {
 
         ///Draw buffer to screen
@@ -78,7 +76,7 @@ void quickTopScreenRefresh (void)
         //dmaCopy(topscr_palbuffer, BG_PALETTE_SUB, 256*2);
     }
     //we do actualize top screen every 16 frames, enough to have something smooth, and it doesnt impact the overall fps
-    else if (!(Counter[1]&7))
+    else if (!(Counter[TOPSCREEN]&7))
     {
         ///set the correct images of the orbs in the buffer
         orbLifeLevel=((hero.stats.lifeMax-hero.stats.curLife)*42)/hero.stats.lifeMax;

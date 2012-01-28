@@ -278,7 +278,7 @@ void myulScreenDraws()
 
         }
     }
-    //ulPrintf_xy(0,0,"%d",Counter[0]);
+    //ulPrintf_xy(0,0,"%d",Counter[VBL]);
     ulEndDrawing();
 }
 

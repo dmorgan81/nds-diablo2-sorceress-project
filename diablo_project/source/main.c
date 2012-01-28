@@ -11,6 +11,8 @@
 #include <nds.h>
 #include "main.h"
 #include "misc.h"
+#include "sound.h"
+
 //#define Test
 //#define NOSPAWN
 #ifdef Test
@@ -138,7 +140,6 @@ int main( int argc, char **argv)
         myulScreenDraws();
         WaitForVBL();
     }
-topSetBackground("tyrael");
 
     DialogInBox("Welcome to the world of Sanctuary, sorceress.\nAs you may know, this land is, once again, struck by the Three.\n\n\
 I am the Archangel Tyrael. I came here to prevent Diablo from freeing his brother, Baal. But I have failed. Now, Terror and Destruction roam free throughout your world.\n\n\
@@ -146,13 +147,12 @@ Even now, they head towards the Eastern capital of Kurast - to the very heart of
 If the three Prime Evils unite, they will be invincible. Though it is unclear as to what their aims are, it is certain that they must be stopped at all costs.\n\n\
 I am broken and the energys that tie me to this world are diminishing rapidly.\n\n\
 You must take up this quest and prevent the Three Brothers from reuniting. You must cross the sea and search for Diablo and Baal in Kurast.\n\n\
-Now hurry, mortal... Time is running out for all of us!\n",10,1);
+Now hurry, mortal... Time is running out for all of us!\n",15,"tyrael",-1,6*15*8,1);//SFX_TYR_INTRO
 #endif
-topSetNormalScreen();
     skillmenu(1);
-    WaitForVBL();
+        WaitForVBL();
 
-    CounterStart(0);
+    CounterStart(VBL);
     while(1)
     {
         while(hero.stats.curLife>0&&hero.stats.curLife<=hero.stats.lifeMax)
@@ -182,7 +182,7 @@ topSetNormalScreen();
 
             myulSetSpritePrio(hero.sprite,CHARFEET_Y);
 
-            if (!(Counter[0]&128))//change
+            if (!(Counter[VBL]&128))//change
             {
                 for (i=0; i<MAX_DATASPRITES; i++)
                 {
@@ -191,7 +191,7 @@ topSetNormalScreen();
             }
             myulScreenDraws();
 
-            if (!(Counter[0]&128))
+            if (!(Counter[VBL]&128))
             {
 #ifdef Test
                 //PA_OutputText(1,1,8,"tex: %d    ",ulGetTexVramAvailMemory());
@@ -209,7 +209,7 @@ topSetNormalScreen();
 
 #ifndef NOSPAWN
             //spawning
-            if(!(Counter[0]&511))
+            if(!(Counter[VBL]&511))
             {
                 if (hero.stats.lvl<2)
                 {
@@ -263,7 +263,7 @@ topSetNormalScreen();
             if(ul_keys.pressed.X) saveloadmenu(0);
             if(ul_keys.pressed.Y) saveloadmenu(1);
 #ifdef Test
-            if(ul_keys.pressed.B) hero.stats.experience+=100;
+            if(ul_keys.pressed.B)  {hero.stats.experience+=100;}
 #endif
             if(ul_keys.pressed.select)	skillmenu(0); //will be changed later, we cant firce player to levelup skills if they just want to switch
             if(PAUSEKEY || ul_keys.held.lid) pause();//(int*)ul_keys.pressed.start);
@@ -303,7 +303,7 @@ topSetNormalScreen();
 
 void CallAllInits()
 {
-
+int i;
     ulInit(UL_INIT_ALL);
     ulInitGfx();
     ulInitText();
@@ -323,6 +323,7 @@ void CallAllInits()
 
 #ifndef _NOSPLASH_
     //Affiches des splashs, PAlib, uLibrary, Project...
+    initTopScreen();
     MySplash();
 
     UL_IMAGE* loadingimg = ulLoadImageFilePNG((void*)loading_png, (int)loading_png, UL_IN_RAM, UL_PF_PAL8);
@@ -333,24 +334,7 @@ void CallAllInits()
     ulDrawImage(loadingimg);
     ulEndDrawing();
 #endif
-    //Font PALIB
-    /*
-        //PA_InitCustomText(1, 0, exocet);//obselete
-        PA_LoadText(1, 0, &exocet);
-        PATEXT_ALL_COL_WHITE //define, changing default text color
-        //essai pour les palettes
 
-        int screen=1;
-        PA_CreateTextPal(screen, 0, 31, 31, 31);
-        PA_CreateTextPal(screen, 1, 31, 0, 0);
-        PA_CreateTextPal(screen, 2, 0, 31, 0);
-        PA_CreateTextPal(screen, 3, 0, 0, 31);
-        PA_CreateTextPal(screen, 4, 31, 0, 31);
-        PA_CreateTextPal(screen, 5, 0, 31, 31);
-        PA_CreateTextPal(screen, 6, 31, 31, 0);
-        PA_CreateTextPal(screen, 7, 25, 25, 25);
-        PA_CreateTextPal(screen, 8, 20, 20, 20);
-        PA_CreateTextPal(screen, 9, 0, 0, 0);*/
 #ifndef _NOSPLASH_
     //loading frame 1
     ulSetImageTileSize (loadingimg, 192, 0, 192, 192);
@@ -358,20 +342,9 @@ void CallAllInits()
     ulDrawImage(loadingimg);
     ulEndDrawing();
 #endif
-
-#ifdef MUSIC_ON
-    /*
-        // Check if tristram.mp3 is there, regardless if libfat or EFS_Lib is used
-        MP3FILE* file = FILE_OPEN("tristram.mp3");
-        if (!file)
-        {
-            //PA_OutputText(0, 1, 1, "tristram.mp3 not found !!!");
-            for(;;) WaitForVBL();
-        }
-        FILE_CLOSE(file);
-        */
-#endif
+    initSounds();
     initObjects ();
+
 #ifndef _NOSPLASH_
     //loading frame 2
     ulSetImageTileSize (loadingimg, 384, 0, 192, 192);
@@ -388,7 +361,6 @@ void CallAllInits()
         AS_ReserveChannel(0);//hero's channel
 
     */
-    initTopScreen ();
 #ifndef _NOSPLASH_
     //loading frame 3
     ulSetImageTileSize (loadingimg, 576, 0, 192, 192);
@@ -399,7 +371,6 @@ void CallAllInits()
 #endif
     myulInitData (0);
     changemap(0);
-    int i;
 #ifndef Test
     for (i=0; i<SKILLNUMBER; i++)
     {
@@ -411,6 +382,9 @@ void CallAllInits()
         skillsLevels[i]=1;
     }
 #endif
+    Counter[TOPSCREEN]=8;
+    quickTopScreenRefresh();
+    topSetNormalScreen();
     WaitForVBL();
 }
 
@@ -427,23 +401,7 @@ void CallAllInits()
 void MySplash()
 {
     s32 time=180;
-    _GFX_ALIGN char *buffer=(char*)malloc(49152*sizeof(char));
-    _GFX_ALIGN short *palbuffer=(short*)malloc(256*sizeof(short));
-    FILE* file;
-    if (buffer&&palbuffer)
-    {
-        file=fopen("/d_Splash1_Bitmap.bin", "rb");
-        fread(buffer, 1, 49152*sizeof(u8), file);
-        fclose(file);
-        dmaCopy(buffer, bgGetGfxPtr(bg3_sub), 256*192);
-        file=fopen("/d_Splash1_Pal.bin", "rb");
-        fread(palbuffer, 1, 256*sizeof(short), file);
-        fclose(file);
-        dmaCopy(palbuffer, BG_PALETTE_SUB, 256*2);
-    }
-    free(buffer);
-    free(palbuffer);
-
+    topSetBackground("d_Splash1");
     ulShowSplashScreen(3);
     UL_IMAGE* d_splash2 = ulLoadImageFilePNG((void*)d_Splash2_png, (int)d_Splash2_png, UL_IN_RAM, UL_PF_PAL8);
     ulStartDrawing2D();
@@ -465,8 +423,6 @@ void MySplash()
     ulEndDrawing();
     ulDeleteImage (loadingimg);
     ulDeleteImage (d_splash2);
-
-
 }
 
 
