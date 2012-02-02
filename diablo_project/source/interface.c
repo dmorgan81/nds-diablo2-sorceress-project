@@ -81,7 +81,7 @@ void saveloadmenu(bool saveload)
 {
     bool loop=1;
     int i;
-    UL_IMAGE *box = ulLoadImageFilePNG((void*)textbox_png, (int)textbox_png_size, UL_IN_RAM, UL_PF_PAL4);
+    UL_IMAGE *box = ulLoadImageFilePNG("/gfx/textbox_png.png",0, UL_IN_RAM, UL_PF_PAL4);
     WaitForVBL();
     while (loop)
     {
@@ -123,7 +123,7 @@ void waypointmenu(objectinfo* wp)
     {
         bool loop=1;
         int i;
-        UL_IMAGE *box = ulLoadImageFilePNG((void*)textbox_png, (int)textbox_png_size, UL_IN_RAM, UL_PF_PAL4);
+        UL_IMAGE *box = ulLoadImageFilePNG("/gfx/textbox_png.png",0, UL_IN_RAM, UL_PF_PAL4);
         WaitForVBL();
         while (loop)
         {
@@ -151,8 +151,8 @@ void pause ()//with booloean parameter checked at each frame
     CounterPause(0);
     WaitForVBL();
     int frameNumber=0, animStage=0;
-    UL_IMAGE *pentacle = ulLoadImageFilePNG((void*)pentacle_png, (int)pentacle_png_size, UL_IN_RAM, UL_PF_PAL4),
-                         *pausesprite = ulLoadImageFilePNG((void*)pause_png, (int)pause_png_size, UL_IN_RAM, UL_PF_PAL2);
+    UL_IMAGE *pentacle = ulLoadImageFilePNG("/gfx/pentacle_png.png",0, UL_IN_RAM, UL_PF_PAL4),
+                         *pausesprite = ulLoadImageFilePNG("/gfx/pause_png.png",0, UL_IN_RAM, UL_PF_PAL2);
     while (!(PAUSEKEY))
     {
         ulStartDrawing2D();
@@ -244,7 +244,7 @@ void DialogInBox(char* dialog,int speed,char* topBg,char* sound,int soundOffset,
     //mm_sfxhand sfx=0;
     bool sfx=0;
     int offset=5*speed;
-    UL_IMAGE *box = ulLoadImageFilePNG((void*)textbox_png, (int)textbox_png_size, UL_IN_RAM, UL_PF_PAL4);
+    UL_IMAGE *box = ulLoadImageFilePNG("/gfx/textbox_png.png",0, UL_IN_RAM, UL_PF_PAL4);
     if(topBg)topSetBackground(topBg);
     //if(sound!=-1) loadSound(sound);
     while(*dialog&& !ul_keys.pressed.start)//offset<((190-DIALOGY0)<<3))
@@ -303,12 +303,12 @@ void skillmenu(bool levelup)
     };
     u8 i;
 
-    UL_IMAGE *skillicons = ulLoadImageFilePNG((void*)sorts_png, (int)sorts_png_size, UL_IN_RAM, UL_PF_PAL4);
-    UL_IMAGE *numberslot = ulLoadImageFilePNG((void*)number_png, (int)number_png_size, UL_IN_RAM, UL_PF_PAL2);
-    UL_IMAGE *exitbtn=ulLoadImageFilePNG((void*)exit_png, (int)exit_png_size, UL_IN_VRAM, UL_PF_PAL4);
-//    UL_IMAGE *skillbg = ulLoadImageFilePNG((void*)skillmenubg_png, (int)skillmenubg_png_size, UL_IN_RAM, UL_PF_PAL4);
+    UL_IMAGE *skillicons = ulLoadImageFilePNG("/gfx/sorts_png.png",0, UL_IN_RAM, UL_PF_PAL4);
+    UL_IMAGE *numberslot = ulLoadImageFilePNG("/gfx/number_png.png",0, UL_IN_RAM, UL_PF_PAL2);
+    UL_IMAGE *exitbtn=ulLoadImageFilePNG("/gfx/exit_png.png",0, UL_IN_VRAM, UL_PF_PAL4);
+//    UL_IMAGE *skillbg = ulLoadImageFilePNG("/gfx/skillmenubg_png.png",0, UL_IN_RAM, UL_PF_PAL4);
 //UL_MAP *skillbg = ulCreateMap(mapTiles,map,8,8,60,45,UL_MF_U16);
-    UL_IMAGE *skillTiles = ulLoadImageFilePNG((void*)skilltiles_png, (int)skilltiles_png_size, UL_IN_VRAM, UL_PF_PAL4);
+    UL_IMAGE *skillTiles = ulLoadImageFilePNG("/gfx/skilltiles_png.png",0, UL_IN_VRAM, UL_PF_PAL4);
     UL_MAP *skillbg = ulCreateMap(skillTiles,/*Tileset*/skillmenu_map,8,8,/*Tiles size*/32,24,/*Map size*/UL_MF_U16);//Map format
 
     while (!endloop)
@@ -418,7 +418,7 @@ void death()
     ulDeleteImage(mapTiles);
     ulDeleteMap(Mymap);
     quickTopScreenRefresh();
-    UL_IMAGE *deathscreen = ulLoadImageFilePNG((void*)deathscreen_png, (int)deathscreen_png_size, UL_IN_RAM, UL_PF_PAL8);
+    UL_IMAGE *deathscreen = ulLoadImageFilePNG("/gfx/deathscreen_png.png",0, UL_IN_RAM, UL_PF_PAL8);
     ulStartDrawing2D();
     ulSetDepth(0);
     ulDrawImage(deathscreen);

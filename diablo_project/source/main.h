@@ -9,8 +9,8 @@
 //#include "efs_lib.h"				// Include for EFS_lib
 
 //#include "all_gfx.h"
-#include "d_Splash2_png.h"
-#include "loading_png.h"
+//#include "d_Splash2_png.h"
+//#include "loading_png.h"
 
 #include "structures.h"
 #include "defines.h"

@@ -298,6 +298,7 @@ Now hurry, mortal... Time is running out for all of us!\n",15,"tyrael","/Tyr_int
 
 
 
+int ulInitNitroFS();
 
 
 void CallAllInits()
@@ -313,7 +314,7 @@ int i;
     bg3_sub = bgInitSub(3, BgType_Bmp8, BgSize_B8_256x256, 0,0);
     ulSetTexVramParameters(UL_BANK_A | UL_BANK_B | UL_BANK_C | UL_BANK_D, VRAM_A, 512 << 10); //256ko de vram
     CountersReset();
-    if (!nitroFSInit())
+    if (!ulInitNitroFS())
     {
         ////PA_OutputText(0, 1, 1, "Filesystem init error !!!");
         for(;;) WaitForVBL();
@@ -325,7 +326,7 @@ int i;
     initTopScreen();
     MySplash();
 
-    UL_IMAGE* loadingimg = ulLoadImageFilePNG((void*)loading_png, (int)loading_png, UL_IN_RAM, UL_PF_PAL8);
+    UL_IMAGE* loadingimg = ulLoadImageFilePNG("/gfx/loading_png.png",0, UL_IN_RAM, UL_PF_PAL8);
     loadingimg->x=32;
     //loading frame 0
     ulSetImageTileSize (loadingimg, 0, 0, 192, 192);
@@ -402,7 +403,7 @@ void MySplash()
     s32 time=180;
     topSetBackground("d_Splash1");
     ulShowSplashScreen(3);
-    UL_IMAGE* d_splash2 = ulLoadImageFilePNG((void*)d_Splash2_png, (int)d_Splash2_png, UL_IN_RAM, UL_PF_PAL8);
+    UL_IMAGE* d_splash2 = ulLoadImageFilePNG("/gfx/d_Splash2_png.png",0, UL_IN_RAM, UL_PF_PAL8);
     ulStartDrawing2D();
     ulDrawImage(d_splash2);
     ulEndDrawing();
@@ -413,7 +414,7 @@ void MySplash()
         time--;
         WaitForVBL();
     }
-    UL_IMAGE* loadingimg = ulLoadImageFilePNG((void*)loading_png, (int)loading_png, UL_IN_RAM, UL_PF_PAL8);
+    UL_IMAGE* loadingimg = ulLoadImageFilePNG("/gfx/loading_png.png",0, UL_IN_RAM, UL_PF_PAL8);
     loadingimg->x=32;
     //loading frame 0
     ulSetImageTileSize (loadingimg, 0, 0, 192, 192);

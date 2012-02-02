@@ -3,12 +3,12 @@
 
 
 
-#include "map_png.h"
+//#include "map_png.h"
 #include "Maps/Map.h"
 //////////////////
 ///////GFX////////
 //////////////////
-
+/*
 //Menus and ui
 #include "pentacle_png.h"
 #include "pause_png.h"
@@ -44,5 +44,5 @@
 
 #include "wpfire_png.h"
 #include "dudu_png.h"
-
+*/
 #endif

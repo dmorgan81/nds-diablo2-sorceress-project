@@ -48,7 +48,7 @@ void changemap(u8 mapnb)
                 ulEndDrawing();
                 WaitForVBL();
             }
-        mapTiles = ulLoadImageFilePNG((void*)map_png, (int)map_png_size, UL_IN_VRAM, UL_PF_PAL4);
+        mapTiles = ulLoadImageFilePNG("/gfx/map_png.png",0, UL_IN_VRAM, UL_PF_PAL4);
         if(map!=NULL && map_col!=NULL)Mymap = ulCreateMap(mapTiles,/*Tileset*/map,8,8,/*Tiles size*/60,45,/*Map size*/UL_MF_U16);//Map format
         else while(1);//error
 
@@ -91,7 +91,7 @@ void changemap(u8 mapnb)
                 ulEndDrawing();
                 WaitForVBL();
             }
-        mapTiles = ulLoadImageFilePNG((void*)dudu_png, (int)dudu_png_size, UL_IN_VRAM, UL_PF_PAL4);
+        mapTiles = ulLoadImageFilePNG("/gfx/dudu_png.png",0, UL_IN_VRAM, UL_PF_PAL4);
         Mymap = ulCreateMap(mapTiles,/*Tileset*/map,8,8,/*Tiles size*/129,102,/*Map size*/UL_MF_U16);//Map format
         hero.x=norm_fix(240);
         hero.y=norm_fix(430);

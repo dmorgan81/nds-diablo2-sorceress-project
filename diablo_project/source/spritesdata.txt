@@ -3,7 +3,7 @@
 
     ulSetTransparentColor(RGB15(31, 0, 31));
     {
-        spritedatabase[0].image = ulLoadImageFilePNG((void*)sorc_png, (int)sorc_png_size, UL_IN_RAM, UL_PF_PAL4);
+        spritedatabase[0].image = ulLoadImageFilePNG("/gfx/sorc_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
     }
     spritedatabase[0].nbframe=5;
     spritedatabase[0].framerate=9;
@@ -16,7 +16,7 @@
 ///Tyrael - body
     ulSetTransparentColor(RGB15(31, 0, 31));
     {
-        spritedatabase[1].image = ulLoadImageFilePNG((void*)tyr_body_png, (int)tyr_body_png_size, UL_IN_RAM, UL_PF_PAL4);
+        spritedatabase[1].image = ulLoadImageFilePNG("/gfx/tyr_body_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
     }
     spritedatabase[1].nbframe=1;
     spritedatabase[1].framerate=30;//8;
@@ -28,7 +28,7 @@
 ///Tyrael - wings
     ulSetTransparentColor(RGB15(31, 0, 31));
     {
-        spritedatabase[2].image = ulLoadImageFilePNG((void*)tyr_wings_png, (int)tyr_wings_png_size, UL_IN_RAM, UL_PF_PAL4);
+        spritedatabase[2].image = ulLoadImageFilePNG("/gfx/tyr_wings_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
     }
     spritedatabase[2].nbframe=3;
     spritedatabase[2].framerate=15;//8;
@@ -40,7 +40,7 @@
 ///Firebolt
     ulSetTransparentColor(RGB15(31, 0, 31));
     {
-        spritedatabase[3].image = ulLoadImageFilePNG((void*)firebolt_png, (int)firebolt_png_size, UL_IN_RAM, UL_PF_PAL4);
+        spritedatabase[3].image = ulLoadImageFilePNG("/gfx/firebolt_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
     }
     spritedatabase[3].nbframe=2;
     spritedatabase[3].framerate=8;//8;
@@ -53,7 +53,7 @@
 ///icebolt
     ulSetTransparentColor(RGB15(31, 0, 31));
     {
-        spritedatabase[4].image = ulLoadImageFilePNG((void*)icebolt_png, (int)icebolt_png_size, UL_IN_RAM, UL_PF_PAL4);
+        spritedatabase[4].image = ulLoadImageFilePNG("/gfx/icebolt_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
     }
     spritedatabase[4].nbframe=2;
     spritedatabase[4].framerate=8;//8;
@@ -66,7 +66,7 @@
 ///iceorb
     ulSetTransparentColor(RGB15(31, 0, 31));
     {
-        spritedatabase[5].image = ulLoadImageFilePNG((void*)iceorb_png, (int)iceorb_png_size, UL_IN_RAM, UL_PF_PAL4);
+        spritedatabase[5].image = ulLoadImageFilePNG("/gfx/iceorb_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
     }
     spritedatabase[5].nbframe=2;
     spritedatabase[5].framerate=8;//8;
@@ -79,7 +79,7 @@
 ///zombie
     ulSetTransparentColor(RGB15(31, 0, 31));
     {
-        spritedatabase[6].image = ulLoadImageFilePNG((void*)zombie_png, (int)zombie_png_size, UL_IN_RAM, UL_PF_PAL4);
+        spritedatabase[6].image = ulLoadImageFilePNG("/gfx/zombie_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
     }
     spritedatabase[6].nbframe=2;
     spritedatabase[6].framerate=8;//8;
@@ -92,7 +92,7 @@
 ///firebig
     ulSetTransparentColor(RGB15(31, 0, 31));
     {
-        spritedatabase[7].image = ulLoadImageFilePNG((void*)firebig_png, (int)firebig_png_size, UL_IN_RAM, UL_PF_PAL4);
+        spritedatabase[7].image = ulLoadImageFilePNG("/gfx/firebig_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
     }
     spritedatabase[7].nbframe=10;
     spritedatabase[7].framerate=8;//8;
@@ -104,7 +104,7 @@
 ///firesmall
     ulSetTransparentColor(RGB15(31, 0, 31));
     {
-        spritedatabase[8].image = ulLoadImageFilePNG((void*)firesmall_png, (int)firesmall_png_size, UL_IN_RAM, UL_PF_PAL4);
+        spritedatabase[8].image = ulLoadImageFilePNG("/gfx/firesmall_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
     }
     spritedatabase[8].nbframe=5;
     spritedatabase[8].framerate=8;//8;
@@ -116,7 +116,7 @@
 ///hydra
     ulSetTransparentColor(RGB15(31, 0, 31));
     {
-        spritedatabase[9].image = ulLoadImageFilePNG((void*)hydra_png, (int)hydra_png_size, UL_IN_RAM, UL_PF_PAL4);
+        spritedatabase[9].image = ulLoadImageFilePNG("/gfx/hydra_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
     }
     spritedatabase[9].nbframe=4;
     spritedatabase[9].framerate=8;//8;
@@ -130,7 +130,7 @@
 ///tree
     ulSetTransparentColor(RGB15(31, 0, 31));
     {
-        spritedatabase[10].image = ulLoadImageFilePNG((void*)tree_png, (int)tree_png_size, UL_IN_RAM, UL_PF_PAL4);
+        spritedatabase[10].image = ulLoadImageFilePNG("/gfx/tree_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
     }
     spritedatabase[10].nbframe=0;
     spritedatabase[10].framerate=0;//8;
@@ -143,7 +143,7 @@
 ///fence
     ulSetTransparentColor(RGB15(31, 0, 31));
     {
-        spritedatabase[11].image = ulLoadImageFilePNG((void*)fence_png, (int)fence_png_size, UL_IN_RAM, UL_PF_PAL4);
+        spritedatabase[11].image = ulLoadImageFilePNG("/gfx/fence_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
     }
     spritedatabase[11].nbframe=0;
     spritedatabase[11].framerate=0;//8;
@@ -156,7 +156,7 @@
 ///Fallen
     ulSetTransparentColor(RGB15(31, 0, 31));
     {
-        spritedatabase[12].image = ulLoadImageFilePNG((void*)fallen_png, (int)fallen_png_size, UL_IN_RAM, UL_PF_PAL4);
+        spritedatabase[12].image = ulLoadImageFilePNG("/gfx/fallen_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
     }
     spritedatabase[12].nbframe=5;
     spritedatabase[12].framerate=8;//8;
@@ -169,7 +169,7 @@
 ///small fire at wp
     ulSetTransparentColor(RGB15(31, 0, 31));
     {
-        spritedatabase[13].image = ulLoadImageFilePNG((void*)wpfire_png, (int)wpfire_png_size, UL_IN_RAM, UL_PF_PAL4);
+        spritedatabase[13].image = ulLoadImageFilePNG("/gfx/wpfire_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
     }
     spritedatabase[13].nbframe=8;
     spritedatabase[13].framerate=8;//8;
@@ -182,7 +182,7 @@
 ///chargedbolt
     ulSetTransparentColor(RGB15(31, 0, 31));
     {
-        spritedatabase[14].image = ulLoadImageFilePNG((void*)chargedbolt_png, (int)chargedbolt_png_size, UL_IN_RAM, UL_PF_PAL4);
+        spritedatabase[14].image = ulLoadImageFilePNG("/gfx/chargedbolt_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
     }
     spritedatabase[14].nbframe=10;
     spritedatabase[14].framerate=3;//8;
@@ -196,7 +196,7 @@
 ///torch
     ulSetTransparentColor(RGB15(31, 0, 31));
     {
-        spritedatabase[15].image = ulLoadImageFilePNG((void*)torch_png, (int)torch_png_size, UL_IN_RAM, UL_PF_PAL4);
+        spritedatabase[15].image = ulLoadImageFilePNG("/gfx/torch_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
     }
     spritedatabase[15].nbframe=4;
     spritedatabase[15].framerate=8;//8;
@@ -209,7 +209,7 @@
 ///rock
     ulSetTransparentColor(RGB15(31, 0, 31));
     {
-        spritedatabase[16].image = ulLoadImageFilePNG((void*)rock_png, (int)rock_png_size, UL_IN_RAM, UL_PF_PAL4);
+        spritedatabase[16].image = ulLoadImageFilePNG("/gfx/rock_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
     }
     spritedatabase[16].nbframe=1;
     spritedatabase[16].framerate=0;//8;
@@ -222,7 +222,7 @@
 ///fallen death
     ulSetTransparentColor(RGB15(31, 0, 31));
     {
-        spritedatabase[17].image = ulLoadImageFilePNG((void*)fallendeath_png, (int)fallendeath_png_size, UL_IN_RAM, UL_PF_PAL4);
+        spritedatabase[17].image = ulLoadImageFilePNG("/gfx/fallendeath_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
     }
     spritedatabase[17].nbframe=5;
     spritedatabase[17].framerate=8;//8;
@@ -236,7 +236,7 @@
 ///lvlup icon
     ulSetTransparentColor(RGB15(31, 0, 31));
     {
-        spritedatabase[18].image = ulLoadImageFilePNG((void*)levelup_png, (int)levelup_png_size, UL_IN_RAM, UL_PF_PAL4);
+        spritedatabase[18].image = ulLoadImageFilePNG("/gfx/levelup_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
     }
     spritedatabase[18].nbframe=2;
     spritedatabase[18].framerate=0;//8;
@@ -250,7 +250,7 @@
 
     ulSetTransparentColor(RGB15(31, 0, 31));
     {
-        spritedatabase[19].image = ulLoadImageFilePNG((void*)serpent_png, (int)serpent_png_size, UL_IN_RAM, UL_PF_PAL4);
+        spritedatabase[19].image = ulLoadImageFilePNG("/gfx/serpent_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
     }
     spritedatabase[19].nbframe=5;
     spritedatabase[19].framerate=8;//8;
