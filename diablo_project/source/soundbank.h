@@ -1,0 +1,12 @@
+#define SFX_SOR_INEEDMANA	0
+#define SFX_SOR_CANTUSEYET	1
+#define SFX_CHARGEDBOLT1	2
+#define SFX_COLDCAST	3
+#define SFX_DEATH	4
+#define SFX_FIREBOLT1	5
+#define SFX_FIRECAST	6
+#define SFX_ICEBOLT1	7
+#define SFX_TELEPORT	8
+#define MSL_NSONGS	0
+#define MSL_NSAMPS	9
+#define MSL_BANKSIZE	9

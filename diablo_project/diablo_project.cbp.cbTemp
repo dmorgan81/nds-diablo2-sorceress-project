@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="diablo_project" />
+		<Option makefile_is_custom="1" />
+		<Option execution_dir="D:\devkitPro\diablo_project" />
+		<Option pch_mode="2" />
+		<Option compiler="armelfgcc" />
+		<MakeCommands>
+			<Build command="$make -f $makefile" />
+			<CompileFile command="$make -f $makefile" />
+			<Clean command="$make -f $makefile clean" />
+			<DistClean command="$make -f $makefile distclean$target" />
+			<AskRebuildNeeded command="$make -f $makefile " />
+			<SilentBuild command="$make -f $makefile clean" />
+		</MakeCommands>
+		<Build>
+			<Target title="Release">
+				<Option output="diablo_project.nds" prefix_auto="0" extension_auto="0" />
+				<Option working_dir="D:\devkitPro\diablo_project" />
+				<Option object_output="D:\devkitPro\diablo_project\.objs" />
+				<Option type="1" />
+				<Option compiler="armelfgcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+				<MakeCommands>
+					<Build command="$make" />
+					<CompileFile command="$make" />
+					<Clean command="$make clean" />
+					<DistClean command="$make -f $makefile distclean$target" />
+					<AskRebuildNeeded command="$make clean" />
+					<SilentBuild command="$make clean" />
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="source\Maps\Map.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source\Maps\Map.h" />
+		<Unit filename="source\actions.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source\actions.h" />
+		<Unit filename="source\defines.h" />
+		<Unit filename="source\formulas\formulas.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source\formulas\skills.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source\interface.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source\interface.h" />
+		<Unit filename="source\main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source\main.h" />
+		<Unit filename="source\misc.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source\misc.h" />
+		<Unit filename="source\objects.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source\objects.h" />
+		<Unit filename="source\objects\ai.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source\objects\bgobjects.c">
+			<Option compilerVar="CC" />
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="source\objects\bgobjects.h" />
+		<Unit filename="source\objects\collisions.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source\objects\collisions.h" />
+		<Unit filename="source\objects\fxdata.txt" />
+		<Unit filename="source\objects\missilesdata.txt" />
+		<Unit filename="source\objects\objectsdata.txt" />
+		<Unit filename="source\objects\scrolling.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source\skillmenu.map.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source\spritesdata.txt" />
+		<Unit filename="source\structures.h" />
+		<Unit filename="source\top_screen.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source\top_screen.h" />
+		<Unit filename="source\ulScreenDisplay.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source\ulScreenDisplay.h" />
+		<Unit filename="source\uldata.h" />
+		<Extensions>
+			<code_completion>
+				<search_path add="D:\devkitPro\libnds" />
+				<search_path add="D:\devkitPro\PAlib" />
+				<search_path add="D:\devkitPro\uLibrary" />
+				<search_path add="D:\devkitPro\PAlib\source\arm9\source" />
+				<search_path add="D:\devkitPro\uLibrary\Source" />
+			</code_completion>
+			<debugger />
+			<wxsmith version="1">
+				<gui name="wxWidgets" src="" main="" init_handlers="necessary" language="CPP" />
+			</wxsmith>
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

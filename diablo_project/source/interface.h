@@ -13,7 +13,7 @@ void save();
 void load();
 void saveloadmenu(bool saveload);
 void waypointmenu(objectinfo* wp);
-void DialogInBox(char* dialog,int speed,char* topBg,int sound,int soundOffset,bool anim);
+void DialogInBox(char* dialog,int speed,char* topBg,char* sound,int soundOffset,bool anim);
 void skillmenu(bool levelup);
 void death();
 

@@ -147,7 +147,7 @@ Even now, they head towards the Eastern capital of Kurast - to the very heart of
 If the three Prime Evils unite, they will be invincible. Though it is unclear as to what their aims are, it is certain that they must be stopped at all costs.\n\n\
 I am broken and the energys that tie me to this world are diminishing rapidly.\n\n\
 You must take up this quest and prevent the Three Brothers from reuniting. You must cross the sea and search for Diablo and Baal in Kurast.\n\n\
-Now hurry, mortal... Time is running out for all of us!\n",15,"tyrael",-1,6*15*8,1);//SFX_TYR_INTRO
+Now hurry, mortal... Time is running out for all of us!\n",15,"tyrael","/Tyr_intro.raw",6*15*8,1);//SFX_TYR_INTRO
 #endif
     skillmenu(1);
         WaitForVBL();
@@ -267,8 +267,7 @@ Now hurry, mortal... Time is running out for all of us!\n",15,"tyrael",-1,6*15*8
 #endif
             if(ul_keys.pressed.select)	skillmenu(0); //will be changed later, we cant firce player to levelup skills if they just want to switch
             if(PAUSEKEY || ul_keys.held.lid) pause();//(int*)ul_keys.pressed.start);
-
-
+            //if (ul_keys.held.value& RESETKEYS )exit(0);
             CheckForLevelUp();
             WaitForVBL();
         }

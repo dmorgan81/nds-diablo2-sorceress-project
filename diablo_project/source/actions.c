@@ -37,7 +37,7 @@ void CheckForLevelUp()
         if (hero.stats.lvl==5)
         {
             int i;
-            DialogInBox("The waypoint in the southwest is now opened.\nYou can use it by pressing A button.\nIf you wish to come back, simply use the waypoint from your new location.\n\nGo forth, Hero, may the Heaven protect you.",8,0,-1,0,0);
+            DialogInBox("The waypoint in the southwest is now opened.\nYou can use it by pressing A button.\nIf you wish to come back, simply use the waypoint from your new location.\n\nGo forth, Hero, may the Heaven protect you.",8,0,0,0,0);
             int objectnb;
             objectnb=getUnusedBgObject();
             newObject((46<<3)+4, (39<<3)+8, &bgobjects[objectnb],objectnb, &bgdata[2] ,1);

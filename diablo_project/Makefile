@@ -4,7 +4,7 @@ PATH 		:= $(DEVKITARM)/bin:$(PATH)
 # leave it as is (with ARM7_MP3 uncommented).
 #---------------------------------------------------------------------------------
 
-MAXMODUSE=YES
+#MAXMODUSE=YES
 #ARM7_SELECTED = ARM7_MP3
 #ARM7_SELECTED = ARM7_MP3_DSWIFI
 #ARM7_SELECTED = ARM7_MAXMOD_DSWIFI
@@ -220,7 +220,7 @@ endif
 #---------------------------------------------------------------------------------
 %.nds: %.bin
 ifeq ($(strip $(USE_EFS)), YES)
-	@ndstool -c $@ -9 $(TARGET).bin $(ARM7BIN) $(LOGO) $(ICON) "$(TEXT1);$(TEXT2);$(TEXT3)" -d ../efsroot
+	@ndstool -c $@ -9 $(TARGET).bin $(ARM7BIN) $(LOGO) $(ICON) "$(TEXT1);$(TEXT2);$(TEXT3)" -d ../nitrofs
 #	@$(CURDIR)/../efs $(OUTPUT).nds
 
 

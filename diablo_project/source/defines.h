@@ -9,6 +9,7 @@
 
 #define MUSIC_OFF
 
+//#define RESETKEYS 0xF03
 
 #define _GFX_ALIGN __attribute__((aligned (4)))
 

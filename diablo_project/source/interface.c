@@ -238,17 +238,19 @@ newline:
 }
 
 
-void DialogInBox(char* dialog,int speed,char* topBg,int sound,int soundOffset,bool anim)
+void DialogInBox(char* dialog,int speed,char* topBg,char* sound,int soundOffset,bool anim)
 {
     int i;
-    mm_sfxhand sfx=0;
+    //mm_sfxhand sfx=0;
+    bool sfx=0;
     int offset=5*speed;
     UL_IMAGE *box = ulLoadImageFilePNG((void*)textbox_png, (int)textbox_png_size, UL_IN_RAM, UL_PF_PAL4);
     if(topBg)topSetBackground(topBg);
-    if(sound!=-1) loadSound(sound);
+    //if(sound!=-1) loadSound(sound);
     while(*dialog&& !ul_keys.pressed.start)//offset<((190-DIALOGY0)<<3))
     {
-        if(offset==soundOffset) if(sound!=-1 && !sfx)    sfx=playSound(sound);
+        if(offset>=soundOffset){ if(*sound!=0 && !sfx)    sfx=initStream(sound);
+        else if (*sound!=0)streamUpdate();}
         offset+=1+2*ul_keys.held.B;
         if (187<128+(offset/speed))
         {
@@ -264,7 +266,7 @@ void DialogInBox(char* dialog,int speed,char* topBg,int sound,int soundOffset,bo
     }
     topSetNormalScreen();
     ulDeleteImage(box);
-    stopSound(sfx);
+    closeStream();
 }
 
 
