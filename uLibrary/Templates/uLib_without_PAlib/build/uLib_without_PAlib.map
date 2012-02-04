@@ -1,0 +1,1572 @@
+Archive member included because of file (symbol)
+
+c:/devkitPro/libnds/lib\libul.a(ulib.o)
+                              main.o (ulInit)
+c:/devkitPro/libnds/lib\libul.a(drawing.o)
+                              main.o (ulInitGfx)
+c:/devkitPro/libnds/lib\libul.a(text.o)
+                              main.o (ulInitText)
+c:/devkitPro/libnds/lib\libul.a(VirtualFile.o)
+                              c:/devkitPro/libnds/lib\libul.a(text.o) (VirtualFileSources)
+c:/devkitPro/libnds/lib\libul.a(texVramManager.o)
+                              c:/devkitPro/libnds/lib\libul.a(ulib.o) (ulTexVramInit)
+c:/devkitPro/libnds/lib\libul.a(texPalManager.o)
+                              c:/devkitPro/libnds/lib\libul.a(ulib.o) (ulTexPalInit)
+c:/devkitPro/libnds/lib\libul.a(keys.o)
+                              main.o (ulReadKeys)
+c:/devkitPro/libnds/lib\libul.a(ulCreateImagePalette.o)
+                              c:/devkitPro/libnds/lib\libul.a(drawing.o) (ulCreateImagePalette)
+c:/devkitPro/libnds/lib\libul.a(glWrapper.o)
+                              c:/devkitPro/libnds/lib\libul.a(texVramManager.o) (ulChangeVramAllocation)
+c:/devkitPro/libnds/lib\libnds9.a(dynamicArray.o)
+                              c:/devkitPro/libnds/lib\libul.a(texVramManager.o) (DynamicArraySet)
+c:/devkitPro/libnds/lib\libnds9.a(keys.o)
+                              c:/devkitPro/libnds/lib\libul.a(keys.o) (keysCurrent)
+c:/devkitPro/libnds/lib\libnds9.a(system.o)
+                              c:/devkitPro/libnds/lib\libul.a(ulib.o) (powerOn)
+c:/devkitPro/libnds/lib\libnds9.a(touch.o)
+                              c:/devkitPro/libnds/lib\libul.a(keys.o) (touchRead)
+c:/devkitPro/libnds/lib\libnds9.a(videoGL.o)
+                              c:/devkitPro/libnds/lib\libul.a(texVramManager.o) (glGlobalData)
+c:/devkitPro/libnds/lib\libnds9.a(initSystem.o)
+                              c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib/ds_arm9_crt0.o (initSystem)
+c:/devkitPro/libnds/lib\libnds9.a(fifosystem.o)
+                              c:/devkitPro/libnds/lib\libnds9.a(system.o) (fifoSendValue32)
+c:/devkitPro/libnds/lib\libnds9.a(interrupts.o)
+                              c:/devkitPro/libnds/lib\libnds9.a(fifosystem.o) (irqSet)
+c:/devkitPro/libnds/lib\libnds9.a(libnds_exit.o)
+                              c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib/ds_arm9_crt0.o (__libnds_exit)
+c:/devkitPro/libnds/lib\libnds9.a(mpu_setup.o)
+                              c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib/ds_arm9_crt0.o (__libnds_mpu_setup)
+c:/devkitPro/libnds/lib\libnds9.a(biosCalls.o)
+                              c:/devkitPro/libnds/lib\libnds9.a(system.o) (swiDelay)
+c:/devkitPro/libnds/lib\libnds9.a(interruptDispatcher.o)
+                              c:/devkitPro/libnds/lib\libnds9.a(interrupts.o) (IntrMain)
+c:/devkitPro/libnds/lib\libnds9.a(swiSoftReset.o)
+                              c:/devkitPro/libnds/lib\libnds9.a(fifosystem.o) (swiSoftReset)
+c:/devkitPro/libnds/lib\libnds9.a(trig.o)
+                              c:/devkitPro/libnds/lib\libnds9.a(videoGL.o) (sinLerp)
+c:/devkitPro/libnds/lib\libnds9.a(video.o)
+                              c:/devkitPro/libnds/lib\libnds9.a(videoGL.o) (vramSetPrimaryBanks)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_cos.o)
+                              c:/devkitPro/libnds/lib\libul.a(ulib.o) (cos)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_sin.o)
+                              c:/devkitPro/libnds/lib\libul.a(ulib.o) (sin)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-e_rem_pio2.o)
+                              c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_cos.o) (__ieee754_rem_pio2)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-k_cos.o)
+                              c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_cos.o) (__kernel_cos)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-k_rem_pio2.o)
+                              c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-e_rem_pio2.o) (__kernel_rem_pio2)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-k_sin.o)
+                              c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_cos.o) (__kernel_sin)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_fabs.o)
+                              c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-e_rem_pio2.o) (fabs)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_floor.o)
+                              c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-k_rem_pio2.o) (floor)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_scalbn.o)
+                              c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-k_rem_pio2.o) (scalbn)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_copysign.o)
+                              c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_scalbn.o) (copysign)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_divsi3.o)
+                              c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-k_rem_pio2.o) (__aeabi_idiv)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_dvmd_tls.o)
+                              c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_divsi3.o) (__aeabi_idiv0)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_arm_addsubdf3.o)
+                              c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_cos.o) (__aeabi_dsub)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_arm_muldivdf3.o)
+                              c:/devkitPro/libnds/lib\libul.a(ulib.o) (__aeabi_dmul)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_arm_cmpdf2.o)
+                              c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-e_rem_pio2.o) (__aeabi_dcmpeq)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_arm_fixdfsi.o)
+                              c:/devkitPro/libnds/lib\libul.a(ulib.o) (__aeabi_d2iz)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_arm_addsubsf3.o)
+                              c:/devkitPro/libnds/lib\libul.a(ulib.o) (__aeabi_i2f)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_arm_muldivsf3.o)
+                              c:/devkitPro/libnds/lib\libul.a(ulib.o) (__aeabi_fmul)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_muldi3.o)
+                              c:/devkitPro/libnds/lib\libnds9.a(videoGL.o) (__aeabi_lmul)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-bsearch.o)
+                              c:/devkitPro/libnds/lib\libnds9.a(trig.o) (bsearch)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-init.o)
+                              c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib/ds_arm9_crt0.o (__libc_init_array)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-malloc.o)
+                              c:/devkitPro/libnds/lib\libul.a(drawing.o) (malloc)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-mallocr.o)
+                              c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-malloc.o) (_malloc_r)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-memcpy.o)
+                              c:/devkitPro/libnds/lib\libul.a(VirtualFile.o) (memcpy)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-memmove.o)
+                              c:/devkitPro/libnds/lib\libul.a(texVramManager.o) (memmove)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-memset.o)
+                              c:/devkitPro/libnds/lib\libul.a(drawing.o) (memset)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-mlock.o)
+                              c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-mallocr.o) (__malloc_lock)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-realloc.o)
+                              c:/devkitPro/libnds/lib\libul.a(texVramManager.o) (realloc)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-reallocr.o)
+                              c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-realloc.o) (_realloc_r)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-strcmp.o)
+                              c:/devkitPro/libnds/lib\libul.a(text.o) (strcmp)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-strlen.o)
+                              c:/devkitPro/libnds/lib\libul.a(VirtualFile.o) (strlen)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-freer.o)
+                              c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-malloc.o) (_free_r)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-impure.o)
+                              c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-malloc.o) (_impure_ptr)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(sbrk.o)
+                              c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-mallocr.o) (_sbrk_r)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(times.o)
+                              c:/devkitPro/libnds/lib\libnds9.a(initSystem.o) (punixTime)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(malloc_vars.o)
+                              c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib/ds_arm9_crt0.o (fake_heap_end)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(build_argv.o)
+                              c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib/ds_arm9_crt0.o (build_argv)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(syscall_support.o)
+                              c:/devkitPro/libnds/lib\libnds9.a(initSystem.o) (__syscalls)
+c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-errno.o)
+                              c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(times.o) (__errno)
+
+Allocating common symbols
+Common symbol       size              file
+
+ul_colorKeyValue32  0x4               c:/devkitPro/libnds/lib\libul.a(drawing.o)
+fifo_datamsg_data   0x40              c:/devkitPro/libnds/lib\libnds9.a(fifosystem.o)
+ulTextureMax        0x4               c:/devkitPro/libnds/lib\libul.a(texVramManager.o)
+__dsimode           0x1               c:/devkitPro/libnds/lib\libnds9.a(initSystem.o)
+ulTextureParams     0x4               c:/devkitPro/libnds/lib\libul.a(texVramManager.o)
+ul_cos              0x400             c:/devkitPro/libnds/lib\libul.a(ulib.o)
+fifo_buffer         0x800             c:/devkitPro/libnds/lib\libnds9.a(fifosystem.o)
+ulTexRamBlocksNb    0x4               c:/devkitPro/libnds/lib\libul.a(texVramManager.o)
+fifo_value32_func   0x40              c:/devkitPro/libnds/lib\libnds9.a(fifosystem.o)
+fifo_address_func   0x40              c:/devkitPro/libnds/lib\libnds9.a(fifosystem.o)
+ulTexPalBlocksNb    0x4               c:/devkitPro/libnds/lib\libul.a(texPalManager.o)
+ul_colorKeyValue    0x2               c:/devkitPro/libnds/lib\libul.a(drawing.o)
+VirtualFileSources  0x40              c:/devkitPro/libnds/lib\libul.a(VirtualFile.o)
+ulDualScreenSprites
+                    0x400             c:/devkitPro/libnds/lib\libul.a(drawing.o)
+ulTextureNb         0x4               c:/devkitPro/libnds/lib\libul.a(texVramManager.o)
+fifo_value32_data   0x40              c:/devkitPro/libnds/lib\libnds9.a(fifosystem.o)
+ulTexRamBlocksMax   0x4               c:/devkitPro/libnds/lib\libul.a(texVramManager.o)
+ulTexPalBlocks      0x4               c:/devkitPro/libnds/lib\libul.a(texPalManager.o)
+ul_virtualFileList  0x4               c:/devkitPro/libnds/lib\libul.a(VirtualFile.o)
+fifo_value32_queue  0x40              c:/devkitPro/libnds/lib\libnds9.a(fifosystem.o)
+fifo_data_queue     0x40              c:/devkitPro/libnds/lib\libnds9.a(fifosystem.o)
+ulTexRamBlocks      0x4               c:/devkitPro/libnds/lib\libul.a(texVramManager.o)
+ul_autoDepth        0x1               c:/devkitPro/libnds/lib\libul.a(drawing.o)
+ul_dualScreenMode   0x1               c:/devkitPro/libnds/lib\libul.a(drawing.o)
+ulTexPalBlocksMax   0x4               c:/devkitPro/libnds/lib\libul.a(texPalManager.o)
+ul_frameNumber      0x1               c:/devkitPro/libnds/lib\libul.a(drawing.o)
+punixTime           0x4               c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(times.o)
+fifo_address_data   0x40              c:/devkitPro/libnds/lib\libnds9.a(fifosystem.o)
+ul_sin              0x400             c:/devkitPro/libnds/lib\libul.a(ulib.o)
+ul_currentDepth     0x4               c:/devkitPro/libnds/lib\libul.a(drawing.o)
+glGlobalData        0x4c              c:/devkitPro/libnds/lib\libnds9.a(videoGL.o)
+ulTextureActive     0x4               c:/devkitPro/libnds/lib\libul.a(texVramManager.o)
+ul_colorKeyEnabled  0x1               c:/devkitPro/libnds/lib\libul.a(drawing.o)
+fifo_datamsg_func   0x40              c:/devkitPro/libnds/lib\libnds9.a(fifosystem.o)
+fifo_address_queue  0x40              c:/devkitPro/libnds/lib\libnds9.a(fifosystem.o)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+rom              0x08000000         0x02000000
+ewram            0x02000000         0x003ff000
+dtcm             0x0b000000         0x00004000
+vectors          0x01000000         0x00000100
+itcm             0x01000100         0x00007f00
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+                0x01000000                __vectors_start = 0x1000000
+                0x01000100                __itcm_start = 0x1000100
+                0x023ff000                __ewram_end = 0x23ff000
+                0x023ff000                __eheap_end = 0x23ff000
+                0x0b000000                __dtcm_start = 0xb000000
+                0x0b004000                __dtcm_top = 0xb004000
+                0x0b003ff8                __irq_flags = (__dtcm_top - 0x8)
+                0x0b003ffc                __irq_vector = (__dtcm_top - 0x4)
+                0x0b003f00                __sp_svc = (__dtcm_top - 0x100)
+                0x0b003e00                __sp_irq = (__sp_svc - 0x100)
+                0x0b003d00                __sp_usr = (__sp_irq - 0x100)
+
+.init           0x02000000      0x248
+                0x02000000                __text_start = .
+ *(.init)
+ .init          0x02000000      0x230 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib/ds_arm9_crt0.o
+                0x02000000                _start
+ .init          0x02000230        0xc c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crti.o
+                0x02000230                _init
+ .init          0x0200023c        0xc c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crtn.o
+                0x02000248                . = ALIGN (0x4)
+
+.plt
+ *(.plt)
+
+.text           0x02000250     0xacb0
+ *(EXCLUDE_FILE(*.itcm*) .text)
+ .text          0x02000250        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib/ds_arm9_crt0.o
+ .text          0x02000250        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crti.o
+ .text          0x02000250       0x94 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crtbegin.o
+ .text          0x020002e4       0x2c main.o
+                0x020002e4                main
+ .text          0x02000310      0x15c c:/devkitPro/libnds/lib\libul.a(ulib.o)
+                0x02000310                _initSinTables
+                0x020003fc                ulInit
+                0x02000434                ulTerminate
+                0x02000438                ulGetPowerOf2Count
+ .text          0x0200046c     0x148c c:/devkitPro/libnds/lib\libul.a(drawing.o)
+                0x0200046c                ulInitGfx
+                0x020004e0                ulInitDualScreenMode
+                0x02000614                ulStopDualScreenMode
+                0x02000628                ulSetRegCapture
+                0x0200068c                ulEndDrawing
+                0x020006bc                ulSetScreenWindow
+                0x0200095c                ulSetScreenClipping
+                0x02000c00                ulResetScreenClipping
+                0x02000e64                ulEndFrame
+                0x02000f90                ulSyncFrame
+                0x02000fcc                ulResetScreenView
+                0x02001210                ulStartDrawing2D
+                0x020012c4                ulMoveScreenView
+                0x020012dc                ulScaleScreenView
+                0x020012f4                ulRotateScreenView
+                0x02001354                ulSetAlpha
+                0x02001374                ulRealizeImage
+                0x020014d8                ulSetTexture
+                0x02001548                ulResetImageProperties
+                0x02001598                ulDeleteImage
+                0x02001618                ulCreateImage
+                0x02001884                ulSetScreenBackgroundColor
+                0x02001890                ulSetTransparentColor
+ .text          0x020018f8      0xa58 c:/devkitPro/libnds/lib\libul.a(text.o)
+                0x020018f8                ulDrawChar1BitToImage
+                0x02001a4c                ulCreateFont
+                0x02001d54                ulLoadFont
+                0x02001efc                ulDeleteFont
+                0x02001f28                ulDrawTile
+                0x02002020                ulDrawChar
+                0x020020cc                ulDrawString
+                0x020021a0                ulDrawTextBox
+                0x02002308                ulSetTextColor
+                0x02002318                ulInitText
+ .text          0x02002350      0x5fc c:/devkitPro/libnds/lib\libul.a(VirtualFile.o)
+                0x02002350                vfsMemClose
+                0x02002358                vfsMemGetc
+                0x0200239c                vfsMemPutc
+                0x020023e8                vfsMemGets
+                0x02002594                vfsMemSeek
+                0x02002608                vfsMemEof
+                0x02002620                vfsMemPuts
+                0x0200265c                vfsMemRead
+                0x020026b0                vfsMemWrite
+                0x0200270c                VirtualFileRegisterSource
+                0x0200273c                VirtualFileOpen
+                0x020027d8                VirtualFileClose
+                0x02002810                ulSetVirtualFilenameList
+                0x0200282c                ulFindFileInVirtualFilenameList
+                0x020028bc                vfsMemOpen
+                0x020028fc                VirtualFileInit
+ .text          0x0200294c      0x8c0 c:/devkitPro/libnds/lib\libul.a(texVramManager.o)
+                0x0200294c                ulTexVramInit
+                0x020029ac                ulTexVramAllocBlock
+                0x02002b14                ulTexVramFreeBlock
+                0x02002c64                ulTexImage2D
+                0x02002e68                ulInitTextures
+                0x02002ebc                ulGetNextAvailableTexture
+                0x02002fa0                ulGenTextures
+                0x02002ff8                ulFreeTextures
+                0x0200305c                ulTexParameter
+                0x02003094                ulBindTexture
+                0x020030bc                ulBindTextureToGl
+                0x020030f8                ulSetTexVramParameters
+                0x02003198                ulGetTexVramAvailMemory
+                0x020031c4                ulGetTexVramTotalMemory
+                0x020031d4                ulGetTexVramUsedMemory
+ .text          0x0200320c      0x584 c:/devkitPro/libnds/lib\libul.a(texPalManager.o)
+                0x0200320c                ulTexPalInit
+                0x0200326c                ulTexPalAllocBlock
+                0x0200347c                ulTexPalFreeBlock
+                0x020035cc                uluTexUnloadPal
+                0x020035d4                ulTexLoadPal
+                0x02003620                uluTexLoadPal
+                0x0200367c                ulSetTexPalVramParameters
+                0x0200371c                ulGetTexPalAvailMemory
+                0x02003748                ulGetTexPalTotalMemory
+                0x02003758                ulGetTexPalUsedMemory
+ .text          0x02003790      0x190 c:/devkitPro/libnds/lib\libul.a(keys.o)
+                0x02003790                ulReadKeys
+ .text          0x02003920       0xe8 c:/devkitPro/libnds/lib\libul.a(ulCreateImagePalette.o)
+                0x02003920                ulCreateImagePalette
+ .text          0x02003a08       0x7c c:/devkitPro/libnds/lib\libul.a(glWrapper.o)
+                0x02003a08                ulChangeVramAllocation
+ .text          0x02003a84       0x94 c:/devkitPro/libnds/lib\libnds9.a(dynamicArray.o)
+                0x02003a84                DynamicArrayInit
+                0x02003a9c                DynamicArrayDelete
+                0x02003ab0                DynamicArrayGet
+                0x02003acc                DynamicArraySet
+ .text          0x02003b18       0xf8 c:/devkitPro/libnds/lib\libnds9.a(keys.o)
+                0x02003b18                scanKeys
+                0x02003b88                keysHeld
+                0x02003b94                keysDown
+                0x02003ba4                keysDownRepeat
+                0x02003bb4                keysSetRepeat
+                0x02003bcc                keysUp
+                0x02003bdc                keysCurrent
+ .text          0x02003c10       0xf4 c:/devkitPro/libnds/lib\libnds9.a(system.o)
+                0x02003c10                systemMsgHandler
+                0x02003c54                systemSleep
+                0x02003c6c                powerValueHandler
+                0x02003c7c                powerOn
+                0x02003ca8                powerOff
+                0x02003cd0                ledBlink
+                0x02003ce4                getBatteryLevel
+ .text          0x02003d04       0x4c c:/devkitPro/libnds/lib\libnds9.a(touch.o)
+                0x02003d04                touchRead
+                0x02003d2c                touchReadXY
+ .text          0x02003d50     0x14b8 c:/devkitPro/libnds/lib\libnds9.a(videoGL.o)
+                0x02003d50                glGetGlobals
+                0x02003d58                glRotatef32i
+                0x02004034                glMaterialf
+                0x020040a4                glTexCoord2f32
+                0x02004118                vramBlock_init
+                0x02004184                vramBlock_Construct
+                0x020041ac                vramBlock_terminate
+                0x020041d8                vramBlock_Deconstruct
+                0x020041ec                vramBlock__allocateBlock
+                0x0200434c                vramBlock__deallocateBlock
+                0x02004464                vramBlock_examineSpecial
+                0x020046a0                vramBlock_allocateSpecial
+                0x0200470c                vramBlock_allocateBlock
+                0x02004744                vramBlock_deallocateBlock
+                0x02004788                vramBlock_deallocateAll
+                0x02004798                vramBlock_getAddr
+                0x020047ac                vramBlock_getSize
+                0x020047c0                glInit_C
+                0x02004960                glResetTextures
+                0x020049e8                removePaletteFromTexture
+                0x02004a58                glGenTextures
+                0x02004af4                glDeleteTextures
+                0x02004bcc                vramGetBank
+                0x02004c8c                glBindTexture
+                0x02004cf0                glColorTableEXT
+                0x02004e58                glAssignColorTable
+                0x02004ecc                glTexParameter
+                0x02004f04                glGetTexturePointer
+                0x02004f24                glGetTexParameter
+                0x02004f44                glTexImage2D
+ .text          0x02005208      0x14c c:/devkitPro/libnds/lib\libnds9.a(initSystem.o)
+                0x02005208                initSystem
+ .text          0x02005354      0xc98 c:/devkitPro/libnds/lib\libnds9.a(fifosystem.o)
+                0x020055c4                fifoSendAddress
+                0x020055f0                fifoSendValue32
+                0x02005630                fifoSendDatamsg
+                0x020056a8                fifoGetAddress
+                0x02005718                fifoSetAddressHandler
+                0x0200578c                fifoGetValue32
+                0x020057f8                fifoSetValue32Handler
+                0x0200586c                fifoGetDatamsg
+                0x02005cfc                fifoSetDatamsgHandler
+                0x02005d94                fifoCheckAddress
+                0x02005db8                fifoCheckDatamsg
+                0x02005ddc                fifoCheckValue32
+                0x02005e00                fifoInit
+ .text          0x02005fec      0x1cc c:/devkitPro/libnds/lib\libnds9.a(interrupts.o)
+                0x02005fec                irqDummy
+                0x02005ff0                irqSet
+                0x0200605c                irqInit
+                0x020060a8                irqInitHandler
+                0x020060d8                irqEnable
+                0x02006138                irqDisable
+                0x0200618c                irqClear
+ .text          0x020061b8       0x40 c:/devkitPro/libnds/lib\libnds9.a(libnds_exit.o)
+                0x020061b8                systemErrorExit
+                0x020061bc                __libnds_exit
+ .text          0x020061f8      0x1b4 c:/devkitPro/libnds/lib\libnds9.a(mpu_setup.o)
+                0x020061f8                __libnds_mpu_setup
+                0x02006338                memCached
+                0x02006350                memUncached
+ *fill*         0x020063ac        0x4 ff
+ .text          0x020063b0       0x70 c:/devkitPro/libnds/lib\libnds9.a(biosCalls.o)
+                0x020063b0                swiDelay
+                0x020063b4                swiIntrWait
+                0x020063b8                swiWaitForVBlank
+                0x020063bc                swiSleep
+                0x020063c0                swiChangeSoundBias
+                0x020063c4                swiDivide
+                0x020063c8                swiRemainder
+                0x020063ce                swiDivMod
+                0x020063da                swiCopy
+                0x020063de                swiFastCopy
+                0x020063e2                swiSqrt
+                0x020063e6                swiCRC16
+                0x020063ea                swiIsDebugger
+                0x020063ee                swiUnpackBits
+                0x020063f2                swiDecompressLZSSWram
+                0x020063f6                swiDecompressLZSSVramNTR
+                0x020063fa                swiDecompressLZSSVramTWL
+                0x020063fe                swiDecompressHuffman
+                0x02006402                swiDecompressRLEWram
+                0x02006406                swiDecompressRLEVram
+                0x0200640a                swiWaitForIRQ
+                0x0200640e                swiDecodeDelta8
+                0x02006412                swiDecodeDelta16
+                0x02006416                swiSetHaltCR
+ .text          0x02006420        0x0 c:/devkitPro/libnds/lib\libnds9.a(interruptDispatcher.o)
+ .text          0x02006420       0x30 c:/devkitPro/libnds/lib\libnds9.a(swiSoftReset.o)
+                0x02006420                swiSoftReset
+ .text          0x02006450      0x238 c:/devkitPro/libnds/lib\libnds9.a(trig.o)
+                0x02006450                asinComp
+                0x02006474                sinLutLookup
+                0x020064b0                sinLerp
+                0x020064e4                cosLerp
+                0x020064fc                tanLutLookup
+                0x02006534                tanLerp
+                0x020065e4                asinLerp
+                0x0200664c                acosLerp
+                0x02006664                atanComp
+ .text          0x02006688      0x148 c:/devkitPro/libnds/lib\libnds9.a(video.o)
+                0x02006688                vramSetPrimaryBanks
+                0x020066cc                vramSetMainBanks
+                0x02006710                vramSetBanks_EFG
+                0x02006748                vramRestorePrimaryBanks
+                0x02006754                vramRestoreMainBanks
+                0x02006760                vramRestoreBanks_EFG
+                0x0200676c                setBrightness
+                0x020067ac                vramDefault
+ .text          0x020067d0      0x104 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_cos.o)
+                0x020067d0                cos
+ .text          0x020068d4      0x110 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_sin.o)
+                0x020068d4                sin
+ *fill*         0x020069e4        0x4 ff
+ .text          0x020069e8      0x678 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-e_rem_pio2.o)
+                0x020069e8                __ieee754_rem_pio2
+ .text          0x02007060      0x358 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-k_cos.o)
+                0x02007060                __kernel_cos
+ .text          0x020073b8      0xb08 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-k_rem_pio2.o)
+                0x020073b8                __kernel_rem_pio2
+ .text          0x02007ec0      0x218 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-k_sin.o)
+                0x02007ec0                __kernel_sin
+ .text          0x020080d8       0x14 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_fabs.o)
+                0x020080d8                fabs
+ *fill*         0x020080ec        0x4 ff
+ .text          0x020080f0      0x198 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_floor.o)
+                0x020080f0                floor
+ .text          0x02008288      0x1a8 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_scalbn.o)
+                0x02008288                scalbn
+ .text          0x02008430       0x24 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_copysign.o)
+                0x02008430                copysign
+ .text          0x02008454      0x148 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_divsi3.o)
+                0x02008454                __divsi3
+                0x02008454                __aeabi_idiv
+                0x0200857c                __aeabi_idivmod
+ .text          0x0200859c        0x4 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_dvmd_tls.o)
+                0x0200859c                __aeabi_idiv0
+                0x0200859c                __aeabi_ldiv0
+ .text          0x020085a0      0x41c c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_arm_addsubdf3.o)
+                0x020085a0                __aeabi_drsub
+                0x020085a8                __aeabi_dsub
+                0x020085a8                __subdf3
+                0x020085ac                __aeabi_dadd
+                0x020085ac                __adddf3
+                0x020088bc                __floatunsidf
+                0x020088bc                __aeabi_ui2d
+                0x020088e0                __floatsidf
+                0x020088e0                __aeabi_i2d
+                0x02008908                __aeabi_f2d
+                0x02008908                __extendsfdf2
+                0x02008948                __floatundidf
+                0x02008948                __aeabi_ul2d
+                0x0200895c                __floatdidf
+                0x0200895c                __aeabi_l2d
+ .text          0x020089bc      0x49c c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_arm_muldivdf3.o)
+                0x020089bc                __aeabi_dmul
+                0x020089bc                __muldf3
+                0x02008c4c                __divdf3
+                0x02008c4c                __aeabi_ddiv
+ .text          0x02008e58      0x144 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_arm_cmpdf2.o)
+                0x02008e58                __gtdf2
+                0x02008e58                __gedf2
+                0x02008e60                __ltdf2
+                0x02008e60                __ledf2
+                0x02008e68                __nedf2
+                0x02008e68                __eqdf2
+                0x02008e68                __cmpdf2
+                0x02008ef0                __aeabi_cdrcmple
+                0x02008f0c                __aeabi_cdcmpeq
+                0x02008f0c                __aeabi_cdcmple
+                0x02008f24                __aeabi_dcmpeq
+                0x02008f3c                __aeabi_dcmplt
+                0x02008f54                __aeabi_dcmple
+                0x02008f6c                __aeabi_dcmpge
+                0x02008f84                __aeabi_dcmpgt
+ .text          0x02008f9c       0x5c c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_arm_fixdfsi.o)
+                0x02008f9c                __aeabi_d2iz
+                0x02008f9c                __fixdfsi
+ .text          0x02008ff8      0x2ac c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_arm_addsubsf3.o)
+                0x02008ff8                __aeabi_frsub
+                0x02009000                __subsf3
+                0x02009000                __aeabi_fsub
+                0x02009004                __aeabi_fadd
+                0x02009004                __addsf3
+                0x020091c0                __aeabi_ui2f
+                0x020091c0                __floatunsisf
+                0x020091c8                __aeabi_i2f
+                0x020091c8                __floatsisf
+                0x020091e8                __aeabi_ul2f
+                0x020091e8                __floatundisf
+                0x020091f8                __aeabi_l2f
+                0x020091f8                __floatdisf
+ .text          0x020092a4      0x2f8 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_arm_muldivsf3.o)
+                0x020092a4                __mulsf3
+                0x020092a4                __aeabi_fmul
+                0x0200943c                __aeabi_fdiv
+                0x0200943c                __divsf3
+ .text          0x0200959c       0x48 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_muldi3.o)
+                0x0200959c                __muldi3
+                0x0200959c                __aeabi_lmul
+ .text          0x020095e4       0x7c c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-bsearch.o)
+                0x020095e4                bsearch
+ .text          0x02009660       0xc4 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-init.o)
+                0x02009660                __libc_init_array
+                0x020096e0                __libc_fini_array
+ .text          0x02009724       0x40 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-malloc.o)
+                0x02009724                malloc
+                0x02009744                free
+ .text          0x02009764      0x710 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-mallocr.o)
+                0x02009764                _malloc_r
+ .text          0x02009e74       0xf8 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-memcpy.o)
+                0x02009e74                memcpy
+ .text          0x02009f6c      0x138 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-memmove.o)
+                0x02009f6c                memmove
+ .text          0x0200a0a4      0x100 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-memset.o)
+                0x0200a0a4                memset
+ .text          0x0200a1a4        0x8 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-mlock.o)
+                0x0200a1a4                __malloc_lock
+                0x0200a1a8                __malloc_unlock
+ .text          0x0200a1ac       0x28 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-realloc.o)
+                0x0200a1ac                realloc
+ .text          0x0200a1d4      0x5c0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-reallocr.o)
+                0x0200a1d4                _realloc_r
+ .text          0x0200a794      0x230 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-strcmp.o)
+                0x0200a794                strcmp
+ .text          0x0200a9c4       0x60 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-strlen.o)
+                0x0200a9c4                strlen
+ .text          0x0200aa24      0x360 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-freer.o)
+                0x0200aa24                _malloc_trim_r
+                0x0200ab20                _free_r
+ .text          0x0200ad84        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-impure.o)
+ .text          0x0200ad84       0x78 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(sbrk.o)
+                0x0200ad84                _sbrk_r
+ .text          0x0200adfc       0x68 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(times.o)
+                0x0200adfc                _times
+                0x0200ae18                _times_r
+                0x0200ae20                _gettimeofday_r
+ .text          0x0200ae64        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(malloc_vars.o)
+ .text          0x0200ae64       0x84 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(build_argv.o)
+                0x0200ae64                build_argv
+ .text          0x0200aee8        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(syscall_support.o)
+ .text          0x0200aee8       0x10 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-errno.o)
+                0x0200aee8                __errno
+ .text          0x0200aef8        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crtend.o
+ .text          0x0200aef8        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crtn.o
+ .text.stub     0x0200aef8        0x8 linker stubs
+ *(.text.*)
+ *(.stub)
+ *(.gnu.warning)
+ *(.gnu.linkonce.t*)
+ *(.glue_7)
+ .glue_7        0x00000000        0x0 linker stubs
+ *(.glue_7t)
+ .glue_7t       0x00000000        0x0 linker stubs
+                0x0200af00                . = ALIGN (0x4)
+
+.vfp11_veneer   0x00000000        0x0 load address 0x0200af00
+ .vfp11_veneer  0x00000000        0x0 linker stubs
+
+.v4_bx          0x00000000        0x0 load address 0x0200af00
+ .v4_bx         0x00000000        0x0 linker stubs
+
+.fini           0x0200af00       0x18
+ *(.fini)
+ .fini          0x0200af00        0xc c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crti.o
+                0x0200af00                _fini
+ .fini          0x0200af0c        0xc c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crtn.o
+                0x0200af18                __text_end = .
+
+.rodata         0x0200af18      0xdb4
+ *(.rodata)
+ .rodata        0x0200af18       0x48 c:/devkitPro/libnds/lib\libul.a(drawing.o)
+                0x0200af18                ul_pixelSizes
+                0x0200af24                ul_pixelWidth
+                0x0200af48                ul_paletteSizes
+                0x0200af54                ul_pixelsPerByte
+ .rodata        0x0200af60      0x810 c:/devkitPro/libnds/lib\libul.a(text.o)
+                0x0200af70                ul_lcdFont_data
+ .rodata        0x0200b770       0x68 c:/devkitPro/libnds/lib\libnds9.a(videoGL.o)
+ .rodata        0x0200b7d8      0x308 c:/devkitPro/libnds/lib\libnds9.a(trig.o)
+                0x0200b7d8                SIN_LUT
+                0x0200b8dc                TAN_LUT
+ .rodata        0x0200bae0      0x188 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-e_rem_pio2.o)
+ .rodata        0x0200bc68       0x50 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-k_rem_pio2.o)
+ .rodata        0x0200bcb8        0x4 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-impure.o)
+                0x0200bcb8                _global_impure_ptr
+ *all.rodata*(*)
+ *(.roda)
+ *(.rodata.*)
+ .rodata.str1.4
+                0x0200bcbc        0xc c:/devkitPro/libnds/lib\libul.a(text.o)
+ .rodata.str1.4
+                0x0200bcc8        0x4 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-impure.o)
+ *(.gnu.linkonce.r*)
+                0x0200bccc                . = ALIGN (0x4)
+
+.ARM.extab
+ *(.ARM.extab* .gnu.linkonce.armextab.*)
+                0x0200bccc                __exidx_start = .
+
+.ARM.exidx
+ *(.ARM.exidx* .gnu.linkonce.armexidx.*)
+                0x0200bccc                __exidx_end = .
+                0x0200bccc                . = ALIGN (0x4)
+                0x0200bccc                PROVIDE (__preinit_array_start, .)
+
+.preinit_array
+ *(.preinit_array)
+                0x0200bccc                PROVIDE (__preinit_array_end, .)
+                0x0200bccc                PROVIDE (__init_array_start, .)
+
+.init_array     0x0200bccc        0x4
+ *(SORT(.init_array.*))
+ *(.init_array)
+ .init_array    0x0200bccc        0x4 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crtbegin.o
+                0x0200bcd0                PROVIDE (__init_array_end, .)
+                0x0200bcd0                PROVIDE (__fini_array_start, .)
+
+.fini_array     0x0200bcd0        0x4
+ *(.fini_array)
+ .fini_array    0x0200bcd0        0x4 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crtbegin.o
+ *(SORT(.fini_array.*))
+                0x0200bcd4                PROVIDE (__fini_array_end, .)
+
+.ctors          0x0200bcd4        0x0
+ *crtbegin.o(.ctors)
+ *(EXCLUDE_FILE(*crtend.o) .ctors)
+ *(SORT(.ctors.*))
+ *(.ctors)
+                0x0200bcd4                . = ALIGN (0x4)
+
+.dtors          0x0200bcd4        0x0
+ *crtbegin.o(.dtors)
+ *(EXCLUDE_FILE(*crtend.o) .dtors)
+ *(SORT(.dtors.*))
+ *(.dtors)
+                0x0200bcd4                . = ALIGN (0x4)
+
+.eh_frame       0x0200bcd4        0x4
+ *(.eh_frame)
+ .eh_frame      0x0200bcd4        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crtbegin.o
+ .eh_frame      0x0200bcd4        0x4 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crtend.o
+                0x0200bcd8                . = ALIGN (0x4)
+
+.gcc_except_table
+                0x0200bcd8        0x0
+ *(.gcc_except_table)
+                0x0200bcd8                . = ALIGN (0x4)
+
+.jcr            0x0200bcd8        0x4
+ *(.jcr)
+ .jcr           0x0200bcd8        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crtbegin.o
+ .jcr           0x0200bcd8        0x4 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crtend.o
+
+.got
+ *(.got.plt)
+ *(.got)
+ *(.rel.got)
+
+.ewram          0x0200bcdc        0x0
+                0x0200bcdc                __ewram_start = ABSOLUTE (.)
+ *(.ewram)
+ *ewram.*(.text)
+                0x0200bcdc                . = ALIGN (0x4)
+
+.data           0x0200bcdc      0x8f4
+                0x0200bcdc                __data_start = ABSOLUTE (.)
+ *(.data)
+ .data          0x0200bcdc        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib/ds_arm9_crt0.o
+ .data          0x0200bcdc        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crti.o
+ .data          0x0200bcdc        0x4 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crtbegin.o
+                0x0200bcdc                __dso_handle
+ .data          0x0200bce0        0x0 main.o
+ .data          0x0200bce0        0x0 c:/devkitPro/libnds/lib\libul.a(ulib.o)
+ .data          0x0200bce0        0x0 c:/devkitPro/libnds/lib\libul.a(drawing.o)
+ .data          0x0200bce0       0x28 c:/devkitPro/libnds/lib\libul.a(text.o)
+                0x0200bce0                ul_curTextColor
+                0x0200bce4                ul_lcdFontInfo
+ .data          0x0200bd08       0x2c c:/devkitPro/libnds/lib\libul.a(VirtualFile.o)
+                0x0200bd08                VF_MEMORY
+                0x0200bd0c                vfsMemory
+ .data          0x0200bd34       0x10 c:/devkitPro/libnds/lib\libul.a(texVramManager.o)
+                0x0200bd34                ul_texVramSize
+                0x0200bd38                ul_optimizeTextureSize
+                0x0200bd3c                ul_texVramBase
+                0x0200bd40                ul_texVramBanks
+                0x0200bd42                ul_initTexturesToZero
+ .data          0x0200bd44        0xc c:/devkitPro/libnds/lib\libul.a(texPalManager.o)
+                0x0200bd44                ul_texPalVramSize
+                0x0200bd48                ul_texPalVramBanks
+                0x0200bd4c                ul_texPalVramBase
+ .data          0x0200bd50       0x28 c:/devkitPro/libnds/lib\libul.a(keys.o)
+                0x0200bd50                ul_keys
+ .data          0x0200bd78        0x0 c:/devkitPro/libnds/lib\libul.a(ulCreateImagePalette.o)
+ .data          0x0200bd78        0x0 c:/devkitPro/libnds/lib\libul.a(glWrapper.o)
+ .data          0x0200bd78        0x0 c:/devkitPro/libnds/lib\libnds9.a(dynamicArray.o)
+ .data          0x0200bd78        0x3 c:/devkitPro/libnds/lib\libnds9.a(keys.o)
+ .data          0x0200bd7b        0x0 c:/devkitPro/libnds/lib\libnds9.a(system.o)
+ .data          0x0200bd7b        0x0 c:/devkitPro/libnds/lib\libnds9.a(touch.o)
+ *fill*         0x0200bd7b        0x1 ff
+ .data          0x0200bd7c        0x4 c:/devkitPro/libnds/lib\libnds9.a(videoGL.o)
+ .data          0x0200bd80        0x0 c:/devkitPro/libnds/lib\libnds9.a(initSystem.o)
+ .data          0x0200bd80       0x10 c:/devkitPro/libnds/lib\libnds9.a(fifosystem.o)
+                0x0200bd80                fifo_freewords
+                0x0200bd84                fifo_buffer_free
+                0x0200bd88                fifo_send_queue
+                0x0200bd8c                fifo_receive_queue
+ .data          0x0200bd90        0x0 c:/devkitPro/libnds/lib\libnds9.a(interrupts.o)
+ .data          0x0200bd90        0x0 c:/devkitPro/libnds/lib\libnds9.a(libnds_exit.o)
+ .data          0x0200bd90        0x0 c:/devkitPro/libnds/lib\libnds9.a(mpu_setup.o)
+ .data          0x0200bd90        0x0 c:/devkitPro/libnds/lib\libnds9.a(biosCalls.o)
+ .data          0x0200bd90        0x0 c:/devkitPro/libnds/lib\libnds9.a(interruptDispatcher.o)
+ .data          0x0200bd90        0x0 c:/devkitPro/libnds/lib\libnds9.a(swiSoftReset.o)
+ .data          0x0200bd90        0x0 c:/devkitPro/libnds/lib\libnds9.a(trig.o)
+ .data          0x0200bd90        0x0 c:/devkitPro/libnds/lib\libnds9.a(video.o)
+ .data          0x0200bd90        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_cos.o)
+ .data          0x0200bd90        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_sin.o)
+ .data          0x0200bd90        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-e_rem_pio2.o)
+ .data          0x0200bd90        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-k_cos.o)
+ .data          0x0200bd90        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-k_rem_pio2.o)
+ .data          0x0200bd90        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-k_sin.o)
+ .data          0x0200bd90        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_fabs.o)
+ .data          0x0200bd90        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_floor.o)
+ .data          0x0200bd90        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_scalbn.o)
+ .data          0x0200bd90        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_copysign.o)
+ .data          0x0200bd90        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_divsi3.o)
+ .data          0x0200bd90        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_dvmd_tls.o)
+ .data          0x0200bd90        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_arm_addsubdf3.o)
+ .data          0x0200bd90        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_arm_muldivdf3.o)
+ .data          0x0200bd90        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_arm_cmpdf2.o)
+ .data          0x0200bd90        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_arm_fixdfsi.o)
+ .data          0x0200bd90        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_arm_addsubsf3.o)
+ .data          0x0200bd90        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_arm_muldivsf3.o)
+ .data          0x0200bd90        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_muldi3.o)
+ .data          0x0200bd90        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-bsearch.o)
+ .data          0x0200bd90        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-init.o)
+ .data          0x0200bd90        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-malloc.o)
+ .data          0x0200bd90      0x410 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-mallocr.o)
+                0x0200bd90                __malloc_av_
+                0x0200c198                __malloc_sbrk_base
+                0x0200c19c                __malloc_trim_threshold
+ .data          0x0200c1a0        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-memcpy.o)
+ .data          0x0200c1a0        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-memmove.o)
+ .data          0x0200c1a0        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-memset.o)
+ .data          0x0200c1a0        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-mlock.o)
+ .data          0x0200c1a0        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-realloc.o)
+ .data          0x0200c1a0        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-reallocr.o)
+ .data          0x0200c1a0        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-strcmp.o)
+ .data          0x0200c1a0        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-strlen.o)
+ .data          0x0200c1a0        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-freer.o)
+ .data          0x0200c1a0      0x430 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-impure.o)
+                0x0200c1a0                _impure_ptr
+ .data          0x0200c5d0        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(sbrk.o)
+ .data          0x0200c5d0        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(times.o)
+ .data          0x0200c5d0        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(malloc_vars.o)
+ .data          0x0200c5d0        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(build_argv.o)
+ .data          0x0200c5d0        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(syscall_support.o)
+ .data          0x0200c5d0        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-errno.o)
+ .data          0x0200c5d0        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crtend.o
+ .data          0x0200c5d0        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crtn.o
+ *(.data.*)
+ *(.gnu.linkonce.d*)
+                0x0200c5d0                . = ALIGN (0x4)
+                0x0200c5d0                __data_end = ABSOLUTE (.)
+                0x0200c5d0                __dtcm_lma = .
+                0x0200c5d0                __bss_vma = .
+
+.dtcm           0x0b000000        0x0 load address 0x0200c5d0
+ *(.dtcm)
+ *(.dtcm.*)
+                0x0b000000                . = ALIGN (0x4)
+                0x0b000000                __dtcm_end = ABSOLUTE (.)
+                0x0200c5d0                __itcm_lma = (__dtcm_lma + SIZEOF (.dtcm))
+
+.itcm           0x01000100      0x194 load address 0x0200c5d0
+ *(.itcm)
+ .itcm          0x01000100       0xc8 c:/devkitPro/libnds/lib\libnds9.a(interrupts.o)
+                0x01000100                irqTable
+ .itcm          0x010001c8       0xcc c:/devkitPro/libnds/lib\libnds9.a(interruptDispatcher.o)
+                0x010001c8                IntrMain
+ *itcm.*(.text)
+                0x01000294                . = ALIGN (0x4)
+                0x01000294                __itcm_end = ABSOLUTE (.)
+                0x0200c764                __vectors_lma = (__itcm_lma + SIZEOF (.itcm))
+
+.vectors        0x01000000        0x0 load address 0x0200c764
+ *(.vectors)
+ *vectors.*(.text)
+                0x01000000                . = ALIGN (0x4)
+                0x01000000                __vectors_end = ABSOLUTE (.)
+
+.sbss           0x0b000000        0x0
+                0x0b000000                __sbss_start = ABSOLUTE (.)
+                0x0b000000                __sbss_start__ = ABSOLUTE (.)
+ *(.sbss)
+                0x0b000000                . = ALIGN (0x4)
+                0x0b000000                __sbss_end = ABSOLUTE (.)
+
+.bss            0x0200c5d0     0x17a8
+                0x0200c5d0                __bss_start = ABSOLUTE (.)
+                0x0200c5d0                __bss_start__ = ABSOLUTE (.)
+ *(.dynbss)
+ *(.gnu.linkonce.b*)
+ *(.bss*)
+ .bss           0x0200c5d0        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib/ds_arm9_crt0.o
+ .bss           0x0200c5d0        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crti.o
+ .bss           0x0200c5d0       0x1c c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crtbegin.o
+ .bss           0x0200c5ec        0x0 main.o
+ .bss           0x0200c5ec        0x4 c:/devkitPro/libnds/lib\libul.a(ulib.o)
+                0x0200c5ec                ul_isConsoleInited
+ .bss           0x0200c5f0        0x3 c:/devkitPro/libnds/lib\libul.a(drawing.o)
+                0x0200c5f0                ul_drawingStarted
+                0x0200c5f1                ul_screenClippingChanged
+                0x0200c5f2                ul_firstPaletteColorOpaque
+ *fill*         0x0200c5f3        0x1 00
+ .bss           0x0200c5f4        0x8 c:/devkitPro/libnds/lib\libul.a(text.o)
+                0x0200c5f4                ul_curFont
+                0x0200c5f8                ul_lcdFont
+ .bss           0x0200c5fc        0x8 c:/devkitPro/libnds/lib\libul.a(VirtualFile.o)
+                0x0200c5fc                VirtualFileSourcesNb
+                0x0200c600                ul_virtualFileListNumber
+ .bss           0x0200c604        0x0 c:/devkitPro/libnds/lib\libul.a(texVramManager.o)
+ .bss           0x0200c604        0x0 c:/devkitPro/libnds/lib\libul.a(texPalManager.o)
+ .bss           0x0200c604        0x0 c:/devkitPro/libnds/lib\libul.a(keys.o)
+ .bss           0x0200c604        0x0 c:/devkitPro/libnds/lib\libul.a(ulCreateImagePalette.o)
+ .bss           0x0200c604        0x0 c:/devkitPro/libnds/lib\libul.a(glWrapper.o)
+ .bss           0x0200c604        0x0 c:/devkitPro/libnds/lib\libnds9.a(dynamicArray.o)
+ .bss           0x0200c604        0x6 c:/devkitPro/libnds/lib\libnds9.a(keys.o)
+ .bss           0x0200c60a        0x0 c:/devkitPro/libnds/lib\libnds9.a(system.o)
+ .bss           0x0200c60a        0x0 c:/devkitPro/libnds/lib\libnds9.a(touch.o)
+ *fill*         0x0200c60a        0x2 00
+ .bss           0x0200c60c        0x8 c:/devkitPro/libnds/lib\libnds9.a(videoGL.o)
+ .bss           0x0200c614        0x0 c:/devkitPro/libnds/lib\libnds9.a(initSystem.o)
+ .bss           0x0200c614        0x8 c:/devkitPro/libnds/lib\libnds9.a(fifosystem.o)
+                0x0200c618                processing
+ .bss           0x0200c61c        0x0 c:/devkitPro/libnds/lib\libnds9.a(interrupts.o)
+ .bss           0x0200c61c        0x0 c:/devkitPro/libnds/lib\libnds9.a(libnds_exit.o)
+ .bss           0x0200c61c        0x0 c:/devkitPro/libnds/lib\libnds9.a(mpu_setup.o)
+ .bss           0x0200c61c        0x0 c:/devkitPro/libnds/lib\libnds9.a(biosCalls.o)
+ .bss           0x0200c61c        0x0 c:/devkitPro/libnds/lib\libnds9.a(interruptDispatcher.o)
+ .bss           0x0200c61c        0x0 c:/devkitPro/libnds/lib\libnds9.a(swiSoftReset.o)
+ .bss           0x0200c61c        0x0 c:/devkitPro/libnds/lib\libnds9.a(trig.o)
+ .bss           0x0200c61c        0x0 c:/devkitPro/libnds/lib\libnds9.a(video.o)
+ .bss           0x0200c61c        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_cos.o)
+ .bss           0x0200c61c        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_sin.o)
+ .bss           0x0200c61c        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-e_rem_pio2.o)
+ .bss           0x0200c61c        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-k_cos.o)
+ .bss           0x0200c61c        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-k_rem_pio2.o)
+ .bss           0x0200c61c        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-k_sin.o)
+ .bss           0x0200c61c        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_fabs.o)
+ .bss           0x0200c61c        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_floor.o)
+ .bss           0x0200c61c        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_scalbn.o)
+ .bss           0x0200c61c        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_copysign.o)
+ .bss           0x0200c61c        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_divsi3.o)
+ .bss           0x0200c61c        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_dvmd_tls.o)
+ .bss           0x0200c61c        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_arm_addsubdf3.o)
+ .bss           0x0200c61c        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_arm_muldivdf3.o)
+ .bss           0x0200c61c        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_arm_cmpdf2.o)
+ .bss           0x0200c61c        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_arm_fixdfsi.o)
+ .bss           0x0200c61c        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_arm_addsubsf3.o)
+ .bss           0x0200c61c        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_arm_muldivsf3.o)
+ .bss           0x0200c61c        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_muldi3.o)
+ .bss           0x0200c61c        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-bsearch.o)
+ .bss           0x0200c61c        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-init.o)
+ .bss           0x0200c61c        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-malloc.o)
+ .bss           0x0200c61c       0x34 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-mallocr.o)
+                0x0200c61c                __malloc_top_pad
+                0x0200c620                __malloc_current_mallinfo
+                0x0200c648                __malloc_max_sbrked_mem
+                0x0200c64c                __malloc_max_total_mem
+ .bss           0x0200c650        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-memcpy.o)
+ .bss           0x0200c650        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-memmove.o)
+ .bss           0x0200c650        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-memset.o)
+ .bss           0x0200c650        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-mlock.o)
+ .bss           0x0200c650        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-realloc.o)
+ .bss           0x0200c650        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-reallocr.o)
+ .bss           0x0200c650        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-strcmp.o)
+ .bss           0x0200c650        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-strlen.o)
+ .bss           0x0200c650        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-freer.o)
+ .bss           0x0200c650        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-impure.o)
+ .bss           0x0200c650        0x4 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(sbrk.o)
+ .bss           0x0200c654        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(times.o)
+ .bss           0x0200c654        0x8 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(malloc_vars.o)
+                0x0200c654                fake_heap_end
+                0x0200c658                fake_heap_start
+ .bss           0x0200c65c        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(build_argv.o)
+ .bss           0x0200c65c        0x8 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(syscall_support.o)
+                0x0200c65c                __syscalls
+ .bss           0x0200c664        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-errno.o)
+ .bss           0x0200c664        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crtend.o
+ .bss           0x0200c664        0x0 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crtn.o
+ *(COMMON)
+ COMMON         0x0200c664      0x800 c:/devkitPro/libnds/lib\libul.a(ulib.o)
+                0x0200c664                ul_cos
+                0x0200ca64                ul_sin
+ COMMON         0x0200ce64      0x411 c:/devkitPro/libnds/lib\libul.a(drawing.o)
+                0x0200ce64                ul_colorKeyValue32
+                0x0200ce68                ul_colorKeyValue
+                0x0200ce6c                ulDualScreenSprites
+                0x0200d26c                ul_autoDepth
+                0x0200d26d                ul_dualScreenMode
+                0x0200d26e                ul_frameNumber
+                0x0200d270                ul_currentDepth
+                0x0200d274                ul_colorKeyEnabled
+ *fill*         0x0200d275        0x3 00
+ COMMON         0x0200d278       0x44 c:/devkitPro/libnds/lib\libul.a(VirtualFile.o)
+                0x0200d278                VirtualFileSources
+                0x0200d2b8                ul_virtualFileList
+ COMMON         0x0200d2bc       0x1c c:/devkitPro/libnds/lib\libul.a(texVramManager.o)
+                0x0200d2bc                ulTextureMax
+                0x0200d2c0                ulTextureParams
+                0x0200d2c4                ulTexRamBlocksNb
+                0x0200d2c8                ulTextureNb
+                0x0200d2cc                ulTexRamBlocksMax
+                0x0200d2d0                ulTexRamBlocks
+                0x0200d2d4                ulTextureActive
+ COMMON         0x0200d2d8        0xc c:/devkitPro/libnds/lib\libul.a(texPalManager.o)
+                0x0200d2d8                ulTexPalBlocksNb
+                0x0200d2dc                ulTexPalBlocks
+                0x0200d2e0                ulTexPalBlocksMax
+ COMMON         0x0200d2e4       0x4c c:/devkitPro/libnds/lib\libnds9.a(videoGL.o)
+                0x0200d2e4                glGlobalData
+ COMMON         0x0200d330        0x1 c:/devkitPro/libnds/lib\libnds9.a(initSystem.o)
+                0x0200d330                __dsimode
+ *fill*         0x0200d331        0x3 00
+ COMMON         0x0200d334      0xa40 c:/devkitPro/libnds/lib\libnds9.a(fifosystem.o)
+                0x0200d334                fifo_datamsg_data
+                0x0200d374                fifo_buffer
+                0x0200db74                fifo_value32_func
+                0x0200dbb4                fifo_address_func
+                0x0200dbf4                fifo_value32_data
+                0x0200dc34                fifo_value32_queue
+                0x0200dc74                fifo_data_queue
+                0x0200dcb4                fifo_address_data
+                0x0200dcf4                fifo_datamsg_func
+                0x0200dd34                fifo_address_queue
+ COMMON         0x0200dd74        0x4 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(times.o)
+                0x0200dd74                punixTime
+                0x0200dd78                . = ALIGN (0x4)
+                0x0200dd78                __bss_end = ABSOLUTE (.)
+                0x0200dd78                __bss_end__ = __bss_end
+                0x0200dd78                _end = __bss_end__
+                0x0200dd78                __end__ = __bss_end__
+
+.stab
+ *(.stab)
+
+.stabstr
+ *(.stabstr)
+
+.stab.excl
+ *(.stab.excl)
+
+.stab.exclstr
+ *(.stab.exclstr)
+
+.stab.index
+ *(.stab.index)
+
+.stab.indexstr
+ *(.stab.indexstr)
+
+.ARM.attributes
+                0x00000000       0x2d load address 0x0200c5d0
+ .ARM.attributes
+                0x00000000       0x21 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib/ds_arm9_crt0.o
+ .ARM.attributes
+                0x00000021       0x20 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crti.o
+ .ARM.attributes
+                0x00000041       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crtbegin.o
+ .ARM.attributes
+                0x00000071       0x27 main.o
+ .ARM.attributes
+                0x00000098       0x2d c:/devkitPro/libnds/lib\libul.a(ulib.o)
+ .ARM.attributes
+                0x000000c5       0x2d c:/devkitPro/libnds/lib\libul.a(drawing.o)
+ .ARM.attributes
+                0x000000f2       0x2d c:/devkitPro/libnds/lib\libul.a(text.o)
+ .ARM.attributes
+                0x0000011f       0x2d c:/devkitPro/libnds/lib\libul.a(VirtualFile.o)
+ .ARM.attributes
+                0x0000014c       0x2d c:/devkitPro/libnds/lib\libul.a(texVramManager.o)
+ .ARM.attributes
+                0x00000179       0x2d c:/devkitPro/libnds/lib\libul.a(texPalManager.o)
+ .ARM.attributes
+                0x000001a6       0x2d c:/devkitPro/libnds/lib\libul.a(keys.o)
+ .ARM.attributes
+                0x000001d3       0x2d c:/devkitPro/libnds/lib\libul.a(ulCreateImagePalette.o)
+ .ARM.attributes
+                0x00000200       0x2d c:/devkitPro/libnds/lib\libul.a(glWrapper.o)
+ .ARM.attributes
+                0x0000022d       0x27 c:/devkitPro/libnds/lib\libnds9.a(dynamicArray.o)
+ .ARM.attributes
+                0x00000254       0x27 c:/devkitPro/libnds/lib\libnds9.a(keys.o)
+ .ARM.attributes
+                0x0000027b       0x27 c:/devkitPro/libnds/lib\libnds9.a(system.o)
+ .ARM.attributes
+                0x000002a2       0x27 c:/devkitPro/libnds/lib\libnds9.a(touch.o)
+ .ARM.attributes
+                0x000002c9       0x27 c:/devkitPro/libnds/lib\libnds9.a(videoGL.o)
+ .ARM.attributes
+                0x000002f0       0x27 c:/devkitPro/libnds/lib\libnds9.a(initSystem.o)
+ .ARM.attributes
+                0x00000317       0x27 c:/devkitPro/libnds/lib\libnds9.a(fifosystem.o)
+ .ARM.attributes
+                0x0000033e       0x27 c:/devkitPro/libnds/lib\libnds9.a(interrupts.o)
+ .ARM.attributes
+                0x00000365       0x27 c:/devkitPro/libnds/lib\libnds9.a(libnds_exit.o)
+ .ARM.attributes
+                0x0000038c       0x21 c:/devkitPro/libnds/lib\libnds9.a(mpu_setup.o)
+ .ARM.attributes
+                0x000003ad       0x1b c:/devkitPro/libnds/lib\libnds9.a(biosCalls.o)
+ .ARM.attributes
+                0x000003c8       0x1b c:/devkitPro/libnds/lib\libnds9.a(interruptDispatcher.o)
+ .ARM.attributes
+                0x000003e3       0x21 c:/devkitPro/libnds/lib\libnds9.a(swiSoftReset.o)
+ .ARM.attributes
+                0x00000404       0x27 c:/devkitPro/libnds/lib\libnds9.a(trig.o)
+ .ARM.attributes
+                0x0000042b       0x27 c:/devkitPro/libnds/lib\libnds9.a(video.o)
+ .ARM.attributes
+                0x00000452       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_cos.o)
+ .ARM.attributes
+                0x00000482       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_sin.o)
+ .ARM.attributes
+                0x000004b2       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-e_rem_pio2.o)
+ .ARM.attributes
+                0x000004e2       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-k_cos.o)
+ .ARM.attributes
+                0x00000512       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-k_rem_pio2.o)
+ .ARM.attributes
+                0x00000542       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-k_sin.o)
+ .ARM.attributes
+                0x00000572       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_fabs.o)
+ .ARM.attributes
+                0x000005a2       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_floor.o)
+ .ARM.attributes
+                0x000005d2       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_scalbn.o)
+ .ARM.attributes
+                0x00000602       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_copysign.o)
+ .ARM.attributes
+                0x00000632       0x22 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_divsi3.o)
+ .ARM.attributes
+                0x00000654       0x22 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_dvmd_tls.o)
+ .ARM.attributes
+                0x00000676       0x22 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_arm_addsubdf3.o)
+ .ARM.attributes
+                0x00000698       0x22 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_arm_muldivdf3.o)
+ .ARM.attributes
+                0x000006ba       0x22 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_arm_cmpdf2.o)
+ .ARM.attributes
+                0x000006dc       0x22 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_arm_fixdfsi.o)
+ .ARM.attributes
+                0x000006fe       0x22 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_arm_addsubsf3.o)
+ .ARM.attributes
+                0x00000720       0x22 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_arm_muldivsf3.o)
+ .ARM.attributes
+                0x00000742       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_muldi3.o)
+ .ARM.attributes
+                0x00000772       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-bsearch.o)
+ .ARM.attributes
+                0x000007a2       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-init.o)
+ .ARM.attributes
+                0x000007d2       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-malloc.o)
+ .ARM.attributes
+                0x00000802       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-mallocr.o)
+ .ARM.attributes
+                0x00000832       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-memcpy.o)
+ .ARM.attributes
+                0x00000862       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-memmove.o)
+ .ARM.attributes
+                0x00000892       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-memset.o)
+ .ARM.attributes
+                0x000008c2       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-mlock.o)
+ .ARM.attributes
+                0x000008f2       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-realloc.o)
+ .ARM.attributes
+                0x00000922       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-reallocr.o)
+ .ARM.attributes
+                0x00000952       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-strcmp.o)
+ .ARM.attributes
+                0x00000982       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-strlen.o)
+ .ARM.attributes
+                0x000009b2       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-freer.o)
+ .ARM.attributes
+                0x000009e2       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-impure.o)
+ .ARM.attributes
+                0x00000a12       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(sbrk.o)
+ .ARM.attributes
+                0x00000a42       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(times.o)
+ .ARM.attributes
+                0x00000a72       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(malloc_vars.o)
+ .ARM.attributes
+                0x00000aa2       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(build_argv.o)
+ .ARM.attributes
+                0x00000ad2       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(syscall_support.o)
+ .ARM.attributes
+                0x00000b02       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-errno.o)
+ .ARM.attributes
+                0x00000b32       0x30 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crtend.o
+ .ARM.attributes
+                0x00000b62       0x20 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crtn.o
+
+.comment        0x00000000       0x22 load address 0x0200c5d0
+ *(.comment)
+ .comment       0x00000000       0x22 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crtbegin.o
+                                 0x23 (size before relaxing)
+ .comment       0x00000000       0x23 main.o
+ .comment       0x00000000       0x23 c:/devkitPro/libnds/lib\libul.a(ulib.o)
+ .comment       0x00000000       0x23 c:/devkitPro/libnds/lib\libul.a(drawing.o)
+ .comment       0x00000000       0x23 c:/devkitPro/libnds/lib\libul.a(text.o)
+ .comment       0x00000000       0x23 c:/devkitPro/libnds/lib\libul.a(VirtualFile.o)
+ .comment       0x00000000       0x23 c:/devkitPro/libnds/lib\libul.a(texVramManager.o)
+ .comment       0x00000000       0x23 c:/devkitPro/libnds/lib\libul.a(texPalManager.o)
+ .comment       0x00000000       0x23 c:/devkitPro/libnds/lib\libul.a(keys.o)
+ .comment       0x00000000       0x23 c:/devkitPro/libnds/lib\libul.a(ulCreateImagePalette.o)
+ .comment       0x00000000       0x23 c:/devkitPro/libnds/lib\libul.a(glWrapper.o)
+ .comment       0x00000000       0x23 c:/devkitPro/libnds/lib\libnds9.a(dynamicArray.o)
+ .comment       0x00000000       0x23 c:/devkitPro/libnds/lib\libnds9.a(keys.o)
+ .comment       0x00000000       0x23 c:/devkitPro/libnds/lib\libnds9.a(system.o)
+ .comment       0x00000000       0x23 c:/devkitPro/libnds/lib\libnds9.a(touch.o)
+ .comment       0x00000000       0x23 c:/devkitPro/libnds/lib\libnds9.a(videoGL.o)
+ .comment       0x00000000       0x23 c:/devkitPro/libnds/lib\libnds9.a(initSystem.o)
+ .comment       0x00000000       0x23 c:/devkitPro/libnds/lib\libnds9.a(fifosystem.o)
+ .comment       0x00000000       0x23 c:/devkitPro/libnds/lib\libnds9.a(interrupts.o)
+ .comment       0x00000000       0x23 c:/devkitPro/libnds/lib\libnds9.a(libnds_exit.o)
+ .comment       0x00000000       0x23 c:/devkitPro/libnds/lib\libnds9.a(trig.o)
+ .comment       0x00000000       0x23 c:/devkitPro/libnds/lib\libnds9.a(video.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_cos.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_sin.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-e_rem_pio2.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-k_cos.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-k_rem_pio2.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-k_sin.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_fabs.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_floor.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_scalbn.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a(lib_a-s_copysign.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a(_muldi3.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-bsearch.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-init.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-malloc.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-mallocr.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-memcpy.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-memmove.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-memset.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-mlock.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-realloc.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-reallocr.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-strcmp.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-strlen.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-freer.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-impure.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(sbrk.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(times.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(malloc_vars.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(build_argv.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a(syscall_support.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a(lib_a-errno.o)
+ .comment       0x00000000       0x23 c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crtend.o
+
+.debug
+ *(.debug)
+
+.line
+ *(.line)
+
+.debug_srcinfo
+ *(.debug_srcinfo)
+
+.debug_sfnames
+ *(.debug_sfnames)
+
+.debug_aranges  0x00000000      0x320 load address 0x0200c5d0
+ *(.debug_aranges)
+ .debug_aranges
+                0x00000000       0x20 main.o
+ .debug_aranges
+                0x00000020       0x20 c:/devkitPro/libnds/lib\libul.a(ulib.o)
+ .debug_aranges
+                0x00000040       0x20 c:/devkitPro/libnds/lib\libul.a(drawing.o)
+ .debug_aranges
+                0x00000060       0x20 c:/devkitPro/libnds/lib\libul.a(text.o)
+ .debug_aranges
+                0x00000080       0x20 c:/devkitPro/libnds/lib\libul.a(VirtualFile.o)
+ .debug_aranges
+                0x000000a0       0x20 c:/devkitPro/libnds/lib\libul.a(texVramManager.o)
+ .debug_aranges
+                0x000000c0       0x20 c:/devkitPro/libnds/lib\libul.a(texPalManager.o)
+ .debug_aranges
+                0x000000e0       0x20 c:/devkitPro/libnds/lib\libul.a(keys.o)
+ .debug_aranges
+                0x00000100       0x20 c:/devkitPro/libnds/lib\libul.a(ulCreateImagePalette.o)
+ .debug_aranges
+                0x00000120       0x20 c:/devkitPro/libnds/lib\libul.a(glWrapper.o)
+ .debug_aranges
+                0x00000140       0x20 c:/devkitPro/libnds/lib\libnds9.a(dynamicArray.o)
+ .debug_aranges
+                0x00000160       0x20 c:/devkitPro/libnds/lib\libnds9.a(keys.o)
+ .debug_aranges
+                0x00000180       0x20 c:/devkitPro/libnds/lib\libnds9.a(system.o)
+ .debug_aranges
+                0x000001a0       0x20 c:/devkitPro/libnds/lib\libnds9.a(touch.o)
+ .debug_aranges
+                0x000001c0       0x20 c:/devkitPro/libnds/lib\libnds9.a(videoGL.o)
+ .debug_aranges
+                0x000001e0       0x20 c:/devkitPro/libnds/lib\libnds9.a(initSystem.o)
+ .debug_aranges
+                0x00000200       0x20 c:/devkitPro/libnds/lib\libnds9.a(fifosystem.o)
+ .debug_aranges
+                0x00000220       0x20 c:/devkitPro/libnds/lib\libnds9.a(interrupts.o)
+ .debug_aranges
+                0x00000240       0x20 c:/devkitPro/libnds/lib\libnds9.a(libnds_exit.o)
+ .debug_aranges
+                0x00000260       0x20 c:/devkitPro/libnds/lib\libnds9.a(mpu_setup.o)
+ .debug_aranges
+                0x00000280       0x20 c:/devkitPro/libnds/lib\libnds9.a(biosCalls.o)
+ .debug_aranges
+                0x000002a0       0x20 c:/devkitPro/libnds/lib\libnds9.a(interruptDispatcher.o)
+ .debug_aranges
+                0x000002c0       0x20 c:/devkitPro/libnds/lib\libnds9.a(swiSoftReset.o)
+ .debug_aranges
+                0x000002e0       0x20 c:/devkitPro/libnds/lib\libnds9.a(trig.o)
+ .debug_aranges
+                0x00000300       0x20 c:/devkitPro/libnds/lib\libnds9.a(video.o)
+
+.debug_pubnames
+                0x00000000     0x140f load address 0x0200c5d0
+ *(.debug_pubnames)
+ .debug_pubnames
+                0x00000000       0x1b main.o
+ .debug_pubnames
+                0x0000001b       0x84 c:/devkitPro/libnds/lib\libul.a(ulib.o)
+ .debug_pubnames
+                0x0000009f      0x33e c:/devkitPro/libnds/lib\libul.a(drawing.o)
+ .debug_pubnames
+                0x000003dd      0x119 c:/devkitPro/libnds/lib\libul.a(text.o)
+ .debug_pubnames
+                0x000004f6      0x1c5 c:/devkitPro/libnds/lib\libul.a(VirtualFile.o)
+ .debug_pubnames
+                0x000006bb      0x259 c:/devkitPro/libnds/lib\libul.a(texVramManager.o)
+ .debug_pubnames
+                0x00000914      0x176 c:/devkitPro/libnds/lib\libul.a(texPalManager.o)
+ .debug_pubnames
+                0x00000a8a       0x2d c:/devkitPro/libnds/lib\libul.a(keys.o)
+ .debug_pubnames
+                0x00000ab7       0x2b c:/devkitPro/libnds/lib\libul.a(ulCreateImagePalette.o)
+ .debug_pubnames
+                0x00000ae2       0x2d c:/devkitPro/libnds/lib\libul.a(glWrapper.o)
+ .debug_pubnames
+                0x00000b0f       0x66 c:/devkitPro/libnds/lib\libnds9.a(dynamicArray.o)
+ .debug_pubnames
+                0x00000b75       0x79 c:/devkitPro/libnds/lib\libnds9.a(keys.o)
+ .debug_pubnames
+                0x00000bee       0x87 c:/devkitPro/libnds/lib\libnds9.a(system.o)
+ .debug_pubnames
+                0x00000c75       0x30 c:/devkitPro/libnds/lib\libnds9.a(touch.o)
+ .debug_pubnames
+                0x00000ca5      0x2c2 c:/devkitPro/libnds/lib\libnds9.a(videoGL.o)
+ .debug_pubnames
+                0x00000f67       0x2f c:/devkitPro/libnds/lib\libnds9.a(initSystem.o)
+ .debug_pubnames
+                0x00000f96      0x259 c:/devkitPro/libnds/lib\libnds9.a(fifosystem.o)
+ .debug_pubnames
+                0x000011ef       0x80 c:/devkitPro/libnds/lib\libnds9.a(interrupts.o)
+ .debug_pubnames
+                0x0000126f       0x38 c:/devkitPro/libnds/lib\libnds9.a(libnds_exit.o)
+ .debug_pubnames
+                0x000012a7       0xa4 c:/devkitPro/libnds/lib\libnds9.a(trig.o)
+ .debug_pubnames
+                0x0000134b       0xc4 c:/devkitPro/libnds/lib\libnds9.a(video.o)
+
+.debug_info     0x00000000     0xeb6b load address 0x0200c5d0
+ *(.debug_info)
+ .debug_info    0x00000000      0x67e main.o
+ .debug_info    0x0000067e      0x908 c:/devkitPro/libnds/lib\libul.a(ulib.o)
+ .debug_info    0x00000f86     0x2312 c:/devkitPro/libnds/lib\libul.a(drawing.o)
+ .debug_info    0x00003298     0x1338 c:/devkitPro/libnds/lib\libul.a(text.o)
+ .debug_info    0x000045d0      0xeef c:/devkitPro/libnds/lib\libul.a(VirtualFile.o)
+ .debug_info    0x000054bf      0xebb c:/devkitPro/libnds/lib\libul.a(texVramManager.o)
+ .debug_info    0x0000637a      0xb0e c:/devkitPro/libnds/lib\libul.a(texPalManager.o)
+ .debug_info    0x00006e88      0xa76 c:/devkitPro/libnds/lib\libul.a(keys.o)
+ .debug_info    0x000078fe      0x8d1 c:/devkitPro/libnds/lib\libul.a(ulCreateImagePalette.o)
+ .debug_info    0x000081cf      0x795 c:/devkitPro/libnds/lib\libul.a(glWrapper.o)
+ .debug_info    0x00008964      0x1e7 c:/devkitPro/libnds/lib\libnds9.a(dynamicArray.o)
+ .debug_info    0x00008b4b      0x3d0 c:/devkitPro/libnds/lib\libnds9.a(keys.o)
+ .debug_info    0x00008f1b      0x6f4 c:/devkitPro/libnds/lib\libnds9.a(system.o)
+ .debug_info    0x0000960f      0x2c2 c:/devkitPro/libnds/lib\libnds9.a(touch.o)
+ .debug_info    0x000098d1     0x1dc7 c:/devkitPro/libnds/lib\libnds9.a(videoGL.o)
+ .debug_info    0x0000b698      0xed0 c:/devkitPro/libnds/lib\libnds9.a(initSystem.o)
+ .debug_info    0x0000c568     0x10ca c:/devkitPro/libnds/lib\libnds9.a(fifosystem.o)
+ .debug_info    0x0000d632      0x466 c:/devkitPro/libnds/lib\libnds9.a(interrupts.o)
+ .debug_info    0x0000da98      0x2a6 c:/devkitPro/libnds/lib\libnds9.a(libnds_exit.o)
+ .debug_info    0x0000dd3e       0xca c:/devkitPro/libnds/lib\libnds9.a(mpu_setup.o)
+ .debug_info    0x0000de08       0xc5 c:/devkitPro/libnds/lib\libnds9.a(biosCalls.o)
+ .debug_info    0x0000decd       0xcf c:/devkitPro/libnds/lib\libnds9.a(interruptDispatcher.o)
+ .debug_info    0x0000df9c       0xc8 c:/devkitPro/libnds/lib\libnds9.a(swiSoftReset.o)
+ .debug_info    0x0000e064      0x4b6 c:/devkitPro/libnds/lib\libnds9.a(trig.o)
+ .debug_info    0x0000e51a      0x651 c:/devkitPro/libnds/lib\libnds9.a(video.o)
+
+.debug_abbrev   0x00000000     0x2c27 load address 0x0200c5d0
+ *(.debug_abbrev)
+ .debug_abbrev  0x00000000      0x12c main.o
+ .debug_abbrev  0x0000012c      0x1a9 c:/devkitPro/libnds/lib\libul.a(ulib.o)
+ .debug_abbrev  0x000002d5      0x4ca c:/devkitPro/libnds/lib\libul.a(drawing.o)
+ .debug_abbrev  0x0000079f      0x270 c:/devkitPro/libnds/lib\libul.a(text.o)
+ .debug_abbrev  0x00000a0f      0x29d c:/devkitPro/libnds/lib\libul.a(VirtualFile.o)
+ .debug_abbrev  0x00000cac      0x30f c:/devkitPro/libnds/lib\libul.a(texVramManager.o)
+ .debug_abbrev  0x00000fbb      0x245 c:/devkitPro/libnds/lib\libul.a(texPalManager.o)
+ .debug_abbrev  0x00001200      0x1cf c:/devkitPro/libnds/lib\libul.a(keys.o)
+ .debug_abbrev  0x000013cf      0x16c c:/devkitPro/libnds/lib\libul.a(ulCreateImagePalette.o)
+ .debug_abbrev  0x0000153b      0x171 c:/devkitPro/libnds/lib\libul.a(glWrapper.o)
+ .debug_abbrev  0x000016ac       0xf6 c:/devkitPro/libnds/lib\libnds9.a(dynamicArray.o)
+ .debug_abbrev  0x000017a2      0x176 c:/devkitPro/libnds/lib\libnds9.a(keys.o)
+ .debug_abbrev  0x00001918      0x19a c:/devkitPro/libnds/lib\libnds9.a(system.o)
+ .debug_abbrev  0x00001ab2      0x123 c:/devkitPro/libnds/lib\libnds9.a(touch.o)
+ .debug_abbrev  0x00001bd5      0x390 c:/devkitPro/libnds/lib\libnds9.a(videoGL.o)
+ .debug_abbrev  0x00001f65      0x242 c:/devkitPro/libnds/lib\libnds9.a(initSystem.o)
+ .debug_abbrev  0x000021a7      0x3af c:/devkitPro/libnds/lib\libnds9.a(fifosystem.o)
+ .debug_abbrev  0x00002556      0x1d5 c:/devkitPro/libnds/lib\libnds9.a(interrupts.o)
+ .debug_abbrev  0x0000272b      0x131 c:/devkitPro/libnds/lib\libnds9.a(libnds_exit.o)
+ .debug_abbrev  0x0000285c       0x14 c:/devkitPro/libnds/lib\libnds9.a(mpu_setup.o)
+ .debug_abbrev  0x00002870       0x14 c:/devkitPro/libnds/lib\libnds9.a(biosCalls.o)
+ .debug_abbrev  0x00002884       0x14 c:/devkitPro/libnds/lib\libnds9.a(interruptDispatcher.o)
+ .debug_abbrev  0x00002898       0x14 c:/devkitPro/libnds/lib\libnds9.a(swiSoftReset.o)
+ .debug_abbrev  0x000028ac      0x1c2 c:/devkitPro/libnds/lib\libnds9.a(trig.o)
+ .debug_abbrev  0x00002a6e      0x1b9 c:/devkitPro/libnds/lib\libnds9.a(video.o)
+
+.debug_line     0x00000000     0x4487 load address 0x0200c5d0
+ *(.debug_line)
+ .debug_line    0x00000000      0x1d0 main.o
+ .debug_line    0x000001d0      0x1c8 c:/devkitPro/libnds/lib\libul.a(ulib.o)
+ .debug_line    0x00000398      0x81c c:/devkitPro/libnds/lib\libul.a(drawing.o)
+ .debug_line    0x00000bb4      0x3dd c:/devkitPro/libnds/lib\libul.a(text.o)
+ .debug_line    0x00000f91      0x2f3 c:/devkitPro/libnds/lib\libul.a(VirtualFile.o)
+ .debug_line    0x00001284      0x385 c:/devkitPro/libnds/lib\libul.a(texVramManager.o)
+ .debug_line    0x00001609      0x29c c:/devkitPro/libnds/lib\libul.a(texPalManager.o)
+ .debug_line    0x000018a5      0x1c5 c:/devkitPro/libnds/lib\libul.a(keys.o)
+ .debug_line    0x00001a6a      0x1e4 c:/devkitPro/libnds/lib\libul.a(ulCreateImagePalette.o)
+ .debug_line    0x00001c4e      0x190 c:/devkitPro/libnds/lib\libul.a(glWrapper.o)
+ .debug_line    0x00001dde      0x178 c:/devkitPro/libnds/lib\libnds9.a(dynamicArray.o)
+ .debug_line    0x00001f56      0x254 c:/devkitPro/libnds/lib\libnds9.a(keys.o)
+ .debug_line    0x000021aa      0x26c c:/devkitPro/libnds/lib\libnds9.a(system.o)
+ .debug_line    0x00002416      0x22d c:/devkitPro/libnds/lib\libnds9.a(touch.o)
+ .debug_line    0x00002643      0x93f c:/devkitPro/libnds/lib\libnds9.a(videoGL.o)
+ .debug_line    0x00002f82      0x36c c:/devkitPro/libnds/lib\libnds9.a(initSystem.o)
+ .debug_line    0x000032ee      0x6c8 c:/devkitPro/libnds/lib\libnds9.a(fifosystem.o)
+ .debug_line    0x000039b6      0x1d0 c:/devkitPro/libnds/lib\libnds9.a(interrupts.o)
+ .debug_line    0x00003b86      0x1d8 c:/devkitPro/libnds/lib\libnds9.a(libnds_exit.o)
+ .debug_line    0x00003d5e       0xe3 c:/devkitPro/libnds/lib\libnds9.a(mpu_setup.o)
+ .debug_line    0x00003e41       0xc5 c:/devkitPro/libnds/lib\libnds9.a(biosCalls.o)
+ .debug_line    0x00003f06       0xc4 c:/devkitPro/libnds/lib\libnds9.a(interruptDispatcher.o)
+ .debug_line    0x00003fca       0x93 c:/devkitPro/libnds/lib\libnds9.a(swiSoftReset.o)
+ .debug_line    0x0000405d      0x224 c:/devkitPro/libnds/lib\libnds9.a(trig.o)
+ .debug_line    0x00004281      0x206 c:/devkitPro/libnds/lib\libnds9.a(video.o)
+
+.debug_frame    0x00000000     0x142c load address 0x0200c5d0
+ *(.debug_frame)
+ .debug_frame   0x00000000       0x28 main.o
+ .debug_frame   0x00000028       0x70 c:/devkitPro/libnds/lib\libul.a(ulib.o)
+ .debug_frame   0x00000098      0x220 c:/devkitPro/libnds/lib\libul.a(drawing.o)
+ .debug_frame   0x000002b8      0x160 c:/devkitPro/libnds/lib\libul.a(text.o)
+ .debug_frame   0x00000418      0x1b0 c:/devkitPro/libnds/lib\libul.a(VirtualFile.o)
+ .debug_frame   0x000005c8      0x1a0 c:/devkitPro/libnds/lib\libul.a(texVramManager.o)
+ .debug_frame   0x00000768      0x10c c:/devkitPro/libnds/lib\libul.a(texPalManager.o)
+ .debug_frame   0x00000874       0x30 c:/devkitPro/libnds/lib\libul.a(keys.o)
+ .debug_frame   0x000008a4       0x30 c:/devkitPro/libnds/lib\libul.a(ulCreateImagePalette.o)
+ .debug_frame   0x000008d4       0x28 c:/devkitPro/libnds/lib\libul.a(glWrapper.o)
+ .debug_frame   0x000008fc       0x78 c:/devkitPro/libnds/lib\libnds9.a(dynamicArray.o)
+ .debug_frame   0x00000974       0x8c c:/devkitPro/libnds/lib\libnds9.a(keys.o)
+ .debug_frame   0x00000a00       0xbc c:/devkitPro/libnds/lib\libnds9.a(system.o)
+ .debug_frame   0x00000abc       0x44 c:/devkitPro/libnds/lib\libnds9.a(touch.o)
+ .debug_frame   0x00000b00      0x3b4 c:/devkitPro/libnds/lib\libnds9.a(videoGL.o)
+ .debug_frame   0x00000eb4       0x28 c:/devkitPro/libnds/lib\libnds9.a(initSystem.o)
+ .debug_frame   0x00000edc      0x2b4 c:/devkitPro/libnds/lib\libnds9.a(fifosystem.o)
+ .debug_frame   0x00001190       0xb4 c:/devkitPro/libnds/lib\libnds9.a(interrupts.o)
+ .debug_frame   0x00001244       0x38 c:/devkitPro/libnds/lib\libnds9.a(libnds_exit.o)
+ .debug_frame   0x0000127c       0xf4 c:/devkitPro/libnds/lib\libnds9.a(trig.o)
+ .debug_frame   0x00001370       0xbc c:/devkitPro/libnds/lib\libnds9.a(video.o)
+
+.debug_str      0x00000000     0x4012 load address 0x0200c5d0
+ *(.debug_str)
+ .debug_str     0x00000000      0x3dd main.o
+                                0x444 (size before relaxing)
+ .debug_str     0x000003dd      0x2f7 c:/devkitPro/libnds/lib\libul.a(ulib.o)
+                                0x701 (size before relaxing)
+ .debug_str     0x000006d4      0xfe8 c:/devkitPro/libnds/lib\libul.a(drawing.o)
+                               0x1595 (size before relaxing)
+ .debug_str     0x000016bc      0x357 c:/devkitPro/libnds/lib\libul.a(text.o)
+                                0x949 (size before relaxing)
+ .debug_str     0x00001a13      0x1ca c:/devkitPro/libnds/lib\libul.a(VirtualFile.o)
+                                0x720 (size before relaxing)
+ .debug_str     0x00001bdd      0x31b c:/devkitPro/libnds/lib\libul.a(texVramManager.o)
+                                0x8e1 (size before relaxing)
+ .debug_str     0x00001ef8      0x151 c:/devkitPro/libnds/lib\libul.a(texPalManager.o)
+                                0x784 (size before relaxing)
+ .debug_str     0x00002049      0x1ad c:/devkitPro/libnds/lib\libul.a(keys.o)
+                                0x687 (size before relaxing)
+ .debug_str     0x000021f6       0x32 c:/devkitPro/libnds/lib\libul.a(ulCreateImagePalette.o)
+                                0x5ce (size before relaxing)
+ .debug_str     0x00002228       0x92 c:/devkitPro/libnds/lib\libul.a(glWrapper.o)
+                                0x603 (size before relaxing)
+ .debug_str     0x000022ba       0xaf c:/devkitPro/libnds/lib\libnds9.a(dynamicArray.o)
+                                0x18f (size before relaxing)
+ .debug_str     0x00002369      0x175 c:/devkitPro/libnds/lib\libnds9.a(keys.o)
+                                0x2dc (size before relaxing)
+ .debug_str     0x000024de      0x34f c:/devkitPro/libnds/lib\libnds9.a(system.o)
+                                0x510 (size before relaxing)
+ .debug_str     0x0000282d       0x72 c:/devkitPro/libnds/lib\libnds9.a(touch.o)
+                                0x1f8 (size before relaxing)
+ .debug_str     0x0000289f      0xa36 c:/devkitPro/libnds/lib\libnds9.a(videoGL.o)
+                               0x130f (size before relaxing)
+ .debug_str     0x000032d5      0x458 c:/devkitPro/libnds/lib\libnds9.a(initSystem.o)
+                                0x95d (size before relaxing)
+ .debug_str     0x0000372d      0x52a c:/devkitPro/libnds/lib\libnds9.a(fifosystem.o)
+                                0x74c (size before relaxing)
+ .debug_str     0x00003c57      0x12d c:/devkitPro/libnds/lib\libnds9.a(interrupts.o)
+                                0x34a (size before relaxing)
+ .debug_str     0x00003d84       0x88 c:/devkitPro/libnds/lib\libnds9.a(libnds_exit.o)
+                                0x298 (size before relaxing)
+ .debug_str     0x00003e0c       0xe4 c:/devkitPro/libnds/lib\libnds9.a(trig.o)
+                                0x1d7 (size before relaxing)
+ .debug_str     0x00003ef0      0x122 c:/devkitPro/libnds/lib\libnds9.a(video.o)
+                                0xb12 (size before relaxing)
+
+.debug_loc      0x00000000     0x63ad load address 0x0200c5d0
+ *(.debug_loc)
+ .debug_loc     0x00000000       0x20 main.o
+ .debug_loc     0x00000020       0xa4 c:/devkitPro/libnds/lib\libul.a(ulib.o)
+ .debug_loc     0x000000c4      0xa4b c:/devkitPro/libnds/lib\libul.a(drawing.o)
+ .debug_loc     0x00000b0f      0x7ed c:/devkitPro/libnds/lib\libul.a(text.o)
+ .debug_loc     0x000012fc      0x776 c:/devkitPro/libnds/lib\libul.a(VirtualFile.o)
+ .debug_loc     0x00001a72      0x81d c:/devkitPro/libnds/lib\libul.a(texVramManager.o)
+ .debug_loc     0x0000228f      0x413 c:/devkitPro/libnds/lib\libul.a(texPalManager.o)
+ .debug_loc     0x000026a2       0x99 c:/devkitPro/libnds/lib\libul.a(keys.o)
+ .debug_loc     0x0000273b       0xdd c:/devkitPro/libnds/lib\libul.a(ulCreateImagePalette.o)
+ .debug_loc     0x00002818       0x76 c:/devkitPro/libnds/lib\libul.a(glWrapper.o)
+ .debug_loc     0x0000288e      0x196 c:/devkitPro/libnds/lib\libnds9.a(dynamicArray.o)
+ .debug_loc     0x00002a24       0x20 c:/devkitPro/libnds/lib\libnds9.a(keys.o)
+ .debug_loc     0x00002a44      0x1ba c:/devkitPro/libnds/lib\libnds9.a(system.o)
+ .debug_loc     0x00002bfe       0x40 c:/devkitPro/libnds/lib\libnds9.a(touch.o)
+ .debug_loc     0x00002c3e     0x1c39 c:/devkitPro/libnds/lib\libnds9.a(videoGL.o)
+ .debug_loc     0x00004877       0x64 c:/devkitPro/libnds/lib\libnds9.a(initSystem.o)
+ .debug_loc     0x000048db     0x1131 c:/devkitPro/libnds/lib\libnds9.a(fifosystem.o)
+ .debug_loc     0x00005a0c      0x17b c:/devkitPro/libnds/lib\libnds9.a(interrupts.o)
+ .debug_loc     0x00005b87       0x5c c:/devkitPro/libnds/lib\libnds9.a(libnds_exit.o)
+ .debug_loc     0x00005be3      0x5b9 c:/devkitPro/libnds/lib\libnds9.a(trig.o)
+ .debug_loc     0x0000619c      0x211 c:/devkitPro/libnds/lib\libnds9.a(video.o)
+
+.debug_macinfo
+ *(.debug_macinfo)
+
+.debug_weaknames
+ *(.debug_weaknames)
+
+.debug_funcnames
+ *(.debug_funcnames)
+
+.debug_typenames
+ *(.debug_typenames)
+
+.debug_varnames
+ *(.debug_varnames)
+
+.stack          0x00080000        0x0 load address 0x0200c5d0
+                0x00080000                _stack = .
+ *(.stack)
+LOAD c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib/ds_arm9_crt0.o
+LOAD c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crti.o
+LOAD c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crtbegin.o
+LOAD main.o
+LOAD c:/devkitPro/libnds/lib\libul.a
+LOAD c:/devkitPro/libnds/lib\libpng.a
+LOAD c:/devkitPro/libnds/lib\libz.a
+LOAD c:/devkitPro/libnds/lib\libfat.a
+LOAD c:/devkitPro/libnds/lib\libnds9.a
+LOAD c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libm.a
+START GROUP
+LOAD c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1\libgcc.a
+LOAD c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libg.a
+LOAD c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libc.a
+LOAD c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/../../../../arm-eabi/lib\libsysbase.a
+END GROUP
+LOAD c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crtend.o
+LOAD c:/devkitpro/devkitarm/bin/../lib/gcc/arm-eabi/4.5.1/crtn.o
+OUTPUT(c:/devkitpro/uLibrary/Templates/uLib_without_PAlib/uLib_without_PAlib.elf elf32-littlearm)
+
+.debug_pubtypes
+                0x00000000     0x1cf8 load address 0x0200c5d0
+ .debug_pubtypes
+                0x00000000      0x172 main.o
+ .debug_pubtypes
+                0x00000172      0x192 c:/devkitPro/libnds/lib\libul.a(ulib.o)
+ .debug_pubtypes
+                0x00000304      0x335 c:/devkitPro/libnds/lib\libul.a(drawing.o)
+ .debug_pubtypes
+                0x00000639      0x21f c:/devkitPro/libnds/lib\libul.a(text.o)
+ .debug_pubtypes
+                0x00000858      0x1ab c:/devkitPro/libnds/lib\libul.a(VirtualFile.o)
+ .debug_pubtypes
+                0x00000a03      0x1d0 c:/devkitPro/libnds/lib\libul.a(texVramManager.o)
+ .debug_pubtypes
+                0x00000bd3      0x19e c:/devkitPro/libnds/lib\libul.a(texPalManager.o)
+ .debug_pubtypes
+                0x00000d71      0x1c9 c:/devkitPro/libnds/lib\libul.a(keys.o)
+ .debug_pubtypes
+                0x00000f3a      0x1b3 c:/devkitPro/libnds/lib\libul.a(ulCreateImagePalette.o)
+ .debug_pubtypes
+                0x000010ed      0x19c c:/devkitPro/libnds/lib\libul.a(glWrapper.o)
+ .debug_pubtypes
+                0x00001289       0x3d c:/devkitPro/libnds/lib\libnds9.a(dynamicArray.o)
+ .debug_pubtypes
+                0x000012c6       0xdd c:/devkitPro/libnds/lib\libnds9.a(keys.o)
+ .debug_pubtypes
+                0x000013a3      0x109 c:/devkitPro/libnds/lib\libnds9.a(system.o)
+ .debug_pubtypes
+                0x000014ac       0xc4 c:/devkitPro/libnds/lib\libnds9.a(touch.o)
+ .debug_pubtypes
+                0x00001570      0x20c c:/devkitPro/libnds/lib\libnds9.a(videoGL.o)
+ .debug_pubtypes
+                0x0000177c      0x1e5 c:/devkitPro/libnds/lib\libnds9.a(initSystem.o)
+ .debug_pubtypes
+                0x00001961      0x126 c:/devkitPro/libnds/lib\libnds9.a(fifosystem.o)
+ .debug_pubtypes
+                0x00001a87       0xaa c:/devkitPro/libnds/lib\libnds9.a(interrupts.o)
+ .debug_pubtypes
+                0x00001b31       0x8b c:/devkitPro/libnds/lib\libnds9.a(libnds_exit.o)
+ .debug_pubtypes
+                0x00001bbc       0x58 c:/devkitPro/libnds/lib\libnds9.a(trig.o)
+ .debug_pubtypes
+                0x00001c14       0xe4 c:/devkitPro/libnds/lib\libnds9.a(video.o)
+
+.debug_ranges   0x00000000     0x1220 load address 0x0200c5d0
+ .debug_ranges  0x00000000      0x4d8 c:/devkitPro/libnds/lib\libul.a(drawing.o)
+ .debug_ranges  0x000004d8       0x40 c:/devkitPro/libnds/lib\libul.a(text.o)
+ .debug_ranges  0x00000518      0x100 c:/devkitPro/libnds/lib\libul.a(texVramManager.o)
+ .debug_ranges  0x00000618       0x38 c:/devkitPro/libnds/lib\libul.a(texPalManager.o)
+ .debug_ranges  0x00000650       0x30 c:/devkitPro/libnds/lib\libul.a(glWrapper.o)
+ .debug_ranges  0x00000680       0x18 c:/devkitPro/libnds/lib\libnds9.a(touch.o)
+ .debug_ranges  0x00000698      0x730 c:/devkitPro/libnds/lib\libnds9.a(videoGL.o)
+ .debug_ranges  0x00000dc8      0x378 c:/devkitPro/libnds/lib\libnds9.a(fifosystem.o)
+ .debug_ranges  0x00001140       0x30 c:/devkitPro/libnds/lib\libnds9.a(interrupts.o)
+ .debug_ranges  0x00001170       0x80 c:/devkitPro/libnds/lib\libnds9.a(trig.o)
+ .debug_ranges  0x000011f0       0x30 c:/devkitPro/libnds/lib\libnds9.a(video.o)
