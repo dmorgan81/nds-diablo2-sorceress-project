@@ -60,9 +60,12 @@ void initTopScreen (void)
         fclose(file);
     }
     topUpdateLevel();
+    Counter[TOPSCREEN]=8;
+    quickTopScreenRefresh();
     dmaCopy(topscr_buffer, bgGetGfxPtr(bg3_sub), 256*192);
     dmaCopy(topscr_palbuffer, BG_PALETTE_SUB, 256*2);
     CounterStart(TOPSCREEN);
+    Counter[TOPSCREEN]=0;
 
 }
 

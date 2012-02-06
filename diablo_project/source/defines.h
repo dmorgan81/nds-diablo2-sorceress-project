@@ -7,6 +7,8 @@
 /////////////////
 #include "soundbank.h" //include all audio defines
 
+#define VERSION             "1.1.2"
+
 #define MUSIC_OFF
 
 //#define RESETKEYS 0xF03

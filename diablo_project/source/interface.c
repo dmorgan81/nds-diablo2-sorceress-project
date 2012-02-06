@@ -4,7 +4,6 @@
 #include "interface.h"
 #include "uldata.h"
 //#include "Sor_cantuseyet.h"
-//#define ulPrintf_xy(x, y, format...)		({ char __str[1000]; sprintf(__str , ##format); ulDrawString(x, y, __str); })
 
 extern int curMaxSprite;
 bool dialbox=0;
@@ -75,6 +74,58 @@ void load()
         }
     }
 
+}
+
+void mainmenu()
+{
+    WaitForVBL();
+    bool loop=1,helpmenu=0;
+    int frameNumber=0, animStage=0;
+    ulSetMainLcd(1);
+    UL_IMAGE *topscreen= ulLoadImageFilePNG("/gfx/mainmenutop_png.png",0, UL_IN_RAM, UL_PF_PAL8);
+    UL_IMAGE *logo= ulLoadImageFilePNG("/gfx/d2logo_png.png",0, UL_IN_RAM, UL_PF_PAL8);
+
+    topSetBackground("mainmenubot");
+
+    logo->x=67;
+    logo->y=15;
+    while(loop)
+    {
+        ulStartDrawing2D();
+        ulSetDepth(255);
+        ulDrawImage(topscreen);
+
+        if(!helpmenu)
+        {
+            ulSetDepth(256);
+            frameNumber++;
+            if (frameNumber % 9  == 0) animStage = (animStage + 1) % 8 ;
+            ulSetImageTileSize (logo, 0,	57*animStage, 118, 57);
+            ulDrawImage(logo);
+            ulPrintf_xy(150,180,"Version:%s",VERSION);
+        }
+        ulEndDrawing();
+        if(ul_keys.touch.click)
+        {
+            if(ul_keys.touch.x>30 && ul_keys.touch.x<225 && ul_keys.touch.y>23 && ul_keys.touch.y<52)loop=0;
+            else if(ul_keys.touch.x>30 && ul_keys.touch.x<225 && ul_keys.touch.y>73 && ul_keys.touch.y<102)
+            {
+                load();
+                loop=0;
+            }
+            else if(ul_keys.touch.x>65 && ul_keys.touch.x<173 && ul_keys.touch.y>133 && ul_keys.touch.y<163)
+            {
+                helpmenu=helpmenu^1,
+                ulDeleteImage(topscreen);
+                if(helpmenu)topscreen=ulLoadImageFilePNG("/gfx/controls_png.png",0, UL_IN_RAM, UL_PF_PAL8);
+                else topscreen= ulLoadImageFilePNG("/gfx/mainmenutop_png.png",0, UL_IN_RAM, UL_PF_PAL8);
+            }
+        }
+        WaitForVBL();
+    }
+    ulDeleteImage(topscreen);
+    ulDeleteImage(logo);
+    ulSetMainLcd(0);
 }
 
 void saveloadmenu(bool saveload)
@@ -249,8 +300,11 @@ void DialogInBox(char* dialog,int speed,char* topBg,char* sound,int soundOffset,
     //if(sound!=-1) loadSound(sound);
     while(*dialog&& !ul_keys.pressed.start)//offset<((190-DIALOGY0)<<3))
     {
-        if(offset>=soundOffset){ if(*sound!=0 && !sfx)    sfx=initStream(sound);
-        else if (*sound!=0)streamUpdate();}
+        if(offset>=soundOffset)
+        {
+            if(*sound!=0 && !sfx)    sfx=initStream(sound);
+            else if (*sound!=0)streamUpdate();
+        }
         offset+=1+2*ul_keys.held.B;
         if (187<128+(offset/speed))
         {
@@ -384,7 +438,11 @@ void skillmenu(bool levelup)
                         }
                         endloop=1;
                     }
-                    else if (Counter[TALKING]>60){CounterStart(TALKING);playSound(SFX_SOR_CANTUSEYET);}
+                    else if (Counter[TALKING]>60)
+                    {
+                        CounterStart(TALKING);
+                        playSound(SFX_SOR_CANTUSEYET);
+                    }
                 }
                 else if (ul_keys.touch.x>212&&ul_keys.touch.x<244&&ul_keys.touch.y>156&&ul_keys.touch.y<188)
                 {

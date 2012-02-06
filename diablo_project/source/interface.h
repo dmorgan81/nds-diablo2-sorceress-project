@@ -11,6 +11,7 @@
 void pause ();
 void save();
 void load();
+void mainmenu();
 void saveloadmenu(bool saveload);
 void waypointmenu(objectinfo* wp);
 void DialogInBox(char* dialog,int speed,char* topBg,char* sound,int soundOffset,bool anim);

@@ -1,0 +1,16 @@
+PAGfx Converter v0.10 -- by Mollusk -- resurrected by fincs -- forum.palib.info
+Mono version
+If you have suggestions, problems or anything please come to the PAlib forums
+
+Converting PAGfx.ini
+Transparent Color: Magenta
+
+1 backgrounds:
+  mainmenubot_png : 8bit, 256x192, Pal: mainmenubot_png_Pal, -> mainmenubot_png_Bitmap
+
+1 palettes:
+  mainmenubot_png_Pal, 236 colors
+
+Converted in 0 minutes and 0 seconds
+
+Finished!

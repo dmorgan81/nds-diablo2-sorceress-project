@@ -109,6 +109,10 @@
 		</Unit>
 		<Unit filename="source\ulScreenDisplay.h" />
 		<Unit filename="source\uldata.h" />
+		<Unit filename="source\vfsnitro.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="source\vfsnitro.h" />
 		<Extensions>
 			<code_completion>
 				<search_path add="D:\devkitPro\libnds" />

@@ -94,15 +94,7 @@ int main( int argc, char **argv)
     hero.sprite=myulCreateSprite(0,CAMERA_X, CAMERA_Y, CHARFEET_Y);
 
 
-
-
-
-
     auras[0].fonction=&blazeAura;
-
-
-
-
 
 
 ///////////////////////////
@@ -111,13 +103,6 @@ int main( int argc, char **argv)
 #ifdef MUSIC_ON
 //    AS_MP3StreamPlay("tristram.mp3");
 #endif
-#ifdef Test
-//    //PA_OutputText(1,0,0,"u8%d obj%d",sizeof(u8),sizeof(objectinfo));
-#endif
-
-    int objectnb=getUnusedObject();
-    newObject(80, -40, &objects[objectnb],objectnb, &data[0],0);
-
 
     int i=0;
     Mymap->scrollX=fix_norm(hero.x)-CAMERA_X;
@@ -129,6 +114,14 @@ int main( int argc, char **argv)
 #ifndef Test
     hero.direction=4;
     movechar();
+
+
+
+    int objectnb=-1;
+if(!hero.stats.experience)
+{
+    objectnb=getUnusedObject();
+    newObject(80, -40, &objects[objectnb],objectnb, &data[0],0);
     for (i=0; i<280; i++)
     {
         updateObjects();
@@ -150,6 +143,7 @@ You must take up this quest and prevent the Three Brothers from reuniting. You m
 Now hurry, mortal... Time is running out for all of us!\n",15,"tyrael","/Tyr_intro.raw",6*15*8,1);//SFX_TYR_INTRO
 #endif
     skillmenu(1);
+}
         WaitForVBL();
 
     CounterStart(VBL);
@@ -320,10 +314,10 @@ int i;
         for(;;) WaitForVBL();
     }
 
+    initTopScreen();
 
 #ifndef _NOSPLASH_
     //Affiches des splashs, PAlib, uLibrary, Project...
-    initTopScreen();
     MySplash();
 
     UL_IMAGE* loadingimg = ulLoadImageFilePNG("/gfx/loading_png.png",0, UL_IN_RAM, UL_PF_PAL8);
@@ -383,6 +377,7 @@ int i;
     }
 #endif
     Counter[TOPSCREEN]=8;
+    mainmenu();
     quickTopScreenRefresh();
     topSetNormalScreen();
     WaitForVBL();
@@ -401,6 +396,8 @@ int i;
 void MySplash()
 {
     s32 time=180;
+    topSetBackground("d_Splash1");
+    swiWaitForVBlank();
     topSetBackground("d_Splash1");
     ulShowSplashScreen(3);
     UL_IMAGE* d_splash2 = ulLoadImageFilePNG("/gfx/d_Splash2_png.png",0, UL_IN_RAM, UL_PF_PAL8);
