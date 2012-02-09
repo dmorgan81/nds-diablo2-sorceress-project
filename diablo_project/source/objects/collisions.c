@@ -91,13 +91,10 @@ void mCollision(objectinfo* missile)
         {
             if(boxcollision (&missile->hitbox,missile->x,missile->y,&objects[i].hitbox,objects[i].x,objects[i].y))
             {
-                if(objects[i].life)
-                {
                     objects[i].life-=missile->dommages;
                     objects[i].status|=missile->status;
                     deleteMissile(missile->arrayID);
                     i=curMaxObject;
-                }
             }
         }
     }

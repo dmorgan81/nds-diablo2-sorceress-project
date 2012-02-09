@@ -111,13 +111,14 @@ int main( int argc, char **argv)
 #ifdef Test
     s16 x,y;
 #endif
+    int objectnb=-1;
+
 #ifndef Test
     hero.direction=4;
     movechar();
 
 
 
-    int objectnb=-1;
 if(!hero.stats.experience)
 {
     objectnb=getUnusedObject();
@@ -141,9 +142,10 @@ If the three Prime Evils unite, they will be invincible. Though it is unclear as
 I am broken and the energys that tie me to this world are diminishing rapidly.\n\n\
 You must take up this quest and prevent the Three Brothers from reuniting. You must cross the sea and search for Diablo and Baal in Kurast.\n\n\
 Now hurry, mortal... Time is running out for all of us!\n",15,"tyrael","/Tyr_intro.raw",6*15*8,1);//SFX_TYR_INTRO
-#endif
+
     skillmenu(1);
 }
+#endif
         WaitForVBL();
 
     CounterStart(VBL);
