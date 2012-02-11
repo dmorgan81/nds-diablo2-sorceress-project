@@ -4,11 +4,11 @@ int curMaxSprite;//same trick as in objects.c
 
 sprite_columns columns[50];
 
+
 void myulInitData (bool again)
 {
     int i;
 #include "spritesdata.txt" //all data in txt file to avoid overload of the c file
-
     if (!again)//if its the first time we load images
     {
         //au cas ou
@@ -208,6 +208,18 @@ inline void myulSetCycles (int sprite,int cycles)
 }
 
 
+int shakeframes=0;
+inline void myulStartShake (int frames){shakeframes=frames;}
+
+void myulShakeScreen()
+{
+    if (shakeframes)
+    {
+        ulMoveScreenView(PA_RandMinMax(-3,3),PA_RandMinMax(-3,3));
+        shakeframes--;
+    }
+    else ulMoveScreenView(0,0);
+}
 
 
 void myulScreenDraws()
@@ -215,6 +227,7 @@ void myulScreenDraws()
     ulStartDrawing2D();
 
     ulSetDepth(0);
+    myulShakeScreen();
     //Fond sur l'écran du bas
     glPolyFmt(POLY_ALPHA(31) | POLY_CULL_NONE | POLY_ID(0));
 #ifndef Test
@@ -286,6 +299,7 @@ void myulDrawSprites(bool anim)
 {
     int i;
     ulSetDepth(0);
+    myulShakeScreen();
     ulDrawMap(Mymap);
     UL_IMAGE *spriteimage;
     for (i=0; i<=curMaxSprite ; i++)

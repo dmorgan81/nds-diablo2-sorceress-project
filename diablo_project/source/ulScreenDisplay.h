@@ -27,6 +27,9 @@ inline void myulDefaultAnimRestart (int spritenb);
 inline void myulDefaultAnim (int spritenb);
 inline void myulSetSpritePrio( int sprite, int prio);
 inline void myulSetCycles (int sprite,int cycles);
+inline void myulStartShake (int frames);
+void myulShakeScreen();
+
 
 void myulScreenDraws();
 void myulDrawSprites(bool anim);

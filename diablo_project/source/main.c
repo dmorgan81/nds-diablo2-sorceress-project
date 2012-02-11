@@ -6,14 +6,13 @@
 ////////////////////////////////////////////
 
 
-
 //Includes PALib, µLibrary et headers
 #include <nds.h>
 #include "main.h"
 #include "misc.h"
 #include "sound.h"
 
-//#define Test
+#define Test
 //#define NOSPAWN
 #ifdef Test
 #define _NOSPLASH_ //quote this line to make splash appear
@@ -493,7 +492,6 @@ void movechar()
             hero.cooldown--;
             hero.action=2;
         }
-// NOTE (Clement#1#): attention .click marche pas, pourquoi?
         else if (ul_keys.touch.click)
         {
             Sort(ul_keys.touch.x, ul_keys.touch.y);

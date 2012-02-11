@@ -12,7 +12,6 @@
     spritedatabase[0].abcoeff=31;
     spritedatabase[0].colInfo=&columns[0];
     spritedatabase[0].regular=1;
-// TODO (Clement#1#): Change sorc hitbox, y-=5
 ///Tyrael - body
     ulSetTransparentColor(RGB15(31, 0, 31));
     {
