@@ -9,8 +9,17 @@
 //Includes PALib, µLibrary et headers
 #include <nds.h>
 #include "main.h"
+#include "structures.h"
+#include "defines.h"
+#include "ulScreenDisplay.h"
+#include "top_screen.h"
+#include "actions.h"
+#include "objects.h"
+#include "objects/collisions.h"
+#include "interface.h"
 #include "misc.h"
 #include "sound.h"
+#include "quests.h"
 
 #define Test
 //#define NOSPAWN
@@ -35,9 +44,7 @@ s8 fps = 0; //Our FPS
 u8 old_time=0;
 bool secondpast=1;
 charstruct hero;
-extern void save();
-extern int currentMap;
-extern int MonBaseLife;
+
 ///////////////////////////////
 int bg3_sub;
 
@@ -140,43 +147,29 @@ Even now, they head towards the Eastern capital of Kurast - to the very heart of
 If the three Prime Evils unite, they will be invincible. Though it is unclear as to what their aims are, it is certain that they must be stopped at all costs.\n\n\
 I am broken and the energys that tie me to this world are diminishing rapidly.\n\n\
 You must take up this quest and prevent the Three Brothers from reuniting. You must cross the sea and search for Diablo and Baal in Kurast.\n\n\
-Now hurry, mortal... Time is running out for all of us!\n",15,"tyrael","/Tyr_intro.raw",6*15*8,1);//SFX_TYR_INTRO
+Now hurry, mortal... Time is running out for all of us!\n",15,"tyrael","/Tyr_intro.raw",6*15*8,1);
 
     skillmenu(1);
 }
 #endif
-        WaitForVBL();
 
+    WaitForVBL();
     CounterStart(VBL);
+    createQuestList();
+    q_dataKill *q_essai=malloc(sizeof(*q_essai));
+    while(q_essai==NULL){}
+    q_essai->dataID=2;
+    q_essai->total=10;
+    q_essai->target=10;
+//    while(!pushQuestNode("test",Q_KILL,q_essai)){}//TEST
+    loadQuest("essai",1);
     while(1)
     {
         while(hero.stats.curLife>0&&hero.stats.curLife<=hero.stats.lifeMax)
         {
 
-            hero.cooldown=0;
-            statsUpdate();
-            movechar();
-            quickTopScreenRefresh();
-
-#ifdef Test
-            objectnb=-1;
-            if (ul_keys.held.A)
-            {
-                objectnb=getUnusedMissile();
-                if (objectnb<MAX_MISSILE && objectnb!=-1)
-                {
-
-                    x=fix_norm(hero.x)+hero.hitbox.down.x;
-                    y=fix_norm(hero.y)+hero.hitbox.right.y;
-
-                    newMissile(x, y, &missiles[objectnb],objectnb,dir_angle(3),256,-256,mdata[0].dommages, &mdata[0] );
-                }
-            }
-#endif
-
 
             myulSetSpritePrio(hero.sprite,CHARFEET_Y);
-
             if (!(Counter[VBL]&128))//change
             {
                 for (i=0; i<MAX_DATASPRITES; i++)
@@ -200,61 +193,36 @@ Now hurry, mortal... Time is running out for all of us!\n",15,"tyrael","/Tyr_int
                     }
                 }
             }
+            quickTopScreenRefresh();
+            hero.cooldown=0;
+            statsUpdate();
+            movechar();
+
+#ifdef Test
+            objectnb=-1;
+            if (ul_keys.held.A)
+            {
+                objectnb=getUnusedMissile();
+                if (objectnb<MAX_MISSILE && objectnb!=-1)
+                {
+
+                    x=fix_norm(hero.x)+hero.hitbox.down.x;
+                    y=fix_norm(hero.y)+hero.hitbox.right.y;
+
+                    newMissile(x, y, &missiles[objectnb],objectnb,dir_angle(3),256,-256,mdata[0].dommages, &mdata[0] );
+                }
+            }
+#endif
+
+
 
 
 #ifndef NOSPAWN
-            //spawning
-            if(!(Counter[VBL]&511))
-            {
-                if (hero.stats.lvl<2)
-                {
-                    objectnb=getUnusedObject();
-                    int x=PA_RandMinMax (128+currentMap*50, 330+currentMap*500),y=PA_RandMinMax (86+currentMap*150, 286+currentMap*256);
-                    while (GetTile(x,y)>=NWALKABLETILE)
-                    {
-                        x=PA_RandMinMax (128+currentMap*50, 330+currentMap*500);
-                        y=PA_RandMinMax (86+currentMap*150, 286+currentMap*256);
-                    }
-                    if (!PA_RandMax(2))
-                    {
-                        newObject(x,y, &objects[objectnb],objectnb, &data[1],0 );
-                        objects[objectnb].life=((MonBaseLife*data[1].life)/100+512)>>9;
-                    }
-                    else
-                    {
-                        newObject(x,y, &objects[objectnb],objectnb, &data[2+currentMap],0 );
-                        objects[objectnb].life=((MonBaseLife*data[2+currentMap].life)/100+512)>>9;
-                    }
-                }
-                else for(i=0; i<=(hero.stats.lvl>>1)+1; i++)
-                    {
-                        objectnb=getUnusedObject();
-                        int x=PA_RandMinMax (128+currentMap*50, 330+currentMap*500),y=PA_RandMinMax (86+currentMap*150, 286+currentMap*256);
-                        while (GetTile(x,y)>=NWALKABLETILE)
-                        {
-                            x=PA_RandMinMax (128+currentMap*50, 330+currentMap*500);
-                            y=PA_RandMinMax (86+currentMap*150, 286+currentMap*256);
-                        }
-                        if (!PA_RandMax(2))
-                        {
-                            newObject(x,y, &objects[objectnb],objectnb, &data[1],0 );
-                            objects[objectnb].life=((MonBaseLife*data[1].life)/100+512)>>9;
-                        }
-                        else
-                        {
-                            newObject(x,y, &objects[objectnb],objectnb, &data[2+currentMap],0 );
-                            objects[objectnb].life=((MonBaseLife*data[2+currentMap].life)/100+512)>>9;
-                        }
-                    }
-            }
+            mobSpawn();
 #endif
-            for(i=0; i<MAX_AURAS; i++)
-            {
-                if(auras[i].life>0)
-                    auras[i].fonction(&auras[i]);
-            }
-
+            updateAuras();
             updateObjects();
+            updateQuests();
             if(ul_keys.pressed.X) saveloadmenu(0);
             if(ul_keys.pressed.Y) saveloadmenu(1);
 #ifdef Test
