@@ -21,7 +21,7 @@
 #include "sound.h"
 #include "quests.h"
 
-#define Test
+//#define Test
 //#define NOSPAWN
 #ifdef Test
 #define _NOSPLASH_ //quote this line to make splash appear
