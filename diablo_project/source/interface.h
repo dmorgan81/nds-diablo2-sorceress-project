@@ -7,7 +7,7 @@
 #include "objects.h"
 #include "actions.h"
 #include "top_screen.h"
-#include "Maps/Map.h"
+#include "maps/map.h"
 void pause ();
 void save();
 void load();

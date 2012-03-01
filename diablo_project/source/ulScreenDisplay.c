@@ -1,5 +1,4 @@
 #include "ulScreenDisplay.h"
-#include "uldata.h"
 int curMaxSprite;//same trick as in objects.c
 
 sprite_columns columns[50];

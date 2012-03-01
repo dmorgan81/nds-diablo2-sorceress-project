@@ -2,8 +2,6 @@
 #include "sound.h"
 #include "misc.h"
 #include "interface.h"
-#include "uldata.h"
-//#include "Sor_cantuseyet.h"
 
 extern int curMaxSprite;
 bool dialbox=0;
@@ -36,6 +34,8 @@ void save()
     fwrite(&hero.stats, 1, sizeof(hero.stats), save_file);
     fwrite(&skillsLevels, 1, sizeof(skillsLevels), save_file);
     fwrite(&skillpoints, 1, sizeof(skillpoints), save_file);
+    fwrite(&skillCost, 1, sizeof(skillCost), save_file);
+    fwrite(&skilldmg, 1, sizeof(skilldmg), save_file);
     fclose(save_file);
 }
 
@@ -46,6 +46,8 @@ void load()
     fread(&hero.stats, 1, sizeof(hero.stats), save_file);
     fread(&skillsLevels, 1, sizeof(skillsLevels), save_file);
     fread(&skillpoints, 1, sizeof(skillpoints), save_file);
+    fread(&skillCost, 1, sizeof(skillCost), save_file);
+    fread(&skilldmg, 1, sizeof(skilldmg), save_file);
     fclose(save_file);
     topDrawString(20*8,15,"           ");//erase current experience
     topDrawString(7*8,15,"           ");

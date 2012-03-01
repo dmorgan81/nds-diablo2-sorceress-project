@@ -19,6 +19,7 @@ extern inline void myulStartAnim (int spritenb, u8 sframe, u8 endframe, u8 frame
 
 void Sort(int X,int Y);
 void CheckForLevelUp();
+void updateAuras();
 
 void nospell (int a, int b, u16 c,u8 d);
 void firebolt (int x,int y,u16 angle,u8 level);

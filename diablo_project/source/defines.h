@@ -8,6 +8,9 @@
 #include "soundbank.h" //include all audio defines
 
 #define VERSION             "1.1.2"
+#define PARSERROR           topPrintf(130,45,"Error parsing quest data")
+
+
 
 #define MUSIC_OFF
 

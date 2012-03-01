@@ -26,29 +26,27 @@ void initTopScreen (void)
         if (file)
         {
             fread(topscr_buffer, sizeof(char), 256*192, file);
-            //copy images of the orbs and the backup of the background
+            //copy the backup of the background for the orbs
+            for(i=0; i<42; i++)
+            {
+                dmaCopy(topscr_buffer+(143+i)*256+17,topscr_orbs+84+i*168,42);
+                dmaCopy(topscr_buffer+(143+i)*256+198,topscr_orbs+126+i*168,42);
+            }
+        }
+        fclose(file);
+        file=fopen("/orbes_Bitmap.bin","rb");
+        if(file)
+        {
             for(i=0; i<42; i++)
             {
                 fread(topscr_orbs+168*i, sizeof(char), 84, file);
-                dmaCopy(topscr_buffer+(143+i)*256+17,topscr_orbs+84+i*168,42);
-                dmaCopy(topscr_buffer+(143+i)*256+198,topscr_orbs+126+i*168,42);
-                fseek(file,172,SEEK_CUR);
             }
-
-            //copy the level numbers font
-            fseek(file,256*192+84,SEEK_SET);
-            for(i=0; i<21; i++)
-            {
-                fread(topscr_levelFont+210*i, sizeof(char), 168, file);
-                fseek(file,88,SEEK_CUR);
-            }
-            fseek(file,256*192+256*21+84,SEEK_SET);
-            for(i=0; i<21; i++)//copy images of the orbs and the backup of the background
-            {
-                fread(topscr_levelFont+210*i+168, sizeof(char), 42, file);
-                fseek(file,256*(192+21+i)+84,SEEK_SET);
-            }
-
+            fclose(file);
+        }
+        file=fopen("/levelFont_Bitmap.bin", "rb");
+        if (file)
+        {
+            fread(topscr_levelFont,sizeof(char),210*21,file);
             fclose(file);
         }
         file=fopen("/fond_haut_Pal.bin", "rb");

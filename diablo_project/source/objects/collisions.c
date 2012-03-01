@@ -1,6 +1,6 @@
 #include "collisions.h"
 
-#include "../Maps/Map.h"
+#include "../maps/map.h"
 
 extern charstruct hero;
 

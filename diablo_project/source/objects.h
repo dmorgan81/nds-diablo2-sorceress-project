@@ -20,6 +20,7 @@ extern int curMaxObject,curMaxBgObject,curMaxMissile;
 
 void initObjects (void);
 void spawnObjects();
+void mobSpawn();
 void updateObjects();
 void deleteObject(s16 ID);
 void deleteMissile(s16 ID);

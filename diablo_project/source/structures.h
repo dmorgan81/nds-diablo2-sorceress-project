@@ -117,8 +117,6 @@ struct objectdata
     s8 variables;
 
     hitboxinfo hitbox;
-
-
 };
 
 struct fx_info
@@ -153,7 +151,6 @@ struct spritedata
     bool regular;
     int abcoeff;
     hitboxinfo hitbox;
-
 };
 
 struct spritestruct
@@ -166,7 +163,6 @@ struct spritestruct
     int animStage, frameNumber;
     sprite_columns *colInfo;
     bool /*alphablended,*/ flippedh,flippedv, used;
-
 };
 
 struct charstruct

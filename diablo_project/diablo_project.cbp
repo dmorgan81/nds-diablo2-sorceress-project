@@ -4,24 +4,24 @@
 	<Project>
 		<Option title="diablo_project" />
 		<Option makefile_is_custom="1" />
-		<Option execution_dir="D:\devkitPro\diablo_project" />
+		<Option execution_dir="..\diablo_project\" />
 		<Option pch_mode="2" />
-		<Option compiler="armelfgcc" />
+		<Option compiler="devkitarm" />
+		<Option virtualFolders="zLibrairies\;headers\;headers\Maps\;headers\objects\;source\Maps\;source\;source\objects\;data\;" />
 		<MakeCommands>
-			<Build command="$make -f $makefile" />
-			<CompileFile command="$make -f $makefile" />
-			<Clean command="$make -f $makefile clean" />
+			<Build command="make" />
+			<CompileFile command="make" />
+			<Clean command="make clean" />
 			<DistClean command="$make -f $makefile distclean$target" />
-			<AskRebuildNeeded command="$make -f $makefile " />
-			<SilentBuild command="$make -f $makefile clean" />
+			<AskRebuildNeeded command="make" />
+			<SilentBuild command="make clean" />
 		</MakeCommands>
 		<Build>
 			<Target title="Release">
-				<Option output="diablo_project.nds" prefix_auto="0" extension_auto="0" />
-				<Option working_dir="D:\devkitPro\diablo_project" />
+				<Option output="diablo_project" prefix_auto="1" extension_auto="1" />
 				<Option object_output="D:\devkitPro\diablo_project\.objs" />
 				<Option type="1" />
-				<Option compiler="armelfgcc" />
+				<Option compiler="devkitarm" />
 				<Compiler>
 					<Add option="-O2" />
 				</Compiler>
@@ -29,90 +29,188 @@
 					<Add option="-s" />
 				</Linker>
 				<MakeCommands>
-					<Build command="$make" />
-					<CompileFile command="$make" />
-					<Clean command="$make clean" />
+					<Build command="$make -f $makefile" />
+					<CompileFile command="$make -f $makefile" />
+					<Clean command="$make -f $makefile clean" />
 					<DistClean command="$make -f $makefile distclean$target" />
-					<AskRebuildNeeded command="$make clean" />
-					<SilentBuild command="$make clean" />
+					<AskRebuildNeeded command="$make -f $makefile clean" />
+					<SilentBuild command="$make -f $makefile clean" />
 				</MakeCommands>
 			</Target>
 		</Build>
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
+		<Unit filename="..\..\..\libnds\include\dswifi7.h">
+			<Option virtualFolder="zLibrairies\" />
+		</Unit>
+		<Unit filename="..\..\..\libnds\include\dswifi9.h">
+			<Option virtualFolder="zLibrairies\" />
+		</Unit>
+		<Unit filename="..\..\..\libnds\include\dswifi_version.h">
+			<Option virtualFolder="zLibrairies\" />
+		</Unit>
+		<Unit filename="..\..\..\libnds\include\fat.h">
+			<Option virtualFolder="zLibrairies\" />
+		</Unit>
+		<Unit filename="..\..\..\libnds\include\filesystem.h">
+			<Option virtualFolder="zLibrairies\" />
+		</Unit>
+		<Unit filename="..\..\..\libnds\include\gbfs.h">
+			<Option virtualFolder="zLibrairies\" />
+		</Unit>
+		<Unit filename="..\..\..\libnds\include\maxmod7.h">
+			<Option virtualFolder="zLibrairies\" />
+		</Unit>
+		<Unit filename="..\..\..\libnds\include\maxmod9.h">
+			<Option virtualFolder="zLibrairies\" />
+		</Unit>
+		<Unit filename="..\..\..\libnds\include\mm_types.h">
+			<Option virtualFolder="zLibrairies\" />
+		</Unit>
+		<Unit filename="..\..\..\libnds\include\nds.h">
+			<Option virtualFolder="zLibrairies\" />
+		</Unit>
+		<Unit filename="..\..\..\libnds\include\netdb.h">
+			<Option virtualFolder="zLibrairies\" />
+		</Unit>
+		<Unit filename="..\..\..\libnds\include\sgIP_errno.h">
+			<Option virtualFolder="zLibrairies\" />
+		</Unit>
 		<Unit filename="source\Maps\Map.c">
 			<Option compilerVar="CC" />
+			<Option virtualFolder="source\Maps\" />
 		</Unit>
-		<Unit filename="source\Maps\Map.h" />
+		<Unit filename="source\Maps\Map.h">
+			<Option virtualFolder="headers\Maps\" />
+		</Unit>
 		<Unit filename="source\actions.c">
 			<Option compilerVar="CC" />
+			<Option virtualFolder="source\" />
 		</Unit>
-		<Unit filename="source\actions.h" />
-		<Unit filename="source\defines.h" />
+		<Unit filename="source\actions.h">
+			<Option virtualFolder="headers\" />
+		</Unit>
+		<Unit filename="source\defines.h">
+			<Option virtualFolder="headers\" />
+		</Unit>
 		<Unit filename="source\formulas\formulas.c">
 			<Option compilerVar="CC" />
+			<Option virtualFolder="source\Maps\" />
 		</Unit>
 		<Unit filename="source\formulas\skills.c">
 			<Option compilerVar="CC" />
+			<Option virtualFolder="source\Maps\" />
 		</Unit>
 		<Unit filename="source\interface.c">
 			<Option compilerVar="CC" />
+			<Option virtualFolder="source\" />
 		</Unit>
-		<Unit filename="source\interface.h" />
+		<Unit filename="source\interface.h">
+			<Option virtualFolder="headers\" />
+		</Unit>
 		<Unit filename="source\main.c">
 			<Option compilerVar="CC" />
+			<Option virtualFolder="source\" />
 		</Unit>
-		<Unit filename="source\main.h" />
+		<Unit filename="source\main.h">
+			<Option virtualFolder="headers\" />
+		</Unit>
 		<Unit filename="source\misc.c">
 			<Option compilerVar="CC" />
+			<Option virtualFolder="source\" />
 		</Unit>
-		<Unit filename="source\misc.h" />
+		<Unit filename="source\misc.h">
+			<Option virtualFolder="headers\" />
+		</Unit>
 		<Unit filename="source\objects.c">
 			<Option compilerVar="CC" />
+			<Option virtualFolder="source\" />
 		</Unit>
-		<Unit filename="source\objects.h" />
+		<Unit filename="source\objects.h">
+			<Option virtualFolder="headers\" />
+		</Unit>
 		<Unit filename="source\objects\ai.c">
 			<Option compilerVar="CC" />
+			<Option virtualFolder="source\objects\" />
 		</Unit>
 		<Unit filename="source\objects\bgobjects.c">
 			<Option compilerVar="CC" />
+			<Option virtualFolder="source\objects\" />
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="source\objects\bgobjects.h" />
+		<Unit filename="source\objects\bgobjects.h">
+			<Option virtualFolder="headers\objects\" />
+		</Unit>
 		<Unit filename="source\objects\collisions.c">
 			<Option compilerVar="CC" />
+			<Option virtualFolder="source\objects\" />
 		</Unit>
-		<Unit filename="source\objects\collisions.h" />
-		<Unit filename="source\objects\fxdata.txt" />
-		<Unit filename="source\objects\missilesdata.txt" />
-		<Unit filename="source\objects\objectsdata.txt" />
+		<Unit filename="source\objects\collisions.h">
+			<Option virtualFolder="headers\objects\" />
+		</Unit>
+		<Unit filename="source\objects\fxdata.txt">
+			<Option virtualFolder="data\" />
+		</Unit>
+		<Unit filename="source\objects\missilesdata.txt">
+			<Option virtualFolder="data\" />
+		</Unit>
+		<Unit filename="source\objects\objectsdata.txt">
+			<Option virtualFolder="data\" />
+		</Unit>
 		<Unit filename="source\objects\scrolling.c">
 			<Option compilerVar="CC" />
+			<Option virtualFolder="source\objects\" />
+		</Unit>
+		<Unit filename="source\quests.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="source\" />
+		</Unit>
+		<Unit filename="source\quests.h">
+			<Option virtualFolder="headers\" />
 		</Unit>
 		<Unit filename="source\skillmenu.map.c">
 			<Option compilerVar="CC" />
+			<Option virtualFolder="source\" />
 		</Unit>
 		<Unit filename="source\sound.c">
 			<Option compilerVar="CC" />
+			<Option virtualFolder="source\" />
 			<Option target="&lt;{~None~}&gt;" />
 		</Unit>
-		<Unit filename="source\sound.h" />
-		<Unit filename="source\spritesdata.txt" />
-		<Unit filename="source\structures.h" />
+		<Unit filename="source\sound.h">
+			<Option virtualFolder="headers\" />
+		</Unit>
+		<Unit filename="source\spritesdata.txt">
+			<Option virtualFolder="data\" />
+		</Unit>
+		<Unit filename="source\structures.h">
+			<Option virtualFolder="headers\" />
+		</Unit>
 		<Unit filename="source\top_screen.c">
 			<Option compilerVar="CC" />
+			<Option virtualFolder="source\" />
 		</Unit>
-		<Unit filename="source\top_screen.h" />
+		<Unit filename="source\top_screen.h">
+			<Option virtualFolder="headers\" />
+		</Unit>
 		<Unit filename="source\ulScreenDisplay.c">
 			<Option compilerVar="CC" />
+			<Option virtualFolder="source\" />
 		</Unit>
-		<Unit filename="source\ulScreenDisplay.h" />
-		<Unit filename="source\uldata.h" />
+		<Unit filename="source\ulScreenDisplay.h">
+			<Option virtualFolder="headers\" />
+		</Unit>
 		<Unit filename="source\vfsnitro.c">
 			<Option compilerVar="CC" />
+			<Option virtualFolder="source\" />
 		</Unit>
-		<Unit filename="source\vfsnitro.h" />
+		<Unit filename="source\vfsnitro.h">
+			<Option virtualFolder="headers\" />
+		</Unit>
+		<Unit filename="..\..\..\uLibrary\Source\ulib.h">
+			<Option virtualFolder="zLibrairies\" />
+		</Unit>
 		<Extensions>
 			<code_completion>
 				<search_path add="D:\devkitPro\libnds" />

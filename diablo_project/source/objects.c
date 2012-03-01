@@ -1,7 +1,8 @@
 #include "objects.h"
-
+#include "maps/map.h"
 void noai (objectinfo* info) {}
 objectdata data[MAX_DATA];
+u32 killedMobs[MAX_DATA]={0};
 objectdata bgdata[MAX_BGDATA];
 objectdata mdata[MAX_MDATA];
 objectinfo objects[MAX_OBJECT];
@@ -221,6 +222,56 @@ void spawnObjects()
     //curMaxBgObject=objectnb; //same here
 }
 
+
+void mobSpawn()
+{
+    if(!(Counter[VBL]&511))
+            {
+                extern int MonBaseLife;
+                int objectnb,i;
+                if (hero.stats.lvl<2)
+                {
+                    objectnb=getUnusedObject();
+                    int x=PA_RandMinMax (128+currentMap*50, 330+currentMap*500),y=PA_RandMinMax (86+currentMap*150, 286+currentMap*256);
+                    while (GetTile(x,y)>=NWALKABLETILE)
+                    {
+                        x=PA_RandMinMax (128+currentMap*50, 330+currentMap*500);
+                        y=PA_RandMinMax (86+currentMap*150, 286+currentMap*256);
+                    }
+                    if (!PA_RandMax(2))
+                    {
+                        newObject(x,y, &objects[objectnb],objectnb, &data[1],0 );
+                        objects[objectnb].life=((MonBaseLife*data[1].life)/100+512)>>9;
+                    }
+                    else
+                    {
+                        newObject(x,y, &objects[objectnb],objectnb, &data[2+currentMap],0 );
+                        objects[objectnb].life=((MonBaseLife*data[2+currentMap].life)/100+512)>>9;
+                    }
+                }
+                else for(i=0; i<=(hero.stats.lvl>>1)+1; i++)
+                    {
+                        objectnb=getUnusedObject();
+                        int x=PA_RandMinMax (128+currentMap*50, 330+currentMap*500),y=PA_RandMinMax (86+currentMap*150, 286+currentMap*256);
+                        while (GetTile(x,y)>=NWALKABLETILE)
+                        {
+                            x=PA_RandMinMax (128+currentMap*50, 330+currentMap*500);
+                            y=PA_RandMinMax (86+currentMap*150, 286+currentMap*256);
+                        }
+                        if (!PA_RandMax(2))
+                        {
+                            newObject(x,y, &objects[objectnb],objectnb, &data[1],0 );
+                            objects[objectnb].life=((MonBaseLife*data[1].life)/100+512)>>9;
+                        }
+                        else
+                        {
+                            newObject(x,y, &objects[objectnb],objectnb, &data[2+currentMap],0 );
+                            objects[objectnb].life=((MonBaseLife*data[2+currentMap].life)/100+512)>>9;
+                        }
+                    }
+            }
+}
+
 void updateObjects()
 {
     int i;
@@ -377,6 +428,8 @@ inline void deleteFX (s16 fx)
 void mobDeath(objectinfo* mob,int time)
 {
     hero.stats.experience+=mob->exp;
+    killedMobs[mob->datanb]++;
+
     if (data[mob->datanb].deathspritedata!=255)//-1=255because deathspritedata is u8
     {
         mob->action=0;
@@ -422,7 +475,7 @@ void blazeAura (aurainfo* aura)
     if (!(aura->life&15))
     {
         int objectnb=getUnusedMissile();
-        newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+hero.hitbox.down.y, &missiles[objectnb],objectnb,384,0,0,mdata[3].dommages, &mdata[3] );
+        newMissile(fix_norm(hero.x)+hero.hitbox.down.x, fix_norm(hero.y)+hero.hitbox.down.y, &missiles[objectnb],objectnb,384,0,0,aura->variable, &mdata[3] );
     }
     aura->life-=1;
 //if(aura->life){}

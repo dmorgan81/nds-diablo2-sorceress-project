@@ -34,7 +34,7 @@ endif
 #---------------------------------------------------------------------------------
 TARGET	:=	$(shell basename $(CURDIR))
 BUILD		:=	build
-SOURCES	:=	gfx/bin source source/objects source/Maps data
+SOURCES	:=	gfx/bin source source/objects source/maps data
 INCLUDES	:=	include build data gfx $(BUILD)
 DATA		:=	data
 AUDIO    	:=  audio

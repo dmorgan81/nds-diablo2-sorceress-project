@@ -100,6 +100,15 @@ void Sort(int X,int Y)
     }
     else if(!lvlUpIcnPressed&& Counter[TALKING]>60){CounterStart(TALKING); playSound(SFX_SOR_INEEDMANA);}
 }
+void updateAuras()
+{
+    int i;
+            for(i=0; i<MAX_AURAS; i++)
+            {
+                if(auras[i].life>0) auras[i].fonction(&auras[i]);
+            }
+}
+
 void nospell (int a, int b, u16 c,u8 d) {}
 
 ///firebolt///
@@ -161,7 +170,9 @@ void iceorb (int x,int y,u16 angle,u8 level)
 
 void blaze (int x,int y,u16 angle,u8 level)
 {
+    int dommages=PA_RandMinMax(skilldmg[currentSkill[ul_keys.held.L]][0],skilldmg[currentSkill[ul_keys.held.L]][1]);
     auras[0].life=1000;
+    auras[0].variable=dommages;
     playSound(SFX_FIRECAST);
 }
 

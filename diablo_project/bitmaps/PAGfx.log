@@ -5,11 +5,20 @@ If you have suggestions, problems or anything please come to the PAlib forums
 Converting PAGfx.ini
 Transparent Color: Magenta
 
-1 backgrounds:
+8 backgrounds:
   mainmenubot_png : 8bit, 256x192, Pal: mainmenubot_png_Pal, -> mainmenubot_png_Bitmap
+  d_Splash1 : 8bit, 256x192, Pal: d_Splash1_Pal, -> d_Splash1_Bitmap
+  fond_haut : 8bit, 256x192, Pal: fond_haut_Pal, -> fond_haut_Bitmap
+  lvlfont : 8bit, 32x320, Pal: fond_haut_Pal, -> lvlfont_Bitmap
+  sorts : 8bit, 32x288, Pal: fond_haut_Pal, -> sorts_Bitmap
+  orbes : 8bit, 84x42, Pal: fond_haut_Pal, -> orbes_Bitmap
+  exocet : 8bit, 256x24, Pal: fond_haut_Pal, -> exocet_Bitmap
+  levelFont : 8bit, 210x21, Pal: fond_haut_Pal, -> levelFont_Bitmap
 
-1 palettes:
+3 palettes:
   mainmenubot_png_Pal, 236 colors
+  d_Splash1_Pal, 250 colors
+  fond_haut_Pal, 256 colors
 
 Converted in 0 minutes and 0 seconds
 

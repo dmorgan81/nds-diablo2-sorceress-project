@@ -5,10 +5,9 @@
 //Mémoire: 5400 octets
 
 #include "../ulScreenDisplay.h"
-#include "../uldata.h"
 #include "../objects.h"
 #include "../interface.h"
-#include "Map.h"
+#include "map.h"
 
 int currentMap;
 u16* map_col=NULL;
