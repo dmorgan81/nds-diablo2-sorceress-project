@@ -2,7 +2,7 @@
 #include "sound.h"
 #include "misc.h"
 #include "interface.h"
-
+#include "maps/waypoint.h"
 extern int curMaxSprite;
 bool dialbox=0;
 extern const unsigned short skillmenu_map[24][32];
@@ -30,52 +30,71 @@ extern u8 skillpoints;
 void save()
 {
     FILE *save_file = fopen("fat:/d2save.sav", "wb");
+    int version=VERSION_NUMBER;
     if (!save_file)topPrintf(24,0,"Can't open save, emulator?");
-    fwrite(&hero.stats, 1, sizeof(hero.stats), save_file);
-    fwrite(&skillsLevels, 1, sizeof(skillsLevels), save_file);
-    fwrite(&skillpoints, 1, sizeof(skillpoints), save_file);
-    fwrite(&skillCost, 1, sizeof(skillCost), save_file);
-    fwrite(&skilldmg, 1, sizeof(skilldmg), save_file);
-    fclose(save_file);
+    {
+        //header
+        fwrite("Diablo Project Save\nVersion",1,strlen("Diablo Project Save\nVersion"),save_file);
+        fwrite(&version,1,sizeof(int),save_file);
+        //data
+        fwrite(&hero.stats, 1, sizeof(hero.stats), save_file);
+        fwrite(&skillsLevels, 1, sizeof(skillsLevels), save_file);
+        fwrite(&skillpoints, 1, sizeof(skillpoints), save_file);
+        fwrite(&skillCost, 1, sizeof(skillCost), save_file);
+        fwrite(&skilldmg, 1, sizeof(skilldmg), save_file);
+        fclose(save_file);
+    }
 }
 
 void load()
 {
+    int i=0,version=0;
     FILE *save_file = fopen("fat:/d2save.sav", "rb");
+    char* hbuffer=NULL;
+    hbuffer=malloc(sizeof(char)*strlen("Diablo Project Save\nVersion") + 1);
     if (!save_file)topPrintf(0,0,"Can't open save, emulator?");
-    fread(&hero.stats, 1, sizeof(hero.stats), save_file);
-    fread(&skillsLevels, 1, sizeof(skillsLevels), save_file);
-    fread(&skillpoints, 1, sizeof(skillpoints), save_file);
-    fread(&skillCost, 1, sizeof(skillCost), save_file);
-    fread(&skilldmg, 1, sizeof(skilldmg), save_file);
-    fclose(save_file);
-    topDrawString(20*8,15,"           ");//erase current experience
-    topDrawString(7*8,15,"           ");
-    topPrintf(81,42,"    ");
-    topPrintf(81,66,"    ");
-    topPrintf(81,90,"    ");
-    topPrintf(81,114,"    ");
-    topPrintf(85,42,"%d",hero.stats.strenght);
-    topPrintf(85,66,"%d",hero.stats.dexterity);
-    topPrintf(85,90,"%d",hero.stats.vitality);
-    topPrintf(85,114,"%d",hero.stats.energy);
-    topUpdateLevel();
-    hero.stats.curLife=hero.stats.lifeMax;
-    hero.stats.curMana=hero.stats.manaMax;
-    MonBaseLife=40*(hero.stats.lvl+1)*(hero.stats.lvl+1)+1000*(hero.stats.lvl+1)-512; //fixed point *512 not 256
-
-    if (currentMap) changemap(currentMap);
-    else if (hero.stats.lvl>=5)
+    else
     {
-        int i, objectnb;
-        objectnb=getUnusedBgObject();
-        newObject((46<<3)+4, (39<<3)+8, &bgobjects[objectnb],objectnb, &bgdata[2] ,1);
-        for (i=0; i<MAX_BGOBJECT; i++)
+
+        for (i=0; i<strlen("Diablo Project Save\nVersion") ; i++)hbuffer[i]=fgetc(save_file);
+        hbuffer[i]='\0';
+        if(strcmp(hbuffer,"Diablo Project Save\nVersion")) ERROR("Saved data corrupted.");
+        else
         {
-            if(bgobjects[i].datanb==2)bgobjects[i].ai=&waypointmenu;
+            fread(&version,1,sizeof(int),save_file);
+            switch(version)
+            {
+                //when modifications of save storage are made, simply add a case for conversion
+            case 0101002 :
+                fread(&hero.stats, 1, sizeof(hero.stats), save_file);
+                fread(&skillsLevels, 1, sizeof(skillsLevels), save_file);
+                fread(&skillpoints, 1, sizeof(skillpoints), save_file);
+                fread(&skillCost, 1, sizeof(skillCost), save_file);
+                fread(&skilldmg, 1, sizeof(skilldmg), save_file);
+                fclose(save_file);
+                //refresh top screen and stats
+                topDrawString(20*8,15,"           ");//erase current experience
+                topDrawString(7*8,15,"           ");
+                topPrintf(81,42,"    ");
+                topPrintf(81,66,"    ");
+                topPrintf(81,90,"    ");
+                topPrintf(81,114,"    ");
+                topPrintf(85,42,"%d",hero.stats.strenght);
+                topPrintf(85,66,"%d",hero.stats.dexterity);
+                topPrintf(85,90,"%d",hero.stats.vitality);
+                topPrintf(85,114,"%d",hero.stats.energy);
+                topUpdateLevel();
+                hero.stats.curLife=hero.stats.lifeMax;
+                hero.stats.curMana=hero.stats.manaMax;
+                MonBaseLife=40*(hero.stats.lvl+1)*(hero.stats.lvl+1)+1000*(hero.stats.lvl+1)-512; //fixed point *512 not 256
+                //if (currentMap) changemap(currentMap);
+                break;
+            default:
+                ERROR("Saved data corrupted.");
+                break;
+            }
         }
     }
-
 }
 
 void mainmenu()
@@ -110,15 +129,15 @@ void mainmenu()
         if(ul_keys.touch.click)
         {
             if(ul_keys.touch.x>30 && ul_keys.touch.x<225 && ul_keys.touch.y>23 && ul_keys.touch.y<52)loop=0;
-            else if(ul_keys.touch.x>30 && ul_keys.touch.x<225 && ul_keys.touch.y>73 && ul_keys.touch.y<102)
+            else if(STYLUSBOX(30,73,225-30,102-73))
             {
                 load();
                 loop=0;
             }
-            else if(ul_keys.touch.x>65 && ul_keys.touch.x<173 && ul_keys.touch.y>133 && ul_keys.touch.y<163)
+            else if(STYLUSBOX(65,133,173-65,163-133))
             {
                 helpmenu=helpmenu^1,
-                ulDeleteImage(topscreen);
+                         ulDeleteImage(topscreen);
                 if(helpmenu)topscreen=ulLoadImageFilePNG("/gfx/controls_png.png",0, UL_IN_RAM, UL_PF_PAL8);
                 else topscreen= ulLoadImageFilePNG("/gfx/mainmenutop_png.png",0, UL_IN_RAM, UL_PF_PAL8);
             }
@@ -170,32 +189,12 @@ void saveloadmenu(bool saveload)
 
 
 
-void waypointmenu(objectinfo* wp)
+void waypointAI(objectinfo* wp)
 {
     if (GetTile(fix_norm(hero.x)+hero.hitbox.down.x,fix_norm(hero.y)+hero.hitbox.down.y)==1 && ul_keys.pressed.A)
     {
-        bool loop=1;
-        int i;
-        UL_IMAGE *box = ulLoadImageFilePNG("/gfx/textbox_png.png",0, UL_IN_RAM, UL_PF_PAL4);
-        WaitForVBL();
-        while (loop)
-        {
-            ulStartDrawing2D();
-            myulDrawSprites(0);
-            myulDrawDialogBox(box,168);
-
-            ulDrawTextBox(3,171,253,190,"Press A button to change map or B to resume game.",0);
-            if (ul_keys.pressed.A)
-            {
-                ulDrawTextBox(3,171,253,190,"Loading please wait...",0);
-                changemap(!currentMap);
-                loop=0;
-            }
-            ulEndDrawing();
-            if (ul_keys.pressed.B) loop=0;
-            WaitForVBL();
-        }
-        ulDeleteImage(box);
+        if(!isWaypointActivated(currentMap))activateWaypoint(currentMap);
+        showWPMenu();
     }
 }
 
@@ -362,8 +361,6 @@ void skillmenu(bool levelup)
     UL_IMAGE *skillicons = ulLoadImageFilePNG("/gfx/sorts_png.png",0, UL_IN_RAM, UL_PF_PAL4);
     UL_IMAGE *numberslot = ulLoadImageFilePNG("/gfx/number_png.png",0, UL_IN_RAM, UL_PF_PAL2);
     UL_IMAGE *exitbtn=ulLoadImageFilePNG("/gfx/exit_png.png",0, UL_IN_VRAM, UL_PF_PAL4);
-//    UL_IMAGE *skillbg = ulLoadImageFilePNG("/gfx/skillmenubg_png.png",0, UL_IN_RAM, UL_PF_PAL4);
-//UL_MAP *skillbg = ulCreateMap(mapTiles,map,8,8,60,45,UL_MF_U16);
     UL_IMAGE *skillTiles = ulLoadImageFilePNG("/gfx/skilltiles_png.png",0, UL_IN_VRAM, UL_PF_PAL4);
     UL_MAP *skillbg = ulCreateMap(skillTiles,/*Tileset*/skillmenu_map,8,8,/*Tiles size*/32,24,/*Map size*/UL_MF_U16);//Map format
 
@@ -413,7 +410,8 @@ void skillmenu(bool levelup)
 
             for(i=0; i<SKILLNUMBER; i++)
             {
-                if(ul_keys.touch.x>skillx[i]&&ul_keys.touch.x<(skillx[i]+32)&&ul_keys.touch.y>skilly[i]&&ul_keys.touch.y<(skilly[i]+32))
+//                if(ul_keys.touch.x>skillx[i]&&ul_keys.touch.x<(skillx[i]+32)&&ul_keys.touch.y>skilly[i]&&ul_keys.touch.y<(skilly[i]+32))
+                if(STYLUSBOX(skillx[i],skilly[i],32,32))
                 {
                     if (levelup&&skillpoints&&(hero.stats.lvl>=requiredLevel[i]))
                     {
@@ -425,9 +423,11 @@ void skillmenu(bool levelup)
                     else if (skillsLevels[i] && !(levelup&&skillpoints))
                     {
                         currentSkill[ul_keys.held.L]=i;
+                        //Calculate damages, mana
                         skillCost[ul_keys.held.L]=FormulaManaCost(skillsLevels[i],fMana[i][0],fMana[i][1],fMana[i][2]);
                         skilldmg[i][0]=(FormulaDam(skillsLevels[i],fDam[i][0][0],fDam[i][0][1],fDam[i][0][2],fDam[i][0][3],fDam[i][0][4],fDam[i][0][5])>>1)*skillRatio[i];
                         skilldmg[i][1]=(FormulaDam(skillsLevels[i],fDam[i][1][0],fDam[i][1][1],fDam[i][1][2],fDam[i][1][3],fDam[i][1][4],fDam[i][1][5])>>1)*skillRatio[i];
+                        //select the skill and changes images according to it
                         selectedSkill[ul_keys.held.L]=(void*)skillfunction[i];
                         topSetSkill(skillframe[currentSkill[ul_keys.held.L]],ul_keys.held.L);
                         i=SKILLNUMBER;
@@ -470,7 +470,7 @@ void skillmenu(bool levelup)
 void death()
 {
     int i;
-    extern int currentMap;
+    extern char currentMap[30];
     for (i=0; i<MAX_DATASPRITES; i++)
     {
         ulDeleteImage(spritedatabase[i].image);

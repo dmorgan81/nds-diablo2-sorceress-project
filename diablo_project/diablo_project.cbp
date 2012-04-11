@@ -96,11 +96,11 @@
 		</Unit>
 		<Unit filename="source\formulas\formulas.c">
 			<Option compilerVar="CC" />
-			<Option virtualFolder="source\Maps\" />
+			<Option virtualFolder="data\" />
 		</Unit>
 		<Unit filename="source\formulas\skills.c">
 			<Option compilerVar="CC" />
-			<Option virtualFolder="source\Maps\" />
+			<Option virtualFolder="data\" />
 		</Unit>
 		<Unit filename="source\interface.c">
 			<Option compilerVar="CC" />
@@ -115,6 +115,13 @@
 		</Unit>
 		<Unit filename="source\main.h">
 			<Option virtualFolder="headers\" />
+		</Unit>
+		<Unit filename="source\maps\waypoint.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="source\Maps\" />
+		</Unit>
+		<Unit filename="source\maps\waypoint.h">
+			<Option virtualFolder="headers\Maps\" />
 		</Unit>
 		<Unit filename="source\misc.c">
 			<Option compilerVar="CC" />
@@ -141,6 +148,9 @@
 		</Unit>
 		<Unit filename="source\objects\bgobjects.h">
 			<Option virtualFolder="headers\objects\" />
+		</Unit>
+		<Unit filename="source\objects\bgobjectsdata.txt">
+			<Option virtualFolder="data\" />
 		</Unit>
 		<Unit filename="source\objects\collisions.c">
 			<Option compilerVar="CC" />
@@ -213,11 +223,8 @@
 		</Unit>
 		<Extensions>
 			<code_completion>
-				<search_path add="D:\devkitPro\libnds" />
-				<search_path add="D:\devkitPro\PAlib" />
-				<search_path add="D:\devkitPro\uLibrary" />
-				<search_path add="D:\devkitPro\PAlib\source\arm9\source" />
-				<search_path add="D:\devkitPro\uLibrary\Source" />
+				<search_path add="C:\devkitpro\devkitARM\arm-eabi\include" />
+				<search_path add="C:\devkitpro\libnds\include" />
 			</code_completion>
 			<debugger />
 			<wxsmith version="1">

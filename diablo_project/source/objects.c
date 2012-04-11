@@ -224,19 +224,22 @@ void spawnObjects()
 
 
 void mobSpawn()
+// TODO (Clement#1#): something clean and auto adjustable
 {
     if(!(Counter[VBL]&511))
             {
                 extern int MonBaseLife;
                 int objectnb,i;
+                int mob=0;
+                if (strcmp(currentMap,"Blood Moor")) mob=1;
                 if (hero.stats.lvl<2)
                 {
                     objectnb=getUnusedObject();
-                    int x=PA_RandMinMax (128+currentMap*50, 330+currentMap*500),y=PA_RandMinMax (86+currentMap*150, 286+currentMap*256);
+                    int x=PA_RandMinMax (128, MAPSIZE_X*7),y=PA_RandMinMax (86, MAPSIZE_Y*7);
                     while (GetTile(x,y)>=NWALKABLETILE)
                     {
-                        x=PA_RandMinMax (128+currentMap*50, 330+currentMap*500);
-                        y=PA_RandMinMax (86+currentMap*150, 286+currentMap*256);
+                        x=PA_RandMinMax (128, MAPSIZE_X*7);
+                        y=PA_RandMinMax (86, MAPSIZE_Y*7);
                     }
                     if (!PA_RandMax(2))
                     {
@@ -245,18 +248,18 @@ void mobSpawn()
                     }
                     else
                     {
-                        newObject(x,y, &objects[objectnb],objectnb, &data[2+currentMap],0 );
-                        objects[objectnb].life=((MonBaseLife*data[2+currentMap].life)/100+512)>>9;
+                        newObject(x,y, &objects[objectnb],objectnb, &data[2+mob],0 );
+                        objects[objectnb].life=((MonBaseLife*data[2+mob].life)/100+512)>>9;
                     }
                 }
                 else for(i=0; i<=(hero.stats.lvl>>1)+1; i++)
                     {
                         objectnb=getUnusedObject();
-                        int x=PA_RandMinMax (128+currentMap*50, 330+currentMap*500),y=PA_RandMinMax (86+currentMap*150, 286+currentMap*256);
+                        int x=PA_RandMinMax (128, MAPSIZE_X*7),y=PA_RandMinMax (86, MAPSIZE_Y*7);
                         while (GetTile(x,y)>=NWALKABLETILE)
                         {
-                            x=PA_RandMinMax (128+currentMap*50, 330+currentMap*500);
-                            y=PA_RandMinMax (86+currentMap*150, 286+currentMap*256);
+                            x=PA_RandMinMax (128, MAPSIZE_X*7);
+                            y=PA_RandMinMax (86, MAPSIZE_Y*7);
                         }
                         if (!PA_RandMax(2))
                         {
@@ -265,8 +268,8 @@ void mobSpawn()
                         }
                         else
                         {
-                            newObject(x,y, &objects[objectnb],objectnb, &data[2+currentMap],0 );
-                            objects[objectnb].life=((MonBaseLife*data[2+currentMap].life)/100+512)>>9;
+                            newObject(x,y, &objects[objectnb],objectnb, &data[2+mob],0 );
+                            objects[objectnb].life=((MonBaseLife*data[2+mob].life)/100+512)>>9;
                         }
                     }
             }

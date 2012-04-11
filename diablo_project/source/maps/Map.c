@@ -9,18 +9,32 @@
 #include "../interface.h"
 #include "map.h"
 
-int currentMap;
+char currentMap[30];
 u16* map_col=NULL;
 short *map=NULL;
 bool loadmap(char* name,int sizemap,int sizecol);
 
-void changemap(u8 mapnb)
+void changemap(char* mapname)
 {
-    int i;
-    switch(mapnb)
+    int i,tilemap_x,tilemap_y;
+    char buffer[30];
+    char tileset[30];
+    FILE* file=NULL;
+    sprintf(buffer,"/maps/%s.dat",mapname);
+    file=fopen(buffer, "rb");
+    if(file==NULL) ERROR("error loading map\n%s",buffer);
+    else if( fscanf(file,"[name=<%29[a-z A-Z]>]\n\
+                        size.x=%i\n\
+                        size.y=%i\n\
+                        tileset=<%29[a-z A-Z]>\n\
+                        tilemap.x=%i\n\
+                        tilemap.y=%i\n\
+                        hero.x=%i\n\
+                        hero.y=%i\n",mapname,&MAPSIZE_X,&MAPSIZE_Y,tileset,&tilemap_x,&tilemap_y,&hero.x,&hero.y))
     {
-    case 0:
-        //map_col=tilescollision_map;
+        hero.x=norm_fix(hero.x);
+        hero.y=norm_fix(hero.y);
+
         ulDeleteImage(mapTiles);
         ulDeleteMap(Mymap);
         for (i=0; i<MAX_OBJECT; i++)
@@ -31,15 +45,10 @@ void changemap(u8 mapnb)
         {
             deleteBgObject(i);
         }
-        MAPSIZE_X=59;
-        MAPSIZE_Y=47;
         curMaxObject=0;
         curMaxBgObject=0;
-        hero.x=norm_fix(63);
-        hero.y=norm_fix(5);
-        currentMap=0;
 
-        if(!loadmap("rogue",45*60,47*59))
+        if(!loadmap(mapname,tilemap_x*tilemap_y,MAPSIZE_X*MAPSIZE_Y))
             while(1)
             {
                 ulStartDrawing2D();
@@ -47,62 +56,17 @@ void changemap(u8 mapnb)
                 ulEndDrawing();
                 WaitForVBL();
             }
-        mapTiles = ulLoadImageFilePNG("/gfx/map_png.png",0, UL_IN_VRAM, UL_PF_PAL4);
-        if(map!=NULL && map_col!=NULL)Mymap = ulCreateMap(mapTiles,/*Tileset*/map,8,8,/*Tiles size*/60,45,/*Map size*/UL_MF_U16);//Map format
-        else while(1);//error
-
-
-        if (hero.stats.lvl>=5)
-        {
-            int objectnb;
-            objectnb=getUnusedBgObject();
-            newObject((46<<3)+4, (39<<3)+8, &bgobjects[objectnb],objectnb, &bgdata[2] ,1);
-            for (i=0; i<MAX_BGOBJECT; i++)
-            {
-                if(bgobjects[i].datanb==2)bgobjects[i].ai=&waypointmenu;
-            }
-        }
+        sprintf(buffer,"/gfx/%s_png.png",tileset);
+        mapTiles = ulLoadImageFilePNG(buffer,0, UL_IN_VRAM, UL_PF_PAL4);
+        if(map!=NULL && map_col!=NULL)Mymap = ulCreateMap(mapTiles,/*Tileset*/map,8,8,/*Tiles size*/tilemap_x,tilemap_y,/*Map size*/UL_MF_U16);//Map format
+        else while(1)ERROR("Can't load map.");//error
         spawnObjects();
-        break;
+        sprintf(currentMap,"%s",mapname);
 
-
-    case 1:
-        ulDeleteImage(mapTiles);
-        ulDeleteMap(Mymap);
-        for (i=0; i<MAX_OBJECT; i++)
-        {
-            deleteObject(i);
-        }
-        for (i=0; i<MAX_BGOBJECT; i++)
-        {
-            deleteBgObject(i);
-        }
-        MAPSIZE_X=129;
-        MAPSIZE_Y=102;
-        curMaxObject=0;
-        curMaxBgObject=0;
-
-        if(!loadmap("sand",129*102,129*102))
-            while(1)
-            {
-                ulStartDrawing2D();
-                ulDrawTextBox(3,171,253,190,"Error loading map",0);
-                ulEndDrawing();
-                WaitForVBL();
-            }
-        mapTiles = ulLoadImageFilePNG("/gfx/dudu_png.png",0, UL_IN_VRAM, UL_PF_PAL4);
-        Mymap = ulCreateMap(mapTiles,/*Tileset*/map,8,8,/*Tiles size*/129,102,/*Map size*/UL_MF_U16);//Map format
-        hero.x=norm_fix(240);
-        hero.y=norm_fix(430);
-        currentMap=1;
-        for (i=0; i<MAX_BGOBJECT; i++)
-        {
-            if(bgobjects[i].datanb==2)bgobjects[i].ai=&waypointmenu;
-        }
-        spawnObjects();
-
-        break;
     }
+    else topPrintf(130,40,"Error loading map");
+
+
     for (i=1; i<MAX_DATASPRITES; i++)
     {
         ulUnrealizeImage(spritedatabase[i].image);
@@ -133,3 +97,9 @@ bool loadmap(char* name,int sizemap,int sizecol)
 
     return 1;
 }
+
+
+
+
+
+

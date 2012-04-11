@@ -230,7 +230,7 @@ void orbAI(objectinfo* missile)
 
 void fireAI(objectinfo* missile)
 {
-    if(!(missile->life&63))(missile->collision)(missile);//only hurts once per second
+    if(!(missile->life&127))(missile->collision)(missile);//only hurts once per 2seconds
 
     missile->life-=1;
 

@@ -8,15 +8,19 @@
 #include "soundbank.h" //include all audio defines
 
 #define VERSION             "1.1.2"
-#define PARSERROR           topPrintf(130,45,"Error parsing quest data")
-
+//version number two digits per member and 3 for last one ex : 1.1.2=>01.01.002=>01 01 002 or 12.32.2=>12 32 002
+#define VERSION_NUMBER      0101002
+#define PARSERROR           topPrintf(130,45,"Error parsing data")
+#define ERROR(text...)         topPrintf(130,45, ##text)
 
 
 #define MUSIC_OFF
 
-//#define RESETKEYS 0xF03
+//#define RESETKEYS 0xF03 //combo of keys to reset game
 
 #define _GFX_ALIGN __attribute__((aligned (4)))
+
+#define STYLUSBOX(X,Y,u,v) (ul_keys.touch.x >= (X) && ul_keys.touch.x <= ((X) + (u)) && ul_keys.touch.y >=(Y) && ul_keys.touch.y <=((Y)+(v)))
 
 #define norm_fix(x)			((x)<<8)
 #define fix_norm(x)			((x)>>8)

@@ -3,11 +3,12 @@
 #include "quests.h"
 #include "defines.h"
 #include "top_screen.h"
+int texty=45;
 extern u32 killedMobs[MAX_DATA];
 struct q_Node
 {
     char *name;
-    int type,step;
+    int type,step,rewType,reward;
     void* data;
     q_Node *next;
 };
@@ -25,23 +26,26 @@ void createQuestList()
     questList.start=NULL;
     questList.length=0;
 }
-q_Node* createQuestNode(char* name,int type,void* data)
+q_Node* createQuestNode(char* name,int step,int type,void* data,int rewType,int reward)
 {
     q_Node *temp=malloc(sizeof(*temp));
     if(temp)
     {
         temp->name=name;
+        temp->step=step;
         temp->type=type;
         temp->data=data;
+        temp->rewType=rewType;
+        temp->reward=reward;
         temp->next=NULL;
     }
     return temp;
 }
 
 //add new quest at the beginning
-bool pushQuestNode(/*q_Node* list,*/char* name,int type,void* data)
+bool pushQuestNode(/*q_Node* list,*/char* name,int step,int type,void* data,int rewType,int reward)
 {
-    q_Node *temp=createQuestNode(name,type,data);
+    q_Node *temp=createQuestNode(name,step,type,data,rewType,reward);
     if(temp!=NULL)
     {
         temp->next=questList.start;//or list if allow multiple quest lists
@@ -73,6 +77,7 @@ void removeQuestNode(int nb)//remember, we the first element is 1 and not 0 as i
     {
         q_Node *temp=questList.start;
         questList.start=questList.start->next;
+        free(temp->data);
         free(temp);
         questList.length--;
     }
@@ -85,7 +90,7 @@ bool loadQuest(char* name,int step)
     char buffer[30];
     sprintf(buffer,"/quests/%s.dat",name);
     file=fopen(buffer, "rb");
-    int type=0,parsedstep=0;
+    int type=0,parsedstep=0,rewardType=0,reward=0;
     void* data;
     if(file==NULL)topPrintf(130,40,"Error loading quest data");
     else
@@ -115,9 +120,13 @@ bool loadQuest(char* name,int step)
 
             case Q_KILL:
                 data=malloc(sizeof(q_dataKill));
-                if( !fscanf(file,"data=%i\n",&(((q_dataKill*)data)->dataID)) || !fscanf(file,"total=%i\n\n",&(((q_dataKill*)data)->total)) ) PARSERROR;
-                else    ((q_dataKill*)data)->target=killedMobs[((q_dataKill*)data)->dataID]+((q_dataKill*)data)->total;
-                pushQuestNode(name,Q_KILL,(q_dataKill*)data);
+                if( !fscanf(file,"data=%i\n",&(((q_dataKill*)data)->dataID)) || !fscanf(file,"total=%i\n",&(((q_dataKill*)data)->total)) ) PARSERROR;
+                else
+                {
+                    ((q_dataKill*)data)->target=killedMobs[((q_dataKill*)data)->dataID]+((q_dataKill*)data)->total;
+                    if(fscanf(file,"rewardType=%i\nvalue=%i\n\n",&rewardType,&reward)) pushQuestNode(name,step,Q_KILL,(q_dataKill*)data,rewardType,reward);
+                    else PARSERROR;
+                }
                 break;
             case Q_TALK:
                 data=malloc(sizeof(q_dataTalk));
@@ -129,8 +138,9 @@ bool loadQuest(char* name,int step)
             default:
                 break;
             }
+
             fclose(file);
-            return 1;
+            return type;
         }
     }
     fclose(file);
@@ -139,26 +149,30 @@ bool loadQuest(char* name,int step)
 void updateQuests()
 {
     q_Node* temp=questList.start;
+    q_Node* temp2=NULL;
     int i=1;
-    bool remove=0;
+    bool done=0;
     while(temp!=NULL)
     {
         switch(temp->type)
         {
         case Q_KILL:
-            remove=updateQuestKill((q_dataKill*)temp->data);
+            done=updateQuestKill((q_dataKill*)temp->data);
             break;
         case Q_TALK:
-            remove=updateQuestTalk((q_dataTalk*)temp->data);
+            done=updateQuestTalk((q_dataTalk*)temp->data);
             break;
         case Q_GOTO:
-            remove=updateQuestGoto((q_dataGoto*)temp->data);
+            done=updateQuestGoto((q_dataGoto*)temp->data);
             break;
         }
+        temp2=temp;
         temp=temp->next;
-        if(remove)
+        if(done)
         {
-                removeQuestNode(i);
+            q_reward(temp2);
+            if(loadQuest(temp2->name,temp2->step+1))removeQuestNode(i+1);
+            else removeQuestNode(i);
         }
         else i++;
     }
@@ -168,7 +182,9 @@ bool updateQuestKill(q_dataKill *data)
 {
     if(killedMobs[data->dataID] >= data->target)
     {
-        topPrintf(128,45,"Quest completed");
+
+        topPrintf(128,texty,"Quest completed:%i",data->total);
+        //texty+=10;
         return 1;//quest completed
     }
     //print on top screen how many mobs still need to be killed
@@ -183,4 +199,26 @@ bool updateQuestTalk(q_dataTalk *data)
 bool updateQuestGoto(q_dataGoto *data)
 {
     return 0;
+}
+
+
+void q_reward(q_Node* quest)
+{
+    switch (quest->rewType)
+    {
+    case QR_NONE:
+        break;
+    case QR_EXP:
+        hero.stats.experience+=quest->reward;
+        break;
+    case QR_LIFE:
+        hero.stats.lifeMax+=quest->reward;
+        break;
+    case QR_MANA:
+        hero.stats.manaMax+=quest->reward;
+        break;
+
+    default:
+        break;
+    }
 }

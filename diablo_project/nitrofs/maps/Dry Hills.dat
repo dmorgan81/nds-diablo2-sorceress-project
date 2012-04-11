@@ -1,0 +1,17 @@
+[name=<Dry Hills>]
+
+size.x=129
+size.y=102
+tileset=<dudu>
+tilemap.x=129
+tilemap.y=102
+hero.x=240
+hero.y=430
+
+[quests]
+[<Viper throne>]
+step=1
+
+[<Horadrim's cube>]
+step=1
+

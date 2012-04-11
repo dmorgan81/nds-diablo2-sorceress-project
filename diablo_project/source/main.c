@@ -20,7 +20,7 @@
 #include "misc.h"
 #include "sound.h"
 #include "quests.h"
-
+#include "maps/waypoint.h"
 //#define Test
 //#define NOSPAWN
 #ifdef Test
@@ -88,7 +88,7 @@ int main( int argc, char **argv)
     hero.stats.curMana=(hero.stats.manaMax);
     hero.stats.experience=0;
     hero.stats.nextlvl=400;
-    hero.stats.lvl=1;
+    hero.stats.lvl=4;
 
 /////////////////////////////////////////////
 
@@ -125,23 +125,27 @@ int main( int argc, char **argv)
 
 
 
-if(!hero.stats.experience)
-{
-    objectnb=getUnusedObject();
-    newObject(80, -40, &objects[objectnb],objectnb, &data[0],0);
-    for (i=0; i<280; i++)
+    if(!hero.stats.experience)
     {
-        updateObjects();
-        objects[objectnb].y+=64;
-        sprites[objects[objectnb].sprite].prio=100;
-        sprites[objects[objectnb].sprite].prio=100;
-        sprites[fxinfo[objects[objectnb].fx[0]].sprite].prio=100;
-        sprites[fxinfo[objects[objectnb].fx[1]].sprite].prio=100;
-        myulScreenDraws();
-        WaitForVBL();
-    }
+        objectnb=getUnusedObject();
+        newObject(80, -40, &objects[objectnb],objectnb, &data[0],0);
+        for (i=0; i<280; i++)
+        {
+            updateObjects();
+            objects[objectnb].y+=64;
+            sprites[objects[objectnb].sprite].prio=100;
+            sprites[objects[objectnb].sprite].prio=100;
+            sprites[fxinfo[objects[objectnb].fx[0]].sprite].prio=100;
+            sprites[fxinfo[objects[objectnb].fx[1]].sprite].prio=100;
+            myulScreenDraws();
+            //waitforvbl without key update
+            UpdateRTC();
+            PA_RunCounters();
+            ulSyncFrame();
+            ulEndFrame();
+        }
 
-    DialogInBox("Welcome to the world of Sanctuary, sorceress.\nAs you may know, this land is, once again, struck by the Three.\n\n\
+        DialogInBox("Welcome to the world of Sanctuary, sorceress.\nAs you may know, this land is, once again, struck by the Three.\n\n\
 I am the Archangel Tyrael. I came here to prevent Diablo from freeing his brother, Baal. But I have failed. Now, Terror and Destruction roam free throughout your world.\n\n\
 Even now, they head towards the Eastern capital of Kurast - to the very heart of the Zakarum Temple. There they hope to find their eldest brother, Mephisto, the Lord of Hatred who was imprisoned there ages ago.\n\n\
 If the three Prime Evils unite, they will be invincible. Though it is unclear as to what their aims are, it is certain that they must be stopped at all costs.\n\n\
@@ -149,20 +153,12 @@ I am broken and the energys that tie me to this world are diminishing rapidly.\n
 You must take up this quest and prevent the Three Brothers from reuniting. You must cross the sea and search for Diablo and Baal in Kurast.\n\n\
 Now hurry, mortal... Time is running out for all of us!\n",15,"tyrael","/Tyr_intro.raw",6*15*8,1);
 
-    skillmenu(1);
-}
+        skillmenu(1);
+    }
 #endif
 
     WaitForVBL();
     CounterStart(VBL);
-    createQuestList();
-    q_dataKill *q_essai=malloc(sizeof(*q_essai));
-    while(q_essai==NULL){}
-    q_essai->dataID=2;
-    q_essai->total=10;
-    q_essai->target=10;
-//    while(!pushQuestNode("test",Q_KILL,q_essai)){}//TEST
-    loadQuest("essai",1);
     while(1)
     {
         while(hero.stats.curLife>0&&hero.stats.curLife<=hero.stats.lifeMax)
@@ -226,7 +222,10 @@ Now hurry, mortal... Time is running out for all of us!\n",15,"tyrael","/Tyr_int
             if(ul_keys.pressed.X) saveloadmenu(0);
             if(ul_keys.pressed.Y) saveloadmenu(1);
 #ifdef Test
-            if(ul_keys.pressed.B)  {hero.stats.experience+=100;}
+            if(ul_keys.pressed.B)
+            {
+                hero.stats.experience+=100;
+            }
 #endif
             if(ul_keys.pressed.select)	skillmenu(0); //will be changed later, we cant firce player to levelup skills if they just want to switch
             if(PAUSEKEY || ul_keys.held.lid) pause();//(int*)ul_keys.pressed.start);
@@ -266,7 +265,11 @@ int ulInitNitroFS();
 
 void CallAllInits()
 {
-int i;
+    int i;
+    char buffer[30];
+    FILE* conf_ini=NULL;
+
+
     ulInit(UL_INIT_ALL);
     ulInitGfx();
     ulInitText();
@@ -277,16 +280,33 @@ int i;
     bg3_sub = bgInitSub(3, BgType_Bmp8, BgSize_B8_256x256, 0,0);
     ulSetTexVramParameters(UL_BANK_A | UL_BANK_B | UL_BANK_C | UL_BANK_D, VRAM_A, 512 << 10); //256ko de vram
     CountersReset();
+
     if (!ulInitNitroFS())
     {
-        ////PA_OutputText(0, 1, 1, "Filesystem init error !!!");
-        for(;;) WaitForVBL();
+        while(1)
+        {
+            ulStartDrawing2D();
+            ulDrawTextBox(3,171,253,190,"Filesystem error. Please patch dldi and make sure your flashcart supports argv.",0);
+            ulEndDrawing();
+            WaitForVBL();
+        }
     }
 
+    conf_ini=fopen("/config.ini","rb");
+    if(!conf_ini)
+    {
+        while(1)
+        {
+            ulStartDrawing2D();
+            ulDrawTextBox(3,171,253,190,"Error loading ini file",0);
+            ulEndDrawing();
+            WaitForVBL();
+        }
+    }
     initTopScreen();
 
 #ifndef _NOSPLASH_
-    //Affiches des splashs, PAlib, uLibrary, Project...
+    //Show splash screens, uLibrary, Project...
     MySplash();
 
     UL_IMAGE* loadingimg = ulLoadImageFilePNG("/gfx/loading_png.png",0, UL_IN_RAM, UL_PF_PAL8);
@@ -333,7 +353,17 @@ int i;
     ulDeleteImage (loadingimg);
 #endif
     myulInitData (0);
-    changemap(0);
+    if(!fscanf(conf_ini,"map=<%29[a-z A-Z]>\n",buffer))
+    {
+        PARSERROR;
+        while(1)
+        {
+            WaitForVBL();
+        }
+    }
+    changemap(buffer);//"Blood Moor");
+    WPactivated=malloc(strlen(buffer)*sizeof(char) +1);
+    strcat(WPactivated,buffer);
 #ifndef Test
     for (i=0; i<SKILLNUMBER; i++)
     {
@@ -350,6 +380,8 @@ int i;
     quickTopScreenRefresh();
     topSetNormalScreen();
     WaitForVBL();
+    createQuestList();
+    loadQuest("essai",1);
 }
 
 
@@ -374,7 +406,7 @@ void MySplash()
     ulDrawImage(d_splash2);
     ulEndDrawing();
 
-    //Soit on attend 3 secondes de splash, soit on appuye sur une touche
+    //wait 3seconds or press key
     while(time>0 && !(ul_keys.pressed.value || ul_keys.touch.click))
     {
         time--;

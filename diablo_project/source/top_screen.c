@@ -142,10 +142,17 @@ void topDrawImage(int x,int y,char* source,int offsetx,int offsety,int sizex, in
 
 void topDrawString(int x,int y,char* string)
 {
-    int i=0;
+    int i=0,dx=x,dy=y;
     while(*(string+i) != '\0')
     {
-        topDrawChar(*(string+i),x+(i<<3),y);
+        if (*(string+i)=='\n'){dy+=8;dx=x;}//jump on next line
+        else
+        {
+        topDrawChar(*(string+i),dx,dy);
+        dx+=8;
+        dy+=8*(dx/256);//do we need to change line?
+        dx&=255;//if we changed line then dx must be <256
+        }
         i++;
     }
 }

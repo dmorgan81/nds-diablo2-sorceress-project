@@ -34,17 +34,19 @@ void CheckForLevelUp()
         topPrintf(85,66,"%d",hero.stats.dexterity);
         topPrintf(85,90,"%d",hero.stats.vitality);
         topPrintf(85,114,"%d",hero.stats.energy);
+        //once you reach level 5 you can use the waypoint
         if (hero.stats.lvl==5)
         {
-            int i;
-            DialogInBox("The waypoint in the southwest is now opened.\nYou can use it by pressing A button.\nIf you wish to come back, simply use the waypoint from your new location.\n\nGo forth, Hero, may the Heaven protect you.",8,0,0,0,0);
-            int objectnb;
-            objectnb=getUnusedBgObject();
-            newObject((46<<3)+4, (39<<3)+8, &bgobjects[objectnb],objectnb, &bgdata[2] ,1);
-            for (i=0; i<MAX_BGOBJECT; i++)
-            {
-                if(bgobjects[i].datanb==2)bgobjects[i].ai=&waypointmenu;
-            }
+//            int i;
+            DialogInBox("The waypoint is now opened.\nYou can use it by pressing A button.\nIf you wish to come back, simply use the waypoint from your new location.\n\nGo forth, Hero, may the Heaven protect you.",8,0,0,0,0);
+            activateWaypoint("Dry Hills");
+//            int objectnb;
+//            objectnb=getUnusedBgObject();
+//            newObject((46<<3)+4, (39<<3)+8, &bgobjects[objectnb],objectnb, &bgdata[2] ,1);
+//            for (i=0; i<MAX_BGOBJECT; i++)
+//            {
+//                if(bgobjects[i].datanb==2)bgobjects[i].ai=&waypointAI;
+//            }
         }
     }
     if (skillpoints)
@@ -52,7 +54,7 @@ void CheckForLevelUp()
         if (lvlupicon==-1) lvlupicon=myulCreateSprite(18,224,160,348);
         if (ul_keys.touch.held)
         {
-            if(ul_keys.touch.x>224&&ul_keys.touch.x<248&&ul_keys.touch.y>160&&ul_keys.touch.y<188&&(ul_keys.touch.click||(lvlUpIcnPressed)))
+            if(STYLUSBOX(224,160,24,24) &&(ul_keys.touch.click||(lvlUpIcnPressed)))
             {
                 lvlUpIcnPressed++;
                 myulSetAnim (lvlupicon,1,1,0,0);
@@ -65,7 +67,7 @@ void CheckForLevelUp()
         }
         else if (ul_keys.touch.released)
         {
-            if(ul_keys.touch.x>224&&ul_keys.touch.x<248&&ul_keys.touch.y>160&&ul_keys.touch.y<188&&lvlUpIcnPressed>3)
+            if(STYLUSBOX(224,160,24,24) &&lvlUpIcnPressed>3)
             {
                 skillmenu(1);
                 if (!skillpoints)
@@ -78,6 +80,11 @@ void CheckForLevelUp()
             myulSetAnim (lvlupicon,0,0,0,0);
         }
 
+    }
+    else if(lvlupicon!=-1)
+    {
+        myulDeleteSprite(lvlupicon);
+        lvlupicon=-1;
     }
 }
 

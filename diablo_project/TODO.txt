@@ -1,0 +1,8 @@
+Need to change waypoint, add menu, no more loading wp object manually but open menu and then check if available
+Complete map loading
+complete map zone management (warps etc)
+Complete quests
+Complete NPCs
+..
+
+

@@ -1,0 +1,17 @@
+[name=<Blood Moor>]
+
+size.x=59
+size.y=47
+tileset=<map>
+tilemap.x=60
+tilemap.y=45
+hero.x=63
+hero.y=5
+
+[quests]
+[<Tyrael test>]
+step=1
+
+[<intro>]
+step=1
+
