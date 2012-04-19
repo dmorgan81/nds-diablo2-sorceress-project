@@ -211,7 +211,7 @@ void topSetBackground(char* name)
     if(filebg&&palbuffer)
     {
         fread(palbuffer, sizeof(short), 256, filebg);
-        dmaCopy(palbuffer, BG_PALETTE_SUB, 256*2);
+        dmaCopy(palbuffer, BG_PALETTE_SUB, 256*sizeof(short));
     }
     sprintf(__str ,"/Backgrounds/%s_Bitmap.bin",name);
     filebg=fopen(__str,"rb");
@@ -228,5 +228,19 @@ void topSetBackground(char* name)
 void topSetNormalScreen()
 {
     dmaCopy(topscr_buffer, bgGetGfxPtr(bg3_sub), 256*192);
-    dmaCopy(topscr_palbuffer, BG_PALETTE_SUB, 256*2);
+    dmaCopy(topscr_palbuffer, BG_PALETTE_SUB, 256*sizeof(short));
+}
+
+void topDrawBlackScreen()
+{
+    int i,blackColor=0;
+    for (i=0;i<256;i++)
+    {
+    	if(((short*)BG_PALETTE_SUB)[i]==0)
+    	{
+    	    blackColor=i;
+    	    i=256*2;
+    	}
+    }
+    dmaFillHalfWords(blackColor,bgGetGfxPtr(bg3_sub),256*192);
 }

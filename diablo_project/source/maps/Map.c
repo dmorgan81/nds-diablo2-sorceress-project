@@ -9,9 +9,10 @@
 #include "../interface.h"
 #include "map.h"
 
-char currentMap[30];
+char currentMap[currentMapStrLength];
 u16* map_col=NULL;
 short *map=NULL;
+box spawnArea= {0,0,0,0};
 bool loadmap(char* name,int sizemap,int sizecol);
 
 void changemap(char* mapname)
@@ -30,23 +31,30 @@ void changemap(char* mapname)
                         tilemap.x=%i\n\
                         tilemap.y=%i\n\
                         hero.x=%i\n\
-                        hero.y=%i\n",mapname,&MAPSIZE_X,&MAPSIZE_Y,tileset,&tilemap_x,&tilemap_y,&hero.x,&hero.y))
+                        hero.y=%i\n\
+                        spawn.x=%i\n\
+                        spawn.y=%i\n\
+                        spawn.u=%i\n\
+                        spawn.v=%i\n"
+                    ,mapname,&MAPSIZE_X,&MAPSIZE_Y,tileset,&tilemap_x,&tilemap_y,&hero.x,&hero.y,&spawnArea.x,&spawnArea.y,&spawnArea.u,&spawnArea.v))
     {
         hero.x=norm_fix(hero.x);
         hero.y=norm_fix(hero.y);
 
-        ulDeleteImage(mapTiles);
-        ulDeleteMap(Mymap);
-        for (i=0; i<MAX_OBJECT; i++)
-        {
-            deleteObject(i);
-        }
-        for (i=0; i<MAX_BGOBJECT; i++)
-        {
-            deleteBgObject(i);
-        }
+        //free most of vram
+        myulUnrealizeSprites();
+        if(mapTiles)ulDeleteImage(mapTiles);
+        if(Mymap)ulDeleteMap(Mymap);
+
+
+        //Delete all objects/missiles
+        for (i=0; i<MAX_OBJECT; i++)    deleteObject(i);
+        for (i=0; i<MAX_BGOBJECT; i++)  deleteBgObject(i);
+        for (i=0; i<MAX_MISSILE ; i++ )   deleteMissile(i);
         curMaxObject=0;
         curMaxBgObject=0;
+        curMaxMissile=0;
+
 
         if(!loadmap(mapname,tilemap_x*tilemap_y,MAPSIZE_X*MAPSIZE_Y))
             while(1)
@@ -62,15 +70,11 @@ void changemap(char* mapname)
         else while(1)ERROR("Can't load map.");//error
         spawnObjects();
         sprintf(currentMap,"%s",mapname);
-
     }
     else topPrintf(130,40,"Error loading map");
 
 
-    for (i=1; i<MAX_DATASPRITES; i++)
-    {
-        ulUnrealizeImage(spritedatabase[i].image);
-    }
+
 }
 
 

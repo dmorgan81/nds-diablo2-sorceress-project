@@ -72,17 +72,6 @@ int myulCreateSprite (u8 data,int x,int y, int prio)
 }
 
 
-
-
-
-
-
-
-
-
-
-
-
 inline void myulDeleteSprite (int nb)
 {
     if (nb>-1)
@@ -95,6 +84,7 @@ inline void myulDeleteSprite (int nb)
         if (nb==curMaxSprite)curMaxSprite--;
     }
 }
+
 inline void myulImageFlip (int /*sprite*/nb,bool fliph,bool flipv)
 {
     sprites[nb].flippedh=fliph;
@@ -208,7 +198,10 @@ inline void myulSetCycles (int sprite,int cycles)
 
 
 int shakeframes=0;
-inline void myulStartShake (int frames){shakeframes=frames;}
+inline void myulStartShake (int frames)
+{
+    shakeframes=frames;
+}
 
 void myulShakeScreen()
 {
@@ -219,7 +212,15 @@ void myulShakeScreen()
     }
     else ulMoveScreenView(0,0);
 }
-
+//use this to clear vram, must be used before drawing menu to avoid to fulfill vram
+void myulUnrealizeSprites()
+{
+    int i;
+    for (i=1; i<MAX_DATASPRITES; i++)
+    {
+        ulUnrealizeImage(spritedatabase[i].image);
+    }
+}
 
 void myulScreenDraws()
 {
@@ -231,8 +232,7 @@ void myulScreenDraws()
     glPolyFmt(POLY_ALPHA(31) | POLY_CULL_NONE | POLY_ID(0));
 #ifndef Test
     ulDrawMap(Mymap);
-#endif
-#ifdef Test
+#else
     ulDrawGradientRect(0, 0, 256, 192, RGB15(0, 0, 24), RGB15(0, 0, 0), RGB15(0, 0, 0), RGB15(0, 0, 24));
 #endif
     UL_IMAGE *spriteimage;
@@ -348,6 +348,13 @@ void myulDrawSprites(bool anim)
     }
 }
 
-
+void myulDrawBlackScreen()
+{
+    ulStartDrawing2D();
+    ulDrawFillRect(0,0,256,192,RGB15(0,0,0));
+    ulEndDrawing();
+    ulSyncFrame();
+    ulEndFrame();
+}
 
 

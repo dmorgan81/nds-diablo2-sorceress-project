@@ -21,6 +21,8 @@ void topDrawString(int x,int y,char* string);
 void topSetSkill(int skill,bool secondarySkill);
 void topSetBackground(char* name);
 void topSetNormalScreen();
+void topDrawBlackScreen();
+
 #define topDrawChar(character,x,y) topDrawImage(x,y,topscr_font,(((character)-32)*8)&255,(((character)-32)>>5)<<3,8,8,256)
 #define topPrintf(x, y, format...)		({ char __str[500]; sprintf(__str , ##format); topDrawString(x, y, __str); })
 

@@ -1,16 +1,67 @@
 [1]
-type=1
-data=2
-total=5
-rewardType=1
-value=100
+type=4
+text=<There is your first quest hero.
+
+Quest: Go to the waypoint located at the SouthEast.
+Reward : 20 experience points.>
+rewardType=0
+value=0
 
 [2]
-type=1
-data=2
-total=1
+type=3
+mapname=<Blood Moor>
+x=360
+y=300
+u=80
+v=50
 rewardType=0
 value=0
 
 [3]
+type=4
+text=<Great! You just completed your first quest.
+
+As a reward you gained the 100 experience points promised.
+Now is the time to train yourself and clean this cursed land.
+
+Go and kill 15 "Fallen One" to finish this quest.
+Reward : Life increased by 200 points>
+rewardType=0
+value=0
+
+[4]
+type=1
+data=2
+total=15
+rewardType=2
+value=200
+
+[5]
+type=4
+text=<It seems you are getting stronger now.
+You should be able to travel through the desert soon, but please, free the damned souls of this land before leaving.
+
+Go and kill 10 "Zombies" to finish this quest.
+Reward : Access to the Dry Hills>
+rewardType=0
+value=0
+
+[6]
+type=1
+data=1
+total=10
+rewardType=4
+value=0
+
+[7]
+type=4
+text=<The waypoint is now opened.
+You can use it by pressing A button.
+If you wish to come back, simply use the waypoint from your new location.
+
+Go forth, Hero, may the Heaven protect you.>
+rewardType=0
+value=0
+
+[8]
 type=0 means end of quest

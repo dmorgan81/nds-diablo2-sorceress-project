@@ -5,6 +5,8 @@
 typedef struct objectinfo objectinfo;
 typedef struct objectdata objectdata;
 
+typedef struct box box;
+
 typedef struct pointinfo pointinfo;
 typedef struct hitboxinfo hitboxinfo;
 typedef struct frame frame;
@@ -26,6 +28,11 @@ struct aurainfo
     void (*fonction)(aurainfo*);
     int life;
     int variable;
+};
+
+struct box
+{
+    int x,y,u,v;
 };
 
 struct pointinfo
@@ -59,15 +66,12 @@ struct statistiques
     s8 reslight;
     s8 respsn;
 
-    u16 lifeMax;
-    u16 curLife;
-    u16 manaMax;
-    u16 curMana;
+    int lifeMax,curLife,lifeBonus;
+    int manaMax,curMana,manaBonus;
     u16 dmg;
 
     u32 experience;
     u32 nextlvl;
-
 }  ;
 
 

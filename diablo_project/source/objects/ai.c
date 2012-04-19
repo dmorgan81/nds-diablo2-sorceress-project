@@ -44,6 +44,7 @@ void zombieAI(objectinfo* zombie)
 {
     (zombie->collision)(zombie);
     int movangle=PA_GetAngle(fix_norm(zombie->x)+zombie->hitbox.down.x,fix_norm(zombie->y)+zombie->hitbox.down.y,fix_norm(hero.x)+hero.hitbox.down.x,fix_norm(hero.y)+hero.hitbox.down.y);
+    int colWithHero=boxcollision (&zombie->hitbox,zombie->x,zombie->y,&hero.hitbox,hero.x,hero.y);
     zombie->vx=PA_Cos(movangle)>>1;//make total move 0.5px per frame
     zombie->vy=-PA_Sin(movangle)>>1;
     zombie->variables++;
@@ -54,12 +55,12 @@ void zombieAI(objectinfo* zombie)
         zombie->vy>>=1;
     }
 
-    if(feetcollision(&zombie->hitbox,zombie->x+zombie->vx,zombie->y))
+    if(feetcollision(&zombie->hitbox,zombie->x+zombie->vx,zombie->y)||colWithHero)
     {
         zombie->vx=0;
     }
 
-    if(feetcollision(&zombie->hitbox,zombie->x,zombie->y+zombie->vy))
+    if(feetcollision(&zombie->hitbox,zombie->x,zombie->y+zombie->vy)||colWithHero)
     {
         zombie->vy=0;
     }
@@ -68,7 +69,7 @@ void zombieAI(objectinfo* zombie)
     zombie->y+=zombie->vy;
 
     zombie->dir=angle_dir(movangle);
-    if((boxcollision (&zombie->hitbox,zombie->x,zombie->y,&hero.hitbox,hero.x,hero.y))&& (!(zombie->variables&63))) hero.stats.curLife-=zombie->dommages;
+    if( colWithHero && (!(zombie->variables&63))) hero.stats.curLife-=zombie->dommages;
     if (zombie->life < 1)
     {
         mobDeath(zombie,300);
@@ -95,7 +96,7 @@ void meleeAI(objectinfo* melee)
             {
                 //if in front of here, attack him
                 melee->action=2;
-// NOTE (Clement#1#): one hit only
+                //one hit only
                 myulSetCycles (melee->sprite,1);
                 hero.stats.curLife-=melee->dommages;
             }

@@ -3,12 +3,13 @@
 #include "quests.h"
 #include "defines.h"
 #include "top_screen.h"
+#include "ulScreenDisplay.h"
 int texty=45;
 extern u32 killedMobs[MAX_DATA];
 struct q_Node
 {
     char *name;
-    int type,step,rewType,reward;
+    int type,step,rewType,reward,done;
     void* data;
     q_Node *next;
 };
@@ -31,7 +32,8 @@ q_Node* createQuestNode(char* name,int step,int type,void* data,int rewType,int 
     q_Node *temp=malloc(sizeof(*temp));
     if(temp)
     {
-        temp->name=name;
+        temp->name=malloc((strlen(name)+1) *sizeof(char) );
+        sprintf(temp->name,"%s",name);
         temp->step=step;
         temp->type=type;
         temp->data=data;
@@ -49,6 +51,7 @@ bool pushQuestNode(/*q_Node* list,*/char* name,int step,int type,void* data,int 
     if(temp!=NULL)
     {
         temp->next=questList.start;//or list if allow multiple quest lists
+        temp->done=0;
         questList.start=temp;
         questList.length++;
         return 1;
@@ -69,7 +72,8 @@ void removeQuestNode(int nb)//remember, we the first element is 1 and not 0 as i
             temp=temp->next;
         }
         ptemp->next=temp->next;
-        free(temp->data);
+        freeQuest(temp->data,temp->type);
+        if(temp->name)free(temp->name);
         free(temp);
         questList.length--;
     }
@@ -83,16 +87,17 @@ void removeQuestNode(int nb)//remember, we the first element is 1 and not 0 as i
     }
 }
 
-// NOTE (Clement#1#): definir /*Q_kills*/, la fonction etc...
-bool loadQuest(char* name,int step)
+// TODO (Clement#1#): Add other quest types with their respective functions (npc dialog is important, have to do it fast..)
+
+int loadQuest(char* name,int step)
 {
     FILE* file=NULL;
-    char buffer[30];
+    char buffer[30], textbuffer[500];
     sprintf(buffer,"/quests/%s.dat",name);
     file=fopen(buffer, "rb");
     int type=0,parsedstep=0,rewardType=0,reward=0;
     void* data;
-    if(file==NULL)topPrintf(130,40,"Error loading quest data");
+    if(file==NULL)topPrintf(130,40,"Error loading quest data %s step:%i",buffer,step);
     else
     {
         char c=1;
@@ -128,12 +133,54 @@ bool loadQuest(char* name,int step)
                     else PARSERROR;
                 }
                 break;
+
             case Q_TALK:
                 data=malloc(sizeof(q_dataTalk));
                 break;
+
             case Q_GOTO:
                 data=malloc(sizeof(q_dataGoto));
+                if( !fscanf(file,"mapname=<%29[a-z A-Z]>\n",buffer) || !fscanf(file,"x=%i\ny=%i\nu=%i\nv=%i\n",&(((q_dataGoto*)data)->x),&(((q_dataGoto*)data)->y),&(((q_dataGoto*)data)->u),&(((q_dataGoto*)data)->v)) ) PARSERROR;
+                else
+                {
+                    ((q_dataGoto*)data)->map=malloc((strlen(buffer)+1)*sizeof(char));//allocate amount of memory for the string
+                    sprintf(((q_dataGoto*)data)->map,"%s",buffer);                  //copy the name of the map from buffer
+                    if(fscanf(file,"rewardType=%i\nvalue=%i\n\n",&rewardType,&reward)) pushQuestNode(name,step,Q_GOTO,(q_dataGoto*)data,rewardType,reward);
+                    else PARSERROR;
+                }
 
+                break;
+            case Q_TEXT:
+                data=malloc(sizeof(q_dataText));
+                if(!fscanf(file,"text=<%499[^>]>\n",textbuffer))PARSERROR;
+                else
+                {
+                    ((q_dataText*)data)->text=malloc((strlen(textbuffer)+1)*sizeof(char));
+                    sprintf(((q_dataText*)data)->text,"%s",textbuffer);
+                    i=0;
+                    int len=strlen(textbuffer);
+                    while(i<len)//replace "end of line" character by a space
+                    {
+                        if( (((q_dataText*)data)->text)[i]  ==13)(((q_dataText*)data)->text)[i]=' ';
+                        i++;
+                    }
+                    if(fscanf(file,"rewardType=%i\nvalue=%i\n\n",&rewardType,&reward)) pushQuestNode(name,step,Q_TEXT,(q_dataText*)data,rewardType,reward);
+                    else PARSERROR;
+                }
+                break;
+            case Q_QUEST:
+                data=malloc(sizeof(q_dataQuest));
+                if( !fscanf(file,"name=<%[a-z A-Z0-9]>\nstep=%i\n",textbuffer,&(((q_dataQuest*)data)->step)) )PARSERROR;
+                else
+                {
+                    ((q_dataQuest*)data)->name=malloc((strlen(textbuffer)+1)*sizeof(char));
+                    sprintf(((q_dataQuest*)data)->name,"%s",textbuffer);
+                    if(fscanf(file,"rewardType=%i\nvalue=%i\n\n",&rewardType,&reward))
+                    {
+                        pushQuestNode(name,step,Q_QUEST,(q_dataQuest*)data,rewardType,reward);
+                    }
+                    else PARSERROR;
+                }
                 break;
             default:
                 break;
@@ -146,35 +193,88 @@ bool loadQuest(char* name,int step)
     fclose(file);
     return 0;
 }
+
+void freeQuest(void* data,int type)
+{
+    switch(type)
+    {
+    case Q_KILL:
+        if((q_dataKill*)data)free((q_dataKill*)data);
+        break;
+    case Q_TALK:
+        if((q_dataTalk*)data)
+        {
+            if( ((q_dataTalk*)data)->npc ) free(((q_dataTalk*)data)->npc);
+            free((q_dataTalk*)data);
+        }
+        break;
+    case Q_GOTO:
+        if((q_dataGoto*)data)
+        {
+            if( ((q_dataGoto*)data)->map ) free(((q_dataGoto*)data)->map);
+            free((q_dataGoto*)data);
+        }
+        break;
+    case Q_TEXT:
+        if((q_dataText*)data)
+        {
+            if( ((q_dataText*)data)->text ) free(((q_dataText*)data)->text);
+            free((q_dataText*)data);
+        }
+        break;
+    case Q_QUEST:
+        if((q_dataQuest*)data)
+        {
+            if( ((q_dataQuest*)data)->name ) free(((q_dataQuest*)data)->name);
+            free((q_dataQuest*)data);
+        }
+        break;
+    }
+}
+
 void updateQuests()
 {
     q_Node* temp=questList.start;
-    q_Node* temp2=NULL;
-    int i=1;
-    bool done=0;
     while(temp!=NULL)
     {
         switch(temp->type)
         {
         case Q_KILL:
-            done=updateQuestKill((q_dataKill*)temp->data);
+            temp->done=updateQuestKill((q_dataKill*)temp->data);
             break;
         case Q_TALK:
-            done=updateQuestTalk((q_dataTalk*)temp->data);
+            temp->done=updateQuestTalk((q_dataTalk*)temp->data);
             break;
         case Q_GOTO:
-            done=updateQuestGoto((q_dataGoto*)temp->data);
+            temp->done=updateQuestGoto((q_dataGoto*)temp->data);
+            break;
+        case Q_TEXT:
+            temp->done=updateQuestText((q_dataText*)temp->data);
+            break;
+        case Q_QUEST:
+            temp->done=updateQuestQuest((q_dataQuest*)temp->data);
             break;
         }
-        temp2=temp;
+        if(temp->done)loadQuest(temp->name,temp->step+1);
         temp=temp->next;
-        if(done)
+    }
+    cleanQuests();
+}
+
+void cleanQuests()
+{
+    q_Node* temp=questList.start;
+    int i=1;
+    while(temp!=NULL)
+    {
+        if(temp->done)
         {
-            q_reward(temp2);
-            if(loadQuest(temp2->name,temp2->step+1))removeQuestNode(i+1);
-            else removeQuestNode(i);
+            q_reward(temp);
+            removeQuestNode(i);
+            i--;
         }
-        else i++;
+        i++;
+        temp=temp->next;
     }
 }
 
@@ -184,7 +284,7 @@ bool updateQuestKill(q_dataKill *data)
     {
 
         topPrintf(128,texty,"Quest completed:%i",data->total);
-        //texty+=10;
+        texty+=10;
         return 1;//quest completed
     }
     //print on top screen how many mobs still need to be killed
@@ -198,9 +298,39 @@ bool updateQuestTalk(q_dataTalk *data)
 
 bool updateQuestGoto(q_dataGoto *data)
 {
+    if(ISINBOX(fix_norm(hero.x)+hero.hitbox.down.x,fix_norm(hero.y)+hero.hitbox.down.y,data->x,data->y,data->u,data->v))
+    {
+        topPrintf(128,texty,"Quest completed");
+        texty+=10;
+        return 1;//quest completed
+    }
     return 0;
 }
 
+bool updateQuestQuest(q_dataQuest *data)
+{
+    if(loadQuest(data->name,data->step))   return 1;
+    else return 0;
+}
+
+bool updateQuestText(q_dataText *data)
+{
+    int i;
+    UL_IMAGE *box = ulLoadImageFilePNG("/gfx/textbox_png.png",0, UL_IN_RAM, UL_PF_PAL4);
+
+    ulStartDrawing2D();
+    myulDrawDialogBox(box,0);
+    ulDrawTextBox(3,5,253,190,data->text,0);
+    ulEndDrawing();
+    i=120;
+    while(!ul_keys.pressed.value || i>0)
+    {
+        WaitForVBL();
+        i--;
+    }
+    WaitForVBL();
+    return 1;
+}
 
 void q_reward(q_Node* quest)
 {
@@ -213,11 +343,25 @@ void q_reward(q_Node* quest)
         break;
     case QR_LIFE:
         hero.stats.lifeMax+=quest->reward;
+        hero.stats.lifeBonus+=quest->reward;
         break;
     case QR_MANA:
         hero.stats.manaMax+=quest->reward;
+        hero.stats.manaBonus+=quest->reward;
         break;
-
+    case QR_WPON:
+        //read from a file with waypoints names
+        //activatewpnumber(quest->reward)
+        //the following function is here temporally
+        switch(quest->reward)
+        {
+        case 0:
+            activateWaypoint("Dry Hills");
+            break;
+        default:
+            break;
+        }
+        break;
     default:
         break;
     }

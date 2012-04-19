@@ -30,25 +30,28 @@ extern u8 skillpoints;
 void save()
 {
     FILE *save_file = fopen("fat:/d2save.sav", "wb");
-    int version=VERSION_NUMBER;
+    int version=VERSION_NUMBER,wplen=strlen(WPactivated);
     if (!save_file)topPrintf(24,0,"Can't open save, emulator?");
     {
         //header
         fwrite("Diablo Project Save\nVersion",1,strlen("Diablo Project Save\nVersion"),save_file);
         fwrite(&version,1,sizeof(int),save_file);
+        fwrite(&wplen,1,sizeof(int),save_file); //activated waypoints string lentgh
         //data
         fwrite(&hero.stats, 1, sizeof(hero.stats), save_file);
         fwrite(&skillsLevels, 1, sizeof(skillsLevels), save_file);
         fwrite(&skillpoints, 1, sizeof(skillpoints), save_file);
         fwrite(&skillCost, 1, sizeof(skillCost), save_file);
         fwrite(&skilldmg, 1, sizeof(skilldmg), save_file);
+        fwrite(&currentMap,sizeof(char),currentMapStrLength,save_file);
+        fwrite(WPactivated,sizeof(char),wplen,save_file);
         fclose(save_file);
     }
 }
 
 void load()
 {
-    int i=0,version=0;
+    int i=0,version=0,wplen=0;
     FILE *save_file = fopen("fat:/d2save.sav", "rb");
     char* hbuffer=NULL;
     hbuffer=malloc(sizeof(char)*strlen("Diablo Project Save\nVersion") + 1);
@@ -66,15 +69,24 @@ void load()
             {
                 //when modifications of save storage are made, simply add a case for conversion
             case 0101002 :
+
+                fread(&wplen, 1, sizeof(int), save_file);       //activated waypoints string lentgh
+                if(WPactivated)free(WPactivated);               //erase and free memory of old string
+                WPactivated=malloc((wplen+1)*sizeof(char));     //allocate memory for the string
+                *WPactivated='\0';
                 fread(&hero.stats, 1, sizeof(hero.stats), save_file);
                 fread(&skillsLevels, 1, sizeof(skillsLevels), save_file);
                 fread(&skillpoints, 1, sizeof(skillpoints), save_file);
                 fread(&skillCost, 1, sizeof(skillCost), save_file);
                 fread(&skilldmg, 1, sizeof(skilldmg), save_file);
+                fread(&currentMap,sizeof(char),currentMapStrLength,save_file);
+                fread(WPactivated,sizeof(char),wplen,save_file);
+                WPactivated[wplen]='\0';
                 fclose(save_file);
+
                 //refresh top screen and stats
-                topDrawString(20*8,15,"           ");//erase current experience
-                topDrawString(7*8,15,"           ");
+                topPrintf(20*8,15,"           ");//erase current experience
+                topPrintf(7*8,15,"           ");
                 topPrintf(81,42,"    ");
                 topPrintf(81,66,"    ");
                 topPrintf(81,90,"    ");
@@ -87,7 +99,7 @@ void load()
                 hero.stats.curLife=hero.stats.lifeMax;
                 hero.stats.curMana=hero.stats.manaMax;
                 MonBaseLife=40*(hero.stats.lvl+1)*(hero.stats.lvl+1)+1000*(hero.stats.lvl+1)-512; //fixed point *512 not 256
-                //if (currentMap) changemap(currentMap);
+                changemap(currentMap);
                 break;
             default:
                 ERROR("Saved data corrupted.");
@@ -100,6 +112,8 @@ void load()
 void mainmenu()
 {
     WaitForVBL();
+    topDrawBlackScreen();
+    myulDrawBlackScreen();
     bool loop=1,helpmenu=0;
     int frameNumber=0, animStage=0;
     ulSetMainLcd(1);
@@ -146,6 +160,8 @@ void mainmenu()
     }
     ulDeleteImage(topscreen);
     ulDeleteImage(logo);
+    topDrawBlackScreen();
+    myulDrawBlackScreen();
     ulSetMainLcd(0);
 }
 
@@ -234,6 +250,7 @@ void pause ()//with booloean parameter checked at each frame
     CounterStart(VBL);
 }
 
+//this function copies the way ulDrawTextBox manage text to know how many characters there is on the first line of text
 int TextBoxGetLineCharNb(int x0, int y0, int x1, int y1, const char *text)
 {
     int nb=0;
@@ -358,6 +375,9 @@ void skillmenu(bool levelup)
     };
     u8 i;
 
+    WaitForVBL();
+    myulUnrealizeSprites();
+    myulDrawBlackScreen();
     UL_IMAGE *skillicons = ulLoadImageFilePNG("/gfx/sorts_png.png",0, UL_IN_RAM, UL_PF_PAL4);
     UL_IMAGE *numberslot = ulLoadImageFilePNG("/gfx/number_png.png",0, UL_IN_RAM, UL_PF_PAL2);
     UL_IMAGE *exitbtn=ulLoadImageFilePNG("/gfx/exit_png.png",0, UL_IN_VRAM, UL_PF_PAL4);
@@ -462,21 +482,17 @@ void skillmenu(bool levelup)
     ulDeleteImage   (skillTiles);
     ulDeleteImage   (exitbtn);
     ulDeleteMap     (skillbg);
-    WaitForVBL();
+    myulDrawBlackScreen();
+
 }
 
 
 
 void death()
 {
-    int i;
-    extern char currentMap[30];
-    for (i=0; i<MAX_DATASPRITES; i++)
-    {
-        ulDeleteImage(spritedatabase[i].image);
-    }
-    ulDeleteImage(mapTiles);
-    ulDeleteMap(Mymap);
+    WaitForVBL();
+    myulUnrealizeSprites();
+    extern char currentMap[currentMapStrLength];
     quickTopScreenRefresh();
     UL_IMAGE *deathscreen = ulLoadImageFilePNG("/gfx/deathscreen_png.png",0, UL_IN_RAM, UL_PF_PAL8);
     ulStartDrawing2D();
@@ -487,13 +503,8 @@ void death()
     ulEndDrawing();
     WaitForVBL();
     while (!(ul_keys.pressed.value||ul_keys.touch.click))WaitForVBL();
-
     ulDeleteImage(deathscreen);
     hero.stats.curLife=hero.stats.lifeMax;
-    for(i=0; i<MAX_OBJECT; i++)
-    {
-        deleteObject(i);
-    }
     quickTopScreenRefresh();
     myulInitData(1);
     changemap(currentMap);

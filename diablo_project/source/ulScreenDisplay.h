@@ -30,9 +30,10 @@ inline void myulSetCycles (int sprite,int cycles);
 inline void myulStartShake (int frames);
 void myulShakeScreen();
 
-
+void myulUnrealizeSprites();
 void myulScreenDraws();
 void myulDrawSprites(bool anim);
+void myulDrawBlackScreen();
 
 inline void myulSetSpriteAblending (int nb,int value);
 inline void myulSetSpriteColor (int nb,u16 color);

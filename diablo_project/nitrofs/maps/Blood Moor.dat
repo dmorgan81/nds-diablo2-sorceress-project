@@ -7,6 +7,10 @@ tilemap.x=60
 tilemap.y=45
 hero.x=63
 hero.y=5
+spawn.x=40
+spawn.y=40
+spawn.u=440
+spawn.v=345
 
 [quests]
 [<Tyrael test>]

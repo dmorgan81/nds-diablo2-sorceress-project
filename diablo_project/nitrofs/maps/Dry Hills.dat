@@ -7,6 +7,10 @@ tilemap.x=129
 tilemap.y=102
 hero.x=240
 hero.y=430
+spawn.x=160
+spawn.y=160
+spawn.u=950
+spawn.v=600
 
 [quests]
 [<Viper throne>]

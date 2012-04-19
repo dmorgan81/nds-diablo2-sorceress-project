@@ -5,6 +5,10 @@
 /////Defines/////
 /////////////////
 /////////////////
+//#define Test
+//#define NOSPAWN
+
+
 #include "soundbank.h" //include all audio defines
 
 #define VERSION             "1.1.2"
@@ -20,7 +24,8 @@
 
 #define _GFX_ALIGN __attribute__((aligned (4)))
 
-#define STYLUSBOX(X,Y,u,v) (ul_keys.touch.x >= (X) && ul_keys.touch.x <= ((X) + (u)) && ul_keys.touch.y >=(Y) && ul_keys.touch.y <=((Y)+(v)))
+#define ISINBOX(X,Y,x,y,u,v) ((X) >= (x) && (X) <= ((x) + (u)) && (Y) >=(y) && (Y) <=((y)+(v)))
+#define STYLUSBOX(X,Y,u,v) ISINBOX(ul_keys.touch.x,ul_keys.touch.y,X,Y,u,v)//ul_keys.touch.x >= (X) && ul_keys.touch.x <= ((X) + (u)) && ul_keys.touch.y >=(Y) && ul_keys.touch.y <=((Y)+(v)))
 
 #define norm_fix(x)			((x)<<8)
 #define fix_norm(x)			((x)>>8)
@@ -64,6 +69,10 @@ int MAPSIZE_Y;
 #define MAX_FXDATA 			11
 #define MAX_SPRITES 		300
 #define MAX_AURAS           1
+
+//formulae
+#define MONSTERLIFE(life)   ((MonBaseLife*(life))/100+512)>>9
+
 //counters
 #define VBL                 0
 #define TOPSCREEN           1

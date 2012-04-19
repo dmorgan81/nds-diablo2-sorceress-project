@@ -1,6 +1,6 @@
 #include "actions.h"
 #include "sound.h"
-
+#include "maps/waypoint.h"
 u8 skillsLevels[SKILLNUMBER];
 int skilldmg[SKILLNUMBER][2];
 u8 currentSkill[2];
@@ -17,7 +17,7 @@ void CheckForLevelUp()
         hero.stats.lvl++;
         hero.stats.vitality++;
         hero.stats.energy++;
-        hero.stats.lifeMax=2000+(hero.stats.vitality-1)*500;
+        hero.stats.lifeMax=2000+(hero.stats.vitality-10)*500+hero.stats.lifeBonus;
         hero.stats.manaMax=37+2*(hero.stats.energy-35);
         hero.stats.curLife=hero.stats.lifeMax;
         hero.stats.curMana=hero.stats.manaMax;
@@ -34,20 +34,6 @@ void CheckForLevelUp()
         topPrintf(85,66,"%d",hero.stats.dexterity);
         topPrintf(85,90,"%d",hero.stats.vitality);
         topPrintf(85,114,"%d",hero.stats.energy);
-        //once you reach level 5 you can use the waypoint
-        if (hero.stats.lvl==5)
-        {
-//            int i;
-            DialogInBox("The waypoint is now opened.\nYou can use it by pressing A button.\nIf you wish to come back, simply use the waypoint from your new location.\n\nGo forth, Hero, may the Heaven protect you.",8,0,0,0,0);
-            activateWaypoint("Dry Hills");
-//            int objectnb;
-//            objectnb=getUnusedBgObject();
-//            newObject((46<<3)+4, (39<<3)+8, &bgobjects[objectnb],objectnb, &bgdata[2] ,1);
-//            for (i=0; i<MAX_BGOBJECT; i++)
-//            {
-//                if(bgobjects[i].datanb==2)bgobjects[i].ai=&waypointAI;
-//            }
-        }
     }
     if (skillpoints)
     {

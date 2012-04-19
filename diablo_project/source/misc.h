@@ -27,4 +27,6 @@ inline void PA_RunCounters();
 void WaitForVBL();
 void UpdateRTC();
 
+void MySplash();
+
 #endif

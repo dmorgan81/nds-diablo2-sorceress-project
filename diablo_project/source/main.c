@@ -21,10 +21,9 @@
 #include "sound.h"
 #include "quests.h"
 #include "maps/waypoint.h"
-//#define Test
-//#define NOSPAWN
+
 #ifdef Test
-#define _NOSPLASH_ //quote this line to make splash appear
+//#define _NOSPLASH_ //quote this line to make splash appear
 #endif
 #define NOGBA
 
@@ -32,8 +31,7 @@
 ////////////////////////////////
 /////FUNCTIONS DECLARATIONS/////
 ////////////////////////////////
-
-void MySplash();
+void setHeroData();
 void CallAllInits();
 void statsUpdate();
 
@@ -53,46 +51,6 @@ int main( int argc, char **argv)
 ///////////////////////////////
 /////VARIABLES DEFINITIONS/////
 ///////////////////////////////
-
-
-/////////////////
-/////charvar/////
-/////////////////
-    selectedSkill[0]=&nospell;
-    selectedSkill[1]=&nospell;
-    hero.action=0;
-    hero.speed=256;
-    hero.speed2=181;//multiplie par 181 sois 1.7 en point fixe
-    hero.x=norm_fix(128);//80
-    hero.y=norm_fix(50);//40
-
-///Hitboxinfos///
-    hero.hitbox.left.x=11;
-    hero.hitbox.left.y=43;
-    hero.hitbox.right.x=20;
-    hero.hitbox.right.y=43;
-    hero.hitbox.up.x=16;
-    hero.hitbox.up.y=40;
-    hero.hitbox.down.x=16;
-    hero.hitbox.down.y=47;
-    hero.hitbox.middle.x=16;
-    hero.hitbox.middle.y=43;
-///stats///
-    hero.stats.strenght=10;
-    hero.stats.dexterity=25;
-    hero.stats.vitality=10;
-    hero.stats.energy=35;
-    hero.stats.lifeMax=2000;
-    hero.stats.curLife=hero.stats.lifeMax;
-    hero.stats.manaMax=35;
-    hero.stats.curMana=(hero.stats.manaMax);
-    hero.stats.experience=0;
-    hero.stats.nextlvl=400;
-    hero.stats.lvl=4;
-
-/////////////////////////////////////////////
-
-
 
     CallAllInits();
 
@@ -178,8 +136,8 @@ Now hurry, mortal... Time is running out for all of us!\n",15,"tyrael","/Tyr_int
             if (!(Counter[VBL]&128))
             {
 #ifdef Test
-                //PA_OutputText(1,1,8,"tex: %d    ",ulGetTexVramAvailMemory());
-                //PA_OutputText(1,1,9,"vertex: %d    ",ulGetVertexAvailMemory());
+                topPrintf(1,8*8,"tex: %d    ",ulGetTexVramAvailMemory());
+                topPrintf(1,9*8,"vertex: %d    ",ulGetVertexAvailMemory());
 #endif
                 if (ulGetTexVramAvailMemory()<10000) //security, use it only when necessary because it make some flashes on real ds if the sprite is used right after
                 {
@@ -263,12 +221,52 @@ Now hurry, mortal... Time is running out for all of us!\n",15,"tyrael","/Tyr_int
 int ulInitNitroFS();
 
 
+void setHeroData()
+{
+
+/////////////////
+/////charvar/////
+/////////////////
+    selectedSkill[0]=&nospell;
+    selectedSkill[1]=&nospell;
+    hero.action=0;
+    hero.speed=256;
+    hero.speed2=181;//multiplie par 181 sois 1.7 en point fixe
+    hero.x=norm_fix(128);//80
+    hero.y=norm_fix(50);//40
+
+///Hitboxinfos///
+    hero.hitbox.left.x=11;
+    hero.hitbox.left.y=43;
+    hero.hitbox.right.x=20;
+    hero.hitbox.right.y=43;
+    hero.hitbox.up.x=16;
+    hero.hitbox.up.y=40;
+    hero.hitbox.down.x=16;
+    hero.hitbox.down.y=47;
+    hero.hitbox.middle.x=16;
+    hero.hitbox.middle.y=43;
+///stats///
+    hero.stats.strenght=10;
+    hero.stats.dexterity=25;
+    hero.stats.vitality=10;
+    hero.stats.energy=35;
+    hero.stats.lifeMax=2000+(hero.stats.vitality-10)*500;
+    hero.stats.curLife=hero.stats.lifeMax;
+    hero.stats.manaMax=35;
+    hero.stats.curMana=(hero.stats.manaMax);
+    hero.stats.experience=0;
+    hero.stats.nextlvl=400;
+    hero.stats.lvl=1;
+}
+
 void CallAllInits()
 {
     int i;
     char buffer[30];
     FILE* conf_ini=NULL;
 
+    setHeroData();
 
     ulInit(UL_INIT_ALL);
     ulInitGfx();
@@ -336,22 +334,6 @@ void CallAllInits()
     ulEndDrawing();
 #endif
 
-    /*
-        // Init AS_Lib for mp3
-        FunctionInit(AS_SoundVBL);
-        AS_Init(AS_MODE_MP3 | AS_MODE_SURROUND | AS_MODE_16CH);
-        AS_SetDefaultSettings(AS_PCM_8BIT, 16384, AS_NO_DELAY);//AS_SURROUND delay is creepy
-        AS_ReserveChannel(0);//hero's channel
-
-    */
-#ifndef _NOSPLASH_
-    //loading frame 3
-    ulSetImageTileSize (loadingimg, 576, 0, 192, 192);
-    ulStartDrawing2D();
-    ulDrawImage(loadingimg);
-    ulEndDrawing();
-    ulDeleteImage (loadingimg);
-#endif
     myulInitData (0);
     if(!fscanf(conf_ini,"map=<%29[a-z A-Z]>\n",buffer))
     {
@@ -361,9 +343,19 @@ void CallAllInits()
             WaitForVBL();
         }
     }
+#ifndef _NOSPLASH_
+    //loading frame 3
+    ulSetImageTileSize (loadingimg, 576, 0, 192, 192);
+    ulStartDrawing2D();
+    ulDrawImage(loadingimg);
+    ulEndDrawing();
+    ulDeleteImage (loadingimg);
+#endif
     changemap(buffer);//"Blood Moor");
-    WPactivated=malloc(strlen(buffer)*sizeof(char) +1);
-    strcat(WPactivated,buffer);
+    //allocate some memory for wp string (to avoid the functions to free NULL pointer)
+    WPactivated=malloc(sizeof(char));
+    *WPactivated='\0';
+
 #ifndef Test
     for (i=0; i<SKILLNUMBER; i++)
     {
@@ -383,49 +375,6 @@ void CallAllInits()
     createQuestList();
     loadQuest("essai",1);
 }
-
-
-
-
-
-
-
-
-
-
-
-void MySplash()
-{
-    s32 time=180;
-    topSetBackground("d_Splash1");
-    swiWaitForVBlank();
-    topSetBackground("d_Splash1");
-    ulShowSplashScreen(3);
-    UL_IMAGE* d_splash2 = ulLoadImageFilePNG("/gfx/d_Splash2_png.png",0, UL_IN_RAM, UL_PF_PAL8);
-    ulStartDrawing2D();
-    ulDrawImage(d_splash2);
-    ulEndDrawing();
-
-    //wait 3seconds or press key
-    while(time>0 && !(ul_keys.pressed.value || ul_keys.touch.click))
-    {
-        time--;
-        WaitForVBL();
-    }
-    UL_IMAGE* loadingimg = ulLoadImageFilePNG("/gfx/loading_png.png",0, UL_IN_RAM, UL_PF_PAL8);
-    loadingimg->x=32;
-    //loading frame 0
-    ulSetImageTileSize (loadingimg, 0, 0, 192, 192);
-    ulStartDrawing2D();
-    ulDrawImage(loadingimg);
-    ulEndDrawing();
-    ulDeleteImage (loadingimg);
-    ulDeleteImage (d_splash2);
-}
-
-
-
-
 
 
 void statsUpdate()
@@ -450,12 +399,12 @@ void statsUpdate()
         old_time=MY_RTC.Seconds;
 #endif
 #ifdef Test
-        //PA_OutputText(1,0,0,"%d",fps );
+        topPrintf(0,0,"%d",fps );
 #endif
         fps = 0;
 
 
-        for(i=0; i<25; i++)
+        for(i=0; i<hero.stats.lifeMax/200; i++)//0.5% per second is enough?
         {
             if(hero.stats.curLife<hero.stats.lifeMax)
             {
@@ -623,12 +572,6 @@ void movechar()
     CheckheroCollisions();
     Mymap->scrollX=fix_norm(hero.x)-CAMERA_X;
     Mymap->scrollY=fix_norm(hero.y)-CAMERA_Y;
-#ifdef Test
-    //PA_OutputText(1,17,17,"%d",fix_norm(hero.x));
-    //PA_OutputText(1,17,19,"    ");
-    //PA_OutputText(1,17,19,"%d",GetTile(fix_norm(hero.x),fix_norm(hero.y)));
-    //PA_OutputText(1,17,18,"%d",fix_norm(hero.y));
-#endif
 }
 
 

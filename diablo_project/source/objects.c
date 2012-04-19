@@ -11,9 +11,9 @@ objectinfo missiles[MAX_MISSILE];
 fx_data fxdata[MAX_FXDATA];
 fx_info fxinfo[MAX_FX];
 aurainfo auras[MAX_AURAS];
-int curMaxObject,curMaxBgObject,curMaxMissile;    //small trick to avoid long browsing in arrays for nothing,
-//becoming useless when a lot of objects are create and then deleted because the value will not be
-//decreased, would need to browse the arrays again, and then it would be useless
+int curMaxObject,curMaxBgObject,curMaxMissile;    //small trick to avoid long browsing in arrays for nothing.
+//becoming useless when a lot of objects are created and then deleted because the value will not be accurate
+//Would need to browse the arrays again to check for deleted objects at the end of arrays
 bool objectused[MAX_OBJECT];
 bool missileused[MAX_MISSILE];
 
@@ -201,7 +201,6 @@ void spawnObjects()
         }
     }
 
-    //curMaxObject=objectnb; // we know that the last object created has the highest rank in the array
     for (i=0; i < MAX_BGDATA; i++)
     {
         for (j=0; j<MAPSIZE_X; j++)
@@ -219,12 +218,11 @@ void spawnObjects()
             }
         }
     }
-    //curMaxBgObject=objectnb; //same here
 }
 
 
 void mobSpawn()
-// TODO (Clement#1#): something clean and auto adjustable
+// TODO (Clement#1#): maybe add spawn rate depending on map?
 {
     if(!(Counter[VBL]&511))
             {
@@ -235,41 +233,41 @@ void mobSpawn()
                 if (hero.stats.lvl<2)
                 {
                     objectnb=getUnusedObject();
-                    int x=PA_RandMinMax (128, MAPSIZE_X*7),y=PA_RandMinMax (86, MAPSIZE_Y*7);
+                    int x=PA_RandMinMax (spawnArea.x, spawnArea.u),y=PA_RandMinMax (spawnArea.y, spawnArea.v);
                     while (GetTile(x,y)>=NWALKABLETILE)
                     {
-                        x=PA_RandMinMax (128, MAPSIZE_X*7);
-                        y=PA_RandMinMax (86, MAPSIZE_Y*7);
+                        x=PA_RandMinMax (spawnArea.x, spawnArea.u);
+                        y=PA_RandMinMax (spawnArea.y, spawnArea.v);
                     }
                     if (!PA_RandMax(2))
                     {
                         newObject(x,y, &objects[objectnb],objectnb, &data[1],0 );
-                        objects[objectnb].life=((MonBaseLife*data[1].life)/100+512)>>9;
+                        objects[objectnb].life=MONSTERLIFE(data[1].life);
                     }
                     else
                     {
                         newObject(x,y, &objects[objectnb],objectnb, &data[2+mob],0 );
-                        objects[objectnb].life=((MonBaseLife*data[2+mob].life)/100+512)>>9;
+                        objects[objectnb].life=MONSTERLIFE(data[2+mob].life);
                     }
                 }
                 else for(i=0; i<=(hero.stats.lvl>>1)+1; i++)
                     {
                         objectnb=getUnusedObject();
-                        int x=PA_RandMinMax (128, MAPSIZE_X*7),y=PA_RandMinMax (86, MAPSIZE_Y*7);
+                        int x=PA_RandMinMax (spawnArea.x, spawnArea.u),y=PA_RandMinMax (spawnArea.y, spawnArea.v);
                         while (GetTile(x,y)>=NWALKABLETILE)
                         {
-                            x=PA_RandMinMax (128, MAPSIZE_X*7);
-                            y=PA_RandMinMax (86, MAPSIZE_Y*7);
+                            x=PA_RandMinMax (spawnArea.x, spawnArea.u);
+                            y=PA_RandMinMax (spawnArea.y, spawnArea.v);
                         }
                         if (!PA_RandMax(2))
                         {
                             newObject(x,y, &objects[objectnb],objectnb, &data[1],0 );
-                            objects[objectnb].life=((MonBaseLife*data[1].life)/100+512)>>9;
+                            objects[objectnb].life=MONSTERLIFE(data[1].life);
                         }
                         else
                         {
                             newObject(x,y, &objects[objectnb],objectnb, &data[2+mob],0 );
-                            objects[objectnb].life=((MonBaseLife*data[2+mob].life)/100+512)>>9;
+                            objects[objectnb].life=MONSTERLIFE(data[2+mob].life);
                         }
                     }
             }
