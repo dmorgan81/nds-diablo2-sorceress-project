@@ -1,11 +1,15 @@
 #include <nds.h>
 #include <filesystem.h>
+#include <stdlib.h>
+#include <stdio.h>
 #include "quests.h"
 #include "defines.h"
 #include "top_screen.h"
 #include "ulScreenDisplay.h"
 int texty=45;
 extern u32 killedMobs[MAX_DATA];
+char* completedQuests=NULL;
+
 struct q_Node
 {
     char *name;
@@ -87,7 +91,53 @@ void removeQuestNode(int nb)//remember, we the first element is 1 and not 0 as i
     }
 }
 
+void purgeQuestList()
+{
+    while(questList.length)
+    {
+        removeQuestNode(1);
+    }
+}
 // TODO (Clement#1#): Add other quest types with their respective functions (npc dialog is important, have to do it fast..)
+
+bool isQuestActive(char* name)
+{
+    int i=0;
+    q_Node* tmp=questList.start;
+    while(tmp!=NULL)
+    {
+        if(strcmp(name,tmp->name)==0)return 1;
+        tmp=tmp->next;
+        i+=8;
+
+    }
+    return 0;
+}
+
+bool isQuestCompleted(char* name)
+{
+    return strstr(completedQuests,name)!=NULL;
+}
+
+void questIsNowCompleted(char* name)
+{
+    if(!completedQuests)
+    {
+        completedQuests=malloc( (strlen(name)+1) * sizeof(char) );
+        sprintf(completedQuests,"%s",name);
+    }
+    else
+    {
+        char* buffer=NULL;
+        buffer=malloc( (strlen(completedQuests)+strlen(name)+2)*sizeof(char) );
+        if(buffer)
+        {
+            sprintf(buffer,"%s%s",completedQuests,name);
+            if(completedQuests)free(completedQuests);
+            completedQuests=buffer;
+        }
+    }
+}
 
 int loadQuest(char* name,int step)
 {
@@ -120,7 +170,7 @@ int loadQuest(char* name,int step)
             {
 
             case Q_END:
-                //delete quest nodes, free ptr to name etc
+                questIsNowCompleted(name);
                 break;
 
             case Q_KILL:
@@ -231,6 +281,83 @@ void freeQuest(void* data,int type)
         break;
     }
 }
+//save quest data and completed quests list
+void fsaveQuests(FILE* file)
+{
+    int stringlen=0;
+    fprintf(file,"BeginningOfQuestsData");
+    q_Node* temp=questList.start;
+    stringlen=strlen(completedQuests);
+    fwrite(&stringlen,sizeof(int),1,file);
+    fwrite(completedQuests,sizeof(char),stringlen,file);
+    fwrite(&questList.length,sizeof(int),1,file);
+    while(temp!=NULL)
+    {
+        stringlen=strlen(temp->name);
+        fwrite(&stringlen,sizeof(int),1,file);
+        fwrite(temp->name,sizeof(char),stringlen,file);
+        fwrite(&temp->step,sizeof(int),1,file);
+        fwrite(&temp->type,sizeof(int),1,file);
+        switch(temp->type)
+        {
+        case Q_KILL:
+            fwrite(& ((q_dataKill*)(temp->data))->target,sizeof(int),1,file);
+            break;
+        default:
+            break;//other quests types only have constant values
+        }
+        temp=temp->next;
+    }
+    fprintf(file,"EndOfQuestsData");
+}
+
+
+//load back quest data and completed quests list
+void floadQuests(FILE* file)
+{
+    char* name=NULL;
+    char buffer[1000];
+    int step,type,length,i,stringlen;
+    q_Node* temp=NULL;
+    if(fscanf(file,"BeginningOfQuestsData")==EOF)ERROR("error loading quests save.");
+    else
+    {
+        fread(&stringlen,sizeof(int),1,file);
+        fread(buffer,sizeof(char),stringlen,file);
+        buffer[stringlen]=0;
+        cleanCompletedQuestList();
+        questIsNowCompleted(buffer);
+        fread(&length,sizeof(int),1,file);
+        purgeQuestList();
+        for(i=0;i<length;i++)
+        {
+            fread(&stringlen,sizeof(int),1,file);
+            fread(buffer,sizeof(char),stringlen,file);
+            buffer[stringlen]=0;
+            if(name)free(name);
+            name=malloc((strlen(buffer)+1) *sizeof(char));
+            sprintf(name,"%s",buffer);
+            fread(&step,sizeof(int),1,file);
+            fread(&type,sizeof(int),1,file);
+            loadQuest(name,step); //push the quest data
+            temp=questList.start;
+            switch(temp->type)
+            {
+            case Q_KILL:
+                fread(& ((q_dataKill*)(temp->data))->target,sizeof(int),1,file);
+                break;
+            default:
+                break;//other quests types only have constant values
+            }
+        }
+    }
+    if(fscanf(file,"EndOfQuestsData") == EOF)
+    {
+        ERROR("error loading quest save.");
+        cleanCompletedQuestList();
+        purgeQuestList();
+    }
+}
 
 void updateQuests()
 {
@@ -282,8 +409,6 @@ bool updateQuestKill(q_dataKill *data)
 {
     if(killedMobs[data->dataID] >= data->target)
     {
-
-        topPrintf(128,texty,"Quest completed:%i",data->total);
         texty+=10;
         return 1;//quest completed
     }
@@ -300,7 +425,6 @@ bool updateQuestGoto(q_dataGoto *data)
 {
     if(ISINBOX(fix_norm(hero.x)+hero.hitbox.down.x,fix_norm(hero.y)+hero.hitbox.down.y,data->x,data->y,data->u,data->v))
     {
-        topPrintf(128,texty,"Quest completed");
         texty+=10;
         return 1;//quest completed
     }

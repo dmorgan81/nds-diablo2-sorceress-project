@@ -1,4 +1,5 @@
 #include "ulScreenDisplay.h"
+#include "top_screen.h"
 int curMaxSprite;//same trick as in objects.c
 
 sprite_columns columns[50];
@@ -7,6 +8,8 @@ sprite_columns columns[50];
 void myulInitData (bool again)
 {
     int i;
+    ulSetTransparentColor(RGB15(31, 0, 31));
+
 #include "spritesdata.txt" //all data in txt file to avoid overload of the c file
     if (!again)//if its the first time we load images
     {
@@ -29,8 +32,37 @@ void myulInitData (bool again)
 
 }
 
+void myulLoadSprite(int data)
+{
+    if(!spritedatabase[data].image)
+    {
+                spritedatabase[data].image=ulLoadImageFilePNG(spritedatabase[data].file, 0, UL_IN_RAM, spritedatabase[data].palCount);
+                while(spritedatabase[data].image == NULL)
+                {
+                    ERROR("couldnt load sprite");
+                    WaitForVBL();
+                }
+                //spritedatabase[data].loaded=TRUE;
+    }
+}
 
+void myulLoadSpriteFromFile(char* fname)
+{
+    FILE* file=NULL;
+    int data=-1;
+    file=fopen(fname,"r");
+    if(file)
+    {
+        //each line contain a datasprite number
+        while(fscanf(file,"%i\n",&data) != EOF)myulLoadSprite(data);
+    }
+}
 
+void myulFreeSprite(int data)
+{
+    if(spritedatabase[data].image)ulDeleteImage(spritedatabase[data].image);
+    //spritedatabase[data].loaded=FALSE;
+}
 
 int myulCreateSprite (u8 data,int x,int y, int prio)
 {
@@ -265,6 +297,7 @@ void myulScreenDraws()
                     }
                 }
             }
+            myulLoadSprite(sprites[i].sprite);
             spriteimage=spritedatabase[sprites[i].sprite].image;
 
             spriteimage->x=sprites[i].x;
@@ -329,6 +362,7 @@ void myulDrawSprites(bool anim)
                     }
                 }
             }
+            myulLoadSprite(sprites[i].sprite);
             spriteimage=spritedatabase[sprites[i].sprite].image;
             spriteimage->x=sprites[i].x;
             spriteimage->y=sprites[i].y;

@@ -15,6 +15,9 @@ UL_MAP *Mymap;
 
 
 void myulInitData (bool again);
+void myulLoadSprite(int data);
+void myulLoadSpriteFromFile(char* fname);
+void myulFreeSprite(int data);
 int myulCreateSprite (u8 data,int x,int y, int prio);
 inline void myulDeleteSprite (int nb);
 inline void myulImageFlip (int /*sprite*/nb,bool fliph,bool flipv);

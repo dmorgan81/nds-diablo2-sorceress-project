@@ -149,6 +149,8 @@ struct sprite_columns
 struct spritedata
 {
     UL_IMAGE *image;
+    char* file;
+    int palCount;
     u8 sizex, sizey;
     sprite_columns *colInfo;
     u8 nbframe, framerate,cycles;

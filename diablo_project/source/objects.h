@@ -17,6 +17,7 @@ extern aurainfo auras[MAX_AURAS];
 extern fx_data fxdata[MAX_FXDATA];
 extern fx_info fxinfo[MAX_FX];
 extern int curMaxObject,curMaxBgObject,curMaxMissile;
+extern u32 killedMobs[MAX_DATA];
 
 void initObjects (void);
 void spawnObjects();

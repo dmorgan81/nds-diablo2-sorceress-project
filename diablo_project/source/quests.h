@@ -8,9 +8,20 @@ void createQuestList();
 q_Node* createQuestNode(char* name,int step,int type,void* data,int rewType,int reward);
 bool pushQuestNode(/*q_Node* list,*/char* name,int step,int type,void* data,int rewType,int reward);
 void removeQuestNode(int nb);
+void purgeQuestList();
+
+bool isQuestActive(char* name);
+bool isQuestCompleted(char* name);
+void questIsNowCompleted(char* name);
+#define cleanCompletedQuestList() free(completedQuests)
+#define wasQuestAlreadyLoaded(name)   ( isQuestCompleted(name) || isQuestActive(name) )
+
 void updateQuests();
+
 int loadQuest(char* name,int step);
 void freeQuest(void* data,int type);
+void fsaveQuests(FILE* file);
+void floadQuests(FILE* file);
 void cleanQuests();
 
 #define Q_END   0
@@ -30,6 +41,7 @@ typedef struct q_dataTalk q_dataTalk;
 typedef struct q_dataGoto q_dataGoto;
 typedef struct q_dataText q_dataText;
 typedef struct q_dataQuest q_dataQuest;
+
 struct q_dataKill
 {
     int dataID,target,total;

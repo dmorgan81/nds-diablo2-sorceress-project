@@ -1,260 +1,254 @@
 ///sorceress
 
-
-    ulSetTransparentColor(RGB15(31, 0, 31));
-    {
-        spritedatabase[0].image = ulLoadImageFilePNG("/gfx/sorc_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
-    }
-    spritedatabase[0].nbframe=5;
-    spritedatabase[0].framerate=9;
-    columns[0].size.x=32;
-    columns[0].size.y=45;
-    spritedatabase[0].abcoeff=31;
-    spritedatabase[0].colInfo=&columns[0];
-    spritedatabase[0].regular=1;
+spritedatabase[0].image = NULL;
+spritedatabase[0].file="gfx/sorc_png.png";
+spritedatabase[0].palCount=UL_PF_PAL4;
+spritedatabase[0].nbframe=5;
+spritedatabase[0].framerate=9;
+columns[0].size.x=32;
+columns[0].size.y=45;
+spritedatabase[0].abcoeff=31;
+spritedatabase[0].colInfo=&columns[0];
+spritedatabase[0].regular=1;
 ///Tyrael - body
-    ulSetTransparentColor(RGB15(31, 0, 31));
-    {
-        spritedatabase[1].image = ulLoadImageFilePNG("/gfx/tyr_body_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
-    }
-    spritedatabase[1].nbframe=1;
-    spritedatabase[1].framerate=30;//8;
-    columns[1].size.x=24;
-    columns[1].size.y=50;
-    spritedatabase[1].abcoeff=31;
-    spritedatabase[1].colInfo=&columns[1];
-    spritedatabase[1].regular=1;
+spritedatabase[1].image = NULL;
+spritedatabase[1].file="gfx/tyr_body_png.png";
+spritedatabase[1].palCount=UL_PF_PAL4;
+spritedatabase[1].nbframe=1;
+spritedatabase[1].framerate=30;//8;
+columns[1].size.x=24;
+columns[1].size.y=50;
+spritedatabase[1].abcoeff=31;
+spritedatabase[1].colInfo=&columns[1];
+spritedatabase[1].regular=1;
 ///Tyrael - wings
-    ulSetTransparentColor(RGB15(31, 0, 31));
-    {
-        spritedatabase[2].image = ulLoadImageFilePNG("/gfx/tyr_wings_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
-    }
-    spritedatabase[2].nbframe=3;
-    spritedatabase[2].framerate=15;//8;
-    columns[2].size.x=96;
-    columns[2].size.y=60;
-    spritedatabase[2].abcoeff=22;
-    spritedatabase[2].colInfo=&columns[2];
-    spritedatabase[2].regular=1;
+spritedatabase[2].image = NULL;
+spritedatabase[2].file="gfx/tyr_wings_png.png";
+spritedatabase[2].palCount=UL_PF_PAL4;
+spritedatabase[2].nbframe=3;
+spritedatabase[2].framerate=15;//8;
+columns[2].size.x=96;
+columns[2].size.y=60;
+spritedatabase[2].abcoeff=22;
+spritedatabase[2].colInfo=&columns[2];
+spritedatabase[2].regular=1;
 ///Firebolt
-    ulSetTransparentColor(RGB15(31, 0, 31));
-    {
-        spritedatabase[3].image = ulLoadImageFilePNG("/gfx/firebolt_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
-    }
-    spritedatabase[3].nbframe=2;
-    spritedatabase[3].framerate=8;//8;
-    columns[3].size.x=32;
-    columns[3].size.y=16;
-    spritedatabase[3].abcoeff=31;
-    spritedatabase[3].colInfo=&columns[3];
-    spritedatabase[3].regular=1;
+spritedatabase[3].image = NULL;
+spritedatabase[3].file="gfx/firebolt_png.png";
+spritedatabase[3].palCount=UL_PF_PAL4;
+spritedatabase[3].nbframe=2;
+spritedatabase[3].framerate=8;//8;
+columns[3].size.x=32;
+columns[3].size.y=16;
+spritedatabase[3].abcoeff=31;
+spritedatabase[3].colInfo=&columns[3];
+spritedatabase[3].regular=1;
 
 ///icebolt
-    ulSetTransparentColor(RGB15(31, 0, 31));
-    {
-        spritedatabase[4].image = ulLoadImageFilePNG("/gfx/icebolt_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
-    }
-    spritedatabase[4].nbframe=2;
-    spritedatabase[4].framerate=8;//8;
-    columns[4].size.x=32;
-    columns[4].size.y=16;
-    spritedatabase[4].abcoeff=24;
-    spritedatabase[4].colInfo=&columns[4];
-    spritedatabase[4].regular=1;
+
+spritedatabase[4].image = NULL;
+spritedatabase[4].file="gfx/icebolt_png.png";
+spritedatabase[4].palCount=UL_PF_PAL4;
+spritedatabase[4].nbframe=2;
+spritedatabase[4].framerate=8;//8;
+columns[4].size.x=32;
+columns[4].size.y=16;
+spritedatabase[4].abcoeff=24;
+spritedatabase[4].colInfo=&columns[4];
+spritedatabase[4].regular=1;
 
 ///iceorb
-    ulSetTransparentColor(RGB15(31, 0, 31));
-    {
-        spritedatabase[5].image = ulLoadImageFilePNG("/gfx/iceorb_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
-    }
-    spritedatabase[5].nbframe=2;
-    spritedatabase[5].framerate=8;//8;
-    columns[5].size.x=16;
-    columns[5].size.y=16;
-    spritedatabase[5].abcoeff=20;
-    spritedatabase[5].colInfo=&columns[5];
-    spritedatabase[5].regular=1;
+
+spritedatabase[5].image = NULL;
+spritedatabase[5].file="gfx/iceorb_png.png";
+spritedatabase[5].palCount=UL_PF_PAL4;
+spritedatabase[5].nbframe=2;
+spritedatabase[5].framerate=8;//8;
+columns[5].size.x=16;
+columns[5].size.y=16;
+spritedatabase[5].abcoeff=20;
+spritedatabase[5].colInfo=&columns[5];
+spritedatabase[5].regular=1;
 
 ///zombie
-    ulSetTransparentColor(RGB15(31, 0, 31));
-    {
-        spritedatabase[6].image = ulLoadImageFilePNG("/gfx/zombie_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
-    }
-    spritedatabase[6].nbframe=2;
-    spritedatabase[6].framerate=8;//8;
-    columns[6].size.x=14;
-    columns[6].size.y=33;
-    spritedatabase[6].abcoeff=31;
-    spritedatabase[6].colInfo=&columns[6];
-    spritedatabase[6].regular=1;
+
+spritedatabase[6].image = NULL;
+spritedatabase[6].file="gfx/zombie_png.png";
+spritedatabase[6].palCount=UL_PF_PAL4;
+spritedatabase[6].nbframe=2;
+spritedatabase[6].framerate=8;//8;
+columns[6].size.x=14;
+columns[6].size.y=33;
+spritedatabase[6].abcoeff=31;
+spritedatabase[6].colInfo=&columns[6];
+spritedatabase[6].regular=1;
 
 ///firebig
-    ulSetTransparentColor(RGB15(31, 0, 31));
-    {
-        spritedatabase[7].image = ulLoadImageFilePNG("/gfx/firebig_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
-    }
-    spritedatabase[7].nbframe=10;
-    spritedatabase[7].framerate=8;//8;
-    columns[7].size.x=32;
-    columns[7].size.y=67;
-    spritedatabase[7].abcoeff=20;
-    spritedatabase[7].colInfo=&columns[7];
-    spritedatabase[7].regular=1;
+
+spritedatabase[7].image = NULL;
+spritedatabase[7].file="gfx/firebig_png.png";
+spritedatabase[7].palCount=UL_PF_PAL4;
+spritedatabase[7].nbframe=10;
+spritedatabase[7].framerate=8;//8;
+columns[7].size.x=32;
+columns[7].size.y=67;
+spritedatabase[7].abcoeff=20;
+spritedatabase[7].colInfo=&columns[7];
+spritedatabase[7].regular=1;
 ///firesmall
-    ulSetTransparentColor(RGB15(31, 0, 31));
-    {
-        spritedatabase[8].image = ulLoadImageFilePNG("/gfx/firesmall_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
-    }
-    spritedatabase[8].nbframe=5;
-    spritedatabase[8].framerate=8;//8;
-    columns[8].size.x=24;
-    columns[8].size.y=24;
-    spritedatabase[8].abcoeff=25;
-    spritedatabase[8].colInfo=&columns[8];
-    spritedatabase[8].regular=1;
+
+spritedatabase[8].image = NULL;
+spritedatabase[8].file="gfx/firesmall_png.png";
+spritedatabase[8].palCount=UL_PF_PAL4;
+spritedatabase[8].nbframe=5;
+spritedatabase[8].framerate=8;//8;
+columns[8].size.x=24;
+columns[8].size.y=24;
+spritedatabase[8].abcoeff=25;
+spritedatabase[8].colInfo=&columns[8];
+spritedatabase[8].regular=1;
 ///hydra
-    ulSetTransparentColor(RGB15(31, 0, 31));
-    {
-        spritedatabase[9].image = ulLoadImageFilePNG("/gfx/hydra_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
-    }
-    spritedatabase[9].nbframe=4;
-    spritedatabase[9].framerate=8;//8;
-    columns[9].size.x=28;
-    columns[9].size.y=37;
-    spritedatabase[9].abcoeff=31;
-    spritedatabase[9].colInfo=&columns[9];
-    spritedatabase[9].regular=1;
+
+spritedatabase[9].image = NULL;
+spritedatabase[9].file="gfx/hydra_png.png";
+spritedatabase[9].palCount=UL_PF_PAL4;
+spritedatabase[9].nbframe=4;
+spritedatabase[9].framerate=8;//8;
+columns[9].size.x=28;
+columns[9].size.y=37;
+spritedatabase[9].abcoeff=31;
+spritedatabase[9].colInfo=&columns[9];
+spritedatabase[9].regular=1;
 
 
 ///tree
-    ulSetTransparentColor(RGB15(31, 0, 31));
-    {
-        spritedatabase[10].image = ulLoadImageFilePNG("/gfx/tree_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
-    }
-    spritedatabase[10].nbframe=0;
-    spritedatabase[10].framerate=0;//8;
-    columns[10].size.x=50;
-    columns[10].size.y=107;
-    spritedatabase[10].abcoeff=31;
-    spritedatabase[10].colInfo=&columns[10];
-    spritedatabase[10].regular=1;
+
+spritedatabase[10].image = NULL;
+spritedatabase[10].file="gfx/tree_png.png";
+spritedatabase[10].palCount=UL_PF_PAL4;
+spritedatabase[10].nbframe=0;
+spritedatabase[10].framerate=0;//8;
+columns[10].size.x=50;
+columns[10].size.y=107;
+spritedatabase[10].abcoeff=31;
+spritedatabase[10].colInfo=&columns[10];
+spritedatabase[10].regular=1;
 
 ///fence
-    ulSetTransparentColor(RGB15(31, 0, 31));
-    {
-        spritedatabase[11].image = ulLoadImageFilePNG("/gfx/fence_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
-    }
-    spritedatabase[11].nbframe=0;
-    spritedatabase[11].framerate=0;//8;
-    columns[11].size.x=16;
-    columns[11].size.y=85;
-    spritedatabase[11].abcoeff=31;
-    spritedatabase[11].colInfo=&columns[11];
-    spritedatabase[11].regular=1;
+
+spritedatabase[11].image = NULL;
+spritedatabase[11].file="gfx/fence_png.png";
+spritedatabase[11].palCount=UL_PF_PAL4;
+spritedatabase[11].nbframe=0;
+spritedatabase[11].framerate=0;//8;
+columns[11].size.x=16;
+columns[11].size.y=85;
+spritedatabase[11].abcoeff=31;
+spritedatabase[11].colInfo=&columns[11];
+spritedatabase[11].regular=1;
 
 ///Fallen
-    ulSetTransparentColor(RGB15(31, 0, 31));
-    {
-        spritedatabase[12].image = ulLoadImageFilePNG("/gfx/fallen_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
-    }
-    spritedatabase[12].nbframe=5;
-    spritedatabase[12].framerate=8;//8;
-    columns[12].size.x=32;
-    columns[12].size.y=32;
-    spritedatabase[12].abcoeff=31;
-    spritedatabase[12].colInfo=&columns[12];
-    spritedatabase[12].regular=1;
+
+spritedatabase[12].image = NULL;
+spritedatabase[12].file="gfx/fallen_png.png";
+spritedatabase[12].palCount=UL_PF_PAL4;
+spritedatabase[12].nbframe=5;
+spritedatabase[12].framerate=8;//8;
+columns[12].size.x=32;
+columns[12].size.y=32;
+spritedatabase[12].abcoeff=31;
+spritedatabase[12].colInfo=&columns[12];
+spritedatabase[12].regular=1;
 
 ///small fire at wp
-    ulSetTransparentColor(RGB15(31, 0, 31));
-    {
-        spritedatabase[13].image = ulLoadImageFilePNG("/gfx/wpfire_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
-    }
-    spritedatabase[13].nbframe=8;
-    spritedatabase[13].framerate=8;//8;
-    columns[13].size.x=10;
-    columns[13].size.y=18;
-    spritedatabase[13].abcoeff=31;
-    spritedatabase[13].colInfo=&columns[13];
-    spritedatabase[13].regular=1;
+
+spritedatabase[13].image = NULL;
+spritedatabase[13].file="gfx/wpfire_png.png";
+spritedatabase[13].palCount=UL_PF_PAL4;
+spritedatabase[13].nbframe=8;
+spritedatabase[13].framerate=8;//8;
+columns[13].size.x=10;
+columns[13].size.y=18;
+spritedatabase[13].abcoeff=31;
+spritedatabase[13].colInfo=&columns[13];
+spritedatabase[13].regular=1;
 
 ///chargedbolt
-    ulSetTransparentColor(RGB15(31, 0, 31));
-    {
-        spritedatabase[14].image = ulLoadImageFilePNG("/gfx/chargedbolt_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
-    }
-    spritedatabase[14].nbframe=10;
-    spritedatabase[14].framerate=3;//8;
-    columns[14].size.x=18;
-    columns[14].size.y=20;
-    spritedatabase[14].abcoeff=25;
-    spritedatabase[14].colInfo=&columns[14];
-    spritedatabase[14].regular=1;
+
+spritedatabase[14].image = NULL;
+spritedatabase[14].file="gfx/chargedbolt_png.png";
+spritedatabase[14].palCount=UL_PF_PAL4;
+spritedatabase[14].nbframe=10;
+spritedatabase[14].framerate=3;//8;
+columns[14].size.x=18;
+columns[14].size.y=20;
+spritedatabase[14].abcoeff=25;
+spritedatabase[14].colInfo=&columns[14];
+spritedatabase[14].regular=1;
 
 
 ///torch
-    ulSetTransparentColor(RGB15(31, 0, 31));
-    {
-        spritedatabase[15].image = ulLoadImageFilePNG("/gfx/torch_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
-    }
-    spritedatabase[15].nbframe=4;
-    spritedatabase[15].framerate=8;//8;
-    columns[15].size.x=16;
-    columns[15].size.y=46;
-    spritedatabase[15].abcoeff=28;
-    spritedatabase[15].colInfo=&columns[15];
-    spritedatabase[15].regular=1;
+
+spritedatabase[15].image = NULL;
+spritedatabase[15].file="gfx/torch_png.png";
+spritedatabase[15].palCount=UL_PF_PAL4;
+spritedatabase[15].nbframe=4;
+spritedatabase[15].framerate=8;//8;
+columns[15].size.x=16;
+columns[15].size.y=46;
+spritedatabase[15].abcoeff=28;
+spritedatabase[15].colInfo=&columns[15];
+spritedatabase[15].regular=1;
 
 ///rock
-    ulSetTransparentColor(RGB15(31, 0, 31));
-    {
-        spritedatabase[16].image = ulLoadImageFilePNG("/gfx/rock_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
-    }
-    spritedatabase[16].nbframe=1;
-    spritedatabase[16].framerate=0;//8;
-    columns[16].size.x=16;
-    columns[16].size.y=16;
-    spritedatabase[16].abcoeff=31;
-    spritedatabase[16].colInfo=&columns[16];
-    spritedatabase[16].regular=1;
+
+spritedatabase[16].image = NULL;
+spritedatabase[16].file="gfx/rock_png.png";
+spritedatabase[16].palCount=UL_PF_PAL4;
+spritedatabase[16].nbframe=1;
+spritedatabase[16].framerate=0;//8;
+columns[16].size.x=16;
+columns[16].size.y=16;
+spritedatabase[16].abcoeff=31;
+spritedatabase[16].colInfo=&columns[16];
+spritedatabase[16].regular=1;
 
 ///fallen death
-    ulSetTransparentColor(RGB15(31, 0, 31));
-    {
-        spritedatabase[17].image = ulLoadImageFilePNG("/gfx/fallendeath_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
-    }
-    spritedatabase[17].nbframe=5;
-    spritedatabase[17].framerate=8;//8;
-    columns[17].size.x=32;
-    columns[17].size.y=32;
-    spritedatabase[17].abcoeff=31;
-    spritedatabase[17].cycles=1;
-    spritedatabase[17].colInfo=&columns[17];
-    spritedatabase[17].regular=1;
+
+spritedatabase[17].image = NULL;
+spritedatabase[17].file="gfx/fallendeath_png.png";
+spritedatabase[17].palCount=UL_PF_PAL4;
+spritedatabase[17].nbframe=5;
+spritedatabase[17].framerate=8;//8;
+columns[17].size.x=32;
+columns[17].size.y=32;
+spritedatabase[17].abcoeff=31;
+spritedatabase[17].cycles=1;
+spritedatabase[17].colInfo=&columns[17];
+spritedatabase[17].regular=1;
 
 ///lvlup icon
-    ulSetTransparentColor(RGB15(31, 0, 31));
-    {
-        spritedatabase[18].image = ulLoadImageFilePNG("/gfx/levelup_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
-    }
-    spritedatabase[18].nbframe=2;
-    spritedatabase[18].framerate=0;//8;
-    columns[18].size.x=24;
-    columns[18].size.y=24;
-    spritedatabase[18].abcoeff=31;
-    spritedatabase[18].colInfo=&columns[18];
-    spritedatabase[18].regular=1;
+
+spritedatabase[18].image = NULL;
+spritedatabase[18].file="gfx/levelup_png.png";
+spritedatabase[18].palCount=UL_PF_PAL4;
+spritedatabase[18].nbframe=2;
+spritedatabase[18].framerate=0;//8;
+columns[18].size.x=24;
+columns[18].size.y=24;
+spritedatabase[18].abcoeff=31;
+spritedatabase[18].colInfo=&columns[18];
+spritedatabase[18].regular=1;
 
 ///serpent
 
-    ulSetTransparentColor(RGB15(31, 0, 31));
-    {
-        spritedatabase[19].image = ulLoadImageFilePNG("/gfx/serpent_png.png", 0, UL_IN_RAM, UL_PF_PAL4);
-    }
-    spritedatabase[19].nbframe=5;
-    spritedatabase[19].framerate=8;//8;
-    columns[19].size.x=72;
-    columns[19].size.y=44;
-    spritedatabase[19].abcoeff=31;
-    spritedatabase[19].colInfo=&columns[19];
-    spritedatabase[19].regular=1;
+spritedatabase[19].image = NULL;
+spritedatabase[19].file="gfx/serpent_png.png";
+spritedatabase[19].palCount=UL_PF_PAL4;
+spritedatabase[19].nbframe=5;
+spritedatabase[19].framerate=8;//8;
+columns[19].size.x=72;
+columns[19].size.y=44;
+spritedatabase[19].abcoeff=31;
+spritedatabase[19].colInfo=&columns[19];
+spritedatabase[19].regular=1;

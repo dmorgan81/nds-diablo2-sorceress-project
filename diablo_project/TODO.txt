@@ -1,7 +1,7 @@
-Need to change waypoint, add menu, no more loading wp object manually but open menu and then check if available
-Complete map loading
+Waypoint menu - Done!
+Complete map loading - nearly done (maybe add spawn rate). quest start when loading map
 complete map zone management (warps etc)
-Complete quests
+Complete quests - Nearly done, need npcs
 Complete NPCs
 ..
 

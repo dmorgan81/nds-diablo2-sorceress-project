@@ -69,6 +69,9 @@ void changemap(char* mapname)
         if(map!=NULL && map_col!=NULL)Mymap = ulCreateMap(mapTiles,/*Tileset*/map,8,8,/*Tiles size*/tilemap_x,tilemap_y,/*Map size*/UL_MF_U16);//Map format
         else while(1)ERROR("Can't load map.");//error
         spawnObjects();
+
+        sprintf(buffer,"/maps/%s.sprites.dat",mapname);
+        myulLoadSpriteFromFile(buffer);
         sprintf(currentMap,"%s",mapname);
     }
     else topPrintf(130,40,"Error loading map");

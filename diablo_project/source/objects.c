@@ -195,6 +195,8 @@ void spawnObjects()
                     {
                         objectnb=getUnusedObject();
                         newObject((j<<3)+4, (k<<3)+8, &objects[objectnb],objectnb, &data[i],0 );
+                        if(0<=data[i].spritedata && data[i].spritedata<MAX_DATASPRITES)myulLoadSprite(data[i].spritedata);
+                        if(0<=data[i].deathspritedata && data[i].deathspritedata<MAX_DATASPRITES)myulLoadSprite(data[i].deathspritedata);
                     }
                 }
             }
@@ -213,13 +215,13 @@ void spawnObjects()
                     {
                         objectnb=getUnusedBgObject();
                         newObject((j<<3)+4, (k<<3)+8, &bgobjects[objectnb],objectnb, &bgdata[i] ,1);
-                    }
+                        if(0<=bgdata[i].spritedata && bgdata[i].spritedata<MAX_DATASPRITES)myulLoadSprite(bgdata[i].spritedata);
+                        if(0<=bgdata[i].deathspritedata && bgdata[i].deathspritedata<MAX_DATASPRITES)myulLoadSprite(bgdata[i].deathspritedata);                    }
                 }
             }
         }
     }
 }
-
 
 void mobSpawn()
 // TODO (Clement#1#): maybe add spawn rate depending on map?

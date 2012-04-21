@@ -368,12 +368,12 @@ void CallAllInits()
     }
 #endif
     Counter[TOPSCREEN]=8;
+    createQuestList();
     mainmenu();
     quickTopScreenRefresh();
     topSetNormalScreen();
     WaitForVBL();
-    createQuestList();
-    loadQuest("essai",1);
+    if(!wasQuestAlreadyLoaded("essai"))loadQuest("essai",1);
 }
 
 

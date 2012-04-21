@@ -3,6 +3,7 @@
 #include "misc.h"
 #include "interface.h"
 #include "maps/waypoint.h"
+#include "quests.h"
 extern int curMaxSprite;
 bool dialbox=0;
 extern const unsigned short skillmenu_map[24][32];
@@ -27,32 +28,39 @@ int FormulaManaCost(int lvl,int manashift,int mana,int lvlmana)
 
 extern u8 skillpoints;
 
-void save()
+void saveToFile(char* name)
 {
-    FILE *save_file = fopen("fat:/d2save.sav", "wb");
+    FILE *save_file = fopen(name, "wb");
     int version=VERSION_NUMBER,wplen=strlen(WPactivated);
-    if (!save_file)topPrintf(24,0,"Can't open save, emulator?");
+    if (!save_file)topPrintf(0,0,"Can't open save, emulator?");
     {
         //header
         fwrite("Diablo Project Save\nVersion",1,strlen("Diablo Project Save\nVersion"),save_file);
-        fwrite(&version,1,sizeof(int),save_file);
-        fwrite(&wplen,1,sizeof(int),save_file); //activated waypoints string lentgh
+        fwrite(&version,sizeof(int),1,save_file);
+        fwrite(&wplen,sizeof(int),1,save_file); //activated waypoints string lentgh
         //data
-        fwrite(&hero.stats, 1, sizeof(hero.stats), save_file);
-        fwrite(&skillsLevels, 1, sizeof(skillsLevels), save_file);
-        fwrite(&skillpoints, 1, sizeof(skillpoints), save_file);
-        fwrite(&skillCost, 1, sizeof(skillCost), save_file);
-        fwrite(&skilldmg, 1, sizeof(skilldmg), save_file);
+        fwrite(&hero.stats,sizeof(hero.stats),1, save_file);
+        fwrite(&skillsLevels,sizeof(skillsLevels),1, save_file);
+        fwrite(&skillpoints,sizeof(skillpoints),1, save_file);
+//        fwrite(&skillCost,sizeof(skillCost),1, save_file);
+//        fwrite(&skilldmg,sizeof(skilldmg),1, save_file);
+        fwrite(killedMobs,sizeof(killedMobs),1,save_file);
         fwrite(&currentMap,sizeof(char),currentMapStrLength,save_file);
         fwrite(WPactivated,sizeof(char),wplen,save_file);
+        fsaveQuests(save_file);
+        fprintf(save_file,"EndOfSaveFile");
         fclose(save_file);
     }
 }
 
-void load()
+void save()
+{
+    saveToFile("fat:/d2save.sav");
+}
+bool loadFromSave(char* savefile)
 {
     int i=0,version=0,wplen=0;
-    FILE *save_file = fopen("fat:/d2save.sav", "rb");
+    FILE *save_file = fopen(savefile, "rb");
     char* hbuffer=NULL;
     hbuffer=malloc(sizeof(char)*strlen("Diablo Project Save\nVersion") + 1);
     if (!save_file)topPrintf(0,0,"Can't open save, emulator?");
@@ -64,49 +72,70 @@ void load()
         if(strcmp(hbuffer,"Diablo Project Save\nVersion")) ERROR("Saved data corrupted.");
         else
         {
-            fread(&version,1,sizeof(int),save_file);
+            fread(&version,sizeof(int),1,save_file);
             switch(version)
             {
                 //when modifications of save storage are made, simply add a case for conversion
             case 0101002 :
 
-                fread(&wplen, 1, sizeof(int), save_file);       //activated waypoints string lentgh
+                fread(&wplen,sizeof(int),1, save_file);       //activated waypoints string lentgh
                 if(WPactivated)free(WPactivated);               //erase and free memory of old string
                 WPactivated=malloc((wplen+1)*sizeof(char));     //allocate memory for the string
                 *WPactivated='\0';
-                fread(&hero.stats, 1, sizeof(hero.stats), save_file);
-                fread(&skillsLevels, 1, sizeof(skillsLevels), save_file);
-                fread(&skillpoints, 1, sizeof(skillpoints), save_file);
-                fread(&skillCost, 1, sizeof(skillCost), save_file);
-                fread(&skilldmg, 1, sizeof(skilldmg), save_file);
+                fread(&hero.stats,sizeof(hero.stats),1, save_file);
+                fread(&skillsLevels,sizeof(skillsLevels),1, save_file);
+                fread(&skillpoints,sizeof(skillpoints),1, save_file);
+//                fread(&skillCost,sizeof(skillCost),1, save_file);
+//                fread(&skilldmg,sizeof(skilldmg),1, save_file);
+                fread(killedMobs,sizeof(killedMobs),1,save_file);
                 fread(&currentMap,sizeof(char),currentMapStrLength,save_file);
                 fread(WPactivated,sizeof(char),wplen,save_file);
                 WPactivated[wplen]='\0';
-                fclose(save_file);
+                floadQuests(save_file);
 
-                //refresh top screen and stats
-                topPrintf(20*8,15,"           ");//erase current experience
-                topPrintf(7*8,15,"           ");
-                topPrintf(81,42,"    ");
-                topPrintf(81,66,"    ");
-                topPrintf(81,90,"    ");
-                topPrintf(81,114,"    ");
-                topPrintf(85,42,"%d",hero.stats.strenght);
-                topPrintf(85,66,"%d",hero.stats.dexterity);
-                topPrintf(85,90,"%d",hero.stats.vitality);
-                topPrintf(85,114,"%d",hero.stats.energy);
-                topUpdateLevel();
-                hero.stats.curLife=hero.stats.lifeMax;
-                hero.stats.curMana=hero.stats.manaMax;
-                MonBaseLife=40*(hero.stats.lvl+1)*(hero.stats.lvl+1)+1000*(hero.stats.lvl+1)-512; //fixed point *512 not 256
-                changemap(currentMap);
+                if(fscanf(save_file,"EndOfSaveFile")==EOF)//basic check
+                {
+                    ERROR("error loading save...");
+                    fclose(save_file);
+                    return 0;
+                }
+                else
+                {
+                    //refresh top screen and stats
+                    topPrintf(20*8,15,"           ");//erase current experience
+                    topPrintf(7*8,15,"           ");
+                    topPrintf(81,42,"    ");
+                    topPrintf(81,66,"    ");
+                    topPrintf(81,90,"    ");
+                    topPrintf(81,114,"    ");
+                    topPrintf(85,42,"%d",hero.stats.strenght);
+                    topPrintf(85,66,"%d",hero.stats.dexterity);
+                    topPrintf(85,90,"%d",hero.stats.vitality);
+                    topPrintf(85,114,"%d",hero.stats.energy);
+                    topUpdateLevel();
+                    hero.stats.curLife=hero.stats.lifeMax;
+                    hero.stats.curMana=hero.stats.manaMax;
+                    MonBaseLife=40*(hero.stats.lvl+1)*(hero.stats.lvl+1)+1000*(hero.stats.lvl+1)-512; //fixed point *512 not 256
+                    changemap(currentMap);
+                }
                 break;
             default:
                 ERROR("Saved data corrupted.");
+                fclose(save_file);
+                return 0;
                 break;
             }
         }
+        fclose(save_file);
+        return 1;
     }
+    return 0;
+}
+
+void load()
+{
+    saveToFile("fat:/d2save.bak");
+    if( !loadFromSave("fat:/d2save.sav") )loadFromSave("fat:/d2save.bak");
 }
 
 void mainmenu()
@@ -150,8 +179,8 @@ void mainmenu()
             }
             else if(STYLUSBOX(65,133,173-65,163-133))
             {
-                helpmenu=helpmenu^1,
-                         ulDeleteImage(topscreen);
+                helpmenu=helpmenu^1;
+                ulDeleteImage(topscreen);
                 if(helpmenu)topscreen=ulLoadImageFilePNG("/gfx/controls_png.png",0, UL_IN_RAM, UL_PF_PAL8);
                 else topscreen= ulLoadImageFilePNG("/gfx/mainmenutop_png.png",0, UL_IN_RAM, UL_PF_PAL8);
             }
@@ -167,7 +196,7 @@ void mainmenu()
 
 void saveloadmenu(bool saveload)
 {
-    bool loop=1;
+    bool loop=1,loaded=0;
     int i;
     UL_IMAGE *box = ulLoadImageFilePNG("/gfx/textbox_png.png",0, UL_IN_RAM, UL_PF_PAL4);
     WaitForVBL();
@@ -181,8 +210,13 @@ void saveloadmenu(bool saveload)
             ulDrawTextBox(3,171,253,190,"Press A button to load your saved progress or B to resume game.",0);
             if (ul_keys.pressed.A)
             {
+                ulEndDrawing();
+                ulStartDrawing2D();
+                myulDrawSprites(0);
+                myulDrawDialogBox(box,168);
                 ulDrawTextBox(3,171,253,190,"Loading please wait...",0);
                 load();
+                loaded=1;
                 loop=0;
             }
         }
@@ -191,6 +225,10 @@ void saveloadmenu(bool saveload)
             ulDrawTextBox(3,171,253,190,"Press A button to save your progress or B to resume game.",0);
             if (ul_keys.pressed.A)
             {
+                ulEndDrawing();
+                ulStartDrawing2D();
+                myulDrawSprites(0);
+                myulDrawDialogBox(box,168);
                 ulDrawTextBox(3,171,253,190,"Saving please wait...",0);
                 save();
                 loop=0;
@@ -201,6 +239,7 @@ void saveloadmenu(bool saveload)
         WaitForVBL();
     }
     ulDeleteImage(box);
+    if(loaded)skillmenu(0);
 }
 
 
@@ -414,8 +453,8 @@ void skillmenu(bool levelup)
             ulSetDepth(3);
             ulPrintf_xy(skillx[i]+33,skilly[i]+24,"%i",skillsLevels[i]);
         }
-        if (skillpoints)ulPrintf_xy(130,1,"Points remaining : %i",skillpoints);
-        else if (selectedSkill[0]==&nospell)ulPrintf_xy(1,1,"Please click to select your first skill");
+        if (skillpoints&&levelup)ulPrintf_xy(3,1,"Click to upgrade skill. Points left : %i",skillpoints);
+        else if (selectedSkill[0]==&nospell)ulPrintf_xy(3,1,"Please click to select your first skill");
         exitbtn->x=212;
         exitbtn->y=156;
         ulDrawImage(exitbtn);
@@ -450,7 +489,6 @@ void skillmenu(bool levelup)
                         //select the skill and changes images according to it
                         selectedSkill[ul_keys.held.L]=(void*)skillfunction[i];
                         topSetSkill(skillframe[currentSkill[ul_keys.held.L]],ul_keys.held.L);
-                        i=SKILLNUMBER;
                         if (selectedSkill[ul_keys.held.L ^ 1]==&nospell) //check if other skill has been set (only useful at game start)
                         {
                             currentSkill[ul_keys.held.L ^ 1] =currentSkill[ul_keys.held.L];
@@ -458,6 +496,7 @@ void skillmenu(bool levelup)
                             skillCost[ul_keys.held.L ^ 1]    =skillCost[ul_keys.held.L];
                             topSetSkill(skillframe[currentSkill[ul_keys.held.L^1]],ul_keys.held.L^1);
                         }
+                        i=SKILLNUMBER;
                         endloop=1;
                     }
                     else if (Counter[TALKING]>60)
