@@ -14,7 +14,7 @@ UL_IMAGE *mapTiles;
 UL_MAP *Mymap;
 
 
-void myulInitData (bool again);
+void myulInitData ();
 void myulLoadSprite(int data);
 void myulLoadSpriteFromFile(char* fname);
 void myulFreeSprite(int data);

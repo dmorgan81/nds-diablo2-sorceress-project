@@ -200,6 +200,8 @@ void showWPMenu()
         free(mapNames);
     }
     ulDeleteImage(bg);
+    ulDeleteImage(arrow);
+    ulDeleteImage(icon);
     ulSetFont(ul_lcdFont);
     ulDeleteFont(exocet);
 

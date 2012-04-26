@@ -43,8 +43,8 @@ void changemap(char* mapname)
 
         //free most of vram
         myulUnrealizeSprites();
-        if(mapTiles)ulDeleteImage(mapTiles);
         if(Mymap)ulDeleteMap(Mymap);
+        if(mapTiles)ulDeleteImage(mapTiles);
 
 
         //Delete all objects/missiles

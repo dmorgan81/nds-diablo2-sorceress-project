@@ -464,7 +464,7 @@ void skillmenu(bool levelup)
 
         WaitForVBL();
 
-        if(ul_keys.touch.click)
+        if(ul_keys.touch.click || SKILLMENU_KEY)
         {
 
             for(i=0; i<SKILLNUMBER; i++)
@@ -545,7 +545,6 @@ void death()
     ulDeleteImage(deathscreen);
     hero.stats.curLife=hero.stats.lifeMax;
     quickTopScreenRefresh();
-    myulInitData(1);
     changemap(currentMap);
     WaitForVBL();
     unloadSound(SFX_DEATH);

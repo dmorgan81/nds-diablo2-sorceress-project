@@ -5,24 +5,20 @@ int curMaxSprite;//same trick as in objects.c
 sprite_columns columns[50];
 
 
-void myulInitData (bool again)
+void myulInitData ()
 {
     int i;
     ulSetTransparentColor(RGB15(31, 0, 31));
-
 #include "spritesdata.txt" //all data in txt file to avoid overload of the c file
-    if (!again)//if its the first time we load images
-    {
-        //au cas ou
+    //au cas ou
 
-        for (i=0; i<MAX_SPRITES ; i++)
-        {
-            sprites[i].used=0;
-            sprites[i].sprite=-1;
-            sprites[i].prio=-1;
-            sprites[i].color=RGB15(31, 31, 31);
-            sprites[i].cycles=0;
-        }
+    for (i=0; i<MAX_SPRITES ; i++)
+    {
+        sprites[i].used=0;
+        sprites[i].sprite=-1;
+        sprites[i].prio=-1;
+        sprites[i].color=RGB15(31, 31, 31);
+        sprites[i].cycles=0;
     }
     //la map
     //mapTiles = ulLoadImageFilePNG((void*)map_png, (int)map_png_size, UL_IN_VRAM, UL_PF_PAL4);
@@ -36,13 +32,13 @@ void myulLoadSprite(int data)
 {
     if(!spritedatabase[data].image)
     {
-                spritedatabase[data].image=ulLoadImageFilePNG(spritedatabase[data].file, 0, UL_IN_RAM, spritedatabase[data].palCount);
-                while(spritedatabase[data].image == NULL)
-                {
-                    ERROR("couldnt load sprite");
-                    WaitForVBL();
-                }
-                //spritedatabase[data].loaded=TRUE;
+        spritedatabase[data].image=ulLoadImageFilePNG(spritedatabase[data].file, 0, UL_IN_RAM, spritedatabase[data].palCount);
+        while(spritedatabase[data].image == NULL)
+        {
+            ERROR("couldnt load sprite");
+            WaitForVBL();
+        }
+        //spritedatabase[data].loaded=TRUE;
     }
 }
 
