@@ -505,7 +505,7 @@ void skillmenu(bool levelup)
                         playSound(SFX_SOR_CANTUSEYET);
                     }
                 }
-                else if (ul_keys.touch.x>212&&ul_keys.touch.x<244&&ul_keys.touch.y>156&&ul_keys.touch.y<188)
+                else if ((ul_keys.touch.x>212&&ul_keys.touch.x<244&&ul_keys.touch.y>156&&ul_keys.touch.y<188)  || SKILLMENU_KEY)
                 {
                     if (selectedSkill[0]!=&nospell && selectedSkill[1]!=&nospell) endloop=1;
                 }

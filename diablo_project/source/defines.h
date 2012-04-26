@@ -21,6 +21,7 @@
 #define MUSIC_OFF
 
 //#define RESETKEYS 0xF03 //combo of keys to reset game
+#define SKILLMENU_KEY   ul_keys.pressed.select
 
 #define _GFX_ALIGN __attribute__((aligned (4)))
 
@@ -39,7 +40,7 @@
 #define SOUND(x)            (SoundInfo){(u8*)x,(u32)x##_size,0,16384,127,64,false,0,0}
 
 #define SPEED				256
-#define SPEED2			181
+#define SPEED2			    192
 #define CAMERA_X        	112
 #define CAMERA_Y	        60
 #define CHARMID_X           128

@@ -24,7 +24,7 @@ text=<Great! You just completed your first quest.
 As a reward you gained the 100 experience points promised.
 Now is the time to train yourself and clean this cursed land.
 
-Go and kill 15 "Fallen One" to finish this quest.
+Go and kill 10 "Fallen One" to finish this quest.
 Reward : Life increased by 200 points>
 rewardType=0
 value=0
@@ -32,7 +32,7 @@ value=0
 [4]
 type=1
 data=2
-total=15
+total=10
 rewardType=2
 value=200
 
@@ -41,7 +41,7 @@ type=4
 text=<It seems you are getting stronger now.
 You should be able to travel through the desert soon, but please, free the damned souls of this land before leaving.
 
-Go and kill 10 "Zombies" to finish this quest.
+Go and kill 7 "Zombies" to finish this quest.
 Reward : Access to the Dry Hills>
 rewardType=0
 value=0
@@ -49,8 +49,8 @@ value=0
 [6]
 type=1
 data=1
-total=10
-rewardType=4
+total=7
+rewardType=0
 value=0
 
 [7]
@@ -59,9 +59,37 @@ text=<The waypoint is now opened.
 You can use it by pressing A button.
 If you wish to come back, simply use the waypoint from your new location.
 
-Go forth, Hero, may the Heaven protect you.>
-rewardType=0
+Go forth, Hero, may the Heaven protect you.
+
+New Quest: Kill 13 "Claw Viper"
+Reward : Unknown>
+rewardType=4
 value=0
 
 [8]
-type=0 means end of quest
+type=1
+data=2
+total=1
+rewardType=1
+value=100000
+
+[9]
+type=4
+text=<Congratulations! You finished this small questline!
+You might think its too small, but remember it's a homebrew game.
+
+If you like this project, feel free to contact LeRodeur on gbatemp forums or send a mail to :
+le_rodeur@msn.com
+Any help is welcome, and no particular skill is needed!
+
+I hope you enjoyed playing this game ;)
+
+New maps, monsters, quests and maybe characters will be added later.
+You've been granted 100 000 exp points to test the other skills!>
+rewardType=0
+value=0
+
+[10]
+type=0
+
+End of quest file

@@ -179,13 +179,13 @@ Now hurry, mortal... Time is running out for all of us!\n",15,"tyrael","/Tyr_int
             updateQuests();
             if(ul_keys.pressed.X) saveloadmenu(0);
             if(ul_keys.pressed.Y) saveloadmenu(1);
-#ifdef Test
-            if(ul_keys.pressed.B)
+//#ifdef Test
+            if(ul_keys.held.B)
             {
-                hero.stats.experience+=100;
+                hero.stats.experience+=30;
             }
-#endif
-            if(ul_keys.pressed.select)	skillmenu(0); //will be changed later, we cant firce player to levelup skills if they just want to switch
+//#endif
+            if(SKILLMENU_KEY)	skillmenu(0); //will be changed later, we cant firce player to levelup skills if they just want to switch
             if(PAUSEKEY || ul_keys.held.lid) pause();//(int*)ul_keys.pressed.start);
             //if (ul_keys.held.value& RESETKEYS )exit(0);
             CheckForLevelUp();
@@ -373,7 +373,7 @@ void CallAllInits()
     quickTopScreenRefresh();
     topSetNormalScreen();
     WaitForVBL();
-    if(!wasQuestAlreadyLoaded("essai"))loadQuest("essai",1);
+    if(!wasQuestAlreadyLoaded("essai"))loadQuest("essai",7);
 }
 
 
@@ -410,7 +410,7 @@ void statsUpdate()
             {
                 hero.stats.curLife+=1;
             }
-            else i=25;
+            else i=hero.stats.lifeMax;
         }
 
         for(i=0; i<2; i++)

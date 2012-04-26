@@ -20,6 +20,7 @@ void CheckForLevelUp()
         hero.stats.lifeMax=2000+(hero.stats.vitality-10)*500+hero.stats.lifeBonus;
         hero.stats.manaMax=37+2*(hero.stats.energy-35);
         hero.stats.curLife=hero.stats.lifeMax;
+        hero.stats.curLife=hero.stats.lifeMax;
         hero.stats.curMana=hero.stats.manaMax;
         skillpoints++;
         MonBaseLife=40*(hero.stats.lvl+1)*(hero.stats.lvl+1)+1000*(hero.stats.lvl+1)-512; //fixed point *512 not 256
