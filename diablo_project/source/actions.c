@@ -1,6 +1,13 @@
-#include "actions.h"
+#include "ulScreenDisplay.h"
+#include "objects.h"
+#include "interface.h"
 #include "sound.h"
 #include "maps/waypoint.h"
+#include "top_screen.h"
+#include "actions.h"
+
+extern charstruct hero;
+
 u8 skillsLevels[SKILLNUMBER];
 int skilldmg[SKILLNUMBER][2];
 u8 currentSkill[2];
@@ -13,17 +20,19 @@ void CheckForLevelUp()
 {
     if (hero.stats.nextlvl<=hero.stats.experience)
     {
-        hero.stats.nextlvl=hero.stats.nextlvl*(2.5/hero.stats.lvl)+hero.stats.nextlvl*.99; //curve is not that bad
-        hero.stats.lvl++;
-        hero.stats.vitality++;
-        hero.stats.energy++;
-        hero.stats.lifeMax=2000+(hero.stats.vitality-10)*500+hero.stats.lifeBonus;
-        hero.stats.manaMax=37+2*(hero.stats.energy-35);
+        hero.stats.nextlvl=hero.stats.nextlvl*(2.5/hero.stats.level)+hero.stats.nextlvl*.99; //curve is not that bad
+        hero.stats.level++;
+        hero.stats.strength=CHARSTAT(hero,strength);
+        hero.stats.dexterity=CHARSTAT(hero,dexterity);
+        hero.stats.vitality=CHARSTAT(hero,vitality);
+        hero.stats.energy=CHARSTAT(hero,energy);
+        hero.stats.lifeMax=CHARLIFE(hero,10);
+        hero.stats.manaMax=CHARMANA(hero,35);
         hero.stats.curLife=hero.stats.lifeMax;
         hero.stats.curLife=hero.stats.lifeMax;
         hero.stats.curMana=hero.stats.manaMax;
         skillpoints++;
-        MonBaseLife=40*(hero.stats.lvl+1)*(hero.stats.lvl+1)+1000*(hero.stats.lvl+1)-512; //fixed point *512 not 256
+        MonBaseLife=40*(hero.stats.level+1)*(hero.stats.level+1)+1000*(hero.stats.level+1)-512; //fixed point *512 not 256
         topUpdateLevel();
         topDrawString(20*8,15,"           ");//erase current experience
         topDrawString(7*8,15,"           ");
@@ -31,7 +40,7 @@ void CheckForLevelUp()
         topPrintf(81,66,"    ");
         topPrintf(81,90,"    ");
         topPrintf(81,114,"    ");
-        topPrintf(85,42,"%d",hero.stats.strenght);
+        topPrintf(85,42,"%d",hero.stats.strength);
         topPrintf(85,66,"%d",hero.stats.dexterity);
         topPrintf(85,90,"%d",hero.stats.vitality);
         topPrintf(85,114,"%d",hero.stats.energy);
@@ -89,7 +98,7 @@ void Sort(int X,int Y)
         selectedSkill[ul_keys.held.L] (X,Y,angle,skillsLevels[currentSkill[ul_keys.held.L]]);
         hero.stats.curMana -= skillCost[ul_keys.held.L];
 
-        myulStartAnim (hero.sprite, 0, spritedatabase[0].nbframe,hero.skillperiod/spritedatabase[0].nbframe,1);//framerate according to skill period to match animation time
+        myulStartAnim (hero.sprite, 0, spritedatabase[0].nbframe-1,hero.skillperiod/(spritedatabase[0].nbframe),1);//framerate according to skill period to match animation time
 
     }
     else if(!lvlUpIcnPressed&& Counter[TALKING]>60){CounterStart(TALKING); playSound(SFX_SOR_INEEDMANA);}

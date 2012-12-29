@@ -1,5 +1,9 @@
 #include "objects.h"
 #include "maps/map.h"
+#include "player.h"
+extern charstruct hero;
+
+
 void noai (objectinfo* info) {}
 objectdata data[MAX_DATA];
 u32 killedMobs[MAX_DATA]={0};
@@ -232,7 +236,7 @@ void mobSpawn()
                 int objectnb,i;
                 int mob=0;
                 if (strcmp(currentMap,"Blood Moor")) mob=1;
-                if (hero.stats.lvl<2)
+                if (hero.stats.level<2)
                 {
                     objectnb=getUnusedObject();
                     int x=PA_RandMinMax (spawnArea.x, spawnArea.u),y=PA_RandMinMax (spawnArea.y, spawnArea.v);
@@ -252,7 +256,7 @@ void mobSpawn()
                         objects[objectnb].life=MONSTERLIFE(data[2+mob].life);
                     }
                 }
-                else for(i=0; i<=(hero.stats.lvl>>1)+1; i++)
+                else for(i=0; i<=(hero.stats.level>>1)+1; i++)
                     {
                         objectnb=getUnusedObject();
                         int x=PA_RandMinMax (spawnArea.x, spawnArea.u),y=PA_RandMinMax (spawnArea.y, spawnArea.v);

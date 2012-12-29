@@ -5,7 +5,4 @@
 #include <filesystem.h>
 #include "PA_Math.h"
 
-void movechar();
-
-extern UL_MAP *Mymap;
 #endif //_MAIN_H

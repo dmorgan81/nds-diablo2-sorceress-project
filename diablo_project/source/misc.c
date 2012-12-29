@@ -63,8 +63,6 @@ void MySplash()
     s32 time=180;
     topDrawBlackScreen();
     myulDrawBlackScreen();
-
-    topSetBackground("d_Splash1");
     swiWaitForVBlank();
     topSetBackground("d_Splash1");
     ulShowSplashScreen(3);

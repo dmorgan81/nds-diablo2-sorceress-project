@@ -1,4 +1,7 @@
 #include "../objects.h"
+#include "../top_screen.h"
+#include "../player.h"
+extern charstruct hero;
 
 
 extern objectdata data[MAX_DATA];
@@ -34,7 +37,8 @@ void objectScroll(objectinfo* mover)
 
         if (!mover->action)
         {
-            myulSetAnim (mover->sprite,0,2,25,0);    //change
+            //idle
+            myulSetAnim (mover->sprite,0,1,spritedatabase[mover->spritedata].framerate*(spritedatabase[mover->spritedata].nbframe-1),0);
             columnaddaction= mover->action*5;
         }
         else
@@ -219,9 +223,10 @@ void deadScroll(objectinfo* mover)
                 myulImageFlip(mover->sprite,0,0);
                 mover->hitbox.flipped=0;
             }
-            myulSetAnim (mover->sprite,spritedatabase[mover->spritedata].nbframe-1,spritedatabase[mover->spritedata].nbframe-1,0,1);
+            myulSetAnim (mover->sprite,0,spritedatabase[mover->spritedata].nbframe-1,spritedatabase[mover->spritedata].framerate,1);
 
         }
+        topPrintf(128,50,"%i",sprites[mover->sprite].cycles);
         myulSetSpriteColor(mover->sprite,mover->color);
         myulSetSpritePrio(mover->sprite,myulGetSpriteY(mover->sprite)+mover->hitbox.down.y);
     }

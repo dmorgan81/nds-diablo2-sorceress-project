@@ -81,7 +81,7 @@ int myulCreateSprite (u8 data,int x,int y, int prio)
         sprites[nb].y=y;
         sprites[nb].column=0;
         sprites[nb].startframe=0;
-        sprites[nb].endframe=spritedatabase[data].nbframe;
+        sprites[nb].endframe=spritedatabase[data].nbframe-1;
         sprites[nb].framerate=spritedatabase[data].framerate;
         sprites[nb].abcoeff=spritedatabase[data].abcoeff;
         sprites[nb].animStage=0;
@@ -188,13 +188,13 @@ inline void myulSetAnim (int spritenb, u8 sframe, u8 endframe, u8 framerate,int 
     sprites[spritenb].startframe=sframe;
     sprites[spritenb].endframe=endframe;
     sprites[spritenb].framerate=framerate;
-    sprites[spritenb].cycles=0;
+    sprites[spritenb].cycles=cycles;
 }
 
 inline void myulDefaultAnimRestart (int spritenb)
 {
     sprites[spritenb].startframe=0;
-    sprites[spritenb].endframe=spritedatabase[sprites[spritenb].sprite].nbframe;
+    sprites[spritenb].endframe=spritedatabase[sprites[spritenb].sprite].nbframe-1;
     sprites[spritenb].framerate=spritedatabase[sprites[spritenb].sprite].framerate;
     sprites[spritenb].frameNumber=0;
     sprites[spritenb].animStage=0;
@@ -204,7 +204,7 @@ inline void myulDefaultAnimRestart (int spritenb)
 inline void myulDefaultAnim (int spritenb)
 {
     sprites[spritenb].startframe=0;
-    sprites[spritenb].endframe=spritedatabase[sprites[spritenb].sprite].nbframe;
+    sprites[spritenb].endframe=spritedatabase[sprites[spritenb].sprite].nbframe-1;
     sprites[spritenb].framerate=spritedatabase[sprites[spritenb].sprite].framerate;
     sprites[spritenb].cycles=0;
 }
@@ -272,25 +272,23 @@ void myulScreenDraws()
             if(sprites[i].framerate)
             {
                 sprites[i].frameNumber++;
-                if (sprites[i].frameNumber % sprites[i].framerate  == 0)
+                if (sprites[i].frameNumber == sprites[i].framerate )
                 {
-                    if (!sprites[i].cycles) //loop
+                    if (sprites[i].cycles)//it is not a loop
                     {
-                        sprites[i].animStage = (sprites[i].animStage + 1) % (sprites[i].endframe-sprites[i].startframe) ;
+                        topPrintf(128,70,"%i",sprites[i].animStage);
+                        topPrintf(128,78,"%i",sprites[i].startframe);
+                        topPrintf(128,86,"%i",sprites[i].endframe);
+                        topPrintf(128,94,"%i",sprites[i].framerate);
+                        topPrintf(128,102,"%i",sprites[i].sprite);
+
+                        //last frame? a cycle might have ended
+                        if (((sprites[i].animStage + 1) == (sprites[i].endframe-sprites[i].startframe+1))) sprites[i].cycles--;
+                        if(!sprites[i].cycles) sprites[i].framerate = 0;// no more animation, last frame and cycle were reached
+                        else sprites[i].animStage = (sprites[i].animStage + 1) % (sprites[i].endframe-sprites[i].startframe+1) ;
                     }
-                    else if (sprites[i].cycles>1)
-                    {
-                        sprites[i].animStage = (sprites[i].animStage + 1) % (sprites[i].endframe-sprites[i].startframe) ;
-                        sprites[i].cycles-=1;
-                    }
-                    else if (sprites[i].animStage+1==sprites[i].endframe)//can only be the last cycle so dont have to check it
-                    {
-                        sprites[i].framerate = 0;// no more animation, last frame is reached
-                    }
-                    else //keep doing animation while it doesnt reach last frame
-                    {
-                        sprites[i].animStage = (sprites[i].animStage + 1) % (sprites[i].endframe-sprites[i].startframe) ;
-                    }
+                    else sprites[i].animStage = (sprites[i].animStage + 1) % (sprites[i].endframe-sprites[i].startframe+1) ;
+                    sprites[i].frameNumber=0;
                 }
             }
             myulLoadSprite(sprites[i].sprite);
@@ -316,10 +314,9 @@ void myulScreenDraws()
             ulSetImageTint(spriteimage,sprites[i].color);
             ulDrawImage(spriteimage);
             imagesused[sprites[i].sprite]=1;
-
         }
     }
-    //ulPrintf_xy(0,0,"%d",Counter[VBL]);
+//ulPrintf_xy(0,0,"%d",Counter[VBL]);
     ulEndDrawing();
 }
 
@@ -337,25 +334,18 @@ void myulDrawSprites(bool anim)
             if(sprites[i].framerate&&anim)
             {
                 sprites[i].frameNumber++;
-                if (sprites[i].frameNumber % sprites[i].framerate  == 0)
+                if (sprites[i].frameNumber == sprites[i].framerate )
                 {
-                    if (!sprites[i].cycles) //loop
+                    if (sprites[i].cycles)//it is not a loop
                     {
-                        sprites[i].animStage = (sprites[i].animStage + 1) % (sprites[i].endframe-sprites[i].startframe) ;
+                        topPrintf(128,70,"%i",sprites[i].animStage + 1);
+                        //last frame? a cycle might have ended
+                        if (!((sprites[i].animStage + 1) % (sprites[i].endframe-sprites[i].startframe))) sprites[i].cycles--;
+                        if(!sprites[i].cycles) sprites[i].framerate = 0;// no more animation, last frame and cycle were reached
+                        else sprites[i].animStage = (sprites[i].animStage + 1) % (sprites[i].endframe-sprites[i].startframe) ;
                     }
-                    else if (sprites[i].cycles>1)
-                    {
-                        sprites[i].animStage = (sprites[i].animStage + 1) % (sprites[i].endframe-sprites[i].startframe) ;
-                        sprites[i].cycles-=1;
-                    }
-                    else if (sprites[i].animStage+1==sprites[i].endframe)//can only be the last cycle so dont have to check it
-                    {
-                        sprites[i].framerate = 0;// no more animation, last frame is reached
-                    }
-                    else //keep doing animation while it doesnt reach last frame
-                    {
-                        sprites[i].animStage = (sprites[i].animStage + 1) % (sprites[i].endframe-sprites[i].startframe) ;
-                    }
+                    else sprites[i].animStage = (sprites[i].animStage + 1) % (sprites[i].endframe-sprites[i].startframe) ;
+                    sprites[i].frameNumber=0;
                 }
             }
             myulLoadSprite(sprites[i].sprite);

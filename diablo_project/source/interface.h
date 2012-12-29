@@ -3,11 +3,7 @@
 
 #include <ulib/ulib.h>
 #include "structures.h"
-#include "ulScreenDisplay.h"
-#include "objects.h"
-#include "actions.h"
-#include "top_screen.h"
-#include "maps/map.h"
+
 void pause ();
 void save();
 void load();

@@ -2,11 +2,15 @@
 #include <filesystem.h>
 #include <stdlib.h>
 #include <stdio.h>
-#include "quests.h"
 #include "defines.h"
 #include "top_screen.h"
 #include "ulScreenDisplay.h"
+#include "player.h"
+
+#include "quests.h"
 int texty=45;
+
+extern charstruct hero;
 extern u32 killedMobs[MAX_DATA];
 char* completedQuests=NULL;
 

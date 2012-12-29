@@ -109,6 +109,14 @@
 		<Unit filename="source\interface.h">
 			<Option virtualFolder="headers\" />
 		</Unit>
+		<Unit filename="source\item.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="source\" />
+		</Unit>
+		<Unit filename="source\item.h">
+			<Option virtualFolder="headers\" />
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
 		<Unit filename="source\main.c">
 			<Option compilerVar="CC" />
 			<Option virtualFolder="source\" />
@@ -171,6 +179,14 @@
 		<Unit filename="source\objects\scrolling.c">
 			<Option compilerVar="CC" />
 			<Option virtualFolder="source\objects\" />
+		</Unit>
+		<Unit filename="source\player.c">
+			<Option compilerVar="CC" />
+			<Option virtualFolder="source\" />
+			<Option target="&lt;{~None~}&gt;" />
+		</Unit>
+		<Unit filename="source\player.h">
+			<Option virtualFolder="headers\" />
 		</Unit>
 		<Unit filename="source\quests.c">
 			<Option compilerVar="CC" />

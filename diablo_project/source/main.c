@@ -13,6 +13,7 @@
 #include "defines.h"
 #include "ulScreenDisplay.h"
 #include "top_screen.h"
+#include "player.h"
 #include "actions.h"
 #include "objects.h"
 #include "objects/collisions.h"
@@ -20,6 +21,7 @@
 #include "misc.h"
 #include "sound.h"
 #include "quests.h"
+#include "maps/map.h"
 #include "maps/waypoint.h"
 
 #ifdef Test
@@ -34,14 +36,14 @@
 void setHeroData();
 void CallAllInits();
 void statsUpdate();
-
+extern bool isEmulator();
 ////////////////////////////////
 /////VARIABLES DECLARATIONS/////
 ////////////////////////////////
 s8 fps = 0; //Our FPS
 u8 old_time=0;
 bool secondpast=1;
-charstruct hero;
+extern charstruct hero;
 
 ///////////////////////////////
 int bg3_sub;
@@ -86,7 +88,7 @@ int main( int argc, char **argv)
     if(!hero.stats.experience)
     {
         objectnb=getUnusedObject();
-        newObject(80, -40, &objects[objectnb],objectnb, &data[0],0);
+        newObject(80, -40, &objects[objectnb],objectnb, &data[4],0);
         for (i=0; i<280; i++)
         {
             updateObjects();
@@ -246,7 +248,7 @@ void setHeroData()
     hero.hitbox.middle.x=16;
     hero.hitbox.middle.y=43;
 ///stats///
-    hero.stats.strenght=10;
+    hero.stats.strength=10;
     hero.stats.dexterity=25;
     hero.stats.vitality=10;
     hero.stats.energy=35;
@@ -254,9 +256,22 @@ void setHeroData()
     hero.stats.curLife=hero.stats.lifeMax;
     hero.stats.manaMax=35;
     hero.stats.curMana=(hero.stats.manaMax);
+
+    hero.stats.strengthBase=10;
+    hero.stats.strengthCoeff=0;
+    hero.stats.dexterityBase=25;
+    hero.stats.dexterityCoeff=0;
+    hero.stats.vitalityBase=10;
+    hero.stats.vitalityCoeff=1;
+    hero.stats.energyBase=35;
+    hero.stats.energyCoeff=1;
+    hero.stats.lifeBase=2000;
+    hero.stats.lifeCoeff=500;
+    hero.stats.manaBase=35;
+    hero.stats.manaCoeff=2;
     hero.stats.experience=0;
     hero.stats.nextlvl=400;
-    hero.stats.lvl=1;
+    hero.stats.level=1;
 }
 
 void CallAllInits()
@@ -277,7 +292,6 @@ void CallAllInits()
     bg3_sub = bgInitSub(3, BgType_Bmp8, BgSize_B8_256x256, 0,0);
     ulSetTexVramParameters(UL_BANK_A | UL_BANK_B | UL_BANK_C | UL_BANK_D, VRAM_A, 512 << 10); //256ko de vram
     CountersReset();
-
     if (!ulInitNitroFS())
     {
         while(1)
@@ -373,6 +387,9 @@ void CallAllInits()
     topSetNormalScreen();
     WaitForVBL();
     if(!wasQuestAlreadyLoaded("essai"))loadQuest("essai",1);
+
+    if(isEmulator()) topPrintf(0,0,"Emulator : Save not available");
+
 }
 
 
@@ -419,159 +436,4 @@ void statsUpdate()
     }
 
 }
-
-
-
-
-
-
-void movechar()
-{
-
-    if (hero.action<=3)
-    {
-        if (hero.skillperiod==1)
-        {
-            myulDefaultAnim (hero.sprite);
-        }
-        if (hero.skillperiod)		hero.skillperiod--;
-        else if (hero.cooldown)
-        {
-            hero.cooldown--;
-            hero.action=2;
-        }
-        else if (ul_keys.touch.click)
-        {
-            Sort(ul_keys.touch.x, ul_keys.touch.y);
-        }
-        else hero.action=2;
-
-    }
-
-    if (hero.action<=2)
-    {
-        if 		(ul_keys.held.right&& ul_keys.held.down)
-        {
-            hero.direction=1;
-            hero.action=2;
-        }
-        else if 	(ul_keys.held.left	&& ul_keys.held.down)
-        {
-            hero.direction=7;
-            hero.action=2;
-        }
-        else if 	(ul_keys.held.right&& ul_keys.held.up)
-        {
-            hero.direction=3;
-            hero.action=2;
-        }
-        else if 	(ul_keys.held.left	&& ul_keys.held.up)
-        {
-            hero.direction=5;
-            hero.action=2;
-        }
-        else hero.action=1;
-
-    }
-
-
-    if(!hero.action || hero.action ==1)
-    {
-
-        if			(ul_keys.held.right)
-        {
-            hero.direction=2;
-            hero.action=1;
-        }
-        else 	if	(ul_keys.held.left)
-        {
-            hero.direction=6;
-            hero.action=1;
-        }
-        else 	if (ul_keys.held.down)
-        {
-            hero.direction=0;
-            hero.action=1;
-        }
-        else 	if (ul_keys.held.up)
-        {
-            hero.direction=4;
-            hero.action=1;
-        }
-        else 		hero.action=0;
-
-    }
-
-
-    u8 columnaddaction;
-    if (hero.action>1) columnaddaction= (hero.action-1)*5;
-    else columnaddaction= hero.action*5;
-    switch (hero.direction)
-    {
-    case 0 :
-        myulImageColumn (hero.sprite,columnaddaction);
-
-        break;
-
-    case 1 :
-        myulImageColumn (hero.sprite,1+columnaddaction);
-        myulImageFlip(hero.sprite,0,0);
-        break;
-
-    case 2 :
-        myulImageColumn (hero.sprite,2+columnaddaction);
-        myulImageFlip(hero.sprite,0,0);
-        break;
-
-    case 3 :
-        myulImageColumn (hero.sprite,3+columnaddaction);
-        myulImageFlip(hero.sprite,0,0);
-        break;
-
-    case 4 :
-        myulImageColumn (hero.sprite,4+columnaddaction);
-
-        break;
-
-    case 5 :
-        myulImageColumn (hero.sprite,3+columnaddaction);
-        myulImageFlip(hero.sprite,1,0);
-        break;
-
-    case 6 :
-        myulImageColumn (hero.sprite,2+columnaddaction);
-        myulImageFlip(hero.sprite,1,0);
-        break;
-
-    case 7 :
-        myulImageColumn (hero.sprite,1+columnaddaction);
-        myulImageFlip(hero.sprite,1,0);
-        break;
-
-    }
-
-
-
-
-    if (hero.action ==1 || hero.action ==2)
-    {
-
-        switch (hero.direction%2)
-        {
-        case 0 :
-            hero.x += ((ul_keys.held.right - ul_keys.held.left)*SPEED);
-            hero.y += ((ul_keys.held.down - ul_keys.held.up)*SPEED);
-            break;
-        case 1 :
-            hero.x += ((ul_keys.held.right - ul_keys.held.left)*SPEED2);
-            hero.y += ((ul_keys.held.down - ul_keys.held.up)*SPEED2);
-            break;
-        }
-    }
-    CheckheroCollisions();
-    Mymap->scrollX=fix_norm(hero.x)-CAMERA_X;
-    Mymap->scrollY=fix_norm(hero.y)-CAMERA_Y;
-}
-
-
 

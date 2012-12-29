@@ -1,13 +1,8 @@
 #include "collisions.h"
 
 #include "../maps/map.h"
-
+#include "../player.h"
 extern charstruct hero;
-
-
-
-
-
 
 
 u8 GetTile(s32 x,s32 y)

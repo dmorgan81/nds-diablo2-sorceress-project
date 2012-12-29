@@ -16,7 +16,7 @@ void initSounds()
     for (i=0; i<MSL_NSAMPS; i++)soundsToLoad[i]=1;
     //soundsToLoad[SFX_TYR_INTRO]=0;//dont load this dialog
     soundsToLoad[SFX_DEATH]=0;
-    mmInitDefault( "soundbank.bin" ); //(mm_addr)soundbank_bin );
+    mmInitDefault( "soundbank.bin"); //(mm_addr)soundbank_bin );
     //use soundbank from filesystem, you have to create it with mmutils (or change the makefile)
     for (i=0; i<MSL_NSAMPS; i++)
     {

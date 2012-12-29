@@ -10,8 +10,7 @@ typedef struct box box;
 typedef struct pointinfo pointinfo;
 typedef struct hitboxinfo hitboxinfo;
 typedef struct frame frame;
-typedef struct statistiques statistiques;
-typedef struct charstruct charstruct;
+
 typedef struct sprite_columns sprite_columns;
 typedef struct spritedata spritedata;
 typedef struct spritestruct spritestruct;
@@ -20,8 +19,6 @@ typedef struct fx_info fx_info;
 typedef struct fx_data fx_data;
 
 typedef struct aurainfo aurainfo;
-
-extern charstruct hero;
 
 struct aurainfo
 {
@@ -51,31 +48,6 @@ struct frame
     u8 start, end;
     bool flipped;
 };
-
-struct statistiques
-{
-    u8 strenght;
-    u8 dexterity;
-    u8 vitality;
-    u8 energy;
-    u8 lvl ;
-
-
-    s8 resfire;
-    s8 resice;
-    s8 reslight;
-    s8 respsn;
-
-    int lifeMax,curLife,lifeBonus;
-    int manaMax,curMana,manaBonus;
-    u16 dmg;
-
-    u32 experience;
-    u32 nextlvl;
-}  ;
-
-
-
 
 struct objectinfo
 {
@@ -171,12 +143,4 @@ struct spritestruct
     bool /*alphablended,*/ flippedh,flippedv, used;
 };
 
-struct charstruct
-{
-    int x,y,lastx,lasty;
-    u16 speed, speed2;
-    u8 action, stop_action, direction, skillperiod, cooldown, sprite;
-    statistiques stats;
-    hitboxinfo hitbox;
-};
 #endif

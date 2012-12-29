@@ -7,8 +7,6 @@
 
 
 extern void statsUpdate();
-
-extern charstruct hero;
 extern bool secondpast;
 
 

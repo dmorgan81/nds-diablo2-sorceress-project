@@ -5,9 +5,14 @@
 //Mémoire: 5400 octets
 
 #include "../ulScreenDisplay.h"
+#include "../top_screen.h"
 #include "../objects.h"
 #include "../interface.h"
+#include "../player.h"
+
 #include "map.h"
+
+extern charstruct hero;
 
 char currentMap[currentMapStrLength];
 u16* map_col=NULL;
@@ -17,7 +22,7 @@ bool loadmap(char* name,int sizemap,int sizecol);
 
 void changemap(char* mapname)
 {
-    int i,tilemap_x,tilemap_y;
+    int i,tilemap_x,tilemap_y,tilecolors;
     char buffer[30];
     char tileset[30];
     FILE* file=NULL;
@@ -28,6 +33,7 @@ void changemap(char* mapname)
                         size.x=%i\n\
                         size.y=%i\n\
                         tileset=<%29[a-z A-Z]>\n\
+                        tilecolors=%i\n\
                         tilemap.x=%i\n\
                         tilemap.y=%i\n\
                         hero.x=%i\n\
@@ -36,7 +42,7 @@ void changemap(char* mapname)
                         spawn.y=%i\n\
                         spawn.u=%i\n\
                         spawn.v=%i\n"
-                    ,mapname,&MAPSIZE_X,&MAPSIZE_Y,tileset,&tilemap_x,&tilemap_y,&hero.x,&hero.y,&spawnArea.x,&spawnArea.y,&spawnArea.u,&spawnArea.v))
+                    ,mapname,&MAPSIZE_X,&MAPSIZE_Y,tileset,&tilecolors,&tilemap_x,&tilemap_y,&hero.x,&hero.y,&spawnArea.x,&spawnArea.y,&spawnArea.u,&spawnArea.v))
     {
         hero.x=norm_fix(hero.x);
         hero.y=norm_fix(hero.y);
@@ -65,7 +71,7 @@ void changemap(char* mapname)
                 WaitForVBL();
             }
         sprintf(buffer,"/gfx/%s_png.png",tileset);
-        mapTiles = ulLoadImageFilePNG(buffer,0, UL_IN_VRAM, UL_PF_PAL4);
+        mapTiles = ulLoadImageFilePNG(buffer,0, UL_IN_VRAM, tilecolors);
         if(map!=NULL && map_col!=NULL)Mymap = ulCreateMap(mapTiles,/*Tileset*/map,8,8,/*Tiles size*/tilemap_x,tilemap_y,/*Map size*/UL_MF_U16);//Map format
         else while(1)ERROR("Can't load map.");//error
         spawnObjects();

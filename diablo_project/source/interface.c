@@ -1,9 +1,19 @@
-#include "main.h"
+#include <ulib/ulib.h>			// Include for µLib
+#include <filesystem.h>
+#include "ulScreenDisplay.h"
+#include "top_screen.h"
+#include "player.h"
+#include "actions.h"
+#include "objects.h"
+#include "maps/map.h"
 #include "sound.h"
 #include "misc.h"
-#include "interface.h"
 #include "maps/waypoint.h"
 #include "quests.h"
+
+#include "interface.h"
+
+extern charstruct hero;
 extern int curMaxSprite;
 bool dialbox=0;
 extern const unsigned short skillmenu_map[24][32];
@@ -108,14 +118,14 @@ bool loadFromSave(char* savefile)
                     topPrintf(81,66,"    ");
                     topPrintf(81,90,"    ");
                     topPrintf(81,114,"    ");
-                    topPrintf(85,42,"%d",hero.stats.strenght);
+                    topPrintf(85,42,"%d",hero.stats.strength);
                     topPrintf(85,66,"%d",hero.stats.dexterity);
                     topPrintf(85,90,"%d",hero.stats.vitality);
                     topPrintf(85,114,"%d",hero.stats.energy);
                     topUpdateLevel();
                     hero.stats.curLife=hero.stats.lifeMax;
                     hero.stats.curMana=hero.stats.manaMax;
-                    MonBaseLife=40*(hero.stats.lvl+1)*(hero.stats.lvl+1)+1000*(hero.stats.lvl+1)-512; //fixed point *512 not 256
+                    MonBaseLife=40*(hero.stats.level+1)*(hero.stats.level+1)+1000*(hero.stats.level+1)-512; //fixed point *512 not 256
                     changemap(currentMap);
                 }
                 break;
@@ -472,7 +482,7 @@ void skillmenu(bool levelup)
 //                if(ul_keys.touch.x>skillx[i]&&ul_keys.touch.x<(skillx[i]+32)&&ul_keys.touch.y>skilly[i]&&ul_keys.touch.y<(skilly[i]+32))
                 if(STYLUSBOX(skillx[i],skilly[i],32,32))
                 {
-                    if (levelup&&skillpoints&&(hero.stats.lvl>=requiredLevel[i]))
+                    if (levelup&&skillpoints&&(hero.stats.level>=requiredLevel[i]))
                     {
                         //should ask for confirmation
                         skillsLevels[i]++;

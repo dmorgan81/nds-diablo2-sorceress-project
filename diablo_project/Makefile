@@ -1,101 +1,61 @@
-PATH 		:= $(DEVKITARM)/bin:$(PATH)
-#---------------------------------------------------------------------------------
-# Please uncomment (i.e. delete the '#') only one "ARM7_SELECTED" line. If unsure,
-# leave it as is (with ARM7_MP3 uncommented).
-#---------------------------------------------------------------------------------
-
-#MAXMODUSE=YES
-#ARM7_SELECTED = ARM7_MP3
-#ARM7_SELECTED = ARM7_MP3_DSWIFI
-#ARM7_SELECTED = ARM7_MAXMOD_DSWIFI
-
-USE_EFS = YES
-LAUNCH_ROM_AFTER_BUILD = YES
-
-#arm7 included with this makefile
-#include $(DEVKITPRO)/PAlib/lib/PA_Makefile2
-#ARM7BIN		:= -7 $(PAPATH)/lib/arm7/arm7.bin
-TEXT1 		:= Diablo Project
-TEXT2 		:= using PAlib-µLib
-TEXT3 		:= By Le Rodeur
-ICON 			:= -b $(CURDIR)/../logo.bmp
-
 #---------------------------------------------------------------------------------
 .SUFFIXES:
 #---------------------------------------------------------------------------------
+
 ifeq ($(strip $(DEVKITARM)),)
-$(error "Please set DEVKITARM in your environment. export DEVKITARM=<path to>devkitARM)
+$(error "Please set DEVKITARM in your environment. export DEVKITARM=<path to>devkitARM")
 endif
+
+include $(DEVKITARM)/ds_rules
+
+GAME_TITLE	:= LemIstIo
+GAME_SUBTITLE1	:= By Le Rodeur
+GAME_SUBTITLE2	:= And Studioxygene
+GAME_ICON 	:= $(CURDIR)/../logo.bmp
+
 #---------------------------------------------------------------------------------
-# TARGET is the name of the output, if this ends with _mb generates a multiboot image
+# TARGET is the name of the output
 # BUILD is the directory where object files & intermediate files will be placed
 # SOURCES is a list of directories containing source code
 # INCLUDES is a list of directories containing extra header files
+# DATA is a list of directories containing binary files embedded using bin2o
+# GRAPHICS is a list of directories containing image files to be converted with grit
 #---------------------------------------------------------------------------------
-TARGET	:=	$(shell basename $(CURDIR))
+TARGET		:=	$(shell basename $(CURDIR))
 BUILD		:=	build
-SOURCES	:=	gfx/bin source source/objects source/maps data
-INCLUDES	:=	include build data gfx $(BUILD)
-DATA		:=	data
-AUDIO    	:=  audio
-
-EXPORT_DIR := /c/ndsexamples/
-#---------------------------------------------------------------------------------
-# ARM7BIN is the path to an arm7 binary other than the default
-#	usage: ARM7BIN := -7 binaryName.bin
-#
-# ICON is the path to an icon to be used int the header plus text
-#	usage: ICON := -t iconName.bmp "text line one; text line 2; text line 3"
-#
-#---------------------------------------------------------------------------------
-
-
+SOURCES		:=	source source/objects source/maps
+INCLUDES	:=	include
+DATA		:=	data  
+GRAPHICS	:=	gfx  
+NITRODATA	:=	nitrofs
 
 #---------------------------------------------------------------------------------
 # options for code generation
 #---------------------------------------------------------------------------------
-ARCH	:=	-mthumb-interwork
+ARCH	:=	-mthumb -mthumb-interwork -march=armv5te -mtune=arm946e-s
 
-# note: arm9tdmi isn't the correct CPU arch, but anything newer and LD
-# *insists* it has a FPU or VFP, and it won't take no for an answer!
-CFLAGS	:= -Wall -O2 \
- 		-mcpu=arm9tdmi -mtune=arm9tdmi -fomit-frame-pointer\
+CFLAGS	:=	-g -Wall -O2\
+ 		-fomit-frame-pointer\
 		-ffast-math \
 		$(ARCH)
 
-CFLAGS	+=	$(INCLUDE) -DARM9 -I$(DEVKITPRO)/PAlib/include/nds
+CFLAGS	+=	$(INCLUDE) -DARM9
+CXXFLAGS	:= $(CFLAGS) -fno-rtti -fno-exceptions
 
 ASFLAGS	:=	-g $(ARCH)
-LDFLAGS	:=	-g $(ARCH) -mno-fpu -L$(DEVKITPRO)/PAlib/lib -lpa9
-
-
+LDFLAGS	=	-specs=ds_arm9.specs -g $(ARCH) -Wl,-Map,$(notdir $*.map)
 #---------------------------------------------------------------------------------
-# path to tools - this can be deleted if you set the path in windows
+# any extra libraries we wish to link with the project (order is important)
 #---------------------------------------------------------------------------------
-# export PATH		:=	/d/dev/ds/devkitARM_r11/bin:/bin
-
-#---------------------------------------------------------------------------------
-# PATH to ndslib - just make a system variable called NDSLIBPATH and be done with it
-#---------------------------------------------------------------------------------
-# NDSLIBPATH	:=	/d/dev/ds/ndslib/
-
-#---------------------------------------------------------------------------------
-# the prefix on the compiler executables
-#---------------------------------------------------------------------------------
-PREFIX			:=	arm-eabi-
-#---------------------------------------------------------------------------------
-# any extra libraries we wish to link with the project
-#---------------------------------------------------------------------------------
-LIBS	:= -lul -lfilesystem -lmm9 -lpng -lz -lfat -lnds9
-
-
+LIBS	:= 	-lul -lfilesystem -lmm9 -lpng -lz -lfat -lnds9
+ 
+ 
 #---------------------------------------------------------------------------------
 # list of directories containing libraries, this must be the top level containing
 # include and lib
 #---------------------------------------------------------------------------------
-LIBDIRS	:=	$(DEVKITPRO)/libnds
-
-
+LIBDIRS	:=	$(LIBNDS)
+ 
 #---------------------------------------------------------------------------------
 # no real need to edit anything past this point unless you need to add additional
 # rules for different file extensions
@@ -106,250 +66,82 @@ ifneq ($(BUILD),$(notdir $(CURDIR)))
 export OUTPUT	:=	$(CURDIR)/$(TARGET)
 
 export VPATH	:=	$(foreach dir,$(SOURCES),$(CURDIR)/$(dir)) \
-					$(foreach dir,$(DATA),$(CURDIR)/$(dir))
-export CC		:=	$(PREFIX)gcc
-export CXX		:=	$(PREFIX)g++
-export AR		:=	$(PREFIX)ar
-export OBJCOPY	:=	$(PREFIX)objcopy
-#---------------------------------------------------------------------------------
-# use CXX for linking C++ projects, CC for standard C
-#---------------------------------------------------------------------------------
-export LD		:=	$(CXX)
-#export LD		:=	$(CC)
+					$(foreach dir,$(DATA),$(CURDIR)/$(dir)) \
+					$(foreach dir,$(GRAPHICS),$(CURDIR)/$(dir))
+
+export DEPSDIR	:=	$(CURDIR)/$(BUILD)
+
+ifneq ($(strip $(NITRODATA)),)
+	export NITRO_FILES	:=	$(CURDIR)/$(NITRODATA)
+endif
 
 CFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.c)))
 CPPFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.cpp)))
 SFILES		:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.s)))
-PCXFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.pcx)))
-BINFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.bin)))
-PNGFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.png)))
-PALFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.pal)))
-RAWFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.raw)))
-MAPFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.map)))
-JPEGFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.jpg)))
-MODFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.mod)))
-GIFFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.gif)))
-BMPFILES	:=	$(foreach dir,$(SOURCES),$(notdir $(wildcard $(dir)/*.bmp)))
-
-
-ifeq ($(strip $(MAXMODUSE)), YES)
-	export AUDIOFILES := $(foreach file,$(notdir $(wildcard $(AUDIO)/*.mod)),$(CURDIR)/$(AUDIO)/$(file)) \
-	                     $(foreach file,$(notdir $(wildcard $(AUDIO)/*.s3m)),$(CURDIR)/$(AUDIO)/$(file)) \
-	                     $(foreach file,$(notdir $(wildcard $(AUDIO)/*.xm)),$(CURDIR)/$(AUDIO)/$(file))  \
-	                     $(foreach file,$(notdir $(wildcard $(AUDIO)/*.it)),$(CURDIR)/$(AUDIO)/$(file))  \
-	                     $(foreach file,$(notdir $(wildcard $(AUDIO)/*.wav)),$(CURDIR)/$(AUDIO)/$(file))
-
-	ifeq ($(strip $(AUDIOFILES)),)
-		TEXT_TO_SAY_2 := No Maxmod-compatible files were found in the audio folder.
-		TEXT_TO_SAY_3 := If you are loading the soundbank from the filesystem, ignore this message.
-		TEXT_TO_SAY_4 := " "
-		DONT_BUILD_MAXMOD_SOUNDBANK := YES
-	else
-		# Add the Maxmod soundbank to the list of bin files
-		BINFILES += soundbank_bin.bin
-	endif
-endif
-
-
-
-export OFILES	:=	$(MAPFILES:.map=.o) $(RAWFILES:.raw=.o) $(PALFILES:.pal=.o) $(BINFILES:.bin=.o) $(PNGFILES:.png=.o) $(PCXFILES:.pcx=.o) $(JPEGFILES:.jpg=.o) $(MODFILES:.mod=.o) $(GIFFILES:.gif=.o) $(BMPFILES:.bmp=.o)\
+PNGFILES	:=	$(foreach dir,$(GRAPHICS),$(notdir $(wildcard $(dir)/*.png)))
+BINFILES	:=	$(foreach dir,$(DATA),$(notdir $(wildcard $(dir)/*.*)))
+ 
+export LD	:=	$(CXX)
+export OFILES	:=	$(addsuffix .o,$(BINFILES)) \
+					$(PNGFILES:.png=.o) \
 					$(CPPFILES:.cpp=.o) $(CFILES:.c=.o) $(SFILES:.s=.o)
-
+ 
 export INCLUDE	:=	$(foreach dir,$(INCLUDES),-I$(CURDIR)/$(dir)) \
 					$(foreach dir,$(LIBDIRS),-I$(dir)/include) \
 					$(foreach dir,$(LIBDIRS),-I$(dir)/include/nds) \
-					-I$(PAPATH)/include/nds\
 					-I$(CURDIR)/$(BUILD)
 
 export LIBPATHS	:=	$(foreach dir,$(LIBDIRS),-L$(dir)/lib)
 
-.PHONY: $(BUILD) clean export
+icons := $(wildcard *.bmp)
 
+ifneq (,$(findstring $(TARGET).bmp,$(icons)))
+	export GAME_ICON := $(CURDIR)/$(TARGET).bmp
+else
+	ifneq (,$(findstring icon.bmp,$(icons)))
+		export GAME_ICON := $(CURDIR)/icon.bmp
+	endif
+endif
+ 
+.PHONY: $(BUILD) clean
+ 
 #---------------------------------------------------------------------------------
 $(BUILD):
 	@[ -d $@ ] || mkdir -p $@
 	@make --no-print-directory -C $(BUILD) -f $(CURDIR)/Makefile
-
+ 
 #---------------------------------------------------------------------------------
 clean:
-	@echo clean ...$(TARGET)
-	@rm -fr $(BUILD) *.elf *.*ds*
-
-export:
-	@echo exporting ...$(TARGET)
-	@cp *.nds $(EXPORT_DIR)/$(TARGET).nds
+	@echo clean ...
+	@rm -fr $(BUILD) $(TARGET).elf $(TARGET).nds
 
 #---------------------------------------------------------------------------------
 else
-
-DEPENDS	:=	$(OFILES:.o=.d)
-
+ 
 #---------------------------------------------------------------------------------
 # main targets
 #---------------------------------------------------------------------------------
-$(OUTPUT).ds.gba	: 	$(OUTPUT).nds
-
-$(OUTPUT).nds	: 	$(OUTPUT).bin
-
-$(OUTPUT).bin	:	$(OUTPUT).elf
-
+$(OUTPUT).nds	: 	$(OUTPUT).elf
 $(OUTPUT).elf	:	$(OFILES)
 
 #---------------------------------------------------------------------------------
-# Rule to build the soundbank from audio files
-#---------------------------------------------------------------------------------
-soundbank_bin.bin : $(AUDIOFILES)
-#---------------------------------------------------------------------------------
-ifneq ($(strip $(DONT_BUILD_MAXMOD_SOUNDBANK)), YES)
-	@echo "Generating soundbank..."
-	@echo
-	@mmutil $^ -d -osoundbank_bin.bin -hsoundbank.h
-endif
-
-
-#---------------------------------------------------------------------------------
-%.ds.gba: %.nds
-	@echo built ... $(notdir $@)
-	@dsbuild $<
-
-ifeq ($(strip $(USE_EFS)), YES)
-#	@$(CURDIR)/../efs $(OUTPUT).ds.gba
-else
-	@cp $(CURDIR)/../$(notdir $@) ../$(notdir $(OUTPUT)).sc.nds
-endif
-#---------------------------------------------------------------------------------
-%.nds: %.bin
-ifeq ($(strip $(USE_EFS)), YES)
-	@ndstool -c $@ -9 $(TARGET).bin $(ARM7BIN) $(LOGO) $(ICON) "$(TEXT1);$(TEXT2);$(TEXT3)" -d ../nitrofs
-#	@$(CURDIR)/../efs $(OUTPUT).nds
-
-
-else
-	@ndstool -c $@ -9 $(TARGET).bin $(ARM7BIN) $(LOGO) $(ICON) "$(TEXT1);$(TEXT2);$(TEXT3)"
-endif
-
-#---------------------------------------------------------------------------------
-%.bin: %.elf
-
-	@$(OBJCOPY) -O binary $(TARGET).elf $(TARGET).bin
-
-#---------------------------------------------------------------------------------
-%.elf:
-	@echo $(LD)  $(LDFLAGS) -specs=ds_arm9.specs $(OFILES) $(LIBPATHS) $(LIBS) -o $(TARGET).elf
-	@$(LD)  $(LDFLAGS) -specs=ds_arm9.specs $(OFILES) $(LIBPATHS) $(LIBS) -o $(TARGET).elf
-
-
-
-#---------------------------------------------------------------------------------
-# Compile Targets for C/C++
-#---------------------------------------------------------------------------------
-
-#---------------------------------------------------------------------------------
-%.o : %.cpp
-	@echo $(notdir $<)
-	@$(CXX) -MM $(CFLAGS) -o $*.d $<
-	@$(CXX) $(CFLAGS) -c $< -o$@
-
-#---------------------------------------------------------------------------------
-%.o : %.c
-	@echo $(notdir $<)
-	@$(CC) -MM $(CFLAGS) -o $*.d $<
-	@$(CC)  $(CFLAGS) -c $< -o$@
-
-#---------------------------------------------------------------------------------
-%.o : %.s
-	@echo $(notdir $<)
-	@$(CC) -MM $(CFLAGS) -o $*.d $<
-	@$(CC)  $(ASFLAGS) -c $< -o$@
-
-define bin2o
-	cp $(<) $(*).tmp
-	$(OBJCOPY) -I binary -O elf32-littlearm -B arm \
-	--rename-section .data=.rodata \
-	--redefine-sym _binary_$*_tmp_start=$*\
-	--redefine-sym _binary_$*_tmp_end=$*_end\
-	--redefine-sym _binary_$*_tmp_size=$*_size\
-	$(*).tmp $(@)
-	echo "extern const u8" $(*)"[];" > $(*).h
-	echo "extern const u32" $(*)_size[]";" >> $(*).h
-	rm $(*).tmp
-endef
-
-#---------------------------------------------------------------------------------
-%.o	:	%.pcx
+%.bin.o	:	%.bin
 #---------------------------------------------------------------------------------
 	@echo $(notdir $<)
-	@$(bin2o)
+	$(bin2o)
 
 #---------------------------------------------------------------------------------
-%.o	:	%.bin
+# This rule creates assembly source files using grit
+# grit takes an image file and a .grit describing how the file is to be processed
+# add additional rules like this for each image extension
+# you use in the graphics folders
 #---------------------------------------------------------------------------------
-	@echo $(notdir $<)
-	@$(bin2o)
+%.s %.h   : %.png %.grit
+#---------------------------------------------------------------------------------
+	grit $< -fts -o$*
 
-#---------------------------------------------------------------------------------
-%.o	:	%.png
-#---------------------------------------------------------------------------------
-	@echo $(notdir $<)
-	@$(bin2o)
-
-#---------------------------------------------------------------------------------
-%.o	:	%.raw
-#---------------------------------------------------------------------------------
-	@echo $(notdir $<)
-	@$(bin2o)
-
-#---------------------------------------------------------------------------------
-%.o	:	%.pal
-#---------------------------------------------------------------------------------
-	@echo $(notdir $<)
-	@$(bin2o)
-
-#---------------------------------------------------------------------------------
-%.o	:	%.map
-#---------------------------------------------------------------------------------
-	@echo $(notdir $<)
-	@$(bin2o)
-
-#---------------------------------------------------------------------------------
-%.o	:	%.mdl
-#---------------------------------------------------------------------------------
-	@echo $(notdir $<)
-	@$(bin2o)
-
-#---------------------------------------------------------------------------------
-%.o	:	%.jpg
-#---------------------------------------------------------------------------------
-	@echo $(notdir $<)
-	@$(bin2o)
-
-#---------------------------------------------------------------------------------
-%.o	:	%.mod
-#---------------------------------------------------------------------------------
-	@echo $(notdir $<)
-	@$(bin2o)
-
-#---------------------------------------------------------------------------------
-%.o	:	%.gif
-#---------------------------------------------------------------------------------
-	@echo $(notdir $<)
-	@$(bin2o)
-
-#---------------------------------------------------------------------------------
-%.o	:	%.bmp
-#---------------------------------------------------------------------------------
-	@echo $(notdir $<)
-	@$(bin2o)
-
-
--include $(DEPENDS)
-
+-include $(DEPSDIR)/*.d
+ 
 #---------------------------------------------------------------------------------------
 endif
-
-lib:
-	$(DEVKITPRO)/devkitARM/arm-eabi/bin/ar -cr test.a build/*.o
-
 #---------------------------------------------------------------------------------------
-
-

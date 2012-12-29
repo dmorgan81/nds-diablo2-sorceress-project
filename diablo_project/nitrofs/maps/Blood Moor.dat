@@ -3,6 +3,7 @@
 size.x=59
 size.y=47
 tileset=<map>
+tilecolors=4
 tilemap.x=60
 tilemap.y=45
 hero.x=63

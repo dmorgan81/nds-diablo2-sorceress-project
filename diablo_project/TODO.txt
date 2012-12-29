@@ -1,8 +1,9 @@
-Waypoint menu - Done!
-Complete map loading - nearly done (maybe add spawn rate). quest start when loading map
-complete map zone management (warps etc)
-Complete quests - Nearly done, need npcs
-Complete NPCs
+-Waypoint menu - Done!
+-map loading - nearly done (maybe add spawn rate). quest start when loading map
+-map zone management (warps etc)
+-quests - Nearly done, need npcs
+-NPCs
+-items - Need to finish drop, stats refresh, and inventory menu
 ..
 
 

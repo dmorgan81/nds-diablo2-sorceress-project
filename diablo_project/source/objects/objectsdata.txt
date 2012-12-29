@@ -105,3 +105,25 @@ data[i].hitbox.left.flipx=72-data[i].hitbox.right.x-data[i].hitbox.left.x;//orig
 data[i].hitbox.right.flipx=72-data[i].hitbox.left.x-data[i].hitbox.right.x;
 data[i].fxdata[0]=-1;
 data[i].fxdata[1]=-1;
+//cain -- 4
+i++;
+data[i].spritedata=20;
+data[i].deathspritedata=-1;
+data[i].ai=&immortal;
+data[i].tile=0;
+data[i].vx=0;
+data[i].vy=0;
+data[i].life=500000;
+data[i].scroll=&objectScroll;
+data[i].collision=&noai;
+data[i].datanb=i;
+data[i].hitbox.down.y=50;
+data[i].hitbox.down.x=12;
+data[i].hitbox.up.y=0;
+data[i].hitbox.up.x=12;
+data[i].hitbox.left.x=0;
+data[i].hitbox.left.y=25;
+data[i].hitbox.right.x=24;
+data[i].hitbox.right.y=25;
+data[i].fxdata[0]=-1;
+data[i].fxdata[1]=-1;

@@ -4,6 +4,8 @@
 //////////////////////////////////////////////////
 //////////////////////////////////////////////////
 #include "../objects.h"
+#include "../player.h"
+extern charstruct hero;
 extern objectdata data[MAX_DATA];
 extern objectdata mdata[MAX_MDATA];
 extern objectinfo objects[MAX_OBJECT];
@@ -237,7 +239,7 @@ void fireAI(objectinfo* missile)
 
     if( missile->life<475)
     {
-        myulSetAnim (missile->sprite, 4, 10, 8, 0);
+        myulSetAnim (missile->sprite, 4, 9, 8, 0);
 
     }
     if (anycollision(VOIDTILE,&missile->hitbox,missile->x-missile->hitbox.down.x,missile->y-missile->hitbox.down.y))

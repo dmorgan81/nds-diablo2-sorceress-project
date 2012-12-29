@@ -3,6 +3,7 @@
 size.x=129
 size.y=102
 tileset=<dudu>
+tilecolors=4
 tilemap.x=129
 tilemap.y=102
 hero.x=240

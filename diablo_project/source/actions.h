@@ -5,12 +5,9 @@
 #include "PA_Math.h"
 
 #include "structures.h"
+#include "player.h"
 #include "defines.h"
-#include "ulScreenDisplay.h"
-#include "objects.h"
-#include "interface.h"
 
-extern charstruct hero;
 extern spritestruct sprites[MAX_SPRITES];
 extern u8 skillsLevels[SKILLNUMBER];
 extern int skilldmg[SKILLNUMBER][2];

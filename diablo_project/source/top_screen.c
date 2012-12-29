@@ -1,5 +1,10 @@
-#include "top_screen.h"
+#include <nds.h>
 #include "defines.h"
+#include "player.h"
+#include "top_screen.h"
+extern charstruct hero;
+
+
 int lastLifeLevel,lastManaLevel,orbLifeLevel,orbManaLevel;
 _GFX_ALIGN char *topscr_buffer=NULL;
 _GFX_ALIGN char *topscr_font=NULL;
@@ -73,6 +78,7 @@ void quickTopScreenRefresh (void)
     {
 
         ///Draw buffer to screen
+        DC_FlushRange(topscr_buffer, 256*192);
         dmaCopy(topscr_buffer, bgGetGfxPtr(bg3_sub), 256*192);
         //dmaCopy(topscr_palbuffer, BG_PALETTE_SUB, 256*2);
     }
@@ -93,12 +99,12 @@ void quickTopScreenRefresh (void)
         topPrintf(7*8,15,"%d",hero.stats.experience);
         topPrintf(20*8,7,"Next level");
         topPrintf(20*8,15,"%d",hero.stats.nextlvl);
-        topPrintf(7,42,"Strenght");
+        topPrintf(7,42,"Strength");
         topPrintf(7,66,"Dexterity");
         topPrintf(7,90,"Vitality");
         topPrintf(7,114,"Energy");
 
-        topPrintf(85,42,"%d",hero.stats.strenght);
+        topPrintf(85,42,"%d",hero.stats.strength);
         topPrintf(85,66,"%d",hero.stats.dexterity);
         topPrintf(85,90,"%d",hero.stats.vitality);
         topPrintf(85,114,"%d",hero.stats.energy);
@@ -113,31 +119,19 @@ void quickTopScreenRefresh (void)
 void topDrawImage(int x,int y,char* source,int offsetx,int offsety,int sizex, int sizey,int dataheight)
 {
     register int i;
-    if(sizey&3) //if the number of lines is a multiple of 4 we can copy 4 line at the same time!!!
-    {
-        for (i=0; i<sizey-3; i+=4)
+    while(dmaBusy(0)|dmaBusy(1)|dmaBusy(2)|dmaBusy(3)){}//should be ok as not used elsewhere
+        for (i=0; i<sizey-3 - (sizey%4); i+=4)
         {
             dmaCopyHalfWordsAsynch (0,source+offsetx+dataheight*(offsety+i),topscr_buffer+x+SCREEN_WIDTH*(y+i) , sizex);
             dmaCopyHalfWordsAsynch (1,source+offsetx+dataheight*(offsety+i+1),topscr_buffer+x+SCREEN_WIDTH*(y+i+1) , sizex);
             dmaCopyHalfWordsAsynch (2,source+offsetx+dataheight*(offsety+i+2),topscr_buffer+x+SCREEN_WIDTH*(y+i+2) , sizex);
             dmaCopyHalfWords (3,source+offsetx+dataheight*(offsety+i+3),topscr_buffer+x+SCREEN_WIDTH*(y+i+3) , sizex);
         }
-    }
-    if(sizey&1) //if the number of lines is even we can copy 2line at the same time
-    {
-        for (i=0; i<sizey-1; i+=2)
+    while(dmaBusy(3)){}
+        for (i=sizey - (sizey%4); i<sizey; i++)
         {
-            dmaCopyHalfWordsAsynch (2,source+offsetx+dataheight*(offsety+i),topscr_buffer+x+SCREEN_WIDTH*(y+i) , sizex);
-            dmaCopyHalfWords (3,source+offsetx+dataheight*(offsety+i+1),topscr_buffer+x+SCREEN_WIDTH*(y+i+1) , sizex);
+            dmaCopyHalfWords (3,source+offsetx+dataheight*(offsety+i),topscr_buffer+x+SCREEN_WIDTH*(y+i) , sizex);
         }
-    }
-    else
-    {
-        for (i=0; i<sizey; i++)
-        {
-            dmaCopyHalfWords (2,source+offsetx+dataheight*(offsety+i),topscr_buffer+x+SCREEN_WIDTH*(y+i) , sizex);
-        }
-    }
 }
 
 void topDrawString(int x,int y,char* string)
@@ -160,20 +154,20 @@ void topDrawString(int x,int y,char* string)
 
 void topUpdateLevel(void)
 {
-    if(hero.stats.lvl<10)
+    if(hero.stats.level<10)
     {
         topDrawString(10,5,"    ");
         topDrawString(10,13,"    ");
         topDrawString(10,21,"    ");
-        topDrawImage(26-lvlfontsizes[hero.stats.lvl]/2, 7,topscr_levelFont,(hero.stats.lvl*21),0,lvlfontsizes[hero.stats.lvl],21,210);
+        topDrawImage(26-lvlfontsizes[hero.stats.level]/2, 7,topscr_levelFont,(hero.stats.level*21),0,lvlfontsizes[hero.stats.level],21,210);
     }
     else
     {
         topDrawString(10,5,"    ");
         topDrawString(10,13,"    ");
         topDrawString(10,21,"    ");
-        topDrawImage(26-(lvlfontsizes[hero.stats.lvl/10]+lvlfontsizes[hero.stats.lvl%10])/2, 7,topscr_levelFont,((hero.stats.lvl/10)*21),0,lvlfontsizes[hero.stats.lvl/10],21,210);
-        topDrawImage(26-(-lvlfontsizes[hero.stats.lvl/10]+lvlfontsizes[hero.stats.lvl%10])/2, 7,topscr_levelFont,((hero.stats.lvl%10)*21),0,lvlfontsizes[hero.stats.lvl%10],21,210);
+        topDrawImage(26-(lvlfontsizes[hero.stats.level/10]+lvlfontsizes[hero.stats.level%10])/2, 7,topscr_levelFont,((hero.stats.level/10)*21),0,lvlfontsizes[hero.stats.level/10],21,210);
+        topDrawImage(26-(-lvlfontsizes[hero.stats.level/10]+lvlfontsizes[hero.stats.level%10])/2, 7,topscr_levelFont,((hero.stats.level%10)*21),0,lvlfontsizes[hero.stats.level%10],21,210);
     }
 }
 
@@ -211,6 +205,7 @@ void topSetBackground(char* name)
     if(filebg&&palbuffer)
     {
         fread(palbuffer, sizeof(short), 256, filebg);
+        DC_FlushRange(palbuffer,256*sizeof(short));
         dmaCopy(palbuffer, BG_PALETTE_SUB, 256*sizeof(short));
     }
     sprintf(__str ,"/Backgrounds/%s_Bitmap.bin",name);
@@ -218,6 +213,7 @@ void topSetBackground(char* name)
     if(filebg&&buffer)
     {
         fread(buffer, sizeof(char), 256*192, filebg);
+        DC_FlushRange(buffer,256*192);
         dmaCopy(buffer, bgGetGfxPtr(bg3_sub), 256*192);
     }
 
@@ -227,7 +223,9 @@ void topSetBackground(char* name)
 
 void topSetNormalScreen()
 {
+    DC_FlushRange(topscr_buffer,256*192);
     dmaCopy(topscr_buffer, bgGetGfxPtr(bg3_sub), 256*192);
+    DC_FlushRange(topscr_palbuffer,256*sizeof(short));
     dmaCopy(topscr_palbuffer, BG_PALETTE_SUB, 256*sizeof(short));
 }
 
